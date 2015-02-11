@@ -45,9 +45,6 @@
     <ClCompile Include="QBbgWorker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QSingleBbgRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QSingleBbgResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -63,6 +60,9 @@
     <ClCompile Include="QBbgSecurity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractFieldRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgGenerals.h">
@@ -74,9 +74,6 @@
     <ClInclude Include="QBbgRequest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="QSingleBbgRequest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QSingleBbgResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,9 +81,6 @@
       <Filter>Header Files\Private</Filter>
     </ClInclude>
     <ClInclude Include="QBbgRequest_p.h">
-      <Filter>Header Files\Private</Filter>
-    </ClInclude>
-    <ClInclude Include="QSingleBbgRequest_p.h">
       <Filter>Header Files\Private</Filter>
     </ClInclude>
     <ClInclude Include="QSingleBbgResult_p.h">
@@ -103,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="QBbgSecurity.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractFieldRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractFieldRequest_p.h">
+      <Filter>Header Files\Private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

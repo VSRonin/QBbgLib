@@ -1,6 +1,6 @@
 #include "QBbgRequest.h"
 #include "QBbgRequest_p.h"
-#include "QSingleBbgRequest.h"
+#include "QBbgAbstractFieldRequest.h"
 #include <QDataStream>
 namespace QBbgLib {
     QBbgRequest::QBbgRequest()
@@ -39,15 +39,15 @@ namespace QBbgLib {
         : q_ptr(q)
         , MaxID(a.MaxID)
     {
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = a.ResultTable.constBegin(); i != a.ResultTable.constEnd(); i++) {
-            ResultTable.insert(i.key(), new QSingleBbgRequest(*(i.value())));
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = a.ResultTable.constBegin(); i != a.ResultTable.constEnd(); i++) {
+            ResultTable.insert(i.key(), new QBbgAbstractFieldRequest(*(i.value())));
         }
     }
     QBbgRequestPrivate& QBbgRequestPrivate::operator= (const QBbgRequestPrivate& a)
     {
         MaxID = a.MaxID;
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = a.ResultTable.constBegin(); i != a.ResultTable.constEnd(); i++) {
-            ResultTable.insert(i.key(), new QSingleBbgRequest(*(i.value())));
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = a.ResultTable.constBegin(); i != a.ResultTable.constEnd(); i++) {
+            ResultTable.insert(i.key(), new QBbgAbstractFieldRequest(*(i.value())));
         }
         return *this;
     }
@@ -58,20 +58,20 @@ namespace QBbgLib {
     }
     void QBbgRequestPrivate::ClearRequests()
     {
-        for (QHash<qint64, QSingleBbgRequest*>::iterator i = ResultTable.begin(); i != ResultTable.end(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::iterator i = ResultTable.begin(); i != ResultTable.end(); ++i) {
             delete i.value();
         }
         ResultTable.clear();
     }
 
-    void QBbgRequest::AddRequest(const QSingleBbgRequest& a)
+    void QBbgRequest::AddRequest(const QBbgAbstractFieldRequest& a)
     {
         Q_D(QBbgRequest);
         if (d->ResultTable.contains(a.GetResultID())) return;
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
             if (i.value()->operator==(a)) return;
         }
-        QSingleBbgRequest* TempRes = new QSingleBbgRequest(a);
+        QBbgAbstractFieldRequest* TempRes = new QBbgAbstractFieldRequest(a);
         if (TempRes->GetResultID() < 1i64) {
             ++(d->MaxID);
             TempRes->SetResultID((d->MaxID<1i64) ? 1i64 : d->MaxID);
@@ -80,28 +80,28 @@ namespace QBbgLib {
             d->MaxID = TempRes->GetResultID();
         d->ResultTable.insert(TempRes->GetResultID(), TempRes);
     }
-    const QSingleBbgRequest* QBbgRequest::FindRequest(qint64 ID) const
+    const QBbgAbstractFieldRequest* QBbgRequest::FindRequest(qint64 ID) const
     {
         Q_D(const QBbgRequest);
         return d->FindRequest(ID);
     }
-    const QSingleBbgRequest* QBbgRequestPrivate::FindRequest(qint64 ID) const
+    const QBbgAbstractFieldRequest* QBbgRequestPrivate::FindRequest(qint64 ID) const
     {
         return ResultTable.value(ID, NULL);
     }
-    const QSingleBbgRequest* QBbgRequest::GetRequest(quint32 Index) const
+    const QBbgAbstractFieldRequest* QBbgRequest::GetRequest(quint32 Index) const
     {
         Q_D(const QBbgRequest);
         if (Index > d->ResultTable.size()) return NULL;
         return (d->ResultTable.begin() + Index).value();
     }
-    QSingleBbgRequest* QBbgRequest::GetEditRequest(quint32 Index)
+    QBbgAbstractFieldRequest* QBbgRequest::GetEditRequest(quint32 Index)
     {
         Q_D(QBbgRequest);
         if (Index > d->ResultTable.size()) return NULL;
         return (d->ResultTable.begin() + Index).value();
     }
-    QSingleBbgRequest* QBbgRequest::FindEditRequest(qint64 ID)
+    QBbgAbstractFieldRequest* QBbgRequest::FindEditRequest(qint64 ID)
     {
         Q_D(QBbgRequest);
         if (d->ResultTable.contains(ID))
@@ -111,7 +111,7 @@ namespace QBbgLib {
     bool QBbgRequest::IsValidReq() const
     {
         Q_D(const QBbgRequest);
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
             if (!i.value()->IsValidReq())
                 return false;
         }
@@ -122,7 +122,7 @@ namespace QBbgLib {
         Q_D(const QBbgRequest);
         QList<qint64> Result;
         Secur = Secur.trimmed().toUpper();
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
             if (i.value()->GetSecurity() == Secur || i.value()->GetFullSecurity().toUpper() == Secur) Result.append(i.key());
         }
         return Result;
@@ -133,7 +133,7 @@ namespace QBbgLib {
         QList<qint64> Result;
         Field = Field.simplified().toUpper();
         Field.replace(QChar(' '), QChar('_'));
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
             if (i.value()->GetField() == Field) Result.append(i.key());
         }
         return Result;
@@ -145,7 +145,7 @@ namespace QBbgLib {
         Secur = Secur.simplified().toUpper();
         Field = Field.simplified().toUpper();
         Field.replace(QChar(' '), QChar('_'));
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator i = d->ResultTable.constBegin(); i != d->ResultTable.constEnd(); ++i) {
             if (
                 i.value()->GetField() == Field &&
                 (i.value()->GetSecurity() == Secur || i.value()->GetFullSecurity().toUpper() == Secur)
@@ -165,7 +165,7 @@ namespace QBbgLib {
     }
     void QBbgRequest::AddRequest(qint64 ID, const QString& Secur, const QString& Field, YellowKeys YellowKey)
     {
-        QSingleBbgRequest Temp;
+        QBbgAbstractFieldRequest Temp;
         Temp.SetField(Field);
         Temp.SetSecurity(Secur);
         Temp.SetResultID(ID);
@@ -179,7 +179,7 @@ namespace QBbgLib {
     }
     void QBbgRequest::AddRequest(qint64 ID, const QString& Secur, const QString& Field, const Overrides& Overr, YellowKeys YellowKey)
     {
-        QSingleBbgRequest Temp;
+        QBbgAbstractFieldRequest Temp;
         Temp.SetField(Field);
         Temp.SetSecurity(Secur);
         Temp.SetResultID(ID);
@@ -200,14 +200,14 @@ namespace QBbgLib {
         Result.clear();
         QList<qint64> UsedIDs;
         QList<QString> UsedFields;
-        for (QHash<qint64, QSingleBbgRequest*>::const_iterator MainIter = d->ResultTable.constBegin(); MainIter != d->ResultTable.constEnd(); ++MainIter) {
+        for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator MainIter = d->ResultTable.constBegin(); MainIter != d->ResultTable.constEnd(); ++MainIter) {
             if (UsedIDs.contains(MainIter.key()))continue;
             UsedIDs.append(MainIter.key());
             UsedFields.clear();
             UsedFields.push_back(MainIter.value()->GetField());
             QList<qint64>* CurrentGroup = new QList<qint64>();
             CurrentGroup->push_back(MainIter.key());
-            for (QHash<qint64, QSingleBbgRequest*>::const_iterator SecondIter = MainIter + 1; SecondIter != d->ResultTable.constEnd(); ++SecondIter) {
+            for (QHash<qint64, QBbgAbstractFieldRequest*>::const_iterator SecondIter = MainIter + 1; SecondIter != d->ResultTable.constEnd(); ++SecondIter) {
                 if (MainIter.value()->GetFullSecurity() == SecondIter.value()->GetFullSecurity()) {
                     if (MainIter.value()->SameOverrides(*SecondIter.value())) {
                         UsedIDs.append(SecondIter.key());

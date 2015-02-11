@@ -16,10 +16,10 @@ namespace QBbgLib {
         virtual ~QBbgRequestPrivate();
         qint64 MaxID;
         BbgErrorCodes m_ErrorCode;
-        QHash<qint64, QSingleBbgRequest*>  ResultTable;
+        QHash<qint64, QBbgAbstractFieldRequest*>  ResultTable;
         void ClearRequests();
         bool SameRequest(const QList<qint64>& a, const QList<qint64>& b) const;
-        const QSingleBbgRequest* FindRequest(qint64 ID) const;
+        const QBbgAbstractFieldRequest* FindRequest(qint64 ID) const;
     };
 
 }

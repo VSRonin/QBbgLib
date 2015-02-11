@@ -22,7 +22,7 @@
     <ClCompile Include="QBbgRequest.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
-    <ClCompile Include="QSingleBbgRequest.cpp" />
+    <ClCompile Include="QBbgAbstractFieldRequest.cpp" />
     <ClCompile Include="QSingleBbgResult.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,8 +35,8 @@
     <ClInclude Include="QBbgSecurity.h" />
     <ClInclude Include="QBbgSecurity_p.h" />
     <ClInclude Include="QBbgWorker_p.h" />
-    <ClInclude Include="QSingleBbgRequest.h" />
-    <ClInclude Include="QSingleBbgRequest_p.h" />
+    <ClInclude Include="QBbgAbstractFieldRequest.h" />
+    <ClInclude Include="QBbgAbstractFieldRequest_p.h" />
     <ClInclude Include="QSingleBbgResult.h" />
     <ClInclude Include="QSingleBbgResult_p.h" />
     <CustomBuild Include="QBbgWorker.h">

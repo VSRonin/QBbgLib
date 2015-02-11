@@ -5,7 +5,7 @@
 #include <blpapi_message.h>
 #include <blpapi_request.h>
 #include <blpapi_session.h>
-#include "QSingleBbgRequest.h"
+#include "QBbgAbstractFieldRequest.h"
 namespace QBbgLib {
     void QBbgWorker::setServerAddress(const QString& val)
     {
@@ -75,7 +75,7 @@ namespace QBbgLib {
             UsedSecur.clear();
             UsedField.clear();
             for (QList<qint64>::const_iterator GroupIter = CurrentList->constBegin(); GroupIter != CurrentList->constEnd(); GroupIter++) {
-                const QSingleBbgRequest* CurrentSingle = m_Requests.FindRequest(*GroupIter);
+                const QBbgAbstractFieldRequest* CurrentSingle = m_Requests.FindRequest(*GroupIter);
                 if (!CurrentSingle) continue;
                 if (!CurrentSingle->IsValidReq()) {
                     if (SetError(ReqIter.key(), *GroupIter, InvalidInputs))
@@ -191,7 +191,7 @@ namespace QBbgLib {
                         NumFieldExep = message.getElement("securityData").getValueAsElement(i).getElement("fieldExceptions").numValues();
                         for (qint32 j = 0; j < NumFieldExep; j++) {
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QSingleBbgRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
                                 QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                                 QString CurrentField = message.getElement("securityData").getValueAsElement(i).getElement("fieldExceptions").getValueAsElement(j).getElementAsString("fieldId");
                                 if (
@@ -205,7 +205,7 @@ namespace QBbgLib {
                         if (message.getElement("securityData").getValueAsElement(i).hasElement("securityError")) {
                             QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QSingleBbgRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
                                 if ((FoundRequ->GetFullSecurity()) == CurrentSecurity) {
                                     if (SetError(message.correlationId().asInteger(), *SingleReq, SecurityError))return;
                                 }
@@ -214,7 +214,7 @@ namespace QBbgLib {
                         else {
                             QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QSingleBbgRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
                                 if ((FoundRequ->GetFullSecurity()) == CurrentSecurity) {
                                     if (message.getElement("securityData").getValueAsElement(i).getElement("fieldData").numElements() != 0) {
                                         if (message.getElement("securityData").getValueAsElement(i).getElement("fieldData").hasElement(FoundRequ->GetField().toLatin1().data())) {

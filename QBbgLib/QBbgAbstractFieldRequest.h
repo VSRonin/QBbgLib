@@ -7,16 +7,16 @@
 #include <QHash>
 namespace QBbgLib {
 	class QBbgWorker;
-    class QSingleBbgRequestPrivate;
+    class QBbgAbstractFieldRequestPrivate;
     class QBbgRequestPrivate;
-    class QBBG_EXPORT QSingleBbgRequest : public QBbgAbstractRequest
+    class QBBG_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
 	{
-        Q_DECLARE_PRIVATE(QSingleBbgRequest)
+        Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
 	public:
-		QSingleBbgRequest();
-		QSingleBbgRequest(const QSingleBbgRequest& a);
-		bool operator==(const QSingleBbgRequest& a) const;
-		QSingleBbgRequest& operator=(const QSingleBbgRequest& a);
+		QBbgAbstractFieldRequest();
+		QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a);
+		bool operator==(const QBbgAbstractFieldRequest& a) const;
+		QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);
 		const QString& GetField() const;
 		void SetField(const QString& val);
 		const Overrides& GetOverrides() const;
@@ -25,7 +25,7 @@ namespace QBbgLib {
 		void ClearOverrides();
 		bool IsValidReq() const;
 	protected:
-		bool SameOverrides(const QSingleBbgRequest& a)const;
+		bool SameOverrides(const QBbgAbstractFieldRequest& a)const;
 		friend class QBbgRequest;
         friend class QBbgRequestPrivate;
 	};

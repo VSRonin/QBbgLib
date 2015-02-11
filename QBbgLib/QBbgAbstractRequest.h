@@ -6,15 +6,20 @@ namespace QBbgLib {
     class QBbgSecurity;
     class QBbgAbstractRequest
     {
+    protected:
+        enum {
+            FirstFielded=0x10
+            , FirstRealTime = 0x20
+        };
     public:
         enum RequestType
         {
-            HistoricalData
-            , IntraDayTick
-            , IntraDayBar
+            Beqs
+            , HistoricalData = FirstFielded
             , ReferenceData
             , PortfolioData
-            , Beqs
+            , IntraDayTick = FirstRealTime
+            , IntraDayBar
         };
     protected:
         Q_DECLARE_PRIVATE(QBbgAbstractRequest)
