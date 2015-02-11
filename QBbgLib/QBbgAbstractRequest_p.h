@@ -8,8 +8,8 @@
 namespace QBbgLib {
     class QBbgAbstractRequestPrivate
     {
-    protected:
         Q_DECLARE_PUBLIC(QBbgAbstractRequest)
+    protected:
         QBbgAbstractRequest* q_ptr;
     private:
         QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other);

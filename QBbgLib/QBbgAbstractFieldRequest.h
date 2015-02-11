@@ -6,28 +6,25 @@
 #include "QBbgAbstractRequest.h"
 #include <QHash>
 namespace QBbgLib {
-	class QBbgWorker;
     class QBbgAbstractFieldRequestPrivate;
-    class QBbgRequestPrivate;
-    class QBBG_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
+    class QBbgAbstractFieldRequest : public QBbgAbstractRequest
 	{
         Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
 	public:
 		QBbgAbstractFieldRequest();
 		QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a);
-		bool operator==(const QBbgAbstractFieldRequest& a) const;
-		QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);
-		const QString& GetField() const;
-		void SetField(const QString& val);
-		const Overrides& GetOverrides() const;
-		void SetOverrides(const Overrides& Overr);
-		void SetOverride(QString Name, const QVariant& Value);
-		void ClearOverrides();
-		bool IsValidReq() const;
+        virtual bool operator==(const QBbgAbstractFieldRequest& a) const;
+        virtual QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);
+        virtual const QString& GetField() const;
+        virtual void SetField(const QString& val);
+        virtual const Overrides& GetOverrides() const;
+        virtual void SetOverrides(const Overrides& Overr);
+        virtual void SetOverride(QString Name, const QVariant& Value);
+        virtual void ClearOverrides();
+		virtual bool IsValidReq() const;
 	protected:
-		bool SameOverrides(const QBbgAbstractFieldRequest& a)const;
-		friend class QBbgRequest;
-        friend class QBbgRequestPrivate;
+        virtual bool SameOverrides(const QBbgAbstractFieldRequest& a)const;
+        QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);
 	};
 }
 #endif // SingleBbgRequest_h__

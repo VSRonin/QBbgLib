@@ -111,9 +111,13 @@ namespace QBbgLib {
         : QBbgAbstractRequest(new QBbgAbstractFieldRequestPrivate(this, *(a.d_func())))
     {}
 
+    QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d)
+        : QBbgAbstractRequest(d)
+    {}
+
     QBbgAbstractFieldRequest& QBbgAbstractFieldRequest::operator=(const QBbgAbstractFieldRequest& a)
     {
-        Q_D(QSingleBbgRequest);
+        Q_D(QBbgAbstractFieldRequest);
         d->operator=(*(a.d_func()));
         return *this;
     }

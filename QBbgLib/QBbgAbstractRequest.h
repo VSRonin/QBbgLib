@@ -12,9 +12,11 @@ namespace QBbgLib {
             , FirstRealTime = 0x20
         };
     public:
+        enum {InvalidID=-1024};
         enum RequestType
         {
-            Beqs
+            Invalid =-1
+            , Beqs
             , HistoricalData = FirstFielded
             , ReferenceData
             , PortfolioData
@@ -34,7 +36,8 @@ namespace QBbgLib {
         virtual void setSecurity(const QBbgSecurity& val);
         virtual qint64 getID() const;
         virtual void setID(qint64 val);
-        virtual bool IsValidReq() const =0;
+        virtual bool IsValidReq() const;
+        virtual RequestType requestType() const;
         static QString requestTypeToString(RequestType a);
         static RequestType stringToRequestType(QString a);
     };

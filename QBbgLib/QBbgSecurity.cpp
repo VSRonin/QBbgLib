@@ -95,7 +95,7 @@ namespace QBbgLib {
         case cins: return "cins";
         case cats: return "cats";
         case bbgid: return "bbgid";
-        default: return "";
+        default: return QString();
         }
     }
     QBbgSecurity::YellowKeys QBbgSecurity::stringToYellowKey(QString a)

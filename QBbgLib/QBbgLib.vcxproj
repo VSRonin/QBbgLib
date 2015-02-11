@@ -19,6 +19,7 @@
     </ClCompile>
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgGenerals.cpp" />
+    <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgRequest.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
@@ -30,6 +31,8 @@
     <ClInclude Include="QBbgAbstractRequest_p.h" />
     <ClInclude Include="QBbgGenerals.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
+    <ClInclude Include="QbbgReferenceDataRequest.h" />
+    <ClInclude Include="QbbgReferenceDataRequest_p.h" />
     <ClInclude Include="QBbgRequest.h" />
     <ClInclude Include="QBbgRequest_p.h" />
     <ClInclude Include="QBbgSecurity.h" />
