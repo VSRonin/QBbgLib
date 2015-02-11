@@ -16,34 +16,3 @@ QString QBbgLib::BbgErrorCodes2String(QBbgLib::BbgErrorCodes a)
     return Result;
 }
 
-QString QBbgLib::YellowKey2String(QBbgLib::YellowKeys a)
-{
-    switch (a) {
-    case Govt: return "Govt";
-    case Corp: return "Corp";
-    case Mtge: return "Mtge";
-    case MMkt: return "MMkt";
-    case Muni: return "Muni";
-    case Pfd: return "Pfd";
-    case Equity: return "Equity";
-    case Comdty: return "Comdty";
-    case Index: return "Index";
-    case Curncy: return "Curncy";
-    default: return "";
-    }
-}
-QBbgLib::YellowKeys QBbgLib::String2YellowKey(QString a)
-{
-    a = a.toLower();
-    if (a == "govt") return Govt;
-    else if (a == "corp") return Corp;
-    else if (a == "mtge") return Mtge;
-    else if (a == "mmkt") return MMkt;
-    else if (a == "muni") return Muni;
-    else if (a == "pfd") return Pfd;
-    else if (a == "equity") return Equity;
-    else if (a == "comdty") return Comdty;
-    else if (a == "index") return Index;
-    else if (a == "curncy") return Curncy;
-    else return Invalid;
-}

@@ -57,6 +57,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorker.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgSecurity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgGenerals.h">
@@ -85,6 +91,18 @@
     </ClInclude>
     <ClInclude Include="QSingleBbgResult_p.h">
       <Filter>Header Files\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractRequest_p.h">
+      <Filter>Header Files\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgSecurity_p.h">
+      <Filter>Header Files\Private</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgSecurity.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -17,17 +17,23 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgGenerals.cpp" />
     <ClCompile Include="QBbgRequest.cpp" />
+    <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
     <ClCompile Include="QSingleBbgRequest.cpp" />
     <ClCompile Include="QSingleBbgResult.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="QBbgAbstractRequest.h" />
+    <ClInclude Include="QBbgAbstractRequest_p.h" />
     <ClInclude Include="QBbgGenerals.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QBbgRequest.h" />
     <ClInclude Include="QBbgRequest_p.h" />
+    <ClInclude Include="QBbgSecurity.h" />
+    <ClInclude Include="QBbgSecurity_p.h" />
     <ClInclude Include="QBbgWorker_p.h" />
     <ClInclude Include="QSingleBbgRequest.h" />
     <ClInclude Include="QSingleBbgRequest_p.h" />
