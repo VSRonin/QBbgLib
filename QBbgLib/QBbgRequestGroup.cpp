@@ -230,25 +230,6 @@ namespace QBbgLib {
             MainIter++;
         }*/
     }
-
-
-    BbgErrorCodes QBbgRequestGroup::errorCode() const
-    {
-        Q_D(const QBbgRequestGroup);
-        return d->m_ErrorCode;
-    }
-    bool QBbgRequestGroup::hasErrors() const
-    {
-        Q_D(const QBbgRequestGroup);
-        return d->m_ErrorCode != NoErrors;
-    }
-    void QBbgRequestGroup::SetErrorCode(BbgErrorCodes val)
-    {
-        Q_D(QBbgRequestGroup);
-        if (val == NoErrors) d->m_ErrorCode = NoErrors;
-        else d->m_ErrorCode |= val;
-    }
-
     QList<QBbgAbstractRequest::RequestType> QBbgRequestGroup::differentTypes() const
     {
         QSet<QBbgAbstractRequest::RequestType> result;

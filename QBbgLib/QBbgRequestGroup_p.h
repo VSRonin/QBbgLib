@@ -17,7 +17,6 @@ namespace QBbgLib {
         QBbgRequestGroupPrivate& operator=(const QBbgRequestGroupPrivate& a);
         virtual ~QBbgRequestGroupPrivate();
         static qint64 MaxID;
-        BbgErrorCodes m_ErrorCode;
         QHash<qint64, QBbgAbstractRequest*>  RequestTable;
         void clear();
         const QBbgAbstractRequest* request(qint64 ID) const;

@@ -1,6 +1,5 @@
 #ifndef QBbgAbstractRequest_p_h__
 #define QBbgAbstractRequest_p_h__
-
 #include "QBbgAbstractRequest.h"
 #include "QBbgGenerals.h"
 #include <QString>

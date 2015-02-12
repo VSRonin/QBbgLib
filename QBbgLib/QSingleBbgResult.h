@@ -32,14 +32,10 @@ namespace QBbgLib {
 		qint32 GetNumRows() const;
 		qint32 GetNumCols() const;
 		const QSingleBbgResult* GetTableResult(quint32 r, quint32 c) const;
-		qint32 GetErrorCode() const;
-		QString GetErrorString() const;
-		bool HasErrors() const;
 	protected:
         void SetValue(const QString& val, const QString& Header = QString());
         void AddValueRow(const QList<QString>& val, const QList<QString>& Headers = QList<QString>());
 		void SetHeader(const QString& Header = QString());
-		void SetErrorCode(BbgErrorCodes ErrCd);
 		friend class QBbgWorker;
         friend class QBbgWorkerPrivate;
 	};

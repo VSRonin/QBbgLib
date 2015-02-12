@@ -16,7 +16,7 @@ namespace QBbgLib {
         void SetValue(const QString& val, const QString& Header = QString());
         void AddValueRow(const QList<QString>& val, const QList<QString>& Headers = QList<QString>());
         void Clear();
-        BbgErrorCodes m_ErrorCode;
+
         QString m_Header;
         QString* m_StringValue;
         QDate* m_DateValue;

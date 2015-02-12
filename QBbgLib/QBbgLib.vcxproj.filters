@@ -46,6 +46,12 @@
     <Filter Include="Source Files\RequestResponse\Requests">
       <UniqueIdentifier>{2aaec154-7fe1-482b-9de2-4d912834efe0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\RequestResponse\Response">
+      <UniqueIdentifier>{dba24b37-65b2-4301-b984-4cefffa944c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RequestResponse\Response">
+      <UniqueIdentifier>{e3ef0e8a-3432-4d5c-b82b-a1a53fe5c584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QBbgGenerals.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="QBbgRequestGroup.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgAbstractResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="QBbgRequestGroup.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractResponse_p.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

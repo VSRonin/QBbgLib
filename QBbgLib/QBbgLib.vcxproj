@@ -18,6 +18,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="QBbgAbstractRequest.cpp" />
+    <ClCompile Include="QBbgAbstractResponse.cpp" />
     <ClCompile Include="QBbgGenerals.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgRequestGroup.cpp" />
@@ -29,6 +30,8 @@
   <ItemGroup>
     <ClInclude Include="QBbgAbstractRequest.h" />
     <ClInclude Include="QBbgAbstractRequest_p.h" />
+    <ClInclude Include="QBbgAbstractResponse.h" />
+    <ClInclude Include="QBbgAbstractResponse_p.h" />
     <ClInclude Include="QBbgGenerals.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QbbgReferenceDataRequest.h" />
