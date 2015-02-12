@@ -129,7 +129,7 @@ namespace QBbgLib {
     }
     void QBbgOverride::setOverride(const QString& Name, bool val)
     {
-
+        setOverride(Name, val ? QString("Y") : QString("N"));
     }
 
 }
