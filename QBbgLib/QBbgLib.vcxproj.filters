@@ -51,9 +51,6 @@
     <ClCompile Include="QBbgGenerals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="QBbgRequest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QBbgWorker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,15 +75,15 @@
     <ClCompile Include="QbbgReferenceDataRequest.cpp">
       <Filter>Source Files\RequestResponse\Requests</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgRequestGroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgGenerals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QBbgProjectGlobals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgRequest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QSingleBbgResult.h">
@@ -113,9 +110,6 @@
     <ClInclude Include="QBbgAbstractFieldRequest.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
-    <ClInclude Include="QBbgRequest_p.h">
-      <Filter>Header Files\Private</Filter>
-    </ClInclude>
     <ClInclude Include="QbbgReferenceDataRequest_p.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
@@ -124,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="QBbgSecurity_p.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgRequestGroup_p.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgRequestGroup.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

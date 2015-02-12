@@ -36,7 +36,7 @@ namespace QBbgLib {
         virtual void setSecurity(const QBbgSecurity& val);
         virtual qint64 getID() const;
         virtual void setID(qint64 val);
-        virtual bool IsValidReq() const;
+        virtual bool isValidReq() const;
         virtual RequestType requestType() const;
         static QString requestTypeToString(RequestType a);
         static RequestType stringToRequestType(QString a);

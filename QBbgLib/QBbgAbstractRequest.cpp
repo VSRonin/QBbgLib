@@ -86,7 +86,7 @@ namespace QBbgLib {
         else return Invalid;
     }
 
-    bool QBbgAbstractRequest::IsValidReq() const
+    bool QBbgAbstractRequest::isValidReq() const
     {
         Q_D(const QBbgAbstractRequest);
         return d->m_Security.isValid() && d->m_ID > 0;

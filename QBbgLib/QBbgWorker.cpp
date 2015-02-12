@@ -33,7 +33,7 @@ namespace QBbgLib {
         for (QMap<qint64, QSingleBbgResult* >::iterator i = m_Results.begin(); i != m_Results.end(); i++)
             delete (i.value());
         m_Results.clear();
-        if (!m_Requests.IsValidReq()) {
+        if (!m_Requests.isValidReq()) {
             SetGlobalError(InvalidInputs);
             return;
         }
@@ -75,9 +75,9 @@ namespace QBbgLib {
             UsedSecur.clear();
             UsedField.clear();
             for (QList<qint64>::const_iterator GroupIter = CurrentList->constBegin(); GroupIter != CurrentList->constEnd(); GroupIter++) {
-                const QBbgAbstractFieldRequest* CurrentSingle = m_Requests.FindRequest(*GroupIter);
+                const QBbgAbstractFieldRequest* CurrentSingle = m_Requests.request(*GroupIter);
                 if (!CurrentSingle) continue;
-                if (!CurrentSingle->IsValidReq()) {
+                if (!CurrentSingle->isValidReq()) {
                     if (SetError(ReqIter.key(), *GroupIter, InvalidInputs))
                         return EndOfProcess(); //All Invalid Inputs
                 }
@@ -85,12 +85,12 @@ namespace QBbgLib {
                     request.append("securities", CurrentSingle->GetFullSecurity().toLatin1().data());
                     UsedSecur.append(CurrentSingle->GetSecurity());
                 }
-                if (!UsedField.contains(CurrentSingle->GetField())) {
-                    request.append("fields", CurrentSingle->GetField().toLatin1().data());
-                    UsedField.append(CurrentSingle->GetField());
+                if (!UsedField.contains(CurrentSingle->field())) {
+                    request.append("fields", CurrentSingle->field().toLatin1().data());
+                    UsedField.append(CurrentSingle->field());
                 }
                 if (GroupIter == CurrentList->begin()) {
-                    for (auto OvrIter = CurrentSingle->GetOverrides().constBegin(); OvrIter != CurrentSingle->GetOverrides().constEnd(); OvrIter++) {
+                    for (auto OvrIter = CurrentSingle->overrides().constBegin(); OvrIter != CurrentSingle->overrides().constEnd(); OvrIter++) {
                         BloombergLP::blpapi::Element CurrentOverrides = request.getElement("overrides").appendElement();
                         CurrentOverrides.setElement("fieldId", OvrIter.key().toLatin1().data());
                         CurrentOverrides.setElement("value", OvrIter.value().toLatin1().data());
@@ -191,12 +191,12 @@ namespace QBbgLib {
                         NumFieldExep = message.getElement("securityData").getValueAsElement(i).getElement("fieldExceptions").numValues();
                         for (qint32 j = 0; j < NumFieldExep; j++) {
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.request(*SingleReq);
                                 QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                                 QString CurrentField = message.getElement("securityData").getValueAsElement(i).getElement("fieldExceptions").getValueAsElement(j).getElementAsString("fieldId");
                                 if (
                                     FoundRequ->GetFullSecurity() == CurrentSecurity
-                                    && FoundRequ->GetField() == CurrentField
+                                    && FoundRequ->field() == CurrentField
                                     ) {
                                     if (SetError(message.correlationId().asInteger(), *SingleReq, FieldError))return;
                                 }
@@ -205,7 +205,7 @@ namespace QBbgLib {
                         if (message.getElement("securityData").getValueAsElement(i).hasElement("securityError")) {
                             QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.request(*SingleReq);
                                 if ((FoundRequ->GetFullSecurity()) == CurrentSecurity) {
                                     if (SetError(message.correlationId().asInteger(), *SingleReq, SecurityError))return;
                                 }
@@ -214,31 +214,31 @@ namespace QBbgLib {
                         else {
                             QString CurrentSecurity = message.getElement("securityData").getValueAsElement(i).getElementAsString("security");
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.FindRequest(*SingleReq);
+                                const QBbgAbstractFieldRequest* FoundRequ = m_Requests.request(*SingleReq);
                                 if ((FoundRequ->GetFullSecurity()) == CurrentSecurity) {
                                     if (message.getElement("securityData").getValueAsElement(i).getElement("fieldData").numElements() != 0) {
-                                        if (message.getElement("securityData").getValueAsElement(i).getElement("fieldData").hasElement(FoundRequ->GetField().toLatin1().data())) {
-                                            if (!message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->GetField().toLatin1().data()).isArray()) {
+                                        if (message.getElement("securityData").getValueAsElement(i).getElement("fieldData").hasElement(FoundRequ->field().toLatin1().data())) {
+                                            if (!message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->field().toLatin1().data()).isArray()) {
                                                 if (DataRecieved(message.correlationId().asInteger(), *SingleReq
-                                                    , message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElementAsString(FoundRequ->GetField().toLatin1().data())
-                                                    , FoundRequ->GetField()
+                                                    , message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElementAsString(FoundRequ->field().toLatin1().data())
+                                                    , FoundRequ->field()
                                                     )) return;
                                             }
                                             else {
                                                 QList<QString> CurrentRow, CurrentHead;
                                                 const qint32 NumResults =
-                                                    message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->GetField().toLatin1().data()).numValues();
+                                                    message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->field().toLatin1().data()).numValues();
                                                 const qint32 NumCols =
-                                                    message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->GetField().toLatin1().data()).getValueAsElement(0).numElements();
+                                                    message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->field().toLatin1().data()).getValueAsElement(0).numElements();
                                                 for (qint32 TableIter = 0; TableIter < NumResults; TableIter++) {
                                                     CurrentRow.clear(); CurrentHead.clear();
                                                     for (qint32 ColIter = 0; ColIter < NumCols; ColIter++) {
-                                                        CurrentRow.append(message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->GetField().toLatin1().data()).getValueAsElement(TableIter).getElement(ColIter).getValueAsString());
-                                                        CurrentHead.append(message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->GetField().toLatin1().data()).getValueAsElement(TableIter).getElement(ColIter).name().string());
+                                                        CurrentRow.append(message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->field().toLatin1().data()).getValueAsElement(TableIter).getElement(ColIter).getValueAsString());
+                                                        CurrentHead.append(message.getElement("securityData").getValueAsElement(i).getElement("fieldData").getElement(FoundRequ->field().toLatin1().data()).getValueAsElement(TableIter).getElement(ColIter).name().string());
                                                     }
                                                     DataRowRecieved(message.correlationId().asInteger(), *SingleReq, CurrentRow, CurrentHead);
                                                 }
-                                                if (DataRecieved(message.correlationId().asInteger(), *SingleReq, FoundRequ->GetField())) return;
+                                                if (DataRecieved(message.correlationId().asInteger(), *SingleReq, FoundRequ->field())) return;
                                             }
                                         }
                                         else {
@@ -301,9 +301,9 @@ namespace QBbgLib {
         }
         if (!m_UseSyncronous) {
             q->Recieved(RequestID);
-            q->Progress((100 * m_Results.size()) / m_Requests.NumRequests());
+            q->Progress((100 * m_Results.size()) / m_Requests.size());
         }
-        if (m_Results.size() == m_Requests.NumRequests()) {
+        if (m_Results.size() == m_Requests.size()) {
             m_SessionFinished = true;
             if (m_UseSyncronous) {
                 session->stop();
@@ -337,7 +337,7 @@ namespace QBbgLib {
         if (!session) return;
         m_SessionFinished = false;
         session.reset();
-        if (m_UseSyncronous && (m_Requests.GetErrorCode() & SessionStopped)) {
+        if (m_UseSyncronous && (m_Requests.errorCode() & SessionStopped)) {
             q->Stopped();
         }
 
@@ -388,7 +388,7 @@ namespace QBbgLib {
         d->ServerPort = val;
     }
 
-    void QBbgWorker::setRequest(const QBbgRequest& a)
+    void QBbgWorker::setRequest(const QBbgRequestGroup& a)
     {
         Q_D(QBbgWorker);
         if (!d->session)
@@ -403,7 +403,7 @@ namespace QBbgLib {
         d->RunRequest();
     }
 
-    void QBbgWorker::startRequestSync(const QBbgRequest& a)
+    void QBbgWorker::startRequestSync(const QBbgRequestGroup& a)
     {
         setRequest(a);
         startRequestSync();
@@ -415,7 +415,7 @@ namespace QBbgLib {
         return d->m_Results.value(ID, NULL);
     }
 
-    const QBbgRequest& QBbgWorker::GetRequest() const
+    const QBbgRequestGroup& QBbgWorker::GetRequest() const
     {
         Q_D(const QBbgWorker);
         return d->m_Requests;
@@ -434,7 +434,7 @@ namespace QBbgLib {
         d->RunRequest();
     }
 
-    void QBbgWorker::StartRequestAsync(const QBbgRequest& a)
+    void QBbgWorker::StartRequestAsync(const QBbgRequestGroup& a)
     {
         setRequest(a);
         StartRequestAsync();

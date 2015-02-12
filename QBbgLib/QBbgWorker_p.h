@@ -19,7 +19,7 @@ namespace QBbgLib {
         QHash<qint64, QList<qint64>* > Groups;
         QString ServerAddress;
         unsigned short ServerPort;
-        QBbgRequest m_Requests;
+        QBbgRequestGroup m_Requests;
         QMap<qint64, QSingleBbgResult* > m_Results;
         QScopedPointer<BloombergLP::blpapi::Session> session;
         std::atomic_bool m_SessionFinished;

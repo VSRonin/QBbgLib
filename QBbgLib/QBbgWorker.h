@@ -3,7 +3,7 @@
 
 #include "QBbgProjectGlobals.h"
 #include "QSingleBbgResult.h"
-#include "QBbgRequest.h"
+#include "QBbgRequestGroup.h"
 #include <QObject>
 #include <QMap>
 #include <QHash>
@@ -45,7 +45,7 @@ namespace QBbgLib {
         \brief Sets the request that has to be sent to Bloomberg
         \details This sets the request that should be sent to Bloomberg, the individual data requests will be split automatically in the most efficient way and sent.<br/>If a request was already sent and is still pending answer from Bloomberg, this method will do nothing.
         */
-		void setRequest(const QBbgRequest& a);
+		void setRequest(const QBbgRequestGroup& a);
         /*!
         \brief Sends the current request to Bloomberg 
         \details This sends to Bloomberg the request previously set with setRequest.<br/>This method will return only once all results are collected.
@@ -64,14 +64,14 @@ namespace QBbgLib {
         \sa setRequest
         \sa startRequestSync
         */
-		void startRequestSync(const QBbgRequest& a);
+		void startRequestSync(const QBbgRequestGroup& a);
 		const QSingleBbgResult* GetResult(qint64 ID) const;
-		const QBbgRequest& GetRequest() const;
+		const QBbgRequestGroup& GetRequest() const;
 		bool isRunning() const;
 	public slots:
 		void StopRequest();
 		void StartRequestAsync();
-		void StartRequestAsync(const QBbgRequest& a);
+		void StartRequestAsync(const QBbgRequestGroup& a);
 	private:
         QBbgWorker(const QBbgWorker&);
 	signals :

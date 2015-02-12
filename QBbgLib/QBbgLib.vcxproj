@@ -20,7 +20,7 @@
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgGenerals.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
-    <ClCompile Include="QBbgRequest.cpp" />
+    <ClCompile Include="QBbgRequestGroup.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
     <ClCompile Include="QBbgAbstractFieldRequest.cpp" />
@@ -33,8 +33,8 @@
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QbbgReferenceDataRequest.h" />
     <ClInclude Include="QbbgReferenceDataRequest_p.h" />
-    <ClInclude Include="QBbgRequest.h" />
-    <ClInclude Include="QBbgRequest_p.h" />
+    <ClInclude Include="QBbgRequestGroup.h" />
+    <ClInclude Include="QBbgRequestGroup_p.h" />
     <ClInclude Include="QBbgSecurity.h" />
     <ClInclude Include="QBbgSecurity_p.h" />
     <ClInclude Include="QBbgWorker_p.h" />
