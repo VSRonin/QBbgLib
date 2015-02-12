@@ -1,6 +1,5 @@
 #ifndef QBbgRequest_h__
 #define QBbgRequest_h__
-
 #include "QBbgProjectGlobals.h"
 #include "QBbgSecurity.h"
 #include "QBbgAbstractRequest.h"

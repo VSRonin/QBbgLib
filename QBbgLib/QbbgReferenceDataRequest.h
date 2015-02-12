@@ -1,10 +1,10 @@
 #ifndef QbbgReferenceDataRequest_h__
 #define QbbgReferenceDataRequest_h__
-
+#include "QBbgProjectGlobals.h"
 #include "QBbgAbstractFieldRequest.h"
 namespace QBbgLib {
     class QBbgReferenceDataRequestPrivate;
-    class QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
+    class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {
         Q_DECLARE_PRIVATE(QBbgReferenceDataRequest)
     public:

@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h</Extensions>
     </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
-      <Extensions>ui</Extensions>
-    </Filter>
     <Filter Include="Generated Files">
       <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
       <Extensions>moc;h;cpp</Extensions>
@@ -87,6 +83,21 @@
     <ClCompile Include="QBbgOverride.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgRequestResponseWorker.cpp">
+      <Filter>Source Files\RequestResponse</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgAbstractWorker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestResponseWorker.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
@@ -149,10 +160,22 @@
     <ClInclude Include="QBbgOverride_p.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="QBbgRequestResponseWorker_p.h">
+      <Filter>Header Files\RequestResponse</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractWorker_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QBbgWorker.h">
       <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractWorker.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgRequestResponseWorker.h">
+      <Filter>Header Files\RequestResponse</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

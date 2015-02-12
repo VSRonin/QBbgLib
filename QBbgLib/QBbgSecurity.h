@@ -1,9 +1,10 @@
 #ifndef QBbgSecurity_h__
 #define QBbgSecurity_h__
 #include <QString>
+#include "QBbgProjectGlobals.h"
 namespace QBbgLib {
     class QBbgSecurityPrivate;
-    class QBbgSecurity
+    class QBBG_EXPORT QBbgSecurity
     {
     private:
         enum { FirstPrefix=0x400 };

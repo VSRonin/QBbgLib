@@ -11,8 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestResponseWorker.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -20,10 +27,12 @@
     <ClCompile Include="QBbgAbstractFieldResponse.cpp" />
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgAbstractResponse.cpp" />
+    <ClCompile Include="QBbgAbstractWorker.cpp" />
     <ClCompile Include="QBbgOverride.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgReferenceDataResponse.cpp" />
     <ClCompile Include="QBbgRequestGroup.cpp" />
+    <ClCompile Include="QBbgRequestResponseWorker.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
     <ClCompile Include="QBbgAbstractFieldRequest.cpp" />
@@ -35,6 +44,17 @@
     <ClInclude Include="QBbgAbstractRequest_p.h" />
     <ClInclude Include="QBbgAbstractResponse.h" />
     <ClInclude Include="QBbgAbstractResponse_p.h" />
+    <CustomBuild Include="QBbgAbstractWorker.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QBbgAbstractWorker.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QBbgAbstractWorker.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
+    </CustomBuild>
+    <ClInclude Include="QBbgAbstractWorker_p.h" />
     <ClInclude Include="QBbgOverride.h" />
     <ClInclude Include="QBbgOverride_p.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
@@ -44,6 +64,8 @@
     <ClInclude Include="QBbgReferenceDataResponse_p.h" />
     <ClInclude Include="QBbgRequestGroup.h" />
     <ClInclude Include="QBbgRequestGroup_p.h" />
+    <CustomBuild Include="QBbgRequestResponseWorker.h" />
+    <ClInclude Include="QBbgRequestResponseWorker_p.h" />
     <ClInclude Include="QBbgSecurity.h" />
     <ClInclude Include="QBbgSecurity_p.h" />
     <ClInclude Include="QBbgWorker_p.h" />

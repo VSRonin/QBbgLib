@@ -44,6 +44,7 @@ namespace QBbgLib {
         sessionOptions.setMaxPendingRequests(INT_MAX - 2);
         if (m_UseSyncronous) {
             session.reset(new BloombergLP::blpapi::Session(sessionOptions));
+            
             if (!session->start()) {
                 SetGlobalError(SessionError);
                 return;

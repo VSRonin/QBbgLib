@@ -12,8 +12,8 @@ namespace QBbgLib {
             FirstFielded=0x10
             , FirstRealTime = 0x20
         };
+        enum { InvalidID = -1024 };
     public:
-        enum {InvalidID=-1024};
         enum RequestType
         {
             Invalid =-1

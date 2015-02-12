@@ -2,11 +2,12 @@
 #define QBbgOverride_h__
 #include <QString>
 #include <QList>
+#include "QBbgProjectGlobals.h"
 class QDate;
 class QTime;
 namespace QBbgLib {
     class QBbgOverridePrivate;
-    class QBbgOverride
+    class QBBG_EXPORT QBbgOverride
     {
         Q_DECLARE_PRIVATE(QBbgOverride)
     public:

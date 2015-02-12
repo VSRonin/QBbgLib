@@ -125,7 +125,10 @@ namespace QBbgLib {
 
     void QBbgOverride::setOverride(const QString& Name, const QTime& val)
     {
-        setOverride(Name, val.toString("HHmmss"));
+        if (val.isNull())
+            setOverride(Name, QString());
+        else
+            setOverride(Name, val.toString("HHmmss"));
     }
     void QBbgOverride::setOverride(const QString& Name, bool val)
     {
