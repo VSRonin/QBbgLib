@@ -1,7 +1,8 @@
 #ifndef QBbgReferenceDataResponse_h__
 #define QBbgReferenceDataResponse_h__
-
 #include "QBbgAbstractFieldResponse.h"
+#include <QList>
+class QVariant;
 namespace QBbgLib {
     class QBbgReferenceDataResponsePrivate;
     class QBbgReferenceDataResponse : public QBbgAbstractFieldResponse

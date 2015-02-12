@@ -1,6 +1,5 @@
 #ifndef QBbgAbstractResponse_h__
 #define QBbgAbstractResponse_h__
-#include "QBbgGenerals.h"
 #include <QString>
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate;

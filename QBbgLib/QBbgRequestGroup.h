@@ -2,7 +2,6 @@
 #define QBbgRequest_h__
 
 #include "QBbgProjectGlobals.h"
-#include "QBbgGenerals.h"
 #include "QBbgSecurity.h"
 #include "QBbgAbstractRequest.h"
 #include <QList> 

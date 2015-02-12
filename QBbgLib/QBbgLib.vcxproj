@@ -20,14 +20,13 @@
     <ClCompile Include="QBbgAbstractFieldResponse.cpp" />
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgAbstractResponse.cpp" />
-    <ClCompile Include="QBbgGenerals.cpp" />
+    <ClCompile Include="QBbgOverride.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgReferenceDataResponse.cpp" />
     <ClCompile Include="QBbgRequestGroup.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
     <ClCompile Include="QBbgAbstractFieldRequest.cpp" />
-    <ClCompile Include="QSingleBbgResult.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgAbstractFieldResponse.h" />
@@ -36,7 +35,8 @@
     <ClInclude Include="QBbgAbstractRequest_p.h" />
     <ClInclude Include="QBbgAbstractResponse.h" />
     <ClInclude Include="QBbgAbstractResponse_p.h" />
-    <ClInclude Include="QBbgGenerals.h" />
+    <ClInclude Include="QBbgOverride.h" />
+    <ClInclude Include="QBbgOverride_p.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QbbgReferenceDataRequest.h" />
     <ClInclude Include="QbbgReferenceDataRequest_p.h" />
@@ -49,8 +49,6 @@
     <ClInclude Include="QBbgWorker_p.h" />
     <ClInclude Include="QBbgAbstractFieldRequest.h" />
     <ClInclude Include="QBbgAbstractFieldRequest_p.h" />
-    <ClInclude Include="QSingleBbgResult.h" />
-    <ClInclude Include="QSingleBbgResult_p.h" />
     <CustomBuild Include="QBbgWorker.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QBbgWorker.h...</Message>

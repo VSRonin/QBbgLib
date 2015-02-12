@@ -2,7 +2,7 @@
 #define QBbgWorker_h__
 
 #include "QBbgProjectGlobals.h"
-#include "QSingleBbgResult.h"
+
 #include "QBbgRequestGroup.h"
 #include <QObject>
 #include <QMap>

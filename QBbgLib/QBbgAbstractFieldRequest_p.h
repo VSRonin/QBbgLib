@@ -1,5 +1,6 @@
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgAbstractRequest_p.h"
+#include "QBbgOverride.h"
 namespace QBbgLib {
     class QBbgAbstractFieldRequestPrivate : public QBbgAbstractRequestPrivate
     {
@@ -12,7 +13,7 @@ namespace QBbgLib {
         QBbgAbstractFieldRequestPrivate& operator=(const QBbgAbstractFieldRequestPrivate& a);
         bool operator==(const QBbgAbstractFieldRequestPrivate& a) const;
         QString m_Field;
-        Overrides m_Overrides;
+        QBbgOverride m_Overrides;
         bool SameOverrides(const QBbgAbstractFieldRequestPrivate& a)const;
     };
 }

@@ -1,14 +1,12 @@
 #ifndef SingleBbgRequest_h__
 #define SingleBbgRequest_h__
-#include "QBbgProjectGlobals.h"
-#include "QBbgRequestGroup.h"
-#include "QSingleBbgResult.h"
 #include "QBbgAbstractRequest.h"
-#include <QHash>
+#include <QString>
 namespace QBbgLib {
     class QBbgAbstractFieldRequestPrivate;
     class QBbgRequestGroupPrivate;
     class QBbgRequestGroup;
+    class QBbgOverride;
     class QBbgAbstractFieldRequest : public QBbgAbstractRequest
 	{
         Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
@@ -19,9 +17,8 @@ namespace QBbgLib {
         virtual QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);
         virtual const QString& field() const;
         virtual void setField(const QString& val);
-        virtual const Overrides& overrides() const;
-        virtual void setOverrides(const Overrides& Overr);
-        virtual void setOverride(QString Name, const QVariant& Value);
+        virtual const QBbgOverride& overrides() const;
+        virtual void setOverrides(const QBbgOverride& Overr);
         virtual void clearOverrides();
 		virtual bool isValidReq() const;
 	protected:

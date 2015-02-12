@@ -1,5 +1,6 @@
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgAbstractFieldRequest_p.h"
+#include "QBbgOverride.h"
 #include <QList> 
 #include <QHash>
 namespace QBbgLib {
@@ -24,33 +25,10 @@ namespace QBbgLib {
         m_Overrides = a.m_Overrides;
         return *this;
     }
-    void QBbgAbstractFieldRequest::setOverrides(const Overrides& Overr)
+    void QBbgAbstractFieldRequest::setOverrides(const QBbgOverride& Overr)
     {
         Q_D(QBbgAbstractFieldRequest);
-        clearOverrides();
-        for (auto i = Overr.constBegin(); i != Overr.constEnd(); i++) {
-            if (i.value().isNull()) continue;
-            if (i.key().isEmpty()) continue;
-            QString TempKey = i.key().simplified().toUpper();
-            TempKey.replace(QChar(' '), QChar('_'));
-            d->m_Overrides.insert(TempKey, i.value());
-        }
-    }
-    void QBbgAbstractFieldRequest::setOverride(QString Name, const QVariant& Value)
-    {
-        Q_D(QBbgAbstractFieldRequest);
-        Name = Name.simplified().toUpper();
-        Name.replace(QChar(' '), QChar('_'));
-        Overrides::iterator iter= d->m_Overrides.find(Name);
-        if (Value.isNull()) {
-            if (iter != d->m_Overrides.end())
-                d->m_Overrides.erase(iter);
-            return;
-        }
-        if (iter == d->m_Overrides.end())
-            d->m_Overrides.insert(Name, Value);
-        else
-            iter.value() = Value;
+        d->m_Overrides = Overr;
     }
     void QBbgAbstractFieldRequest::clearOverrides()
     {
@@ -97,7 +75,7 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractFieldRequest);
         return d->m_Field;
     }
-    const Overrides& QBbgAbstractFieldRequest::overrides() const
+    const QBbgOverride& QBbgAbstractFieldRequest::overrides() const
     {
         Q_D(const QBbgAbstractFieldRequest);
         return d->m_Overrides;

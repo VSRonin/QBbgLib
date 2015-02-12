@@ -11,24 +11,20 @@ namespace QBbgLib {
         Q_D(const QBbgReferenceDataResponse);
         return !(d->m_TableResultRows.isEmpty() || d->m_TableCols==0);
     }
-
     bool QBbgReferenceDataResponse::isEmpty() const
     {
         return !(hasTable() || hasValue());
     }
-
     qint32 QBbgReferenceDataResponse::rows() const
     {
         Q_D(const QBbgReferenceDataResponse);
         return d->m_TableResultRows.size();
     }
-
     qint32 QBbgReferenceDataResponse::columns() const
     {
         Q_D(const QBbgReferenceDataResponse);
         return d->m_TableCols;
     }
-
     const QBbgReferenceDataResponse* QBbgReferenceDataResponse::getTableValue(qint32 r, qint32 c) const
     {
         if (r < 0 || r >= rows() || c<0 || c>columns())

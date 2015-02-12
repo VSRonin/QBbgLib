@@ -1,7 +1,7 @@
 #ifndef QBbgRequest_p_h__
 #define QBbgRequest_p_h__
 #include "QBbgRequestGroup.h"
-#include "QBbgGenerals.h"
+#include <QHash>
 namespace QBbgLib {
     class QBbgRequestGroupPrivate
     {

@@ -28,9 +28,6 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Header Files\Private">
-      <UniqueIdentifier>{4df690e7-5898-4390-95ef-8caba42349d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Documentation">
       <UniqueIdentifier>{ce5a4c6d-46a5-41d9-b04d-bc692e90e597}</UniqueIdentifier>
     </Filter>
@@ -54,13 +51,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="QBbgGenerals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QBbgWorker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QSingleBbgResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorker.cpp">
@@ -93,22 +84,13 @@
     <ClCompile Include="QBbgReferenceDataResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgOverride.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="QBbgGenerals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QBbgProjectGlobals.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QSingleBbgResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgWorker_p.h">
-      <Filter>Header Files\Private</Filter>
-    </ClInclude>
-    <ClInclude Include="QSingleBbgResult_p.h">
-      <Filter>Header Files\Private</Filter>
     </ClInclude>
     <ClInclude Include="QBbgSecurity.h">
       <Filter>Header Files</Filter>
@@ -157,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="QBbgReferenceDataResponse_p.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgWorker_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgOverride.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgOverride_p.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

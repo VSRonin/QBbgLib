@@ -2,7 +2,6 @@
 #define QBbgSecurity_p_h__
 #include "QBbgSecurity.h"
 #include <QString>
-#include "QBbgGenerals.h"
 namespace QBbgLib {
     class QBbgSecurityPrivate
     {
