@@ -8,6 +8,13 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PRIVATE(QBbgAbstractResponse)
+    protected:
+        enum
+        {
+            FirstFielded = 0x10
+            , FirstRealTime = 0x20
+        };
+    public:
         enum BbgErrorCodesF
         {
             NoErrors = 0
@@ -21,13 +28,6 @@ namespace QBbgLib {
             , SessionStopped = 0x80
             , NoData = 0x100
         };
-    protected:
-        enum
-        {
-            FirstFielded = 0x10
-            , FirstRealTime = 0x20
-        };
-    public:
         Q_DECLARE_FLAGS(BbgErrorCodes, BbgErrorCodesF)
         enum ResponseType
         {
@@ -41,16 +41,19 @@ namespace QBbgLib {
         };
     	QBbgAbstractResponse();
         QBbgAbstractResponse(const QBbgAbstractResponse& other);
+        virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);
     	virtual ~QBbgAbstractResponse();
         virtual BbgErrorCodes errorCode() const;
         virtual QString errorString() const;
         virtual bool hasErrors() const;
         virtual bool isEmpty() const =0;
         static QString bbgErrorCode2String(BbgErrorCodes a);
+        virtual qint64 getID() const;
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);
         virtual void setErrorCode(BbgErrorCodes ErrCd);
+        virtual void setID(qint64 val);
     };
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(QBbgLib::QBbgAbstractResponse::BbgErrorCodes)

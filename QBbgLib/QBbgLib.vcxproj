@@ -17,10 +17,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractFieldResponse.cpp" />
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgAbstractResponse.cpp" />
     <ClCompile Include="QBbgGenerals.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
+    <ClCompile Include="QBbgReferenceDataResponse.cpp" />
     <ClCompile Include="QBbgRequestGroup.cpp" />
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
@@ -28,6 +30,8 @@
     <ClCompile Include="QSingleBbgResult.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="QBbgAbstractFieldResponse.h" />
+    <ClInclude Include="QBbgAbstractFieldResponse_p.h" />
     <ClInclude Include="QBbgAbstractRequest.h" />
     <ClInclude Include="QBbgAbstractRequest_p.h" />
     <ClInclude Include="QBbgAbstractResponse.h" />
@@ -36,6 +40,8 @@
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QbbgReferenceDataRequest.h" />
     <ClInclude Include="QbbgReferenceDataRequest_p.h" />
+    <ClInclude Include="QBbgReferenceDataResponse.h" />
+    <ClInclude Include="QBbgReferenceDataResponse_p.h" />
     <ClInclude Include="QBbgRequestGroup.h" />
     <ClInclude Include="QBbgRequestGroup_p.h" />
     <ClInclude Include="QBbgSecurity.h" />

@@ -38,6 +38,10 @@ namespace QBbgLib {
         Q_D(QBbgAbstractRequest);
         d->m_Security = val;
     }
+    void QBbgAbstractRequest::setSecurity(const QString& SecName, QBbgSecurity::YellowKeys SecKey)
+    {
+        setSecurity(QBbgSecurity(SecName, SecKey));
+    }
     const QBbgSecurity& QBbgAbstractRequest::security() const
     {
         Q_D(const QBbgAbstractRequest);
@@ -85,7 +89,6 @@ namespace QBbgLib {
         else if (a == "intradaybarrequest") return IntraDayBar;
         else return Invalid;
     }
-
     bool QBbgAbstractRequest::isValidReq() const
     {
         Q_D(const QBbgAbstractRequest);
@@ -96,6 +99,5 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractRequest);
         return d->m_RqType;
     }
-
 }
 

@@ -14,7 +14,7 @@ namespace QBbgLib {
     QBbgRequestGroup& QBbgRequestGroup::operator=(const QBbgRequestGroup& a)
     {
         Q_D(QBbgRequestGroup);
-        d->operator=(*(a.d_ptr));
+        d->operator=(*(a.d_func()));
         return *this;
     }
 
@@ -258,6 +258,7 @@ namespace QBbgLib {
             }
             return FiledsA == FiledsB;
         }
+        return false;
         //TODO do realtime
     }
 }

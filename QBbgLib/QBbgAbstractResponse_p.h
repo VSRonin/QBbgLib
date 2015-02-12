@@ -14,6 +14,7 @@ namespace QBbgLib {
         virtual QBbgAbstractResponsePrivate& operator=(const QBbgAbstractResponsePrivate& other);
         QBbgAbstractResponse::BbgErrorCodes m_ErrorCode;
         QBbgAbstractResponse::ResponseType m_ResType;
+        qint64 m_ID;
     protected:
         QBbgAbstractResponse* q_ptr;
     };

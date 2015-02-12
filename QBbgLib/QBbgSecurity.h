@@ -45,6 +45,7 @@ namespace QBbgLib {
         QBbgSecurityPrivate* d_ptr;
     public:
     	QBbgSecurity();
+        QBbgSecurity(const QString& SecName, YellowKeys SecKey);
         QBbgSecurity(const QBbgSecurity& other);
         QBbgSecurity& operator=(const QBbgSecurity& other);
     	virtual ~QBbgSecurity();

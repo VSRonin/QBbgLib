@@ -18,6 +18,12 @@ namespace QBbgLib {
     QBbgSecurity::QBbgSecurity(const QBbgSecurity& other)
         : d_ptr(new QBbgSecurityPrivate(this,*(other.d_ptr)))
     {}
+    QBbgSecurity::QBbgSecurity(const QString& SecName, YellowKeys SecKey)
+        : d_ptr(new QBbgSecurityPrivate(this))
+    {
+        setName(SecName);
+        setExtension(SecKey);
+    }
     QBbgSecurity::~QBbgSecurity()
     {
         delete d_ptr;

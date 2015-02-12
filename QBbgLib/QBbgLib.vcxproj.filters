@@ -87,6 +87,12 @@
     <ClCompile Include="QBbgAbstractResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractFieldResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgReferenceDataResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgGenerals.h">
@@ -138,6 +144,18 @@
       <Filter>Header Files\RequestResponse\Response</Filter>
     </ClInclude>
     <ClInclude Include="QBbgAbstractResponse_p.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractFieldResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractFieldResponse_p.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgReferenceDataResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgReferenceDataResponse_p.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
     </ClInclude>
   </ItemGroup>

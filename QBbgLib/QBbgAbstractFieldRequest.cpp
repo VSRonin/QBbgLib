@@ -43,11 +43,11 @@ namespace QBbgLib {
         Name.replace(QChar(' '), QChar('_'));
         Overrides::iterator iter= d->m_Overrides.find(Name);
         if (Value.isNull()) {
-            if (iter != d->m_Overrides.end)
+            if (iter != d->m_Overrides.end())
                 d->m_Overrides.erase(iter);
             return;
         }
-        if (iter == d->m_Overrides.end)
+        if (iter == d->m_Overrides.end())
             d->m_Overrides.insert(Name, Value);
         else
             iter.value() = Value;
