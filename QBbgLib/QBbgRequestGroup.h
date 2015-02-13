@@ -5,8 +5,11 @@
 #include "QBbgAbstractRequest.h"
 #include <QList> 
 #include <QHash>
+#include <QString>
 namespace QBbgLib {
     class QBbgRequestGroupPrivate;
+    class QBbgRequestResponseWorker;
+    class QBbgRequestResponseWorkerPrivate;
 	class QBBG_EXPORT QBbgRequestGroup
 	{
     private:
@@ -28,6 +31,10 @@ namespace QBbgLib {
 	protected:
         QBbgAbstractRequest* FindEditRequest(qint64 ID);
 		void RequestGroups(QHash<qint64, QList<qint64>* >& Result, qint64 StartingID = 1i64)const;
+        QList<QString> differentServices() const;
+
+        friend class QBbgRequestResponseWorker;
+        friend class QBbgRequestResponseWorkerPrivate;
 	};
 }
 #endif // QBbgRequest_h__

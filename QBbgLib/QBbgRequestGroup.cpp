@@ -239,6 +239,15 @@ namespace QBbgLib {
         return result.toList();
     }
 
+    QList<QString> QBbgRequestGroup::differentServices() const
+    {
+        QSet<QString> result;
+        Q_D(const QBbgRequestGroup);
+        for (QHash<qint64, QBbgAbstractRequest*>::const_iterator i = d->RequestTable.constBegin(); i != d->RequestTable.constEnd(); ++i)
+            result.insert(QBbgAbstractRequest::serviceForRequest(i.value()->requestType()));
+        return result.toList();
+    }
+
     bool QBbgRequestGroupPrivate::SameRequest(const QList<qint64>& a, const QList<qint64>& b) const
     {
         if (request(*a.begin())->requestType() & QBbgAbstractRequest::FirstFielded) {

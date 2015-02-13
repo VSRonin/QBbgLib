@@ -81,10 +81,16 @@ namespace QBbgLib {
     }
     QBbgReferenceDataResponse::QBbgReferenceDataResponse()
         :QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this))
-    {}
+    {
+        Q_D(QBbgReferenceDataResponse);
+        d->m_ResType = ReferenceDataResponse;
+    }
     QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* d)
         : QBbgAbstractFieldResponse(d)
-    {}
+    {
+        Q_D(QBbgReferenceDataResponse);
+        d->m_ResType = ReferenceDataResponse;
+    }
     QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this,*(other.d_func())))
     {}

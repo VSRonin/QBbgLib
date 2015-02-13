@@ -16,6 +16,8 @@ namespace QBbgLib {
         QScopedPointer<BloombergLP::blpapi::Session> m_session;
         bool m_SessionRunning;
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event)=0;
+        void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const;
+        void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
     protected:
         QBbgAbstractWorker* q_ptr;
     };

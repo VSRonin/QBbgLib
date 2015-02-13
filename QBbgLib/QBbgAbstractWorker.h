@@ -2,6 +2,7 @@
 #define QBbgAbstractWorker_h__
 
 #include <QObject>
+#include "QBbgAbstractResponse.h"
 namespace BloombergLP {namespace blpapi {class SessionOptions;}}
 namespace QBbgLib {
     class QBbgAbstractWorkerPrivate;

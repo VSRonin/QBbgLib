@@ -112,9 +112,6 @@
     <ClInclude Include="QBbgAbstractFieldRequest_p.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
-    <ClInclude Include="QBbgAbstractRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
     <ClInclude Include="QBbgAbstractFieldRequest.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
@@ -165,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="QBbgAbstractWorker_p.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgAbstractRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

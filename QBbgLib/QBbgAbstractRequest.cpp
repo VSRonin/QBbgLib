@@ -99,5 +99,54 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractRequest);
         return d->m_RqType;
     }
+    QString QBbgAbstractRequest::serviceStringForRequest(RequestType a)
+    {
+        return serviceTypeToString(serviceForRequest(a));
+    }
+    QBbgAbstractRequest::ServiceType QBbgAbstractRequest::serviceForRequest(RequestType a)
+    {
+        switch (a) {
+        case ReferenceData: return refdata;
+        default: return NoService;
+        }
+    }
+   QString QBbgAbstractRequest::serviceTypeToString(ServiceType a)
+   {
+       switch (a) {           
+       case QBbgLib::QBbgAbstractRequest::refdata:
+           return "//blp/refdata";
+       case QBbgLib::QBbgAbstractRequest::mktdata:
+           return "//blp/mktdata";
+       case QBbgLib::QBbgAbstractRequest::mktvwap:
+           return "//blp/mktvwap";
+       case QBbgLib::QBbgAbstractRequest::mktbar:
+           return "//blp/mktbar";
+       case QBbgLib::QBbgAbstractRequest::apiflds:
+           return "//blp/apiflds";
+       case QBbgLib::QBbgAbstractRequest::pagedata:
+           return "//blp/pagedata";
+       case QBbgLib::QBbgAbstractRequest::tasvc:
+           return "//blp/tasvc";
+       case QBbgLib::QBbgAbstractRequest::apiauth:
+           return "//blp/apiauth";
+       default:
+           return QString();
+       }
+   }
+
+   QBbgAbstractRequest::ServiceType QBbgAbstractRequest::stringToServiceType(const QString& a)
+   {
+       if (a == "//blp/refdata") return refdata;
+       else if (a == "//blp/mktdata") return mktdata;
+       else if (a == "//blp/mktvwap") return mktvwap;
+       else if (a == "//blp/mktbar") return mktbar;
+       else if (a == "//blp/apiflds") return apiflds;
+       else if (a == "//blp/pagedata") return pagedata;
+       else if (a == "//blp/tasvc") return tasvc;
+       else if (a == "//blp/apiauth") return apiauth;
+       else return NoService;
+   }
+    
+
 }
 

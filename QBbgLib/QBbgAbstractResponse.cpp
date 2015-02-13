@@ -86,4 +86,11 @@ namespace QBbgLib {
         Result.chop(2);
         return Result;
     }
+
+    QBbgAbstractResponse::ResponseType QBbgAbstractResponse::responseType() const
+    {
+        Q_D(const QBbgAbstractResponse);
+        return d->m_ResType;
+    }
+
 }

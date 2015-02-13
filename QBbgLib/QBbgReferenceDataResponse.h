@@ -5,6 +5,7 @@
 #include <QList>
 class QVariant;
 namespace QBbgLib {
+    class QBbgRequestResponseWorkerPrivate;
     class QBbgReferenceDataResponsePrivate;
     class QBBG_EXPORT QBbgReferenceDataResponse : public QBbgAbstractFieldResponse
     {
@@ -27,6 +28,8 @@ namespace QBbgLib {
         virtual void setValue(const QVariant& val, const QString& Header = QString());
         virtual void addValueRow(const QList<QVariant>& val, const QList<QString>& Headers = QList<QString>());
         virtual void clear();
+
+        friend class QBbgRequestResponseWorkerPrivate;
     };
 }
 #endif // QBbgReferenceDataResponse_h__

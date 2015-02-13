@@ -3,6 +3,7 @@
 #include <QString>
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
+    class QBbgAbstractWorkerPrivate;
     class QBbgAbstractResponse
     {
     private:
@@ -48,11 +49,14 @@ namespace QBbgLib {
         virtual bool isEmpty() const =0;
         static QString bbgErrorCode2String(BbgErrorCodes a);
         virtual qint64 getID() const;
+        virtual ResponseType responseType()const;
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);
         virtual void setErrorCode(BbgErrorCodes ErrCd);
         virtual void setID(qint64 val);
+
+        friend class QBbgAbstractWorkerPrivate;
     };
 }
 Q_DECLARE_OPERATORS_FOR_FLAGS(QBbgLib::QBbgAbstractResponse::BbgErrorCodes)

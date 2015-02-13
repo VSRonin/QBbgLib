@@ -5,6 +5,8 @@
 namespace QBbgLib {
     class QBbgAbstractRequestPrivate;
     class QBbgRequestGroup;
+    class QBbgRequestResponseWorkerPrivate;
+    class QBbgRequestResponseWorker;
     class QBbgAbstractRequest
     {
     protected:
@@ -13,6 +15,18 @@ namespace QBbgLib {
             , FirstRealTime = 0x20
         };
         enum { InvalidID = -1024 };
+        enum ServiceType
+        {
+            NoService=0
+            , refdata=1
+            , mktdata
+            , mktvwap
+            , mktbar
+            , apiflds
+            , pagedata
+            , tasvc
+            , apiauth
+        };
     public:
         enum RequestType
         {
@@ -28,6 +42,10 @@ namespace QBbgLib {
         Q_DECLARE_PRIVATE(QBbgAbstractRequest)
         QBbgAbstractRequestPrivate* d_ptr;
         QBbgAbstractRequest(QBbgAbstractRequestPrivate* d);
+        static ServiceType serviceForRequest(RequestType a);
+        static QString serviceStringForRequest(RequestType a);
+        static QString serviceTypeToString(ServiceType a);
+        static ServiceType stringToServiceType(const QString& a);
     public:
         QBbgAbstractRequest();
         QBbgAbstractRequest(const QBbgAbstractRequest& other);
@@ -45,6 +63,8 @@ namespace QBbgLib {
 
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
+        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgAbstractRequest_h__

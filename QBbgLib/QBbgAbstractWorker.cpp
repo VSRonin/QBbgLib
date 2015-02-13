@@ -19,4 +19,13 @@ namespace QBbgLib {
     {
         delete d_ptr;
     }
+
+    void QBbgAbstractWorkerPrivate::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const
+    {
+        res->setErrorCode(err);
+    }
+    void QBbgAbstractWorkerPrivate::setResponseID(QBbgAbstractResponse* res, qint64 corrID) const
+    {
+        res->setID(corrID);
+    }
 }

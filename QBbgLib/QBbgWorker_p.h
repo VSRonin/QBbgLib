@@ -19,8 +19,8 @@ namespace QBbgLib {
         QHash<qint64, QList<qint64>* > Groups;
         QString ServerAddress;
         unsigned short ServerPort;
-        QBbgRequestGroup m_Requests;
-        QMap<qint64, QSingleBbgResult* > m_Results;
+        
+        
 
         std::atomic_bool m_SessionFinished;
         bool m_UseSyncronous;
