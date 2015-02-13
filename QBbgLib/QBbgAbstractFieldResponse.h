@@ -4,7 +4,7 @@
 namespace QBbgLib {
     class QBbgAbstractFieldResponsePrivate;
     class QBbgRequestResponseWorkerPrivate;
-    class QBbgAbstractFieldResponse : public QBbgAbstractResponse
+    class QBBG_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
     {
         Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
     public:

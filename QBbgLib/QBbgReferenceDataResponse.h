@@ -24,7 +24,7 @@ namespace QBbgLib {
         virtual bool isEmpty() const;
         virtual const QVariant& value() const;
     protected:
-        QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* d);
+        QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* dp);
         virtual void setValue(const QVariant& val, const QString& Header = QString());
         virtual void addValueRow(const QList<QVariant>& val, const QList<QString>& Headers = QList<QString>());
         virtual void clear();

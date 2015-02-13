@@ -1,3 +1,4 @@
+#ifdef NOTCOMPILED
 #include "QBbgWorker.h"
 #include "QBbgWorker_p.h"
 #include <blpapi_correlationid.h>
@@ -446,3 +447,4 @@ namespace QBbgLib {
         SetError(-1i64, -1i64, Err);
     }
 }
+#endif

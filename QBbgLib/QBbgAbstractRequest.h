@@ -2,12 +2,13 @@
 #define QBbgAbstractRequest_h__
 #include <QtGlobal>
 #include "QBbgSecurity.h"
+#include "QBbgProjectGlobals.h"
 namespace QBbgLib {
     class QBbgAbstractRequestPrivate;
     class QBbgRequestGroup;
     class QBbgRequestResponseWorkerPrivate;
     class QBbgRequestResponseWorker;
-    class QBbgAbstractRequest
+    class QBBG_EXPORT QBbgAbstractRequest
     {
     protected:
         enum {

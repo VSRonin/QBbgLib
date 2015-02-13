@@ -23,6 +23,17 @@ namespace QBbgLib {
         delete d_ptr;
     }
 
+    bool QBbgAbstractWorker::isAvailable() const
+    {
+        Q_D(const QBbgAbstractWorker);
+        return !d->m_SessionRunning;
+    }
+    void QBbgAbstractWorker::stop()
+    {
+        Q_D(QBbgAbstractWorker);
+        if (d->m_SessionRunning)
+            d->m_session->stopAsync();
+    }
     void QBbgAbstractWorkerPrivate::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const
     {
         res->setErrorCode(err);

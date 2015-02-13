@@ -1,3 +1,4 @@
+#ifdef NOTCOMPILED
 #ifndef QBbgWorker_h__
 #define QBbgWorker_h__
 
@@ -83,3 +84,4 @@ namespace QBbgLib {
 	};
 }
 #endif // QBbgWorker_h__
+#endif

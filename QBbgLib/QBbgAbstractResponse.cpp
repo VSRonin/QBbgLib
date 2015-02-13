@@ -92,5 +92,34 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractResponse);
         return d->m_ResType;
     }
-
+    QBbgAbstractResponse::ResponseType QBbgAbstractResponse::stringToResponseType(QString a)
+    {
+        a = a.toLower().trimmed();
+        if (a == "BeqsResponse") return BeqsResponse;
+        else if (a == "historicaldataresponse") return HistoricalDataResponse;
+        else if (a == "referencedataresponse") return ReferenceDataResponse;
+        else if (a == "portfoliodataresponse") return PortfolioDataResponse;
+        else if (a == "intradaytickresponse") return IntraDayTickResponse;
+        else if (a == "intradaybarresponse") return IntraDayBarResponse;
+        else return Invalid;
+    }
+    QString QBbgAbstractResponse::responseTypeToString(ResponseType a)
+    {
+        switch (a) {
+        case QBbgLib::QBbgAbstractResponse::BeqsResponse:
+            return "BeqsResponse";
+        case QBbgLib::QBbgAbstractResponse::HistoricalDataResponse:
+            return "HistoricalDataResponse";
+        case QBbgLib::QBbgAbstractResponse::ReferenceDataResponse:
+            return "ReferenceDataResponse";
+        case QBbgLib::QBbgAbstractResponse::PortfolioDataResponse:
+            return "PortfolioDataResponse";
+        case QBbgLib::QBbgAbstractResponse::IntraDayTickResponse:
+            return "IntraDayTickResponse";
+        case QBbgLib::QBbgAbstractResponse::IntraDayBarResponse:
+            return "IntraDayBarResponse";
+        default:
+            return QString();
+        }
+    }
 }

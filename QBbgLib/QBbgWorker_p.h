@@ -1,3 +1,4 @@
+#ifdef NOTCOMPILED
 #ifndef QBbgWorker_p_h__
 #define QBbgWorker_p_h__
 #include <blpapi_session.h>
@@ -37,3 +38,4 @@ namespace QBbgLib {
     };
 }
 #endif // QBbgWorker_p_h__
+#endif

@@ -244,7 +244,7 @@ namespace QBbgLib {
         QSet<QString> result;
         Q_D(const QBbgRequestGroup);
         for (QHash<qint64, QBbgAbstractRequest*>::const_iterator i = d->RequestTable.constBegin(); i != d->RequestTable.constEnd(); ++i)
-            result.insert(QBbgAbstractRequest::serviceForRequest(i.value()->requestType()));
+            result.insert(QBbgAbstractRequest::serviceStringForRequest(i.value()->requestType()));
         return result.toList();
     }
 

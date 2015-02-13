@@ -98,6 +98,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">

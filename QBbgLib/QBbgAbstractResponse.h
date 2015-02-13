@@ -1,10 +1,11 @@
 #ifndef QBbgAbstractResponse_h__
 #define QBbgAbstractResponse_h__
 #include <QString>
+#include "QBbgProjectGlobals.h"
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
     class QBbgAbstractWorkerPrivate;
-    class QBbgAbstractResponse
+    class QBBG_EXPORT QBbgAbstractResponse
     {
     private:
         Q_DECLARE_PRIVATE(QBbgAbstractResponse)
@@ -51,7 +52,7 @@ namespace QBbgLib {
         virtual qint64 getID() const;
         virtual ResponseType responseType()const;
         static QString responseTypeToString(ResponseType a);
-        static ResponseType stringToResponseType(const QString& a);
+        static ResponseType stringToResponseType(QString a);
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);

@@ -20,7 +20,7 @@ namespace QBbgLib {
         virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession);
         virtual bool SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err);
         virtual bool DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header);
-        virtual bool HeaderRecieved(qint64 RequestID, const QString& Header);
+        virtual void HeaderRecieved(qint64 RequestID, const QString& Header);
         virtual bool DataRecieved(qint64 RequestID);
         virtual void DataRowRecieved(qint64 RequestID, const QList<QVariant>&  Value, const QList<QString>&  Header);
         virtual qint64 CorrelationForService(const QString& a) const;

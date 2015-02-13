@@ -85,8 +85,8 @@ namespace QBbgLib {
         Q_D(QBbgReferenceDataResponse);
         d->m_ResType = ReferenceDataResponse;
     }
-    QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* d)
-        : QBbgAbstractFieldResponse(d)
+    QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* dp)
+        : QBbgAbstractFieldResponse(dp)
     {
         Q_D(QBbgReferenceDataResponse);
         d->m_ResType = ReferenceDataResponse;

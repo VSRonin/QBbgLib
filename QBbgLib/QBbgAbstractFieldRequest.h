@@ -7,7 +7,7 @@ namespace QBbgLib {
     class QBbgRequestGroupPrivate;
     class QBbgRequestGroup;
     class QBbgOverride;
-    class QBbgAbstractFieldRequest : public QBbgAbstractRequest
+    class QBBG_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
 	{
         Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
 	public:
