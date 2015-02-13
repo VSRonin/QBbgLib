@@ -50,6 +50,8 @@ namespace QBbgLib {
         static QString bbgErrorCode2String(BbgErrorCodes a);
         virtual qint64 getID() const;
         virtual ResponseType responseType()const;
+        static QString responseTypeToString(ResponseType a);
+        static ResponseType stringToResponseType(const QString& a);
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);

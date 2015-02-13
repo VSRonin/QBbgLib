@@ -1,6 +1,6 @@
 #ifndef QBbgAbstractWorker_p_h__
 #define QBbgAbstractWorker_p_h__
-
+#include <QVariant>
 #include "QBbgAbstractWorker.h"
 #include <QScopedPointer>
 #include <blpapi_session.h>
@@ -16,11 +16,16 @@ namespace QBbgLib {
         QScopedPointer<BloombergLP::blpapi::Session> m_session;
         bool m_SessionRunning;
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event)=0;
-        void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const;
-        void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
+        virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const;
+        virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
+        virtual QVariant elementToVariant(BloombergLP::blpapi::Element& val);
     protected:
         QBbgAbstractWorker* q_ptr;
     };
+
+   
+
+
 
     
 

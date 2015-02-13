@@ -5,8 +5,10 @@
 #include "QBbgProjectGlobals.h"
 class QDate;
 class QTime;
+namespace BloombergLP { namespace blpapi { class Request; } }
 namespace QBbgLib {
     class QBbgOverridePrivate;
+    class QBbgRequestResponseWorkerPrivate;
     class QBBG_EXPORT QBbgOverride
     {
         Q_DECLARE_PRIVATE(QBbgOverride)
@@ -33,8 +35,11 @@ namespace QBbgLib {
         virtual QString& operator[](const QString& Name);
         virtual const QString operator[](const QString& Name) const;
     protected:
+        void addOverrideToRequest(BloombergLP::blpapi::Request& rq) const;
         QBbgOverride(QBbgOverridePrivate* d);
         QBbgOverridePrivate* d_ptr;
+
+        friend class QBbgRequestResponseWorkerPrivate;
     };
 }
 #endif // QBbgOverride_h__

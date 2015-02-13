@@ -2,6 +2,7 @@
 #include "QBbgOverride_p.h"
 #include <QDate>
 #include <QTime>
+#include <blpapi_session.h>
 namespace QBbgLib {
     QBbgOverridePrivate::QBbgOverridePrivate(QBbgOverride* q)
         : q_ptr(q)
@@ -133,6 +134,16 @@ namespace QBbgLib {
     void QBbgOverride::setOverride(const QString& Name, bool val)
     {
         setOverride(Name, val ? QString("Y") : QString("N"));
+    }
+
+    void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
+    {
+        Q_D(const QBbgOverride);
+        for (QHash<QString, QString>::const_iterator i = d->m_Overrides.constBegin(); i != d->m_Overrides.constEnd(); ++i) {
+            BloombergLP::blpapi::Element CurrentOverrides = rq.getElement("overrides").appendElement();
+            CurrentOverrides.setElement("fieldId", i.key().toLatin1().data());
+            CurrentOverrides.setElement("value", i.value().toLatin1().data());
+        }
     }
 
 }
