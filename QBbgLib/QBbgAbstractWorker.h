@@ -2,11 +2,11 @@
 #define QBbgAbstractWorker_h__
 #include <QObject>
 #include "QBbgAbstractResponse.h"
-#include "QBbgProjectGlobals.h"
 namespace BloombergLP {namespace blpapi {class SessionOptions;}}
 namespace QBbgLib {
     class QBbgAbstractWorkerPrivate;
-    class QBBG_EXPORT QBbgAbstractWorker : public QObject
+    class QBbgAbstractResponse;
+    class QBbgAbstractWorker : public QObject
     {
         Q_OBJECT
         Q_DECLARE_PRIVATE(QBbgAbstractWorker)
@@ -16,12 +16,17 @@ namespace QBbgLib {
         virtual bool isAvailable() const;
         virtual void stop();
     protected:
-        virtual void start() = 0;
         QBbgAbstractWorker(QBbgAbstractWorkerPrivate* d);
         QBbgAbstractWorkerPrivate* d_ptr;
+    public slots:
+        virtual void start() = 0;
+        virtual void setRequest(const QBbgRequestGroup& req)=0;
     signals:
-        void Started();
-        void Stopped();
+        void started();
+        void stopped();
+        void dataRecieved(qint64 reID, QBbgAbstractResponse* res);
+        void progress(qint32 pct);
+        void finished();
     };
 }
 #endif // QBbgAbstractWorker_h__

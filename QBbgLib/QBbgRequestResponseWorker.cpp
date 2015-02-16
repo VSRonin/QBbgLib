@@ -14,10 +14,6 @@ namespace QBbgLib {
     {
         for (QHash<qint64, QList<qint64>* >::iterator i = Groups.begin(); i != Groups.end(); ++i)
             delete i.value();
-        Groups.clear();
-        for (QHash<qint64, QBbgAbstractResponse* >::iterator i = m_Results.begin(); i != m_Results.end(); ++i)
-            delete i.value();
-        m_Results.clear();
     }
     qint64 QBbgRequestResponseWorkerPrivate::CorrelationForService(const QString& a) const
     {
@@ -81,7 +77,7 @@ namespace QBbgLib {
                                 else {
                                     BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
                                     if (fieldDataValue.isArray()) {
-                                        if (fieldDataValue.numElements() == 0) {
+                                        if (fieldDataValue.numValues() == 0) {
                                             SetError(*SingleReq, QBbgAbstractResponse::NoData);
                                         }
                                         else {
@@ -92,7 +88,7 @@ namespace QBbgLib {
                                             else {
                                                 QList<QVariant> CurrentRow;
                                                 QList<QString> CurrentHead;
-                                                for (size_t RowIter = 0; RowIter < fieldDataValue.numElements(); ++RowIter) {
+                                                for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
                                                     CurrentRow.clear();
                                                     CurrentHead.clear();
                                                     for (size_t ColIter = 0; ColIter < NumCols; ++ColIter) {
@@ -138,12 +134,13 @@ namespace QBbgLib {
                     for (QList<QString>::const_iterator rqIter = servicesToOpen.constBegin(); rqIter != servicesToOpen.constEnd(); ++rqIter) {
                         CurrentSession->openServiceAsync(rqIter->toLatin1().data(), BloombergLP::blpapi::CorrelationId(CorrelationForService(*rqIter)));
                     }
-                    q->Started(); // Emit signal
+                    q->started(); // Emit signal
                 }
                 else if (MessageType == "SessionConnectionUp") continue;
                 else if (MessageType == "SessionConnectionDown") continue;
                 else if (MessageType == "SessionTerminated") {
-                    //EndOfProcess();
+                    m_SessionRunning = false;
+                    q->finished();
                 }
                 else /*if (MessageType == "SessionStartupFailure")*/ {
                     const QList<qint64> allRq = m_Requests.IDList();
@@ -184,9 +181,8 @@ namespace QBbgLib {
         return true;
     }
 
-    bool QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err)
+    void QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err)
     {
-        if (m_Results.contains(RequestID)) return false;
         QBbgAbstractResponse* TempRes=NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
         case QBbgAbstractRequest::ReferenceData:
@@ -199,11 +195,10 @@ namespace QBbgLib {
         setResponseID(TempRes, RequestID);
         setResponseError(TempRes, Err);
         m_Results.insert(RequestID, TempRes);
-        return DataRecieved(RequestID);
+        DataRecieved(RequestID);
     }
-    bool QBbgRequestResponseWorkerPrivate::DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header)
+    void QBbgRequestResponseWorkerPrivate::DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header)
     {
-        if (m_Results.contains(RequestID)) return false;
         QBbgAbstractResponse* resToAdd = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
         case QBbgAbstractRequest::ReferenceData:{
@@ -220,7 +215,7 @@ namespace QBbgLib {
         }
         setResponseID(resToAdd, RequestID);
         m_Results.insert(RequestID, resToAdd);
-        return DataRecieved(RequestID);
+        DataRecieved(RequestID);
     }
     void QBbgRequestResponseWorkerPrivate::HeaderRecieved(qint64 RequestID, const QString& Header)
     {
@@ -229,17 +224,17 @@ namespace QBbgLib {
         Q_ASSERT_X(res, "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Setting header for non-fielded data");
         res->setHeader(Header);
     }
-    bool QBbgRequestResponseWorkerPrivate::DataRecieved(qint64 RequestID)
+    void QBbgRequestResponseWorkerPrivate::DataRecieved(qint64 RequestID)
     {
         Q_Q(QBbgRequestResponseWorker);
-        q->Recieved(RequestID);
-        q->Progress((100 * m_Results.size()) / m_Requests.size());
-        if (m_Results.size() == m_Requests.size()) {
-                q->Finished();
+        QHash<qint64, QBbgAbstractResponse*>::iterator i = m_Results.find(RequestID);
+        Q_ASSERT(i != m_Results.end());
+        q->dataRecieved(RequestID, i.value());
+        m_Results.erase(i);        
+        q->progress((100 * ++m_ResurnedResults) / m_Requests.size());
+        if (m_ResurnedResults == m_Requests.size()) {
                 m_session->stopAsync();
-            return true;
         }
-        return false;
     }
     void QBbgRequestResponseWorkerPrivate::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
     {
@@ -306,9 +301,7 @@ namespace QBbgLib {
     void QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
     {
         Q_D(QBbgRequestResponseWorker);
-        if (d->m_SessionRunning) return;
-        d->m_Requests = req;
-        d->m_Requests.RequestGroups(d->Groups);
+        setRequest(req);
         start();
     }
 
@@ -317,6 +310,7 @@ namespace QBbgLib {
         Q_D(QBbgRequestResponseWorker);
         if (d->m_SessionRunning) return;
         d->m_SessionRunning = true;
+        d->m_ResurnedResults = 0;
         d->m_session->startAsync();
     }
 
@@ -329,5 +323,13 @@ namespace QBbgLib {
     QBbgRequestResponseWorker::QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option)
         :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this,option))
     {}
+
+    void QBbgRequestResponseWorker::setRequest(const QBbgRequestGroup& req)
+    {
+        Q_D(QBbgRequestResponseWorker);
+        if (d->m_SessionRunning) return;
+        d->m_Requests = req;
+        d->m_Requests.RequestGroups(d->Groups);
+    }
 
 }

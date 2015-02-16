@@ -45,6 +45,12 @@
     <Filter Include="Source Files\RequestResponse\Response">
       <UniqueIdentifier>{e3ef0e8a-3432-4d5c-b82b-a1a53fe5c584}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Threads">
+      <UniqueIdentifier>{747b186d-9dd3-4308-8818-03a8726d3eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Threads">
+      <UniqueIdentifier>{7ca94cd0-3c43-4bdd-944e-25dedb2fc84b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QBbgWorker.cpp">
@@ -100,6 +106,15 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorkerThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorkerThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgAbstractWorkerThread.cpp">
+      <Filter>Source Files\Threads</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +184,9 @@
     <ClInclude Include="QBbgAbstractRequest.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
+    <ClInclude Include="QBbgAbstractWorkerThread_p.h">
+      <Filter>Header Files\Threads</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="QBbgWorker.h">
@@ -179,6 +197,9 @@
     </CustomBuild>
     <CustomBuild Include="QBbgRequestResponseWorker.h">
       <Filter>Header Files\RequestResponse</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractWorkerThread.h">
+      <Filter>Header Files\Threads</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

@@ -25,7 +25,7 @@ namespace QBbgLib {
     {
         switch (a.requestType()) {
         case QBbgAbstractRequest::ReferenceData:
-            return new QBbgAbstractRequest(dynamic_cast<const QBbgReferenceDataRequest&>(a));
+            return new QBbgReferenceDataRequest(dynamic_cast<const QBbgReferenceDataRequest&>(a));
             //TODO add other types
         default:
             return NULL;

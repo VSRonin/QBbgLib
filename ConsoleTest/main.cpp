@@ -9,16 +9,20 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QBbgLib::QBbgSecurity secur("XS0181673798", QBbgLib::QBbgSecurity::Corp);
+    QBbgLib::QBbgSecurity secur("XS0181673798", QBbgLib::QBbgSecurity::isin);
     QBbgLib::QBbgReferenceDataRequest a_req;
     a_req.setSecurity(secur);
     a_req.setField("px  last\t");
+    QBbgLib::QBbgRequestGroup req;
+    req.addRequest(a_req);
+    a_req.setField("name");
+    req.addRequest(a_req);
+    a_req.setField("des cash flow");
+    req.addRequest(a_req);
     BloombergLP::blpapi::SessionOptions sessionOptions;
     sessionOptions.setServerHost("localhost");
     sessionOptions.setServerPort(8194);
     sessionOptions.setMaxPendingRequests(INT_MAX - 2);
-    QBbgLib::QBbgRequestGroup req;
-    req.addRequest(a_req);
     QBbgLib::QBbgRequestResponseWorker mainworker(sessionOptions);
     QObject::connect(&mainworker, &QBbgLib::QBbgRequestResponseWorker::Recieved, [&mainworker](qint64 id)
     {
@@ -35,8 +39,9 @@ int main(int argc, char *argv[])
             }
         }
     });
-    QObject::connect(&mainworker, &QBbgLib::QBbgRequestResponseWorker::Finished, []() { qDebug() << "Finished"; });
+    QObject::connect(&mainworker, &QBbgLib::QBbgRequestResponseWorker::finished, []() { qDebug() << "Finished"; });
     mainworker.start(req);
     qDebug() << "Started";
     return a.exec();
 }
+//////////////////////////////////////////////////////////////////////////
