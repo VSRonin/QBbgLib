@@ -80,18 +80,18 @@ namespace QBbgLib {
         RequestTable.clear();
     }
 
-    void QBbgRequestGroup::addRequest(const QBbgAbstractRequest& a)
+    qint64 QBbgRequestGroup::addRequest(const QBbgAbstractRequest& a)
     {
         Q_D(QBbgRequestGroup);
         QBbgAbstractRequest* newReq = d->createRequest(a);
-        if (newReq->getID() < 0) {
+        if (newReq->getID() < 0 || d->RequestTable.contains(newReq->getID())) {
             do {
                 newReq->setID(d->increaseMaxID());
             } while (d->RequestTable.contains(newReq->getID()));
         }
         if (!newReq->isValidReq()) {
             delete newReq;
-            return;
+            return QBbgAbstractRequest::InvalidID;
         }
         QHash<qint64, QBbgAbstractRequest*>::iterator iter = d->RequestTable.find(newReq->getID());
         if (iter == d->RequestTable.end()) {
@@ -101,6 +101,7 @@ namespace QBbgLib {
             delete iter.value();
             iter.value() = newReq;
         }
+        return iter.key();
     }
     const QBbgAbstractRequest* QBbgRequestGroupPrivate::request(qint64 ID) const
     {

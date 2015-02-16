@@ -15,8 +15,9 @@ namespace QBbgLib {
         if (m_SessionRunning)
             m_session->stop();
     }
-    QBbgAbstractWorker::QBbgAbstractWorker( QBbgAbstractWorkerPrivate* d)
+    QBbgAbstractWorker::QBbgAbstractWorker(QBbgAbstractWorkerPrivate* d, QObject* parent)
         : d_ptr(d)
+        , QObject(parent)
     {}
     QBbgAbstractWorker::~QBbgAbstractWorker()
     {

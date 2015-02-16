@@ -24,7 +24,7 @@ namespace QBbgLib {
         virtual const QBbgAbstractRequest* request(qint64 ID) const;
         virtual QList<qint64> findSecurity(const QBbgSecurity& Secur)const;
         virtual QList<qint64> IDList() const;
-        void addRequest(const QBbgAbstractRequest& a);
+        qint64 addRequest(const QBbgAbstractRequest& a);
 		bool isValidReq() const;
 		void clear();
         QList<QBbgAbstractRequest::RequestType> differentTypes() const;

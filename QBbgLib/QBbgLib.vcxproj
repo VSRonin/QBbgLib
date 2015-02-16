@@ -14,7 +14,7 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorkerThread.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestResponseWorker.cpp">
@@ -23,10 +23,13 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorkerThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorkerThread.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgManager.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker.cpp">
@@ -35,10 +38,14 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorker.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorkerThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="QBbgAbstractFieldResponse.cpp" />
     <ClCompile Include="QBbgAbstractRequest.cpp" />
     <ClCompile Include="QBbgAbstractResponse.cpp" />
     <ClCompile Include="QBbgAbstractWorker.cpp" />
+    <ClCompile Include="QBbgManager.cpp" />
     <ClCompile Include="QBbgOverride.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgReferenceDataResponse.cpp" />
@@ -47,7 +54,7 @@
     <ClCompile Include="QBbgSecurity.cpp" />
     <ClCompile Include="QBbgWorker.cpp" />
     <ClCompile Include="QBbgAbstractFieldRequest.cpp" />
-    <ClCompile Include="QBbgAbstractWorkerThread.cpp" />
+    <ClCompile Include="QBbgWorkerThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgAbstractFieldResponse.h" />
@@ -67,6 +74,17 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
     </CustomBuild>
     <ClInclude Include="QBbgAbstractWorker_p.h" />
+    <CustomBuild Include="QBbgManager.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QBbgManager.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QBbgManager.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
+    </CustomBuild>
+    <ClInclude Include="QBbgManager_p.h" />
     <ClInclude Include="QBbgOverride.h" />
     <ClInclude Include="QBbgOverride_p.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
@@ -89,17 +107,17 @@
     <ClInclude Include="QBbgRequestResponseWorker_p.h" />
     <ClInclude Include="QBbgSecurity.h" />
     <ClInclude Include="QBbgSecurity_p.h" />
-    <CustomBuild Include="QBbgAbstractWorkerThread.h">
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QBbgAbstractWorkerThread.h...</Message>
+    <CustomBuild Include="QBbgWorkerThread.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing QBbgWorkerThread.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QBbgAbstractWorkerThread.h...</Message>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing QBbgWorkerThread.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DQBBG_LIB_BUILD -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQBBGLIB_LIB -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
     </CustomBuild>
-    <ClInclude Include="QBbgAbstractWorkerThread_p.h" />
+    <ClInclude Include="QBbgWorkerThread_p.h" />
     <ClInclude Include="QBbgWorker_p.h" />
     <ClInclude Include="QBbgAbstractFieldRequest.h" />
     <ClInclude Include="QBbgAbstractFieldRequest_p.h" />

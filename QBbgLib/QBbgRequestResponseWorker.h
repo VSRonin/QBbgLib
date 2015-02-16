@@ -10,7 +10,7 @@ namespace QBbgLib {
         Q_OBJECT
         Q_DECLARE_PRIVATE(QBbgRequestResponseWorker);
     public:
-        QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option);
+        QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = NULL);
         virtual const QBbgAbstractResponse* result(qint64 id) const;
     public slots:
         virtual void start();

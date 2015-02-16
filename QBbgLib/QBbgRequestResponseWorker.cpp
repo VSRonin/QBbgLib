@@ -320,8 +320,8 @@ namespace QBbgLib {
         return d->m_Results.value(id, NULL);
     }
 
-    QBbgRequestResponseWorker::QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option)
-        :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this,option))
+    QBbgRequestResponseWorker::QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent)
+        :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this,option),parent)
     {}
 
     void QBbgRequestResponseWorker::setRequest(const QBbgRequestGroup& req)

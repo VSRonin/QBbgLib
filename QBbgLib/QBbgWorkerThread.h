@@ -3,19 +3,22 @@
 #include <QThread>
 namespace QBbgLib {
     class QBbgAbstractWorker;
-    class QBbgAbstractWorkerThreadPrivate;
+    class QBbgWorkerThreadPrivate;
     class QBbgAbstractResponse;
-    class QBbgAbstractWorkerThread : public QThread
+    class QBbgWorkerThread : public QThread
     {
         Q_OBJECT
     private:
-        Q_DECLARE_PRIVATE(QBbgAbstractWorkerThread)      
+        Q_DECLARE_PRIVATE(QBbgWorkerThread)      
+    public:
+        QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent = NULL);
+        virtual ~QBbgWorkerThread();
     protected:
-        QBbgAbstractWorkerThread(QBbgAbstractWorkerThreadPrivate* dp, QObject* parent = NULL);
-        QBbgAbstractWorkerThreadPrivate* d_ptr;
+        QBbgWorkerThread(QBbgWorkerThreadPrivate* dp, QObject* parent = NULL);
+        QBbgWorkerThreadPrivate* d_ptr;
+        void createConnections();
     public slots:
-        virtual void run();
-        virtual ~QBbgAbstractWorkerThread();
+        void run();
     signals:
         void started();
         void stopped();

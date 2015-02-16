@@ -1,11 +1,11 @@
 #include <QtCore/QCoreApplication>
-#include "QBbgRequestResponseWorker.h"
+#include "QBbgManager.h"
 #include "QBbgSecurity.h"
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgRequestGroup.h"
 #include "QBbgReferenceDataResponse.h"
 #include <QDebug>
-#include <blpapi_session.h>
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
@@ -19,14 +19,11 @@ int main(int argc, char *argv[])
     req.addRequest(a_req);
     a_req.setField("des cash flow");
     req.addRequest(a_req);
-    BloombergLP::blpapi::SessionOptions sessionOptions;
-    sessionOptions.setServerHost("localhost");
-    sessionOptions.setServerPort(8194);
-    sessionOptions.setMaxPendingRequests(INT_MAX - 2);
-    QBbgLib::QBbgRequestResponseWorker mainworker(sessionOptions);
-    QObject::connect(&mainworker, &QBbgLib::QBbgRequestResponseWorker::Recieved, [&mainworker](qint64 id)
+    QBbgLib::QBbgManager mainManager;
+    
+    QObject::connect(&mainManager, &QBbgLib::QBbgManager::recieved, [&mainManager](quint32 gr, qint64 id)
     {
-        const QBbgLib::QBbgReferenceDataResponse* res = dynamic_cast<const QBbgLib::QBbgReferenceDataResponse*>(mainworker.result(id));
+        const QBbgLib::QBbgReferenceDataResponse* res = dynamic_cast<const QBbgLib::QBbgReferenceDataResponse* const >(mainManager.getResult(gr, id));
         Q_ASSERT(res);
         if (res->hasValue())
             qDebug() << res->header() << res->value();
@@ -39,8 +36,8 @@ int main(int argc, char *argv[])
             }
         }
     });
-    QObject::connect(&mainworker, &QBbgLib::QBbgRequestResponseWorker::finished, []() { qDebug() << "Finished"; });
-    mainworker.start(req);
+    QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
+    mainManager.startRequest(req);
     qDebug() << "Started";
     return a.exec();
 }
