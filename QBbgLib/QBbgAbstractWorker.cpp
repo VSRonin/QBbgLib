@@ -45,6 +45,7 @@ namespace QBbgLib {
     }
     QVariant QBbgAbstractWorkerPrivate::elementToVariant(BloombergLP::blpapi::Element& val)
     {
+        if (!val.isValid() || val.isNull() || val.isNullValue()) return QVariant();
         switch (val.datatype()) {
         case BloombergLP::blpapi::DataType::BOOL:
             return val.getValueAsBool();

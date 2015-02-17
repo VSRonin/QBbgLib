@@ -35,9 +35,9 @@ namespace QBbgLib {
                 }
                 return;
             }
-            #ifdef _DEBUG
-            //message.print(std::cout);
-            #endif // _DEBUG
+#ifdef _DEBUG
+            message.print(std::cout);
+#endif // _DEBUG
             switch (QBbgAbstractResponse::stringToResponseType(message.messageType().string())) {
             case QBbgAbstractResponse::PortfolioDataResponse:
             {
@@ -45,7 +45,7 @@ namespace QBbgLib {
                 for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
                     QString CurrentSecurity = secDataArray.getValueAsElement(secIter).getElementAsString("security");
                     BloombergLP::blpapi::Element fieldExcepArray = secDataArray.getValueAsElement(secIter).getElement("fieldExceptions"); //fieldExceptions[]
-                    
+
                     if (secDataArray.getValueAsElement(secIter).hasElement("securityError")) {
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                             const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
@@ -121,23 +121,14 @@ namespace QBbgLib {
                     }
                 }
             }
-                break;
+            break;
             case QBbgAbstractResponse::ReferenceDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
                 for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
                     QString CurrentSecurity = secDataArray.getValueAsElement(secIter).getElementAsString("security");
                     BloombergLP::blpapi::Element fieldExcepArray = secDataArray.getValueAsElement(secIter).getElement("fieldExceptions"); //fieldExceptions[]
-                    for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues(); ++fieldExcIter) {
-                        QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
-                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                            const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                            Q_ASSERT(FoundRequ);
-                            if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                SetError(*SingleReq, QBbgAbstractResponse::FieldError);
-                            }
-                        }
-                    }
+
                     if (secDataArray.getValueAsElement(secIter).hasElement("securityError")) {
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                             const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
@@ -148,52 +139,53 @@ namespace QBbgLib {
                     }
                     else {
                         BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
-                        if (fieldDataArray.numElements() == 0) {
-                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
-                                if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                            const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                            Q_ASSERT(FoundRequ);
+                            if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
+                                bool foundExp = false;
+                                for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
+                                    QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
+                                    const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                                    Q_ASSERT(FoundRequ);
+                                    if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError);
+                                        foundExp = true;
+                                    }
                                 }
+                                if (!foundExp)
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
                             }
-                        }
-                        else {
-                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                                Q_ASSERT(FoundRequ);
-                                if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
-                                }
-                                else {
-                                    BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
-                                    if (fieldDataValue.isArray()) {
-                                        if (fieldDataValue.numValues() == 0) {
+                            else {
+                                BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
+                                if (fieldDataValue.isArray()) {
+                                    if (fieldDataValue.numValues() == 0) {
+                                        SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    }
+                                    else {
+                                        size_t NumCols = fieldDataValue.getValueAsElement(0).numElements();
+                                        if (NumCols == 0) {
                                             SetError(*SingleReq, QBbgAbstractResponse::NoData);
                                         }
                                         else {
-                                            size_t NumCols = fieldDataValue.getValueAsElement(0).numElements();
-                                            if (NumCols == 0) {
-                                                SetError(*SingleReq, QBbgAbstractResponse::NoData);
-                                            }
-                                            else {
-                                                QList<QVariant> CurrentRow;
-                                                QList<QString> CurrentHead;
-                                                for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
-                                                    CurrentRow.clear();
-                                                    CurrentHead.clear();
-                                                    for (size_t ColIter = 0; ColIter < NumCols; ++ColIter) {
-                                                        CurrentRow.append(elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter)));
-                                                        CurrentHead.append(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter).name().string());
-                                                    }
-                                                    DataRowRecieved(*SingleReq, CurrentRow, CurrentHead);
+                                            QList<QVariant> CurrentRow;
+                                            QList<QString> CurrentHead;
+                                            for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
+                                                CurrentRow.clear();
+                                                CurrentHead.clear();
+                                                for (size_t ColIter = 0; ColIter < NumCols; ++ColIter) {
+                                                    CurrentRow.append(elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter)));
+                                                    CurrentHead.append(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter).name().string());
                                                 }
-                                                HeaderRecieved(*SingleReq, FoundRequ->field());
-                                                DataRecieved(*SingleReq);
+                                                DataRowRecieved(*SingleReq, CurrentRow, CurrentHead);
                                             }
+                                            HeaderRecieved(*SingleReq, FoundRequ->field());
+                                            DataRecieved(*SingleReq);
                                         }
                                     }
-                                    else{
-                                        DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
-                                    }
+                                }
+                                else {
+                                    DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
                                 }
                             }
                         }
@@ -201,7 +193,7 @@ namespace QBbgLib {
                     }
                 }
             }
-                break;
+            break;
             default:
                 Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Unhandled Response Type");
             }
@@ -272,7 +264,7 @@ namespace QBbgLib {
 
     void QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err)
     {
-        QBbgAbstractResponse* TempRes=NULL;
+        QBbgAbstractResponse* TempRes = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
         case QBbgAbstractRequest::ReferenceData:
             TempRes = new QBbgReferenceDataResponse();
@@ -320,10 +312,10 @@ namespace QBbgLib {
         QHash<qint64, QBbgAbstractResponse*>::iterator i = m_Results.find(RequestID);
         Q_ASSERT(i != m_Results.end());
         q->dataRecieved(RequestID, i.value());
-        m_Results.erase(i);        
+        m_Results.erase(i);
         q->progress((100 * ++m_ResurnedResults) / m_Requests.size());
         if (m_ResurnedResults == m_Requests.size()) {
-                m_session->stopAsync();
+            m_session->stopAsync();
         }
     }
     void QBbgRequestResponseWorkerPrivate::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
@@ -430,7 +422,7 @@ namespace QBbgLib {
     }
 
     QBbgRequestResponseWorker::QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent)
-        :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this,option),parent)
+        :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this, option), parent)
     {}
 
     void QBbgRequestResponseWorker::setRequest(const QBbgRequestGroup& req)
