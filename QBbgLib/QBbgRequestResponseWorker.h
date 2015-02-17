@@ -15,9 +15,7 @@ namespace QBbgLib {
     public slots:
         virtual void start();
         virtual void start(const QBbgRequestGroup& req);
-        virtual void setRequest(const QBbgRequestGroup& req);
-
-        
+        virtual void setRequest(const QBbgRequestGroup& req);     
     };
 
 }

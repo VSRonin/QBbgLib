@@ -2,6 +2,7 @@
 #include "QBbgRequestGroup_p.h"
 #include <QSet>
 #include "QbbgReferenceDataRequest.h"
+#include "QBbgPortfolioDataRequest.h"
 namespace QBbgLib {
     qint64 QBbgRequestGroupPrivate::MaxID = 0;
     QBbgRequestGroup::QBbgRequestGroup()
@@ -26,8 +27,11 @@ namespace QBbgLib {
         switch (a.requestType()) {
         case QBbgAbstractRequest::ReferenceData:
             return new QBbgReferenceDataRequest(dynamic_cast<const QBbgReferenceDataRequest&>(a));
+        case QBbgAbstractRequest::PortfolioData:
+            return new QBbgPortfolioDataRequest(dynamic_cast<const QBbgPortfolioDataRequest&>(a));
             //TODO add other types
         default:
+            Q_ASSERT_X(false, "QBbgRequestGroupPrivate::createRequest", "Unhandled request type");
             return NULL;
         }
     }

@@ -12,7 +12,6 @@ namespace QBbgLib {
     public:
         QBbgWorkerThreadPrivate(QBbgWorkerThread* q, QBbgAbstractWorker* wrk);
         QBbgAbstractWorker* m_worker;
-        virtual ~QBbgWorkerThreadPrivate();
     protected:
         QBbgWorkerThread* q_ptr;
     };

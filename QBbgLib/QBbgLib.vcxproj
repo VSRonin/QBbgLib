@@ -47,6 +47,8 @@
     <ClCompile Include="QBbgAbstractWorker.cpp" />
     <ClCompile Include="QBbgManager.cpp" />
     <ClCompile Include="QBbgOverride.cpp" />
+    <ClCompile Include="QBbgPortfolioDataRequest.cpp" />
+    <ClCompile Include="QBbgPortfolioDataResponse.cpp" />
     <ClCompile Include="QbbgReferenceDataRequest.cpp" />
     <ClCompile Include="QBbgReferenceDataResponse.cpp" />
     <ClCompile Include="QBbgRequestGroup.cpp" />
@@ -87,6 +89,10 @@
     <ClInclude Include="QBbgManager_p.h" />
     <ClInclude Include="QBbgOverride.h" />
     <ClInclude Include="QBbgOverride_p.h" />
+    <ClInclude Include="QBbgPortfolioDataRequest.h" />
+    <ClInclude Include="QBbgPortfolioDataRequest_p.h" />
+    <ClInclude Include="QBbgPortfolioDataResponse.h" />
+    <ClInclude Include="QBbgPortfolioDataResponse_p.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
     <ClInclude Include="QbbgReferenceDataRequest.h" />
     <ClInclude Include="QbbgReferenceDataRequest_p.h" />

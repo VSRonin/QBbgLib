@@ -1,5 +1,6 @@
 #include "QBbgSecurity.h"
 #include "QBbgSecurity_p.h"
+#include <QRegExp>
 namespace QBbgLib {
     QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity* q)
         : q_ptr(q)
@@ -23,6 +24,25 @@ namespace QBbgLib {
     {
         setName(SecName);
         setExtension(SecKey);
+    }
+    QBbgSecurity::QBbgSecurity(QString SecString)
+        :d_ptr(new QBbgSecurityPrivate(this))
+    {
+        SecString = SecString.simplified();
+        if (SecString.at(0) == '/') {
+            setExtension(stringToYellowKey(SecString.mid(1, SecString.indexOf('/', 1))));
+            SecString = SecString.mid(SecString.indexOf('/', 1) + 1);
+        }
+        else {
+            setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
+            SecString = SecString.left(SecString.lastIndexOf(' '));
+        }
+        QRegExp priceSourceRegExp("\\S@(\\S)[\\s$]");
+        if (priceSourceRegExp.indexIn(SecString) >= 0) {
+            setPricingSource(priceSourceRegExp.cap(1));
+            SecString.replace(QRegExp("@\\S"), QString());
+        }
+        setName(SecString);
     }
     QBbgSecurity::~QBbgSecurity()
     {
@@ -87,7 +107,7 @@ namespace QBbgLib {
         case Index: return "Index";
         case Curncy: return "Curncy";
         case Client: return "Client";
-        case ticker: return "ticker";
+        //case ticker: return "ticker";
         case cusip: return "cusip";
         case wpk: return "wpk";
         case isin: return "isin";
@@ -118,7 +138,7 @@ namespace QBbgLib {
         else if (a == "index") return Index;
         else if (a == "curncy") return Curncy;
         else if (a == "client") return Client;
-        else if (a == "ticker") return ticker;
+        //else if (a == "ticker") return ticker;
         else if (a == "cusip") return cusip;
         else if (a == "wpk") return wpk;
         else if (a == "isin") return isin;

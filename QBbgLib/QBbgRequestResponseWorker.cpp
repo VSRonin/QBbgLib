@@ -6,6 +6,9 @@
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgOverride.h"
 #include "QbbgReferenceDataRequest.h"
+#include "QBbgPortfolioDataRequest.h"
+#include "QBbgPortfolioDataRequest.h"
+#include "QBbgPortfolioDataResponse.h"
 namespace QBbgLib {
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
@@ -32,7 +35,93 @@ namespace QBbgLib {
                 }
                 return;
             }
+            #ifdef _DEBUG
+            //message.print(std::cout);
+            #endif // _DEBUG
             switch (QBbgAbstractResponse::stringToResponseType(message.messageType().string())) {
+            case QBbgAbstractResponse::PortfolioDataResponse:
+            {
+                BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
+                for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
+                    QString CurrentSecurity = secDataArray.getValueAsElement(secIter).getElementAsString("security");
+                    BloombergLP::blpapi::Element fieldExcepArray = secDataArray.getValueAsElement(secIter).getElement("fieldExceptions"); //fieldExceptions[]
+                    
+                    if (secDataArray.getValueAsElement(secIter).hasElement("securityError")) {
+                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                            const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
+                            if (FoundRequ->security().fullName() == CurrentSecurity) {
+                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError);
+                            }
+                        }
+                    }
+                    else {
+                        BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
+                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                            const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                            Q_ASSERT(FoundRequ);
+                            if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
+                                bool foundExp = false;
+                                for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
+                                    QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
+                                    const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                                    Q_ASSERT(FoundRequ);
+                                    if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError);
+                                        foundExp = true;
+                                    }
+                                }
+                                if (!foundExp)
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                            }
+                            else {
+                                BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
+                                if (fieldDataValue.numValues() == 0) {
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                }
+                                else if (fieldDataValue.getValueAsElement(0).numElements() == 0) {
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                }
+                                else {
+                                    QString tempSec;
+                                    double tmpPos, tmpMkVal, tmpCst, tmpCstFx, tmpWei;
+                                    QDate tmpCstDt;
+                                    bool oneSent = false;
+                                    for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
+                                        if (!fieldDataValue.getValueAsElement(RowIter).hasElement("Security")) continue;
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Position")) tmpPos = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Position");
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Market Value")) tmpMkVal = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Market Value");
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Cost")) tmpCst = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Cost");
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Cost Fx Rate")) tmpCstFx = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Cost Fx Rate");
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Weight")) tmpWei = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Weight");
+                                        if (fieldDataValue.getValueAsElement(RowIter).hasElement("Cost Date")) tmpCstDt = elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement("Cost Date")).toDate();
+                                        PortfolioDataRecieved(
+                                            *SingleReq
+                                            , fieldDataValue.getValueAsElement(RowIter).getElementAsString("Security")
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Position") ? (&tmpPos) : static_cast<double*>(NULL)
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Market Value") ? (&tmpMkVal) : static_cast<double*>(NULL)
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Cost") ? (&tmpCst) : static_cast<double*>(NULL)
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Cost Date") ? (&tmpCstDt) : static_cast<QDate*>(NULL)
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Cost Fx Rate") ? (&tmpCstFx) : static_cast<double*>(NULL)
+                                            , fieldDataValue.getValueAsElement(RowIter).hasElement("Weight") ? (&tmpWei) : static_cast<double*>(NULL)
+                                            );
+                                        oneSent = true;
+                                    }
+                                    if (oneSent) {
+                                        HeaderRecieved(*SingleReq, FoundRequ->field());
+                                        DataRecieved(*SingleReq);
+                                    }
+                                    else {
+                                        SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
+                break;
             case QBbgAbstractResponse::ReferenceDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
@@ -188,6 +277,9 @@ namespace QBbgLib {
         case QBbgAbstractRequest::ReferenceData:
             TempRes = new QBbgReferenceDataResponse();
             break;
+        case QBbgAbstractRequest::PortfolioData:
+            TempRes = new QBbgPortfolioDataResponse();
+            break;
         default:
             Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SetError", "Unhandled request type");
             break;
@@ -207,10 +299,8 @@ namespace QBbgLib {
             resToAdd = TempRes;
             break;
         }
-        case QBbgAbstractRequest::PortfolioData:
-            //TODO
         default:
-            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataPointRecieved", "Only ReferenceData and PortfolioData can recieve Data Ponts");
+            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataPointRecieved", "Only ReferenceData can recieve Data Points");
             break;
         }
         setResponseID(resToAdd, RequestID);
@@ -239,21 +329,40 @@ namespace QBbgLib {
     void QBbgRequestResponseWorkerPrivate::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
-        Q_ASSERT_X(TempIter == m_Results.end() || (TempIter != m_Results.end() && TempIter.value()->responseType() == m_Requests.request(RequestID)->requestType()), "QBbgRequestResponseWorkerPrivate::DataRowRecieved", "Adding Row to response of different type");
-        switch (m_Requests.request(RequestID)->requestType()) {
-        case QBbgAbstractRequest::ReferenceData:{
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::ReferenceData) {
             if (TempIter == m_Results.end()) {
                 TempIter = m_Results.insert(RequestID, new QBbgReferenceDataResponse());
             }
             dynamic_cast<QBbgReferenceDataResponse*>(TempIter.value())->addValueRow(Value, Header);
-            break;
+            return;
         }
-        case QBbgAbstractRequest::PortfolioData:
-            //TODO
-        default:
-            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataRowRecieved", "Only ReferenceData and PortfolioData can recieve Data Rows");
-            break;
+        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataRowRecieved", "Only ReferenceData can recieve Data Rows");
+    }
+    void QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
+    {
+        QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::PortfolioData) {
+            if (TempIter == m_Results.end()) {
+                TempIter = m_Results.insert(RequestID, new QBbgPortfolioDataResponse());
+            }
+            QBbgPortfolioDataResponse* currRes = dynamic_cast<QBbgPortfolioDataResponse*>(TempIter.value());
+            Q_ASSERT((pos && currRes->size() > 0) == currRes->hasPosition());
+            Q_ASSERT((mkVal && currRes->size() > 0) == currRes->hasMarketValue());
+            Q_ASSERT((cst && currRes->size() > 0) == currRes->hasCost());
+            Q_ASSERT((cstDt && currRes->size() > 0) == currRes->hasCostDate());
+            Q_ASSERT((cstFx && currRes->size() > 0) == currRes->hasCostFx());
+            Q_ASSERT((wei && currRes->size() > 0) == currRes->hasWeight());
+            currRes->addSecurity(Sec);
+            Q_ASSERT_X(currRes->security(currRes->size() - 1).isValid(), "QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved", "Invalid security recieved");
+            if (pos) currRes->addPosition(*pos);
+            if (mkVal) currRes->addMarketValue(*mkVal);
+            if (cst) currRes->addCost(*cst);
+            if (cstDt) currRes->addCostDate(*cstDt);
+            if (cstFx) currRes->addCostFx(*cstFx);
+            if (wei) currRes->addWeight(*wei);
+            return;
         }
+        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved", "Only PortfolioData can recieve Portfolio Data");
     }
     void QBbgRequestResponseWorkerPrivate::SendRequ(QBbgAbstractRequest::ServiceType serv)
     {

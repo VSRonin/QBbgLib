@@ -22,13 +22,12 @@ namespace QBbgLib {
     }
     QBbgWorkerThread::~QBbgWorkerThread()
     {
-        if (isRunning()) {
+        if (isRunning()) { 
             quit();
             wait();
         }
         delete d_ptr;
     }
-
     void QBbgWorkerThread::createConnections()
     {
         Q_D(QBbgWorkerThread);
@@ -40,11 +39,6 @@ namespace QBbgLib {
         connect(this, &QBbgWorkerThread::finished, this, &QBbgWorkerThread::deleteLater);
         connect(d->m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::quit);
         connect(d->m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::quit);
-    }
-
-    QBbgWorkerThreadPrivate::~QBbgWorkerThreadPrivate()
-    {
-        m_worker->deleteLater();
     }
     QBbgWorkerThreadPrivate::QBbgWorkerThreadPrivate(QBbgWorkerThread* q, QBbgAbstractWorker* wrk)
         : q_ptr(q)

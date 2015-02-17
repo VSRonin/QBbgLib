@@ -125,6 +125,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgManager.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgPortfolioDataRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgPortfolioDataResponse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
@@ -197,6 +203,18 @@
       <Filter>Header Files\Threads</Filter>
     </ClInclude>
     <ClInclude Include="QBbgManager_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgPortfolioDataRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgPortfolioDataRequest_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgPortfolioDataResponse_p.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QBbgPortfolioDataResponse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

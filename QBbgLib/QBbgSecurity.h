@@ -25,8 +25,8 @@ namespace QBbgLib {
             , Curncy
             , Client
             //Prefixes
-            , ticker = FirstPrefix
-            , cusip
+            //, ticker // still needs another yellow key
+            , cusip = FirstPrefix
             , wpk
             , isin
             , buid
@@ -45,6 +45,7 @@ namespace QBbgLib {
         QBbgSecurityPrivate* d_ptr;
     public:
     	QBbgSecurity();
+        QBbgSecurity(QString SecString);
         QBbgSecurity(const QString& SecName, YellowKeys SecKey);
         QBbgSecurity(const QBbgSecurity& other);
         QBbgSecurity& operator=(const QBbgSecurity& other);

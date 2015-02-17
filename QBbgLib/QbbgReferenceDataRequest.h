@@ -14,6 +14,7 @@ namespace QBbgLib {
         virtual bool operator==(const QBbgReferenceDataRequest& a) const;
         bool useUTCtime() const;
         void setUseUTCtime(bool a);
+        virtual void setSecurity(const QBbgSecurity& val);
     protected:
         QBbgReferenceDataRequest(QBbgReferenceDataRequestPrivate* d);
     };

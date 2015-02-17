@@ -3,9 +3,11 @@
 #include "QBbgWorkerThread.h"
 #include <QObject>
 #include "QBbgProjectGlobals.h"
+#include <QHash>
 namespace QBbgLib {
     class QBbgManagerPrivate;
     class QBbgRequestGroup;
+    class QBbgWorkerThread;
     class QBBG_EXPORT QBbgManager : public QObject
     {
         Q_OBJECT
@@ -16,9 +18,11 @@ namespace QBbgLib {
         virtual ~QBbgManager();
     public:
         quint32 startRequest(const QBbgRequestGroup& rq);
+        const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
         const QBbgAbstractResponse* const getResult(quint32 group, qint64 id);
     protected:
         QBbgManagerPrivate* d_ptr;
+        QHash<quint32, QBbgWorkerThread* >::iterator createThread(const QBbgRequestGroup& rq);
     protected slots:
         void handleResponse(qint64 reID, QBbgAbstractResponse* res);
         void handleThreadFinished();

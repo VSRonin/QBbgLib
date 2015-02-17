@@ -106,8 +106,12 @@ namespace QBbgLib {
     QBbgAbstractRequest::ServiceType QBbgAbstractRequest::serviceForRequest(RequestType a)
     {
         switch (a) {
-        case ReferenceData: return refdata;
-        default: return NoService;
+        case ReferenceData: 
+        case PortfolioData:
+            return refdata;
+        default: 
+            Q_ASSERT_X(false, "QBbgAbstractRequest::serviceForRequest", "Unhandled service type");
+            return NoService;
         }
     }
    QString QBbgAbstractRequest::serviceTypeToString(ServiceType a)

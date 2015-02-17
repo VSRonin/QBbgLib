@@ -5,13 +5,13 @@ namespace QBbgLib {
         : QBbgAbstractFieldRequestPrivate(q)
         , m_UseUTCTime(false)
     {
-        m_RqType = QBbgReferenceDataRequest::ReferenceData;
+        m_RqType = QBbgAbstractRequest::ReferenceData;
     }
     QBbgReferenceDataRequestPrivate::QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q, const QBbgReferenceDataRequestPrivate& other)
         : QBbgAbstractFieldRequestPrivate(q, other)
         , m_UseUTCTime(other.m_UseUTCTime)
     {
-        m_RqType = QBbgReferenceDataRequest::ReferenceData;
+        m_RqType = QBbgAbstractRequest::ReferenceData;
     }
     QBbgReferenceDataRequestPrivate& QBbgReferenceDataRequestPrivate::operator=(const QBbgReferenceDataRequestPrivate& other)
     {
@@ -53,6 +53,12 @@ namespace QBbgLib {
     {
         Q_D(const QBbgReferenceDataRequest);
         return d->m_UseUTCTime;
+    }
+    void QBbgReferenceDataRequest::setSecurity(const QBbgSecurity& val)
+    {
+        if (val.extension() != QBbgSecurity::Client) {
+            QBbgAbstractFieldRequest::setSecurity(val);
+        }
     }
 
 }

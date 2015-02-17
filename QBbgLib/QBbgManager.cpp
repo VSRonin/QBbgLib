@@ -21,8 +21,7 @@ namespace QBbgLib {
         :QObject(parent)
         , d_ptr(new QBbgManagerPrivate(this))
     {}
-
-    quint32 QBbgManager::startRequest(const QBbgRequestGroup& rq)
+    QHash<quint32, QBbgWorkerThread* >::iterator QBbgManager::createThread(const QBbgRequestGroup& rq)
     {
         Q_D(QBbgManager);
         quint32 newID = 0;
@@ -35,8 +34,23 @@ namespace QBbgLib {
         QBbgWorkerThread* newThread = new QBbgWorkerThread(newWorker, this);
         connect(newThread, &QBbgWorkerThread::dataRecieved, this, &QBbgManager::handleResponse);
         connect(newThread, &QBbgWorkerThread::finished, this, &QBbgManager::handleThreadFinished);
-        d->m_ThreadPool.insert(newID, newThread).value()->start();
-        return newID;
+        return d->m_ThreadPool.insert(newID, newThread);
+    }
+    quint32 QBbgManager::startRequest(const QBbgRequestGroup& rq)
+    {
+        QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
+        newTh.value()->start();
+        return newTh.key();
+    }
+    const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
+    {
+        Q_D(QBbgManager);
+        QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
+        const quint32 threadKey = newTh.key();
+        newTh.value()->start();
+        while (!newTh.value()->wait()) {}
+        Q_ASSERT(d->m_ResultTable.contains(threadKey));
+        return *(d->m_ResultTable.value(threadKey));
     }
     void QBbgManager::handleResponse(qint64 reID, QBbgAbstractResponse* res)
     {
@@ -70,20 +84,18 @@ namespace QBbgLib {
         Q_D(QBbgManager);
         for (QHash<quint32, QBbgWorkerThread* >::iterator resIter = d->m_ThreadPool.begin(); resIter != d->m_ThreadPool.end(); ++resIter) {
             if (resIter.value() == sender()) {
-                emit resIter.key();
+                emit finished(resIter.key());
                 d->m_ThreadPool.erase(resIter);
                 return;
             }
         }
         Q_ASSERT_X(false, "QBbgManager::handleThreadFinished", "Could not find sender()");
     }
-
     const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id)
     {
         Q_D(QBbgManager);
         return d->m_ResultTable.value(group, NULL)->value(id, NULL);
     }
-
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
         for (QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator i = m_ResultTable.begin(); i != m_ResultTable.end(); ++i) {
