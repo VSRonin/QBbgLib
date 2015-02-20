@@ -35,9 +35,9 @@ namespace QBbgLib {
         if (d->m_SessionRunning)
             d->m_session->stopAsync();
     }
-    void QBbgAbstractWorkerPrivate::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const
+    void QBbgAbstractWorkerPrivate::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const
     {
-        res->setErrorCode(err);
+        res->setErrorCode(err,errMsg);
     }
     void QBbgAbstractWorkerPrivate::setResponseID(QBbgAbstractResponse* res, qint64 corrID) const
     {
@@ -45,7 +45,8 @@ namespace QBbgLib {
     }
     QVariant QBbgAbstractWorkerPrivate::elementToVariant(BloombergLP::blpapi::Element& val)
     {
-        if (!val.isValid() || val.isNull() || val.isNullValue()) return QVariant();
+        if (val.isNull()) return QVariant();
+        //if (val.isNullValue()) return QVariant();
         switch (val.datatype()) {
         case BloombergLP::blpapi::DataType::BOOL:
             return val.getValueAsBool();

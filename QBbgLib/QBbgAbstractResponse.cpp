@@ -14,13 +14,17 @@ namespace QBbgLib {
     QBbgAbstractResponse::QBbgAbstractResponse(QBbgAbstractResponsePrivate* d)
         : d_ptr(d)
     {}
-    void QBbgAbstractResponse::setErrorCode(BbgErrorCodes ErrCd)
+    void QBbgAbstractResponse::setErrorCode(BbgErrorCodes ErrCd, const QString& errMsg)
     {
         Q_D(QBbgAbstractResponse);
-        if (ErrCd == NoErrors)  
+        if (ErrCd == NoErrors) {
             d->m_ErrorCode = NoErrors;
-        else 
+            d->m_ErrorMessage.clear();
+        }
+        else {
             d->m_ErrorCode |= ErrCd;
+            d->m_ErrorMessage = errMsg;
+        }
     }
     bool QBbgAbstractResponse::hasErrors() const
     {
@@ -121,5 +125,10 @@ namespace QBbgLib {
         default:
             return QString();
         }
+    }
+    QString QBbgAbstractResponse::errorMessage() const
+    {
+        Q_D(const QBbgAbstractResponse);
+        return errorString() + " - " + d->m_ErrorMessage;
     }
 }

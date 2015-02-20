@@ -46,6 +46,7 @@ namespace QBbgLib {
     	virtual ~QBbgAbstractResponse();
         virtual BbgErrorCodes errorCode() const;
         virtual QString errorString() const;
+        virtual QString errorMessage() const;
         virtual bool hasErrors() const;
         virtual bool isEmpty() const =0;
         static QString bbgErrorCode2String(BbgErrorCodes a);
@@ -56,7 +57,7 @@ namespace QBbgLib {
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);
-        virtual void setErrorCode(BbgErrorCodes ErrCd);
+        virtual void setErrorCode(BbgErrorCodes ErrCd,const QString& errMsg=QString());
         virtual void setID(qint64 val);
 
         friend class QBbgAbstractWorkerPrivate;

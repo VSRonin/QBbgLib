@@ -16,7 +16,7 @@ namespace QBbgLib {
         QScopedPointer<BloombergLP::blpapi::Session> m_session;
         bool m_SessionRunning;
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event)=0;
-        virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err) const;
+        virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg /*=QString()*/) const;
         virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
         virtual QVariant elementToVariant(BloombergLP::blpapi::Element& val);
     protected:

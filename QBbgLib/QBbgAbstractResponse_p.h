@@ -1,6 +1,7 @@
 #ifndef QBbgAbstractResponse_p_h__
 #define QBbgAbstractResponse_p_h__
 #include "QBbgAbstractResponse.h"
+#include <QString>
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate
     {
@@ -12,6 +13,7 @@ namespace QBbgLib {
         QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, const QBbgAbstractResponsePrivate& other);
         virtual QBbgAbstractResponsePrivate& operator=(const QBbgAbstractResponsePrivate& other);
         QBbgAbstractResponse::BbgErrorCodes m_ErrorCode;
+        QString m_ErrorMessage;
         QBbgAbstractResponse::ResponseType m_ResType;
         qint64 m_ID;
     protected:

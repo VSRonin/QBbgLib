@@ -27,17 +27,18 @@ namespace QBbgLib {
         BloombergLP::blpapi::MessageIterator iter(event);
         while (iter.next()) {
             BloombergLP::blpapi::Message message = iter.message();
+#ifdef PRINT_RESPONSE_MESSAGE
+            message.print(std::cout);
+#endif // _DEBUG
             const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), nullptr);
             Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Recieving response from unknown request");
             if (message.hasElement("responseError")) {
                 for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                    SetError(*SingleReq, QBbgAbstractResponse::ResponseError);
+                    SetError(*SingleReq, QBbgAbstractResponse::ResponseError, message.getElement("responseError").getElementAsString("message"));
                 }
                 return;
             }
-#ifdef _DEBUG
-            message.print(std::cout);
-#endif // _DEBUG
+
             switch (QBbgAbstractResponse::stringToResponseType(message.messageType().string())) {
             case QBbgAbstractResponse::PortfolioDataResponse:
             {
@@ -50,7 +51,7 @@ namespace QBbgLib {
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                             const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
                             if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError);
+                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError, secDataArray.getValueAsElement(secIter).getElement("securityError").getElementAsString("message"));
                             }
                         }
                     }
@@ -66,20 +67,20 @@ namespace QBbgLib {
                                     const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
                                     Q_ASSERT(FoundRequ);
                                     if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError);
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("message"));
                                         foundExp = true;
                                     }
                                 }
                                 if (!foundExp)
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
                                 if (fieldDataValue.numValues() == 0) {
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 rows");
                                 }
                                 else if (fieldDataValue.getValueAsElement(0).numElements() == 0) {
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 columns");
                                 }
                                 else {
                                     QString tempSec;
@@ -111,7 +112,7 @@ namespace QBbgLib {
                                         DataRecieved(*SingleReq);
                                     }
                                     else {
-                                        SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "No security found");
                                     }
                                 }
                             }
@@ -133,7 +134,7 @@ namespace QBbgLib {
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                             const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
                             if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError);
+                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError, secDataArray.getValueAsElement(secIter).getElement("securityError").getElementAsString("message"));
                             }
                         }
                     }
@@ -149,23 +150,23 @@ namespace QBbgLib {
                                     const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
                                     Q_ASSERT(FoundRequ);
                                     if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError);
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("message"));
                                         foundExp = true;
                                     }
                                 }
                                 if (!foundExp)
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
                                 if (fieldDataValue.isArray()) {
                                     if (fieldDataValue.numValues() == 0) {
-                                        SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 rows");
                                     }
                                     else {
                                         size_t NumCols = fieldDataValue.getValueAsElement(0).numElements();
                                         if (NumCols == 0) {
-                                            SetError(*SingleReq, QBbgAbstractResponse::NoData);
+                                            SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 columns");
                                         }
                                         else {
                                             QList<QVariant> CurrentRow;
@@ -226,7 +227,7 @@ namespace QBbgLib {
                 else /*if (MessageType == "SessionStartupFailure")*/ {
                     const QList<qint64> allRq = m_Requests.IDList();
                     for (QList<qint64>::const_iterator i = allRq.constBegin(); i != allRq.constEnd(); ++i)
-                        SetError(*i, QBbgAbstractResponse::SessionError);
+                        SetError(*i, QBbgAbstractResponse::SessionError, "Impossible to connect to BBG");
                 }
             }
             break;
@@ -243,7 +244,7 @@ namespace QBbgLib {
                     const QList<qint64> allRq = m_Requests.IDList();
                     for (QList<qint64>::const_iterator i = allRq.constBegin(); i != allRq.constEnd(); ++i) {
                         if (QBbgAbstractRequest::serviceForRequest(m_Requests.request(*i)->requestType()) == currentService)
-                            SetError(*i, QBbgAbstractResponse::ServiceError);
+                            SetError(*i, QBbgAbstractResponse::ServiceError, "Failed to open required BBG service");
                     }
                 }
             }
@@ -256,13 +257,13 @@ namespace QBbgLib {
         default:{
             const QList<qint64> allRq = m_Requests.IDList();
             for (QList<qint64>::const_iterator i = allRq.constBegin(); i != allRq.constEnd(); ++i)
-                SetError(*i, QBbgAbstractResponse::UnknownError);
+                SetError(*i, QBbgAbstractResponse::UnknownError, QString());
         }
         }
         return true;
     }
 
-    void QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err)
+    void QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg)
     {
         QBbgAbstractResponse* TempRes = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
@@ -277,7 +278,7 @@ namespace QBbgLib {
             break;
         }
         setResponseID(TempRes, RequestID);
-        setResponseError(TempRes, Err);
+        setResponseError(TempRes, Err, errMsg);
         m_Results.insert(RequestID, TempRes);
         DataRecieved(RequestID);
     }
@@ -372,7 +373,7 @@ namespace QBbgLib {
                 const QBbgAbstractRequest* CurrentSingle = m_Requests.request(*GroupIter);
                 Q_ASSERT_X(CurrentSingle, "QBbgRequestResponseWorkerPrivate::SendRequ", "trying to send NULL request");
                 if (!CurrentSingle->isValidReq()) {
-                    SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs);
+                    SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, "Invalid Request");
                 }
                 if (!UsedSecur.contains(CurrentSingle->security().fullName())) {
                     request.append("securities", CurrentSingle->security().fullName().toLatin1().data());

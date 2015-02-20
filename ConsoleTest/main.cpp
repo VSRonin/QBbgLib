@@ -7,21 +7,31 @@
 #include "QBbgPortfolioDataRequest.h"
 #include <QDebug>
 #include "QBbgPortfolioDataResponse.h"
+#include "QBbgOverride.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QBbgLib::QBbgSecurity secur("XS0181673798", QBbgLib::QBbgSecurity::isin);
+    QBbgLib::QBbgSecurity secur("FRIAR 2014-1 A", QBbgLib::QBbgSecurity::Mtge);
     QBbgLib::QBbgReferenceDataRequest a_req;
     QBbgLib::QBbgPortfolioDataRequest p_req;
     p_req.setSecurity("TS-PX1915-15", QBbgLib::QBbgSecurity::Client);
     //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
     //p_req.setReferenceDay(QDate(2015, 01, 30));
-
+    QBbgLib::QBbgOverride overrides;
+    overrides.setOverride("Allow dynamic cashflow calcs", true);
+    overrides.setOverride("mtg prepay speed", 100);
+    overrides.setOverride("mtg prepay typ", "CPR");
+    overrides.setOverride("YLD flag", 2);
+    overrides.setOverride("prepay speed vector", "15 6S 20 24S 15");
+    overrides.setOverride("apply FWD rate", false);
+    overrides.setOverride("recovery lag", 0);
+    a_req.setOverrides(overrides);
     a_req.setSecurity(secur);
-    a_req.setField("px  last\t");
+    a_req.setField("mtg cash flow");
+
     QBbgLib::QBbgRequestGroup req;
-    //req.addRequest(a_req);
+    req.addRequest(a_req);
     a_req.setField("name");
     //req.addRequest(a_req);
     QBbgLib::QBbgManager mainManager;
@@ -30,7 +40,7 @@ int main(int argc, char *argv[])
     {
         const QBbgLib::QBbgAbstractResponse* genres = mainManager.getResult(gr, id);
         if (genres->hasErrors()) {
-            qDebug() << QString::number(genres->getID()) + " - " + genres->errorString();
+            qDebug() << QString::number(genres->getID()) + " - " + genres->errorMessage();
         }
         else {
             switch (genres->responseType()) {
@@ -75,7 +85,7 @@ int main(int argc, char *argv[])
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
     p_req.setField("PORTFOLIO_DATA");
-    req.addRequest(p_req);
+    //req.addRequest(p_req);
     a_req.setField("Gibberish");
     //req.addRequest(a_req);
     a_req.setSecurity(QString("invalid Mtge"));
