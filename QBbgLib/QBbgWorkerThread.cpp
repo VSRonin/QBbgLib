@@ -26,6 +26,7 @@ namespace QBbgLib {
             quit();
             wait();
         }
+        Q_ASSERT_X(!isRunning(), "~QBbgWorkerThread()", "Destroying thread while still running");
         delete d_ptr;
     }
     void QBbgWorkerThread::createConnections()

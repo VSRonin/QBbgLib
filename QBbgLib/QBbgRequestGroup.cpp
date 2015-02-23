@@ -4,7 +4,7 @@
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 namespace QBbgLib {
-    qint64 QBbgRequestGroupPrivate::MaxID = 0;
+    qint64 QBbgRequestGroupPrivate::MaxID = 1;
     QBbgRequestGroup::QBbgRequestGroup()
         :d_ptr(new QBbgRequestGroupPrivate(this))
     {}
@@ -88,10 +88,9 @@ namespace QBbgLib {
     {
         Q_D(QBbgRequestGroup);
         QBbgAbstractRequest* newReq = d->createRequest(a);
-        if (newReq->getID() < 0 || d->RequestTable.contains(newReq->getID())) {
-            do {
-                newReq->setID(d->increaseMaxID());
-            } while (d->RequestTable.contains(newReq->getID()));
+
+        while (newReq->getID() < 0 || d->RequestTable.contains(newReq->getID())) {
+            newReq->setID(d->increaseMaxID());
         }
         if (!newReq->isValidReq()) {
             delete newReq;

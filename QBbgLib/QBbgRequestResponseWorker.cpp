@@ -64,10 +64,8 @@ namespace QBbgLib {
                                 bool foundExp = false;
                                 for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
                                     QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
-                                    const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                                    Q_ASSERT(FoundRequ);
                                     if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("message"));
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElement("errorInfo").getElementAsString("message"));
                                         foundExp = true;
                                     }
                                 }
@@ -147,10 +145,8 @@ namespace QBbgLib {
                                 bool foundExp = false;
                                 for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
                                     QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
-                                    const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                                    Q_ASSERT(FoundRequ);
                                     if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("message"));
+                                        SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElement("errorInfo").getElementAsString("message"));
                                         foundExp = true;
                                     }
                                 }
