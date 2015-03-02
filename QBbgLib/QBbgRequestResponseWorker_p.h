@@ -27,6 +27,7 @@ namespace QBbgLib {
         virtual qint64 CorrelationForService(const QString& a) const;
         virtual void SendRequ(QBbgAbstractRequest::ServiceType serv);
         virtual void PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei);
+        virtual void fillNoData();
     };
 
     

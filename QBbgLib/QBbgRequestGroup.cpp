@@ -98,7 +98,7 @@ namespace QBbgLib {
         }
         QHash<qint64, QBbgAbstractRequest*>::iterator iter = d->RequestTable.find(newReq->getID());
         if (iter == d->RequestTable.end()) {
-            d->RequestTable.insert(newReq->getID(), newReq);
+            iter=d->RequestTable.insert(newReq->getID(), newReq);
         }
         else {
             delete iter.value();
@@ -148,6 +148,18 @@ namespace QBbgLib {
     }
     void  QBbgRequestGroup::RequestGroups(QHash<qint64, QList<qint64>* >& Result, qint64 StartingID)const
     {
+
+        /*Q_D(const QBbgRequestGroup);
+        for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); ++i)
+            delete (i.value());
+        Result.clear();
+        for (QHash<qint64, QBbgAbstractRequest*>::const_iterator MainIter = d->RequestTable.constBegin(); MainIter != d->RequestTable.constEnd(); ++MainIter) {
+            QList<qint64>* tmp = new QList<qint64>();
+            tmp->append(MainIter.key());
+            Result.insert(MainIter.key(), tmp);
+        }
+        return;*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Q_D(const QBbgRequestGroup);
         for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); ++i)
             delete (i.value());
@@ -157,10 +169,7 @@ namespace QBbgLib {
             for (QHash<qint64, QBbgAbstractRequest*>::const_iterator MainIter = d->RequestTable.constBegin(); MainIter != d->RequestTable.constEnd(); ++MainIter) {
                 found = false;
                 for (QHash<qint64, QList<qint64>* >::iterator resIter = Result.begin(); !found && resIter != Result.end(); ++resIter) {
-                    if (
-                        request(resIter.value()->first())->requestType() == (*MainIter)->requestType()
-                        && request(resIter.value()->first())->security() == (*MainIter)->security()
-                    ) {
+                    if (d->compatible(request(resIter.value()->first()), *MainIter)) {
                         resIter.value()->append(MainIter.key());
                         found = true;
                     }
@@ -171,7 +180,7 @@ namespace QBbgLib {
                 }
             }
         }
-        { 
+        { /*
             // Merge back groups with different securities but with all the other factors in common
             bool tempMerge;
             for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end(); ++MainIter) {
@@ -190,8 +199,9 @@ namespace QBbgLib {
                     }
                 }
             }
+            */
         }
-        //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /*Q_D(const QBbgRequestGroup);
         for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); i++)
             delete (i.value());
@@ -260,8 +270,8 @@ namespace QBbgLib {
             if (a.empty()) return false;
             if (b.empty()) return false;
             if (
-                !dynamic_cast<const QBbgAbstractFieldRequest*>(request(*a.begin()))->sameOverrides(
-                *dynamic_cast<const QBbgAbstractFieldRequest*>(request(*b.begin())))
+                !dynamic_cast<const QBbgAbstractFieldRequest*>(request(a.first()))->sameOverrides(
+                *dynamic_cast<const QBbgAbstractFieldRequest*>(request(b.first())))
             ) return false;
             for (QList<qint64>::const_iterator i = a.constBegin(); i != a.constEnd(); ++i) {
                 FiledsA.insert(dynamic_cast<const QBbgAbstractFieldRequest*>(request(*i))->field());
@@ -271,8 +281,23 @@ namespace QBbgLib {
             }
             return FiledsA == FiledsB;
         }
-        return false;
         //TODO do realtime
+        Q_ASSERT_X(false, "QBbgRequestGroupPrivate::SameRequest", "Unhandled request type");
+        return false;
+        
+    }
+    bool QBbgRequestGroupPrivate::compatible(const QBbgAbstractRequest* a, const QBbgAbstractRequest* b) const
+    {
+        if (!a || !b) return false;
+        if (a->requestType() != b->requestType()) return false;
+        if (a->security() != b->security()) return false;
+        switch (a->requestType()) {
+        case QBbgAbstractRequest::ReferenceData:
+        case QBbgAbstractRequest::PortfolioData:
+            if (!dynamic_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*dynamic_cast<const QBbgAbstractFieldRequest*>(b))) return false;
+            break;
+        }
+        return true;
     }
 }
 

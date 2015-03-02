@@ -61,7 +61,6 @@ namespace QBbgLib {
         virtual RequestType requestType() const;
         static QString requestTypeToString(RequestType a);
         static RequestType stringToRequestType(QString a);
-
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;

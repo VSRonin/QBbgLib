@@ -41,6 +41,13 @@ namespace QBbgLib {
         connect(d->m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::quit);
         connect(d->m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::quit);
     }
+
+    void QBbgWorkerThread::stop()
+    {
+        Q_D(QBbgWorkerThread);
+        d->m_worker->stop();
+    }
+
     QBbgWorkerThreadPrivate::QBbgWorkerThreadPrivate(QBbgWorkerThread* q, QBbgAbstractWorker* wrk)
         : q_ptr(q)
         , m_worker(wrk)

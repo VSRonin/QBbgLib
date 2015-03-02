@@ -19,6 +19,7 @@ namespace QBbgLib {
         void createConnections();
     public slots:
         void run();
+        void stop();
     signals:
         void started();
         void stopped();

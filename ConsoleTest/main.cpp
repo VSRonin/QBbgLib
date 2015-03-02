@@ -8,6 +8,16 @@
 #include <QDebug>
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgOverride.h"
+#include <QFile>
+#include <QTextStream>
+void PrintToTempFile(const QString& TempFileName, const QString& Message, bool PrintTime)
+{
+    QFile TempFile("C:/Temp/" + TempFileName + ".log");
+    if (!TempFile.open(QIODevice::Append | QIODevice::Text)) return;
+    QTextStream TempWrite(&TempFile);
+    TempWrite << (PrintTime ? QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm ") : QString()) + Message + '\n';
+    TempFile.close();
+}
 
 int main(int argc, char *argv[])
 {
@@ -15,9 +25,9 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgSecurity secur("FRIAR 2014-1 A", QBbgLib::QBbgSecurity::Mtge);
     QBbgLib::QBbgReferenceDataRequest a_req;
     QBbgLib::QBbgPortfolioDataRequest p_req;
-    p_req.setSecurity("TS-PX1915-15", QBbgLib::QBbgSecurity::Client);
-    //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
-    //p_req.setReferenceDay(QDate(2015, 01, 30));
+    //p_req.setSecurity("TS-PX1915-15", QBbgLib::QBbgSecurity::Client);
+    p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
+    p_req.setReferenceDay(QDate(2014, 11, 20));
     QBbgLib::QBbgOverride overrides;
     overrides.setOverride("Allow dynamic cashflow calcs", true);
     overrides.setOverride("mtg prepay speed", 100);
@@ -31,7 +41,7 @@ int main(int argc, char *argv[])
     a_req.setField("mtg cash flow");
 
     QBbgLib::QBbgRequestGroup req;
-    req.addRequest(a_req);
+    //req.addRequest(a_req);
     a_req.setField("name");
     //req.addRequest(a_req);
     QBbgLib::QBbgManager mainManager;
@@ -47,8 +57,6 @@ int main(int argc, char *argv[])
             case QBbgLib::QBbgAbstractResponse::ReferenceDataResponse:{
                 const QBbgLib::QBbgReferenceDataResponse* const res = dynamic_cast<const QBbgLib::QBbgReferenceDataResponse* const>(genres);
                 Q_ASSERT(res);
-
-
                 if (res->hasValue())
                     qDebug() << res->header() << res->value();
                 if (res->hasTable()) {
@@ -67,14 +75,17 @@ int main(int argc, char *argv[])
                 Q_ASSERT(res);
                 qDebug() << res->header();
                 for (int i = 0; i < res->size(); ++i) {
-                    qDebug() << res->security(i).fullName()
-                        + (res->hasPosition() ? QString(" Position: %1").arg(res->position(i)) : QString())
-                        + (res->hasMarketValue() ? QString(" Market Value: %1").arg(res->marketValue(i)) : QString())
-                        + (res->hasCost() ? QString(" Cost: %1").arg(res->cost(i)) : QString())
-                        + (res->hasCostDate() ? (" Cost Date: " + res->costDate(i).toString("yyyy-MM-dd")) : QString())
-                        + (res->hasCostFx() ? QString(" Cost Fx Rate: %1").arg(res->costFx(i)) : QString())
-                        + (res->hasWeight() ? QString(" Weight: %1").arg(res->weight(i)) : QString())
+                    QString tmpStr=
+                        res->security(i).fullName()
+                        + (res->hasPosition() ? QString("\tPosition: %1").arg(res->position(i)) : QString())
+                        + (res->hasMarketValue() ? QString("\tMarket Value: %1").arg(res->marketValue(i)) : QString())
+                        + (res->hasCost() ? QString("\tCost: %1").arg(res->cost(i)) : QString())
+                        + (res->hasCostDate() ? ("\tCost Date: " + res->costDate(i).toString("yyyy-MM-dd")) : QString())
+                        + (res->hasCostFx() ? QString("\tCost Fx Rate: %1").arg(res->costFx(i)) : QString())
+                        + (res->hasWeight() ? QString("\tWeight: %1").arg(res->weight(i)) : QString())
                         ;
+                    qDebug() << tmpStr;
+                    PrintToTempFile("PortfolioData", tmpStr, false);
                 }
             }
             break;
@@ -85,7 +96,8 @@ int main(int argc, char *argv[])
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
     p_req.setField("PORTFOLIO_DATA");
-    //req.addRequest(p_req);
+    p_req.setField("PORTFOLIO_MWEIGHT");
+    req.addRequest(p_req);
     a_req.setField("Gibberish");
     //req.addRequest(a_req);
     a_req.setSecurity(QString("invalid Mtge"));

@@ -30,7 +30,7 @@ namespace QBbgLib {
 #ifdef PRINT_RESPONSE_MESSAGE
             message.print(std::cout);
 #endif // _DEBUG
-            const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), nullptr);
+            const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), NULL);
             Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Recieving response from unknown request");
             if (message.hasElement("responseError")) {
                 for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
@@ -70,6 +70,7 @@ namespace QBbgLib {
                                     }
                                 }
                                 if (!foundExp)
+                                    //continue;
                                     SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
@@ -151,6 +152,7 @@ namespace QBbgLib {
                                     }
                                 }
                                 if (!foundExp)
+                                    //continue;
                                     SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
@@ -311,6 +313,7 @@ namespace QBbgLib {
         q->dataRecieved(RequestID, i.value());
         m_Results.erase(i);
         q->progress((100 * ++m_ResurnedResults) / m_Requests.size());
+        Q_ASSERT_X(m_ResurnedResults <= m_Requests.size(), "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Too many results returned");
         if (m_ResurnedResults == m_Requests.size()) {
             m_session->stopAsync();
         }
@@ -428,6 +431,15 @@ namespace QBbgLib {
         if (d->m_SessionRunning) return;
         d->m_Requests = req;
         d->m_Requests.RequestGroups(d->Groups);
+    }
+
+    void QBbgRequestResponseWorkerPrivate::fillNoData()
+    {
+        QList<qint64> allIDs=m_Requests.IDList();
+        for (QList<qint64>::const_iterator i = allIDs.constBegin(); i != allIDs.constEnd(); ++i) {
+            if (!m_Results.contains(*i))
+                SetError(*i, QBbgAbstractResponse::NoData, "Required data not found");
+        }
     }
 
 }

@@ -2,6 +2,7 @@
 #define QBbgRequest_p_h__
 #include "QBbgRequestGroup.h"
 #include <QHash>
+#include "QBbgAbstractFieldRequest.h"
 namespace QBbgLib {
     class QBbgRequestGroupPrivate
     {
@@ -21,13 +22,9 @@ namespace QBbgLib {
         void clear();
         const QBbgAbstractRequest* request(qint64 ID) const;
         bool SameRequest(const QList<qint64>& a, const QList<qint64>& b) const;
+        bool compatible(const QBbgAbstractRequest* a, const QBbgAbstractRequest* b) const;
     };
 
     
-
-    
-
-    
-
 }
 #endif // QBbgRequest_p_h__

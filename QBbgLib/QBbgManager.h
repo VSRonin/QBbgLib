@@ -19,7 +19,7 @@ namespace QBbgLib {
     public:
         quint32 startRequest(const QBbgRequestGroup& rq);
         const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
-        const QBbgAbstractResponse* const getResult(quint32 group, qint64 id);
+        const QBbgAbstractResponse* const getResult(quint32 group, qint64 id) const;
     protected:
         QBbgManagerPrivate* d_ptr;
         QHash<quint32, QBbgWorkerThread* >::iterator createThread(const QBbgRequestGroup& rq);
@@ -29,6 +29,7 @@ namespace QBbgLib {
     signals:
         void recieved(quint32, qint64);
         void finished(quint32);
+        void allFinished();
     };
 }
 #endif // QBbgManager_h__

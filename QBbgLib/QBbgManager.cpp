@@ -86,15 +86,20 @@ namespace QBbgLib {
             if (resIter.value() == sender()) {
                 emit finished(resIter.key());
                 d->m_ThreadPool.erase(resIter);
+                if (d->m_ThreadPool.isEmpty())
+                    emit allFinished();
                 return;
             }
         }
         Q_ASSERT_X(false, "QBbgManager::handleThreadFinished", "Could not find sender()");
     }
-    const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id)
+    const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id) const
     {
-        Q_D(QBbgManager);
-        return d->m_ResultTable.value(group, NULL)->value(id, NULL);
+        Q_D(const QBbgManager);
+        const QHash < qint64, QBbgAbstractResponse* >* resGroup=d->m_ResultTable.value(group, NULL);
+        if (resGroup)
+            return resGroup->value(id, NULL);
+        return NULL;
     }
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
@@ -107,7 +112,7 @@ namespace QBbgLib {
         for (QHash<quint32, QBbgWorkerThread* >::iterator i = m_ThreadPool.begin(); i != m_ThreadPool.end(); ++i) {
             Q_ASSERT(i.value());
             if (i.value()->isRunning()) {
-                i.value()->quit();
+                i.value()->stop();
                 i.value()->wait();
             }
         }

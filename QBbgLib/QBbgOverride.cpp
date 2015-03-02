@@ -100,6 +100,7 @@ namespace QBbgLib {
                 d->m_Overrides.insert(Name, val);
         }
         else {
+            //d->m_Overrides[Name] = val;
             iter.value() = val;
         }
     }
