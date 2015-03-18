@@ -132,9 +132,10 @@ namespace QBbgLib {
         else
             setOverride(Name, val.toString("HHmmss"));
     }
-    void QBbgOverride::setOverride(const QString& Name, bool val)
+
+    void QBbgOverride::setOverride(QString Name, const char* val)
     {
-        setOverride(Name, val ? QString("Y") : QString("N"));
+        return setOverride(Name, QString(val));
     }
 
     void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const

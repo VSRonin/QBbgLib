@@ -27,7 +27,7 @@ namespace QBbgLib {
         virtual void setOverride(const QString& Name, qint32 val);
         virtual void setOverride(const QString& Name, qint64 val);
         virtual void setOverride(QString Name, const QString& val);
-        virtual void setOverride(const QString& Name, bool val);
+        virtual void setOverride(QString Name, const char* val);
         virtual QString overrideValue(const QString& Name) const;
         virtual QList<QString> getKeys() const;
         virtual bool operator==(const QBbgOverride& other)const;
