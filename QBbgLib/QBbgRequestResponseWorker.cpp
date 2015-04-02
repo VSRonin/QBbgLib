@@ -9,6 +9,7 @@
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataResponse.h"
+#include "QBbgHistoricalDataRequest.h"
 namespace QBbgLib {
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
@@ -392,6 +393,74 @@ namespace QBbgLib {
                         const QBbgReferenceDataRequest* CurrentSingleRefData = dynamic_cast<const QBbgReferenceDataRequest*>(CurrentSingle);
                         Q_ASSERT(CurrentSingleRefData);
                         request.set("useUTCTime", CurrentSingleRefData->useUTCtime());
+                    }
+                    else if (reqType == QBbgAbstractRequest::HistoricalData) {
+                        const QBbgHistoricalDataRequest* CurrentSingleHistData = dynamic_cast<const QBbgHistoricalDataRequest*>(CurrentSingle);
+                        Q_ASSERT(CurrentSingleHistData);
+                        request.set("startDate", CurrentSingleHistData->startDate().toString("yyyyMMdd").toLatin1().data());
+                        request.set("endDate", (CurrentSingleHistData->endDate().isNull() ? QDate::currentDate() : CurrentSingleHistData->endDate()).toString("yyyyMMdd").toLatin1().data());
+                        switch (CurrentSingleHistData->periodicityAdjustment()) {
+                        case QBbgHistoricalDataRequest::ACTUAL:
+                            request.set("periodicityAdjustment", "ACTUAL");
+                            break;
+                        case QBbgHistoricalDataRequest::CALENDAR:
+                            request.set("periodicityAdjustment", "CALENDAR");
+                            break;
+                        case QBbgHistoricalDataRequest::FISCAL:
+                            request.set("periodicityAdjustment", "FISCAL");
+                            break;
+                        default:
+                            Q_ASSERT_X(false,"QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled periodicityAdjustment");
+                        }
+                        switch (CurrentSingleHistData->periodicitySelection()) {
+                        case QBbgHistoricalDataRequest::DAILY:
+                            request.set("periodicitySelection", "DAILY");
+                            break;
+                        case QBbgHistoricalDataRequest::WEEKLY:
+                            request.set("periodicitySelection", "WEEKLY");
+                            break;
+                        case QBbgHistoricalDataRequest::MONTHLY:
+                            request.set("periodicitySelection", "MONTHLY");
+                            break;
+                        case QBbgHistoricalDataRequest::QUARTERLY:
+                            request.set("periodicitySelection", "QUARTERLY");
+                            break;
+                        case QBbgHistoricalDataRequest::SEMI_ANNUALLY:
+                            request.set("periodicitySelection", "SEMI_ANNUALLY");
+                            break;
+                        case QBbgHistoricalDataRequest::YEARLY:
+                            request.set("periodicitySelection", "YEARLY");
+                            break;
+                        default:
+                            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled periodicitySelection");
+                        }
+                        if (CurrentSingleHistData->currency().size() == 3)
+                            request.set("currency", CurrentSingleHistData->currency().toLatin1().data());
+                        request.set("overrideOption", CurrentSingleHistData->useClosePrice() ? "OVERRIDE_OPTION_CLOSE" : "OVERRIDE_OPTION_GPA");
+                        request.set("pricingOption", CurrentSingleHistData->usePriceForPricing() ? "PRICING_OPTION_PRICE" : "PRICING_OPTION_YIELD");
+                        switch (CurrentSingleHistData->nonTradingDayFill()) {
+                        case QBbgHistoricalDataRequest::NON_TRADING_WEEKDAYS:
+                            request.set("nonTradingDayFillOption", "NON_TRADING_WEEKDAYS");
+                            break;
+                        case QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS:
+                            request.set("nonTradingDayFillOption", "ALL_CALENDAR_DAYS");
+                            break;
+                        case QBbgHistoricalDataRequest::FISCAL:
+                            request.set("nonTradingDayFillOption", "ACTIVE_DAYS_ONLY");
+                            break;
+                        default:
+                            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled nonTradingDayFill");
+                        }
+                        request.set("nonTradingDayFillMethod", CurrentSingleHistData->fillWithNull() ? "NIL_VALUE" : "PREVIOUS_VALUE");
+                        if (CurrentSingleHistData->maxDataPoints()>0)
+                            request.set("maxDataPoints", CurrentSingleHistData->maxDataPoints());
+                        request.set("returnRelativeDate", CurrentSingleHistData->useRelativeDate());
+                        request.set("adjustmentNormal", CurrentSingleHistData->adjustmentNormal());
+                        request.set("adjustmentAbnormal", CurrentSingleHistData->adjustmentAbnormal());
+                        request.set("adjustmentSplit", CurrentSingleHistData->adjustmentSplit());
+                        request.set("adjustmentFollowDPDF", CurrentSingleHistData->adjustmentFollowDPDF());
+                        if (CurrentSingleHistData->calendarCode().size() == 2)
+                            request.set("calendarCodeOverride", CurrentSingleHistData->calendarCode().toLatin1().data());
                     }
                 }
             }

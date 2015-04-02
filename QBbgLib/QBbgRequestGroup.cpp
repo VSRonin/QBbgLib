@@ -3,6 +3,7 @@
 #include <QSet>
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
+#include "QBbgHistoricalDataRequest.h"
 namespace QBbgLib {
     qint64 QBbgRequestGroupPrivate::MaxID = 1;
     QBbgRequestGroup::QBbgRequestGroup()
@@ -29,6 +30,8 @@ namespace QBbgLib {
             return new QBbgReferenceDataRequest(dynamic_cast<const QBbgReferenceDataRequest&>(a));
         case QBbgAbstractRequest::PortfolioData:
             return new QBbgPortfolioDataRequest(dynamic_cast<const QBbgPortfolioDataRequest&>(a));
+        case QBbgAbstractRequest::HistoricalData:
+            return new QBbgHistoricalDataRequest(dynamic_cast<const QBbgHistoricalDataRequest&>(a));
             //TODO add other types
         default:
             Q_ASSERT_X(false, "QBbgRequestGroupPrivate::createRequest", "Unhandled request type");
@@ -264,22 +267,40 @@ namespace QBbgLib {
 
     bool QBbgRequestGroupPrivate::SameRequest(const QList<qint64>& a, const QList<qint64>& b) const
     {
-        if (request(*a.begin())->requestType() & QBbgAbstractRequest::FirstFielded) {
+        if (request(a.first())->requestType() & QBbgAbstractRequest::FirstFielded) {
             QSet<QString> FiledsA;
             QSet<QString> FiledsB;
             if (a.empty()) return false;
             if (b.empty()) return false;
+            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(request(a.first())));
+            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(request(b.first())));
             if (
                 !dynamic_cast<const QBbgAbstractFieldRequest*>(request(a.first()))->sameOverrides(
                 *dynamic_cast<const QBbgAbstractFieldRequest*>(request(b.first())))
             ) return false;
             for (QList<qint64>::const_iterator i = a.constBegin(); i != a.constEnd(); ++i) {
+                Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(request(*i)));
                 FiledsA.insert(dynamic_cast<const QBbgAbstractFieldRequest*>(request(*i))->field());
             }
             for (QList<qint64>::const_iterator i = b.constBegin(); i != b.constEnd(); ++i) {
+                Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(request(*i)));
                 FiledsB.insert(dynamic_cast<const QBbgAbstractFieldRequest*>(request(*i))->field());
             }
-            return FiledsA == FiledsB;
+            if (FiledsA != FiledsB)
+                return false;
+            if (request(a.first())->requestType() == QBbgAbstractRequest::HistoricalData) {
+                Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(request(a.first())));
+                for (QList<qint64>::const_iterator i = b.constBegin(); i != b.constEnd(); ++i) {
+                    Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(request(*i)));
+                    if (!
+                        dynamic_cast<const QBbgHistoricalDataRequest*>(request(a.first()))->equalHistoricalFields(*
+                            dynamic_cast<const QBbgHistoricalDataRequest*>(request(*i))
+                        )
+                    )return false;
+                }
+                
+            }
+            return true;
         }
         //TODO do realtime
         Q_ASSERT_X(false, "QBbgRequestGroupPrivate::SameRequest", "Unhandled request type");
@@ -294,8 +315,18 @@ namespace QBbgLib {
         switch (a->requestType()) {
         case QBbgAbstractRequest::ReferenceData:
         case QBbgAbstractRequest::PortfolioData:
+            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(a));
+            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(b));
             if (!dynamic_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*dynamic_cast<const QBbgAbstractFieldRequest*>(b))) return false;
             break;
+        case QBbgAbstractRequest::HistoricalData:
+            Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(a));
+            Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(b));
+            if (!dynamic_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*dynamic_cast<const QBbgAbstractFieldRequest*>(b))) return false;
+            if (!dynamic_cast<const QBbgHistoricalDataRequest*>(a)->equalHistoricalFields(*dynamic_cast<const QBbgHistoricalDataRequest*>(b))) return false;
+            break;
+        default:
+            Q_ASSERT_X(false, "QBbgRequestGroupPrivate::compatible", "Unhandled request type");
         }
         return true;
     }
