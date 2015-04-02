@@ -123,6 +123,86 @@ namespace QBbgLib {
                 }
             }
             break;
+            case QBbgAbstractResponse::HistoricalDataResponse:
+            {
+                BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
+                for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
+                    QString CurrentSecurity = secDataArray.getValueAsElement(secIter).getElementAsString("security");
+                    BloombergLP::blpapi::Element fieldExcepArray = secDataArray.getValueAsElement(secIter).getElement("fieldExceptions"); //fieldExceptions[]
+
+                    if (secDataArray.getValueAsElement(secIter).hasElement("securityError")) {
+                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                            const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
+                            if (FoundRequ->security().fullName() == CurrentSecurity) {
+                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError, secDataArray.getValueAsElement(secIter).getElement("securityError").getElementAsString("message"));
+                            }
+                        }
+                    }
+                    else {
+                        BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
+                        if (fieldDataArray.numValues() <= 0) {
+                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++)
+                                SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                        }
+                        for (size_t datesIter = 0; datesIter < fieldDataArray.numValues(); ++datesIter)
+                        {
+                            QList<qint64> responseRecieved;
+                            //TODO continue here
+                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                                const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                                Q_ASSERT(FoundRequ);
+                                if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
+                                    bool foundExp = false;
+                                    for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
+                                        QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
+                                        if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
+                                            SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElement("errorInfo").getElementAsString("message"));
+                                            foundExp = true;
+                                        }
+                                    }
+                                    if (!foundExp)
+                                        //continue;
+                                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
+                                }
+                                else {
+                                    BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
+                                    if (fieldDataValue.isArray()) {
+                                        if (fieldDataValue.numValues() == 0) {
+                                            SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 rows");
+                                        }
+                                        else {
+                                            size_t NumCols = fieldDataValue.getValueAsElement(0).numElements();
+                                            if (NumCols == 0) {
+                                                SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 columns");
+                                            }
+                                            else {
+                                                QList<QVariant> CurrentRow;
+                                                QList<QString> CurrentHead;
+                                                for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
+                                                    CurrentRow.clear();
+                                                    CurrentHead.clear();
+                                                    for (size_t ColIter = 0; ColIter < NumCols; ++ColIter) {
+                                                        CurrentRow.append(elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter)));
+                                                        CurrentHead.append(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter).name().string());
+                                                    }
+                                                    DataRowRecieved(*SingleReq, CurrentRow, CurrentHead);
+                                                }
+                                                HeaderRecieved(*SingleReq, FoundRequ->field());
+                                                DataRecieved(*SingleReq);
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            break;
             case QBbgAbstractResponse::ReferenceDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
