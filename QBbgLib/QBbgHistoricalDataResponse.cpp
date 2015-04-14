@@ -25,6 +25,13 @@ namespace QBbgLib {
         return  d->m_values.value(dateForPeriod(period), QVariant());
     }
 
+    QVariant QBbgHistoricalDataResponse::value(int period) const
+    {
+        if (period < 0 || period >= size()) return QVariant();
+        Q_D(const QBbgHistoricalDataResponse);
+        return  *(d->m_values.begin() + period);
+    }
+
     QList<QDate> QBbgHistoricalDataResponse::findValues(const QVariant& a) const
     {
         QList<QDate> result;
@@ -46,6 +53,18 @@ namespace QBbgLib {
     {
         Q_D(const QBbgHistoricalDataResponse);
         return d->m_relDates.key(period, QDate());
+    }
+
+    QList<QDate> QBbgHistoricalDataResponse::dates() const
+    {
+        Q_D(const QBbgHistoricalDataResponse);
+        return d->m_values.keys();
+    }
+
+    QList<QString> QBbgHistoricalDataResponse::periods() const
+    {
+        Q_D(const QBbgHistoricalDataResponse);
+        return d->m_relDates.values();
     }
 
     QBbgHistoricalDataResponse::QBbgHistoricalDataResponse()

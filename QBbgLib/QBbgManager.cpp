@@ -2,6 +2,7 @@
 #include "QBbgManager_p.h"
 #include "QBbgRequestGroup.h"
 #include <limits>
+#include <QEventLoop>
 #include "QBbgRequestResponseWorker.h"
 namespace QBbgLib {
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
@@ -47,8 +48,10 @@ namespace QBbgLib {
         Q_D(QBbgManager);
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
         const quint32 threadKey = newTh.key();
+        QEventLoop waitLoop;
+        connect(newTh.value(), &QBbgWorkerThread::finished, &waitLoop, &QEventLoop::quit);
         newTh.value()->start();
-        while (!newTh.value()->wait()) {}
+        waitLoop.exec();
         Q_ASSERT(d->m_ResultTable.contains(threadKey));
         return *(d->m_ResultTable.value(threadKey));
     }

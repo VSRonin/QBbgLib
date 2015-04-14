@@ -108,6 +108,7 @@ namespace QBbgLib {
         switch (a) {
         case ReferenceData: 
         case PortfolioData:
+        case HistoricalData:
             return refdata;
         default: 
             Q_ASSERT_X(false, "QBbgAbstractRequest::serviceForRequest", "Unhandled service type");

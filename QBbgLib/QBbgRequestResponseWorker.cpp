@@ -10,6 +10,7 @@
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataRequest.h"
+#include "QBbgHistoricalDataResponse.h"
 namespace QBbgLib {
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
@@ -23,7 +24,7 @@ namespace QBbgLib {
     {
         return -static_cast<qint64>(QBbgAbstractRequest::stringToServiceType(a));
     }
-    void QBbgRequestResponseWorkerPrivate::handleResponseEvent(const BloombergLP::blpapi::Event& event)
+    void QBbgRequestResponseWorkerPrivate::handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal)
     {
         BloombergLP::blpapi::MessageIterator iter(event);
         while (iter.next()) {
@@ -125,28 +126,76 @@ namespace QBbgLib {
             break;
             case QBbgAbstractResponse::HistoricalDataResponse:
             {
-                BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
-                for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
-                    QString CurrentSecurity = secDataArray.getValueAsElement(secIter).getElementAsString("security");
-                    BloombergLP::blpapi::Element fieldExcepArray = secDataArray.getValueAsElement(secIter).getElement("fieldExceptions"); //fieldExceptions[]
+                QString CurrentSecurity = message.getElement("securityData").getElementAsString("security");
+                BloombergLP::blpapi::Element fieldExcepArray = message.getElement("securityData").getElement("fieldExceptions"); //fieldExceptions[]
 
-                    if (secDataArray.getValueAsElement(secIter).hasElement("securityError")) {
-                        for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                            const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
-                            if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                SetError(*SingleReq, QBbgAbstractResponse::SecurityError, secDataArray.getValueAsElement(secIter).getElement("securityError").getElementAsString("message"));
-                            }
+                if (message.getElement("securityData").hasElement("securityError")) {
+                    for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                        const QBbgAbstractRequest* const FoundRequ = m_Requests.request(*SingleReq);
+                        if (FoundRequ->security().fullName() == CurrentSecurity) {
+                            SetError(*SingleReq, QBbgAbstractResponse::SecurityError, message.getElement("securityData").getElement("securityError").getElementAsString("message"));
                         }
                     }
-                    else {
-                        BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
-                        if (fieldDataArray.numValues() <= 0) {
-                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++)
-                                SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                }
+                else {
+                    QSet<qint64> recievedIDs;
+                    QSet<qint64> recievedErrorsIDs;
+                    for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                        const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                        Q_ASSERT(FoundRequ);
+                        bool foundExp = false;
+                        for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
+                            QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
+                            if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField && !recievedErrorsIDs.contains(*SingleReq)) {
+                                recievedErrorsIDs.insert(*SingleReq);
+                                SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElement("errorInfo").getElementAsString("message"));
+                                foundExp = true;
+                            }
                         }
-                        for (size_t datesIter = 0; datesIter < fieldDataArray.numValues(); ++datesIter)
+                        if (!foundExp){
+                            BloombergLP::blpapi::Element fieldDataArray = message.getElement("securityData").getElement("fieldData"); //fieldData[]
+                            if (fieldDataArray.numValues() <= 0 && !recievedErrorsIDs.contains(*SingleReq)) {
+                                recievedErrorsIDs.insert(*SingleReq);
+                                SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                            }
+                            for (size_t fieldDataIter = 0; fieldDataIter < fieldDataArray.numValues(); ++fieldDataIter) {
+                                BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getValueAsElement(fieldDataIter);
+                                Q_ASSERT_X(fieldDataValue.hasElement("date"), "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Historical data has no date element");
+                                if (!recievedErrorsIDs.contains(*SingleReq) && !fieldDataValue.hasElement("date")) {
+                                    recievedErrorsIDs.insert(*SingleReq);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                                }
+                                else if (!recievedErrorsIDs.contains(*SingleReq) && !fieldDataValue.hasElement(FoundRequ->field().toLatin1().data())) {
+                                    recievedErrorsIDs.insert(*SingleReq);
+                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                                }
+                                else if (!recievedErrorsIDs.contains(*SingleReq)){
+                                    recievedIDs.insert(*SingleReq);
+                                    HistDataRecieved(
+                                        *SingleReq
+                                        , elementToVariant(fieldDataValue.getElement("date")).toDate()
+                                        , elementToVariant(fieldDataValue.getElement(FoundRequ->field().toLatin1().data()))
+                                        , fieldDataValue.hasElement("RELATIVE_DATE") ? elementToVariant(fieldDataValue.getElement("RELATIVE_DATE")).toString() : QString()
+                                        , FoundRequ->field()
+                                    );
+                                }
+                            }
+
+                        }
+                    }
+                    for (QSet<qint64>::const_iterator recId = recievedIDs.constBegin(); recId != recievedIDs.constEnd(); ++recId) {
+                        if (!recievedErrorsIDs.contains(*recId))
+                            DataRecieved(*recId);
+                    }
+                }
+            }
+                        /*for (size_t datesIter = 0; datesIter < fieldDataArray.numElements(); ++datesIter)
                         {
                             QList<qint64> responseRecieved;
+                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                                const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                                Q_ASSERT(FoundRequ);
+
                             //TODO continue here
                             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                                 const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
@@ -201,7 +250,7 @@ namespace QBbgLib {
 
                     }
                 }
-            }
+            }*/
             break;
             case QBbgAbstractResponse::ReferenceDataResponse:
             {
@@ -330,8 +379,10 @@ namespace QBbgLib {
             break;
         }
         case BloombergLP::blpapi::Event::PARTIAL_RESPONSE:
+            handleResponseEvent(event, false);
+            break;
         case BloombergLP::blpapi::Event::RESPONSE:
-            handleResponseEvent(event);
+            handleResponseEvent(event,true);
             break;
         default:{
             const QList<qint64> allRq = m_Requests.IDList();
@@ -351,6 +402,9 @@ namespace QBbgLib {
             break;
         case QBbgAbstractRequest::PortfolioData:
             TempRes = new QBbgPortfolioDataResponse();
+            break;
+        case QBbgAbstractRequest::HistoricalData:
+            TempRes = new QBbgHistoricalDataResponse();
             break;
         default:
             Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SetError", "Unhandled request type");
@@ -410,6 +464,18 @@ namespace QBbgLib {
             return;
         }
         Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataRowRecieved", "Only ReferenceData can recieve Data Rows");
+    }
+    void QBbgRequestResponseWorkerPrivate::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
+    {
+        QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::HistoricalData) {
+            if (TempIter == m_Results.end()) {
+                TempIter = m_Results.insert(RequestID, new QBbgHistoricalDataResponse());
+            }
+            dynamic_cast<QBbgHistoricalDataResponse*>(TempIter.value())->setValue(dt, val, period, Header);
+            return;
+        }
+        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::HistDataRecieved", "Only HistoricalData requests can recieve Hist Data");
     }
     void QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
     {

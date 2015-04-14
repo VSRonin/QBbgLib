@@ -7,6 +7,8 @@
 #include "QBbgPortfolioDataRequest.h"
 #include <QDebug>
 #include "QBbgPortfolioDataResponse.h"
+#include "QBbgHistoricalDataRequest.h"
+#include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
 #include <QFile>
 #include <QTextStream>
@@ -26,6 +28,7 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
     QBbgLib::QBbgReferenceDataRequest a_req;
     QBbgLib::QBbgPortfolioDataRequest p_req;
+    QBbgLib::QBbgHistoricalDataRequest h_req;
     //p_req.setSecurity("TS-PX1915-15", QBbgLib::QBbgSecurity::Client);
     p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
     p_req.setReferenceDay(QDate(2014, 11, 20));
@@ -43,6 +46,12 @@ int main(int argc, char *argv[])
     a_req.setOverrides(overrides);
     a_req.setSecurity(secur);
     a_req.setField("mtg cash flow");
+
+    h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
+    h_req.setField("PX_LAST");
+    h_req.startDate(QDate(2015, 3, 14));
+    h_req.endDate(QDate(2015, 4, 14));
+    h_req.nonTradingDayFill(QBbgLib::QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS);
 
     QBbgLib::QBbgRequestGroup req;
     req.addRequest(a_req);
@@ -107,6 +116,21 @@ int main(int argc, char *argv[])
                 }
             }
             break;
+            case QBbgLib::QBbgAbstractResponse::HistoricalDataResponse:{
+                const QBbgLib::QBbgHistoricalDataResponse* const res = dynamic_cast<const QBbgLib::QBbgHistoricalDataResponse* const>(genres);
+                Q_ASSERT(res);
+                qDebug() << res->header();
+                const auto allDates = res->dates();
+                for (auto i = allDates.constBegin(); i !=allDates.constEnd(); ++i) {
+                    QString tmpStr = i->toString("yyyy-MM-dd")
+                        + (res->periodForDate(*i).isEmpty() ? QString() : ('\t' + res->periodForDate(*i)))
+                        + '\t' + res->value(*i).toString()
+                        ;
+                    qDebug() << tmpStr;
+                    PrintToTempFile("HistoricalData", tmpStr, false);
+                }
+            }
+            break;
             default:
                 Q_ASSERT_X(false, "main", "Unhandled Response");
             }
@@ -122,7 +146,15 @@ int main(int argc, char *argv[])
     //req.addRequest(a_req);
     a_req.setField("PX_LAST");
     //req.addRequest(a_req);
-    mainManager.startRequest(req);
+
+    req.addRequest(h_req);
+    h_req.setField("PX_ASK");
+    req.addRequest(h_req);
+    h_req.setField("Gibberish");
+    req.addRequest(h_req);
+
+    //mainManager.startRequest(req);
+    mainManager.processRequest(req);
     qDebug() << "Started";
     return a.exec();
 }

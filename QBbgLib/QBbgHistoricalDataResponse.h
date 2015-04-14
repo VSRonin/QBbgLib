@@ -20,9 +20,12 @@ namespace QBbgLib {
         virtual bool isEmpty() const;
         virtual QVariant value(const QDate& a) const;
         virtual QVariant value(const QString& period) const;
-        QList<QDate> findValues(const QVariant& a) const;
-        QString periodForDate(const QDate& a)const;
-        QDate dateForPeriod(const QString& period)const;
+        virtual QVariant value(int period) const;
+        virtual QList<QDate> findValues(const QVariant& a) const;
+        virtual QString periodForDate(const QDate& a)const;
+        virtual QDate dateForPeriod(const QString& period)const;
+        virtual QList<QDate> dates() const;
+        virtual QList<QString> periods() const;
     protected:
         QBbgHistoricalDataResponse(QBbgHistoricalDataResponsePrivate* dp);
         virtual void setValue(const QDate& dt, const QVariant& val, const QString& period = QString(), const QString& Header = QString());

@@ -289,7 +289,8 @@ namespace QBbgLib {
             if (FiledsA != FiledsB)
                 return false;
             if (request(a.first())->requestType() == QBbgAbstractRequest::HistoricalData) {
-                Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(request(a.first())));
+                return false; // Can't send multiple securites with hist data
+                /*Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(request(a.first())));
                 for (QList<qint64>::const_iterator i = b.constBegin(); i != b.constEnd(); ++i) {
                     Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(request(*i)));
                     if (!
@@ -297,7 +298,7 @@ namespace QBbgLib {
                             dynamic_cast<const QBbgHistoricalDataRequest*>(request(*i))
                         )
                     )return false;
-                }
+                }*/
                 
             }
             return true;
