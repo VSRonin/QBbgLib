@@ -29,8 +29,10 @@ namespace QBbgLib {
         virtual void SendRequ(QBbgAbstractRequest::ServiceType serv);
         virtual void PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei);
         virtual void fillNoData();
+  
     };
 
+    
     
     
 

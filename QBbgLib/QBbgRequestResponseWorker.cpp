@@ -72,8 +72,8 @@ namespace QBbgLib {
                                     }
                                 }
                                 if (!foundExp)
-                                    //continue;
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
+                                    continue;
+                                    //SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
@@ -189,68 +189,6 @@ namespace QBbgLib {
                     }
                 }
             }
-                        /*for (size_t datesIter = 0; datesIter < fieldDataArray.numElements(); ++datesIter)
-                        {
-                            QList<qint64> responseRecieved;
-                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                                Q_ASSERT(FoundRequ);
-
-                            //TODO continue here
-                            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                                const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                                Q_ASSERT(FoundRequ);
-                                if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
-                                    bool foundExp = false;
-                                    for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
-                                        QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
-                                        if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                            SetError(*SingleReq, QBbgAbstractResponse::FieldError, fieldExcepArray.getValueAsElement(fieldExcIter).getElement("errorInfo").getElementAsString("message"));
-                                            foundExp = true;
-                                        }
-                                    }
-                                    if (!foundExp)
-                                        //continue;
-                                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
-                                }
-                                else {
-                                    BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
-                                    if (fieldDataValue.isArray()) {
-                                        if (fieldDataValue.numValues() == 0) {
-                                            SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 rows");
-                                        }
-                                        else {
-                                            size_t NumCols = fieldDataValue.getValueAsElement(0).numElements();
-                                            if (NumCols == 0) {
-                                                SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 columns");
-                                            }
-                                            else {
-                                                QList<QVariant> CurrentRow;
-                                                QList<QString> CurrentHead;
-                                                for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
-                                                    CurrentRow.clear();
-                                                    CurrentHead.clear();
-                                                    for (size_t ColIter = 0; ColIter < NumCols; ++ColIter) {
-                                                        CurrentRow.append(elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter)));
-                                                        CurrentHead.append(fieldDataValue.getValueAsElement(RowIter).getElement(ColIter).name().string());
-                                                    }
-                                                    DataRowRecieved(*SingleReq, CurrentRow, CurrentHead);
-                                                }
-                                                HeaderRecieved(*SingleReq, FoundRequ->field());
-                                                DataRecieved(*SingleReq);
-                                            }
-                                        }
-                                    }
-                                    else {
-                                        DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }*/
             break;
             case QBbgAbstractResponse::ReferenceDataResponse:
             {
@@ -282,8 +220,8 @@ namespace QBbgLib {
                                     }
                                 }
                                 if (!foundExp)
-                                    //continue;
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
+                                    continue;
+                                    //SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
                             else {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
@@ -325,6 +263,10 @@ namespace QBbgLib {
             break;
             default:
                 Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Unhandled Response Type");
+            }
+            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); isFinal && SingleReq != CurrentGroup->constEnd(); ++SingleReq) {
+                if (!m_Results.contains(*SingleReq))
+                    SetError(*SingleReq, QBbgAbstractResponse::NoData, "No data available");
             }
         }
 
@@ -446,10 +388,10 @@ namespace QBbgLib {
         QHash<qint64, QBbgAbstractResponse*>::iterator i = m_Results.find(RequestID);
         Q_ASSERT(i != m_Results.end());
         q->dataRecieved(RequestID, i.value());
-        m_Results.erase(i);
+        //m_Results.erase(i);
         q->progress((100 * ++m_ResurnedResults) / m_Requests.size());
         Q_ASSERT_X(m_ResurnedResults <= m_Requests.size(), "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Too many results returned");
-        if (m_ResurnedResults == m_Requests.size()) {
+        if (m_ResurnedResults >= m_Requests.size()) {
             m_session->stopAsync();
         }
     }
@@ -625,6 +567,7 @@ namespace QBbgLib {
     {
         Q_D(QBbgRequestResponseWorker);
         if (d->m_SessionRunning) return;
+        Q_ASSERT_X(d->m_Requests.size() > 0, "QBbgRequestResponseWorker::start()", "Starting with empty request");
         d->m_SessionRunning = true;
         d->m_ResurnedResults = 0;
         d->m_session->startAsync();
@@ -656,5 +599,9 @@ namespace QBbgLib {
                 SetError(*i, QBbgAbstractResponse::NoData, "Required data not found");
         }
     }
-
+    void QBbgRequestResponseWorker::ClearResults()
+    {
+        Q_D(QBbgRequestResponseWorker);
+        d->m_Results.clear();
+    }
 }

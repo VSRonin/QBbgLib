@@ -57,7 +57,7 @@ namespace QBbgLib {
         case BloombergLP::blpapi::DataType::INT64:
             return qint64(val.getValueAsInt64());
         case BloombergLP::blpapi::DataType::FLOAT32:
-            return float(val.getValueAsFloat32());
+            return double(val.getValueAsFloat32());
         case BloombergLP::blpapi::DataType::FLOAT64:
             return double(val.getValueAsFloat64());
         case BloombergLP::blpapi::DataType::STRING:

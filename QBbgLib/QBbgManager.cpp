@@ -107,7 +107,9 @@ namespace QBbgLib {
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
         for (QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator i = m_ResultTable.begin(); i != m_ResultTable.end(); ++i) {
+            Q_ASSERT(i.value());
             for (QHash<qint64, QBbgAbstractResponse* >::iterator j = i.value()->begin(); j != i.value()->end(); ++j) {
+                Q_ASSERT(j.value());
                 delete j.value();
             }
             delete i.value();
