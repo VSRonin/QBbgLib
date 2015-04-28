@@ -4,6 +4,7 @@
 #include <limits>
 #include <QEventLoop>
 #include "QBbgRequestResponseWorker.h"
+#include <QCoreApplication>
 namespace QBbgLib {
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
         :q_ptr(qp)
@@ -24,6 +25,7 @@ namespace QBbgLib {
     {}
     QHash<quint32, QBbgWorkerThread* >::iterator QBbgManager::createThread(const QBbgRequestGroup& rq)
     {
+        Q_ASSERT_X(QCoreApplication::instance(), "QBbgManager", "A QCoreApplication must be created to process requests");
         Q_D(QBbgManager);
         quint32 newID = 0;
         while (d->m_ThreadPool.contains(newID)) {
