@@ -18,7 +18,7 @@ HEADERS += ./private/QBbgAbstractWorker_p.h \
     ./QbbgReferenceDataRequest.h \
     ./private/QbbgReferenceDataRequest_p.h \
     ./QBbgRequestGroup.h \
-    ./QBbgRequestGroup_p.h \
+    ./private/QBbgRequestGroup_p.h \
     ./QBbgAbstractFieldRequest.h \
     ./private/QBbgAbstractFieldRequest_p.h \
     ./QBbgAbstractFieldResponse.h \

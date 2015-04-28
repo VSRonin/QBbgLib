@@ -28,12 +28,6 @@ DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 installbin.path=$$PREFIX/lib
-installbin.files = $$DESTDIRNAME/TARGETNAME.dll
-installbin.files += $$DESTDIRNAME/TARGETNAME.lib
-installbin.files += $$DESTDIRNAME/TARGETNAME.exp
-CONFIG(debug, debug|release) {
-    installbin.files += $$DESTDIRNAME/TARGETNAME.pdb
-}
 installinclude.path=$$PREFIX/include
 installinclude.files = ./*.h
 INSTALLS += installbin
