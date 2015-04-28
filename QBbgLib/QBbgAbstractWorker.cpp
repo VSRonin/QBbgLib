@@ -90,7 +90,7 @@ namespace QBbgLib {
                 )
                 );
         default:
-            Q_ASSERT_X(false, "QBbgAbstractWorkerPrivate::elementToVariant", "Unhandled element type");
+            Q_UNREACHABLE(); //Unhandled element type
             return QVariant();
         }
     }

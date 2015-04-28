@@ -55,7 +55,7 @@ namespace QBbgLib {
             d->m_TableCols = val.size();
         }
         else if (d->m_TableCols != val.size()) {
-            Q_ASSERT_X(false, "QBbgReferenceDataResponse::addValueRow", "Columns of new row are different from columns of current table");
+            Q_UNREACHABLE(); //Columns of new row are different from columns of current table
             return;
         }
         QBbgReferenceDataResponse* newRow = new QBbgReferenceDataResponse[d->m_TableCols];

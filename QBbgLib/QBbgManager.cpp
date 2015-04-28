@@ -94,7 +94,7 @@ namespace QBbgLib {
                 return;
             }
         }
-        Q_ASSERT_X(false, "QBbgManager::handleThreadFinished", "Could not find sender()");
+        Q_UNREACHABLE(); //Could not find sender()
     }
     const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id) const
     {

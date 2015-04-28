@@ -111,7 +111,7 @@ namespace QBbgLib {
         case HistoricalData:
             return refdata;
         default: 
-            Q_ASSERT_X(false, "QBbgAbstractRequest::serviceForRequest", "Unhandled service type");
+            Q_UNREACHABLE(); //Unhandled service type
             return NoService;
         }
     }

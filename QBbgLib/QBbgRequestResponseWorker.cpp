@@ -262,7 +262,7 @@ namespace QBbgLib {
             }
             break;
             default:
-                Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Unhandled Response Type");
+                Q_UNREACHABLE(); //Unhandled Response Type
             }
             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); isFinal && SingleReq != CurrentGroup->constEnd(); ++SingleReq) {
                 if (!m_Results.contains(*SingleReq))
@@ -349,7 +349,7 @@ namespace QBbgLib {
             TempRes = new QBbgHistoricalDataResponse();
             break;
         default:
-            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SetError", "Unhandled request type");
+            Q_UNREACHABLE(); //Unhandled request type
             break;
         }
         setResponseID(TempRes, RequestID);
@@ -368,7 +368,7 @@ namespace QBbgLib {
             break;
         }
         default:
-            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataPointRecieved", "Only ReferenceData can recieve Data Points");
+            Q_UNREACHABLE(); //Only ReferenceData can recieve Data Points
             break;
         }
         setResponseID(resToAdd, RequestID);
@@ -405,7 +405,7 @@ namespace QBbgLib {
             dynamic_cast<QBbgReferenceDataResponse*>(TempIter.value())->addValueRow(Value, Header);
             return;
         }
-        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::DataRowRecieved", "Only ReferenceData can recieve Data Rows");
+        Q_UNREACHABLE(); //Only ReferenceData can recieve Data Rows
     }
     void QBbgRequestResponseWorkerPrivate::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
     {
@@ -417,7 +417,7 @@ namespace QBbgLib {
             dynamic_cast<QBbgHistoricalDataResponse*>(TempIter.value())->setValue(dt, val, period, Header);
             return;
         }
-        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::HistDataRecieved", "Only HistoricalData requests can recieve Hist Data");
+        Q_UNREACHABLE(); //Only HistoricalData requests can receive Hist Data
     }
     void QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
     {
@@ -443,7 +443,7 @@ namespace QBbgLib {
             if (wei) currRes->addWeight(*wei);
             return;
         }
-        Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved", "Only PortfolioData can recieve Portfolio Data");
+        Q_UNREACHABLE(); //Only PortfolioData can receive Portfolio Data
     }
     void QBbgRequestResponseWorkerPrivate::SendRequ(QBbgAbstractRequest::ServiceType serv)
     {
@@ -498,7 +498,7 @@ namespace QBbgLib {
                             request.set("periodicityAdjustment", "FISCAL");
                             break;
                         default:
-                            Q_ASSERT_X(false,"QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled periodicityAdjustment");
+                            Q_UNREACHABLE(); //Unhandled periodicityAdjustment
                         }
                         switch (CurrentSingleHistData->periodicitySelection()) {
                         case QBbgHistoricalDataRequest::DAILY:
@@ -520,7 +520,7 @@ namespace QBbgLib {
                             request.set("periodicitySelection", "YEARLY");
                             break;
                         default:
-                            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled periodicitySelection");
+                            Q_UNREACHABLE(); //Unhandled periodicitySelection
                         }
                         if (CurrentSingleHistData->currency().size() == 3)
                             request.set("currency", CurrentSingleHistData->currency().toLatin1().data());
@@ -537,7 +537,7 @@ namespace QBbgLib {
                             request.set("nonTradingDayFillOption", "ACTIVE_DAYS_ONLY");
                             break;
                         default:
-                            Q_ASSERT_X(false, "QBbgRequestResponseWorkerPrivate::SendRequ", "Unhandled nonTradingDayFill");
+                            Q_UNREACHABLE(); //Unhandled nonTradingDayFill
                         }
                         request.set("nonTradingDayFillMethod", CurrentSingleHistData->fillWithNull() ? "NIL_VALUE" : "PREVIOUS_VALUE");
                         if (CurrentSingleHistData->maxDataPoints()>0)

@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
             }
             break;
             default:
-                Q_ASSERT_X(false, "main", "Unhandled Response");
+                Q_UNREACHABLE(); //Unhandled Response
             }
         }
     });
