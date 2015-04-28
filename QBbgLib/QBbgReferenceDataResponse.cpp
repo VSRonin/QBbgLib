@@ -1,5 +1,5 @@
 #include "QBbgReferenceDataResponse.h"
-#include "QBbgReferenceDataResponse_p.h"
+#include "private/QBbgReferenceDataResponse_p.h"
 namespace QBbgLib {
     bool QBbgReferenceDataResponse::hasValue() const
     {

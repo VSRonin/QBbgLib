@@ -1,5 +1,5 @@
 #include "QBbgSecurity.h"
-#include "QBbgSecurity_p.h"
+#include "private/QBbgSecurity_p.h"
 #include <QRegExp>
 namespace QBbgLib {
     QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity* q)

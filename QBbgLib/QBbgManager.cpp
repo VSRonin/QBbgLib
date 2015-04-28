@@ -1,5 +1,5 @@
 #include "QBbgManager.h"
-#include "QBbgManager_p.h"
+#include "private/QBbgManager_p.h"
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>

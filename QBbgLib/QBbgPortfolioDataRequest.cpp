@@ -1,5 +1,5 @@
 #include "QbbgPortfolioDataRequest.h"
-#include "QbbgPortfolioDataRequest_p.h"
+#include "private/QbbgPortfolioDataRequest_p.h"
 #include "QBbgSecurity.h"
 namespace QBbgLib {
     void QBbgPortfolioDataRequest::setSecurity(const QBbgSecurity& val)

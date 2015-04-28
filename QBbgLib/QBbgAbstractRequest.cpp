@@ -1,5 +1,5 @@
 #include "QBbgAbstractRequest.h"
-#include "QBbgAbstractRequest_p.h"
+#include "private/QBbgAbstractRequest_p.h"
 namespace QBbgLib {
     QBbgAbstractRequest::QBbgAbstractRequest()
         : d_ptr(new QBbgAbstractRequestPrivate(this))

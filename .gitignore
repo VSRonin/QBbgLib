@@ -60,3 +60,5 @@ Makefile*
 #QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+*.psess
+*vsp

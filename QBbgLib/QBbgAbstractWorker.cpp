@@ -1,5 +1,5 @@
 #include "QBbgAbstractWorker.h"
-#include "QBbgAbstractWorker_p.h"
+#include "private/QBbgAbstractWorker_p.h"
 #include <blpapi_session.h>
 #include <QDate>
 #include <QTime>

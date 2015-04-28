@@ -16,7 +16,7 @@ namespace QBbgLib {
         QHash<qint64, QBbgAbstractResponse* > m_Results;
         QBbgRequestGroup m_Requests;
         QHash<qint64, QList<qint64>* > Groups;
-        size_t m_ResurnedResults;
+        qint32 m_ResurnedResults;
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal);
         virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession);
         virtual void SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg);

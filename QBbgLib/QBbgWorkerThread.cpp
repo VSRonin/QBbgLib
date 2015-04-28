@@ -1,5 +1,5 @@
 #include "QBbgWorkerThread.h"
-#include "QBbgWorkerThread_p.h"
+#include "private/QBbgWorkerThread_p.h"
 #include "QBbgAbstractWorker.h"
 namespace QBbgLib {
     QBbgWorkerThread::QBbgWorkerThread(QBbgWorkerThreadPrivate* dp, QObject* parent)

@@ -1,5 +1,5 @@
 #include "QBbgRequestResponseWorker.h"
-#include "QBbgRequestResponseWorker_p.h"
+#include "private/QBbgRequestResponseWorker_p.h"
 #include "QBbgReferenceDataResponse.h"
 #include <QSet>
 #include "QBbgRequestGroup.h"
@@ -558,7 +558,6 @@ namespace QBbgLib {
 
     void QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
     {
-        Q_D(QBbgRequestResponseWorker);
         setRequest(req);
         start();
     }

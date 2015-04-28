@@ -1,5 +1,5 @@
 #include "QBbgHistoricalDataResponse.h"
-#include "QBbgHistoricalDataResponse_p.h"
+#include "private/QBbgHistoricalDataResponse_p.h"
 namespace QBbgLib {
     qint32 QBbgHistoricalDataResponse::size() const
     {

@@ -1,5 +1,5 @@
 #include "QBbgRequestGroup.h"
-#include "QBbgRequestGroup_p.h"
+#include "private/QBbgRequestGroup_p.h"
 #include <QSet>
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"

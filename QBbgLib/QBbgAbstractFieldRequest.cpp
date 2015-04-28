@@ -1,5 +1,5 @@
 #include "QBbgAbstractFieldRequest.h"
-#include "QBbgAbstractFieldRequest_p.h"
+#include "private/QBbgAbstractFieldRequest_p.h"
 #include "QBbgOverride.h"
 #include <QList> 
 #include <QHash>
