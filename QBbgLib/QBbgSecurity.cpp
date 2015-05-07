@@ -1,6 +1,8 @@
 #include "QBbgSecurity.h"
 #include "private/QBbgSecurity_p.h"
 #include <QRegExp>
+#include <QDataStream>
+#include <QHash>
 namespace QBbgLib {
     QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity* q)
         : q_ptr(q)
@@ -210,4 +212,14 @@ namespace QBbgLib {
         m_PricingSource = other.m_PricingSource;
         return *this;
     }
+}
+
+QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed)
+{
+    QByteArray data;
+    {
+        QDataStream stream(&data, QIODevice::WriteOnly);
+        stream << key.name() << key.extension() << key.exchange() << key.pricingSource();
+    }
+    return qHash(data, seed);
 }

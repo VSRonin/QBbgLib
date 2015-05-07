@@ -106,6 +106,21 @@ namespace QBbgLib {
             return resGroup->value(id, NULL);
         return NULL;
     }
+
+    QList<quint32> QBbgManager::getResultGroups()const
+    {
+        Q_D(const QBbgManager);
+        return d->m_ResultTable.keys();
+    }
+
+    QList<qint64> QBbgManager::getResultIDs(quint32 group) const
+    {
+        Q_D(const QBbgManager);
+        if (!d->m_ResultTable.contains(group))
+            return QList<qint64>();
+        return d->m_ResultTable.value(group)->keys();
+    }
+
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
         for (QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator i = m_ResultTable.begin(); i != m_ResultTable.end(); ++i) {

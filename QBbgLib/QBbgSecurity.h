@@ -66,4 +66,5 @@ namespace QBbgLib {
         static YellowKeys stringToYellowKey(QString a);
     };
 }
+QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed);
 #endif // QBbgSecurity_h__

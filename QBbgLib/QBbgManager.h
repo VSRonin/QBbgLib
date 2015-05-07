@@ -4,6 +4,7 @@
 #include <QObject>
 #include "QBbgProjectGlobals.h"
 #include <QHash>
+#include <QList>
 namespace QBbgLib {
     class QBbgManagerPrivate;
     class QBbgRequestGroup;
@@ -20,6 +21,8 @@ namespace QBbgLib {
         quint32 startRequest(const QBbgRequestGroup& rq);
         const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
         const QBbgAbstractResponse* const getResult(quint32 group, qint64 id) const;
+        QList<quint32> getResultGroups() const;
+        QList<qint64> getResultIDs(quint32 group) const;
     protected:
         QBbgManagerPrivate* d_ptr;
         QHash<quint32, QBbgWorkerThread* >::iterator createThread(const QBbgRequestGroup& rq);
