@@ -15,6 +15,21 @@ namespace QBbgLib {
         , m_Exchange(other.m_Exchange)
         , m_PricingSource(other.m_PricingSource)
     {}
+
+    void QBbgSecurity::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgSecurity);
+        stream << d->m_Name << qint32(d->m_Extension) << d->m_Exchange << d->m_PricingSource;
+    }
+
+    void QBbgSecurity::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgSecurity);
+        qint32 tempExt;
+        stream >> d->m_Name >> tempExt >> d->m_Exchange >> d->m_PricingSource;
+        d->m_Extension = static_cast<YellowKeys>(tempExt);
+    }
+
     QBbgSecurity::QBbgSecurity()
         :d_ptr(new QBbgSecurityPrivate(this))
     {}
@@ -214,12 +229,24 @@ namespace QBbgLib {
     }
 }
 
-QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed)
+uint qHash(const QBbgLib::QBbgSecurity&key, uint seed)
 {
     QByteArray data;
     {
         QDataStream stream(&data, QIODevice::WriteOnly);
-        stream << key.name() << key.extension() << key.exchange() << key.pricingSource();
+        stream << key;
     }
     return qHash(data, seed);
+}
+
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgSecurity& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
+
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
 }

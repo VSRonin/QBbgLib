@@ -2,6 +2,10 @@
 #define QBbgSecurity_h__
 #include <QString>
 #include "QBbgProjectGlobals.h"
+class QDataStream;
+namespace QBbgLib { class QBbgSecurity; }
+QBBG_EXPORT QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgSecurity& obj);
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj);
 namespace QBbgLib {
     class QBbgSecurityPrivate;
     class QBBG_EXPORT QBbgSecurity
@@ -43,6 +47,9 @@ namespace QBbgLib {
     private:
         Q_DECLARE_PRIVATE(QBbgSecurity)
         QBbgSecurityPrivate* d_ptr;
+    protected:
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
     public:
     	QBbgSecurity();
         QBbgSecurity(QString SecString);
@@ -64,6 +71,8 @@ namespace QBbgLib {
         bool operator!=(const QBbgSecurity& other) const;
         static QString yellowKeyToString(YellowKeys a);
         static YellowKeys stringToYellowKey(QString a);
+        friend QDataStream& ::operator<<(QDataStream& stream, const QBbgSecurity& obj);
+        friend QDataStream& ::operator>>(QDataStream& stream, QBbgSecurity& obj);
     };
 }
 QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed);
