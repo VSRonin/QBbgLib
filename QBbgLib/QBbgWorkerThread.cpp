@@ -22,12 +22,11 @@ namespace QBbgLib {
     }
     QBbgWorkerThread::~QBbgWorkerThread()
     {
-        if (isRunning()) { 
+        while (isRunning()) { 
             quit();
-            wait();
+            wait(2000);
         }
         Q_ASSERT_X(!isRunning(), "~QBbgWorkerThread()", "Destroying thread while still running");
-        delete d_ptr;
     }
     void QBbgWorkerThread::createConnections()
     {

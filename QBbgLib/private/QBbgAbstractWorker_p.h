@@ -1,12 +1,14 @@
 #ifndef QBbgAbstractWorker_p_h__
 #define QBbgAbstractWorker_p_h__
 #include <QVariant>
+#include <QObject>
 #include "QBbgAbstractWorker.h"
 #include <QScopedPointer>
 #include <blpapi_session.h>
 namespace QBbgLib {
-    class QBbgAbstractWorkerPrivate : public BloombergLP::blpapi::EventHandler
+    class QBbgAbstractWorkerPrivate : public QObject,  public BloombergLP::blpapi::EventHandler
     {
+        Q_OBJECT
     private:
         Q_DECLARE_PUBLIC(QBbgAbstractWorker)
         QBbgAbstractWorkerPrivate(const QBbgAbstractWorkerPrivate& other);
@@ -22,12 +24,5 @@ namespace QBbgLib {
     protected:
         QBbgAbstractWorker* q_ptr;
     };
-
-   
-
-
-
-    
-
 }
 #endif // QBbgAbstractWorker_p_h__

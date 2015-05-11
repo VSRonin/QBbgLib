@@ -19,9 +19,10 @@ namespace QBbgLib {
         : d_ptr(d)
         , QObject(parent)
     {}
+
     QBbgAbstractWorker::~QBbgAbstractWorker()
     {
-        delete d_ptr;
+        d_ptr->deleteLater();
     }
 
     bool QBbgAbstractWorker::isAvailable() const

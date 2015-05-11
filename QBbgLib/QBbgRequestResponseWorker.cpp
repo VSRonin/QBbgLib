@@ -11,6 +11,7 @@
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
+#include <fstream>
 namespace QBbgLib {
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
@@ -252,6 +253,13 @@ namespace QBbgLib {
                                     }
                                 }
                                 else {
+                                    /*if (fieldDataValue.getValueAsFloat64()>1000.0){
+                                        std::ofstream myfile;
+                                        myfile.open("C:/Temp/WrongResponse.txt", std::ios::out | std::ios::app);
+                                        myfile << *SingleReq << std::endl;
+                                        message.print(myfile);
+                                        myfile.close();
+                                    }*/
                                     DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
                                 }
                             }
@@ -275,10 +283,12 @@ namespace QBbgLib {
     bool QBbgRequestResponseWorkerPrivate::processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession)
     {
         Q_Q(QBbgRequestResponseWorker);
+        if (!m_SessionRunning)
+            return false;
         switch (event.eventType()) {
         case BloombergLP::blpapi::Event::SESSION_STATUS: {
             BloombergLP::blpapi::MessageIterator iter(event);
-            while (iter.next()) {
+            while (iter.next() && m_SessionRunning) {
                 BloombergLP::blpapi::Message message = iter.message();
                 QString MessageType = message.messageType().string();
                 if (MessageType == "SessionStarted") {
@@ -328,8 +338,11 @@ namespace QBbgLib {
             break;
         default:{
             const QList<qint64> allRq = m_Requests.IDList();
-            for (QList<qint64>::const_iterator i = allRq.constBegin(); i != allRq.constEnd(); ++i)
-                SetError(*i, QBbgAbstractResponse::UnknownError, QString());
+            for (QList<qint64>::const_iterator i = allRq.constBegin(); i != allRq.constEnd(); ++i){
+                if(!m_Results.contains(*i))
+                    SetError(*i, QBbgAbstractResponse::UnknownError, QString());
+            }
+                
         }
         }
         return true;

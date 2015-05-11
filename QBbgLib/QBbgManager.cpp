@@ -16,7 +16,7 @@ namespace QBbgLib {
     }
     QBbgManager::~QBbgManager()
     {
-        disconnect();
+        //disconnect();
         delete d_ptr;
     }
     QBbgManager::QBbgManager(QObject* parent/*=NULL*/)
@@ -135,7 +135,7 @@ namespace QBbgLib {
             Q_ASSERT(i.value());
             if (i.value()->isRunning()) {
                 i.value()->stop();
-                i.value()->wait();
+                //i.value()->wait(2000);
             }
         }
     }
