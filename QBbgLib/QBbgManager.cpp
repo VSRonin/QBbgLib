@@ -28,8 +28,8 @@ namespace QBbgLib {
         Q_ASSERT_X(QCoreApplication::instance(), "QBbgManager", "A QCoreApplication must be created to process requests");
         Q_D(QBbgManager);
         quint32 newID = 0;
-        while (d->m_ThreadPool.contains(newID)) {
-            Q_ASSERT(newID < std::numeric_limits<quint32>::max());
+        while (d->m_ResultTable.contains(newID) || d->m_ThreadPool.contains(newID)) {
+            Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
         }
         QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options);

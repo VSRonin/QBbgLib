@@ -73,7 +73,7 @@ namespace QBbgLib {
     void QBbgSecurity::setName(const QString& val)
     {
         Q_D(QBbgSecurity);
-        d->m_Name = val;
+        d->m_Name = val.trimmed().toUpper();
     }
     const QString& QBbgSecurity::exchange() const
     {
@@ -83,7 +83,7 @@ namespace QBbgLib {
     void QBbgSecurity::setExchange(const QString& val)
     {
         Q_D(QBbgSecurity);
-        d->m_Exchange = val;
+        d->m_Exchange = val.trimmed();
     }
     const QString& QBbgSecurity::pricingSource() const
     {
@@ -93,7 +93,7 @@ namespace QBbgLib {
     void QBbgSecurity::setPricingSource(const QString& val)
     {
         Q_D(QBbgSecurity);
-        d->m_PricingSource = val;
+        d->m_PricingSource = val.trimmed();
     }
     QBbgSecurity::YellowKeys QBbgSecurity::extension() const
     {
