@@ -1,6 +1,7 @@
 #ifndef QBbgSecurity_h__
 #define QBbgSecurity_h__
 #include <QString>
+#include <QMetaType>
 #include "QBbgProjectGlobals.h"
 class QDataStream;
 namespace QBbgLib { class QBbgSecurity; }
@@ -75,5 +76,7 @@ namespace QBbgLib {
         friend QDataStream& ::operator>>(QDataStream& stream, QBbgSecurity& obj);
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgSecurity);
+
 QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed);
 #endif // QBbgSecurity_h__
