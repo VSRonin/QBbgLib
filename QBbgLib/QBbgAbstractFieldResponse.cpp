@@ -1,5 +1,5 @@
 #include "QBbgAbstractFieldResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 namespace QBbgLib {
     QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q)
         :QBbgAbstractResponsePrivate(q)

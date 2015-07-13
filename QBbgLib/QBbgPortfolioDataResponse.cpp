@@ -1,5 +1,5 @@
 #include "QBbgPortfolioDataResponse.h"
-#include "QBbgPortfolioDataResponse_p.h"
+#include "private/QBbgPortfolioDataResponse_p.h"
 namespace QBbgLib {
     QBbgPortfolioDataResponsePrivate::QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other)
         :QBbgAbstractFieldResponsePrivate(q, other)

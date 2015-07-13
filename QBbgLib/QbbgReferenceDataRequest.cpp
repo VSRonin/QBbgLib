@@ -1,5 +1,5 @@
 #include "QbbgReferenceDataRequest.h"
-#include "QbbgReferenceDataRequest_p.h"
+#include "private/QbbgReferenceDataRequest_p.h"
 namespace QBbgLib {
     QBbgReferenceDataRequestPrivate::QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q)
         : QBbgAbstractFieldRequestPrivate(q)

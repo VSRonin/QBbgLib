@@ -1,5 +1,5 @@
 #include "QBbgAbstractWorker.h"
-#include "QBbgAbstractWorker_p.h"
+#include "private/QBbgAbstractWorker_p.h"
 #include <blpapi_session.h>
 #include <QDate>
 #include <QTime>
@@ -19,9 +19,10 @@ namespace QBbgLib {
         : d_ptr(d)
         , QObject(parent)
     {}
+
     QBbgAbstractWorker::~QBbgAbstractWorker()
     {
-        delete d_ptr;
+        d_ptr->deleteLater();
     }
 
     bool QBbgAbstractWorker::isAvailable() const
@@ -90,7 +91,7 @@ namespace QBbgLib {
                 )
                 );
         default:
-            Q_ASSERT_X(false, "QBbgAbstractWorkerPrivate::elementToVariant", "Unhandled element type");
+            Q_UNREACHABLE(); //Unhandled element type
             return QVariant();
         }
     }

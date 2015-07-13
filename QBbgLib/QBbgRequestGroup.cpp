@@ -1,5 +1,5 @@
 #include "QBbgRequestGroup.h"
-#include "QBbgRequestGroup_p.h"
+#include "private/QBbgRequestGroup_p.h"
 #include <QSet>
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
@@ -34,7 +34,7 @@ namespace QBbgLib {
             return new QBbgHistoricalDataRequest(dynamic_cast<const QBbgHistoricalDataRequest&>(a));
             //TODO add other types
         default:
-            Q_ASSERT_X(false, "QBbgRequestGroupPrivate::createRequest", "Unhandled request type");
+            Q_UNREACHABLE(); //Unhandled request type
             return NULL;
         }
     }
@@ -304,7 +304,7 @@ namespace QBbgLib {
             return true;
         }
         //TODO do realtime
-        Q_ASSERT_X(false, "QBbgRequestGroupPrivate::SameRequest", "Unhandled request type");
+        Q_UNREACHABLE(); //Unhandled request type
         return false;
         
     }
@@ -327,7 +327,7 @@ namespace QBbgLib {
             if (!dynamic_cast<const QBbgHistoricalDataRequest*>(a)->equalHistoricalFields(*dynamic_cast<const QBbgHistoricalDataRequest*>(b))) return false;
             break;
         default:
-            Q_ASSERT_X(false, "QBbgRequestGroupPrivate::compatible", "Unhandled request type");
+            Q_UNREACHABLE(); //Unhandled request type
         }
         return true;
     }

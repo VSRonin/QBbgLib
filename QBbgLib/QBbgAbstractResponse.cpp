@@ -1,5 +1,5 @@
 #include "QBbgAbstractResponse.h"
-#include "QBbgAbstractResponse_p.h"
+#include "private/QBbgAbstractResponse_p.h"
 namespace QBbgLib {
     QBbgAbstractResponse::~QBbgAbstractResponse()
     {

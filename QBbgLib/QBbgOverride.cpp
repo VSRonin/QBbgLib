@@ -1,5 +1,5 @@
 #include "QBbgOverride.h"
-#include "QBbgOverride_p.h"
+#include "private/QBbgOverride_p.h"
 #include <QDate>
 #include <QTime>
 #include <blpapi_session.h>

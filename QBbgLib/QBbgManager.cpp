@@ -1,9 +1,10 @@
 #include "QBbgManager.h"
-#include "QBbgManager_p.h"
+#include "private/QBbgManager_p.h"
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>
 #include "QBbgRequestResponseWorker.h"
+#include <QCoreApplication>
 namespace QBbgLib {
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
         :q_ptr(qp)
@@ -15,7 +16,7 @@ namespace QBbgLib {
     }
     QBbgManager::~QBbgManager()
     {
-        disconnect();
+        //disconnect();
         delete d_ptr;
     }
     QBbgManager::QBbgManager(QObject* parent/*=NULL*/)
@@ -24,10 +25,11 @@ namespace QBbgLib {
     {}
     QHash<quint32, QBbgWorkerThread* >::iterator QBbgManager::createThread(const QBbgRequestGroup& rq)
     {
+        Q_ASSERT_X(QCoreApplication::instance(), "QBbgManager", "A QCoreApplication must be created to process requests");
         Q_D(QBbgManager);
         quint32 newID = 0;
-        while (d->m_ThreadPool.contains(newID)) {
-            Q_ASSERT(newID < std::numeric_limits<quint32>::max());
+        while (d->m_ResultTable.contains(newID) || d->m_ThreadPool.contains(newID)) {
+            Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
         }
         QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options);
@@ -94,7 +96,7 @@ namespace QBbgLib {
                 return;
             }
         }
-        Q_ASSERT_X(false, "QBbgManager::handleThreadFinished", "Could not find sender()");
+        Q_UNREACHABLE(); //Could not find sender()
     }
     const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id) const
     {
@@ -104,6 +106,21 @@ namespace QBbgLib {
             return resGroup->value(id, NULL);
         return NULL;
     }
+
+    QList<quint32> QBbgManager::getResultGroups()const
+    {
+        Q_D(const QBbgManager);
+        return d->m_ResultTable.keys();
+    }
+
+    QList<qint64> QBbgManager::getResultIDs(quint32 group) const
+    {
+        Q_D(const QBbgManager);
+        if (!d->m_ResultTable.contains(group))
+            return QList<qint64>();
+        return d->m_ResultTable.value(group)->keys();
+    }
+
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
         for (QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator i = m_ResultTable.begin(); i != m_ResultTable.end(); ++i) {
@@ -118,7 +135,7 @@ namespace QBbgLib {
             Q_ASSERT(i.value());
             if (i.value()->isRunning()) {
                 i.value()->stop();
-                i.value()->wait();
+                //i.value()->wait(2000);
             }
         }
     }

@@ -1,5 +1,5 @@
 #include "QBbgAbstractRequest.h"
-#include "QBbgAbstractRequest_p.h"
+#include "private/QBbgAbstractRequest_p.h"
 namespace QBbgLib {
     QBbgAbstractRequest::QBbgAbstractRequest()
         : d_ptr(new QBbgAbstractRequestPrivate(this))
@@ -111,7 +111,7 @@ namespace QBbgLib {
         case HistoricalData:
             return refdata;
         default: 
-            Q_ASSERT_X(false, "QBbgAbstractRequest::serviceForRequest", "Unhandled service type");
+            Q_UNREACHABLE(); //Unhandled service type
             return NoService;
         }
     }

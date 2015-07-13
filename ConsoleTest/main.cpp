@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgReferenceDataRequest a_req;
     QBbgLib::QBbgPortfolioDataRequest p_req;
     QBbgLib::QBbgHistoricalDataRequest h_req;
-    //p_req.setSecurity("TS-PX1915-15", QBbgLib::QBbgSecurity::Client);
-    p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
-    p_req.setReferenceDay(QDate(2014, 11, 20));
+    p_req.setSecurity("TS-PX1915-38", QBbgLib::QBbgSecurity::Client);
+    //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
+    //p_req.setReferenceDay(QDate(2014, 11, 20));
     QBbgLib::QBbgOverride overrides;
     overrides.setOverride("Allow dynamic cashflow calcs", "Y");
     overrides.setOverride("mtg prepay typ", "CPR");
@@ -64,6 +64,7 @@ int main(int argc, char *argv[])
         const QBbgLib::QBbgAbstractResponse* genres = mainManager.getResult(gr, id);
         if (genres->hasErrors()) {
             qDebug() << QString::number(genres->getID()) + " - " + genres->errorMessage();
+            PrintToTempFile("BbgErrors", QString::number(genres->getID()) + " - " + genres->errorMessage(), false);
         }
         else {
             switch (genres->responseType()) {
@@ -101,6 +102,7 @@ int main(int argc, char *argv[])
                 const QBbgLib::QBbgPortfolioDataResponse* const res = dynamic_cast<const QBbgLib::QBbgPortfolioDataResponse* const>(genres);
                 Q_ASSERT(res);
                 qDebug() << res->header();
+                PrintToTempFile("PortfolioData", res->header(), false);
                 for (int i = 0; i < res->size(); ++i) {
                     QString tmpStr=
                         res->security(i).fullName()
@@ -132,13 +134,12 @@ int main(int argc, char *argv[])
             }
             break;
             default:
-                Q_ASSERT_X(false, "main", "Unhandled Response");
+                Q_UNREACHABLE(); //Unhanded Response
             }
         }
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
-    p_req.setField("PORTFOLIO_DATA");
-    p_req.setField("PORTFOLIO_MWEIGHT");
+    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
     req.addRequest(p_req);
     a_req.setField("Gibberish");
     //req.addRequest(a_req);
@@ -153,8 +154,7 @@ int main(int argc, char *argv[])
     h_req.setField("Gibberish");
     req.addRequest(h_req);
 
-    //mainManager.startRequest(req);
-    mainManager.processRequest(req);
+    mainManager.startRequest(req);
     qDebug() << "Started";
     return a.exec();
 }

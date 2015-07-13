@@ -8,6 +8,7 @@
 namespace QBbgLib {
     class QBbgRequestResponseWorkerPrivate : public QBbgAbstractWorkerPrivate
     {
+        Q_OBJECT
         Q_DECLARE_PUBLIC(QBbgRequestResponseWorker);
         QBbgRequestResponseWorkerPrivate(const QBbgRequestResponseWorkerPrivate& other);
     public:
@@ -16,7 +17,7 @@ namespace QBbgLib {
         QHash<qint64, QBbgAbstractResponse* > m_Results;
         QBbgRequestGroup m_Requests;
         QHash<qint64, QList<qint64>* > Groups;
-        size_t m_ResurnedResults;
+        qint32 m_ResurnedResults;
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal);
         virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession);
         virtual void SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg);
@@ -29,7 +30,6 @@ namespace QBbgLib {
         virtual void SendRequ(QBbgAbstractRequest::ServiceType serv);
         virtual void PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei);
         virtual void fillNoData();
-  
     };
 
     

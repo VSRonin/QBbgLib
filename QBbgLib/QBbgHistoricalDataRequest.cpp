@@ -1,5 +1,5 @@
 #include "QBbgHistoricalDataRequest.h"
-#include "QBbgHistoricalDataRequest_p.h"
+#include "private/QBbgHistoricalDataRequest_p.h"
 namespace QBbgLib {
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q)
         : QBbgAbstractFieldRequestPrivate(q)
