@@ -29,8 +29,13 @@ LIBS += -L"$(BLPPATH)/lib" \
 DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-installbin.path=$$PREFIX/lib
-installinclude.path=$$PREFIX/include
-installinclude.files = *.h
-INSTALLS = installbin installinclude
+win32 {
+	target.path=$$PREFIX/lib
+}
+unix:!symbian {
+	target.path=$$PREFIX/lib/$${LIB_ARCH}
+}
+headers.path=$$PREFIX/include
+headers.files = *.h
+INSTALLS += headers target
 include(QBbgLib.pri)
