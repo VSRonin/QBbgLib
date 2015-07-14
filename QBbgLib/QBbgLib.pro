@@ -1,9 +1,11 @@
 TEMPLATE = lib
 isEmpty(PREFIX) {
+ warning("PREFIX not specified")
  PREFIX = ../QBbgLib
 }
 CONFIG(debug, debug|release) {
-    TARGETNAME=QBbgLibd
+    win32: TARGETNAME=QBbgLibd
+	mac: TARGETNAME=QBbgLib_debug
     DESTDIRNAME = ../Win32/Debug
     MOC_DIR += ./GeneratedFiles/debug
     OBJECTS_DIR += debug
@@ -29,7 +31,6 @@ UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 installbin.path=$$PREFIX/lib
 installinclude.path=$$PREFIX/include
-installinclude.files = ./*.h
-INSTALLS += installbin
-INSTALLS += installinclude
+installinclude.files = $$HEADERS
+INSTALLS = installbin installinclude
 include(QBbgLib.pri)
