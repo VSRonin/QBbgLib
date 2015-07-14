@@ -31,6 +31,6 @@ UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 installbin.path=$$PREFIX/lib
 installinclude.path=$$PREFIX/include
-installinclude.files = $$HEADERS
+installinclude.files = *.h
 INSTALLS = installbin installinclude
 include(QBbgLib.pri)
