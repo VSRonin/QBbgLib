@@ -6,20 +6,20 @@ isEmpty(PREFIX) {
 CONFIG(debug, debug|release) {
     win32: TARGETNAME=QBbgLibd
 	mac: TARGETNAME=QBbgLib_debug
-    DESTDIRNAME = ../Win32/Debug
+    DESTDIRNAME = ../bin/Debug
     MOC_DIR += ./GeneratedFiles/debug
     OBJECTS_DIR += debug
 }
 CONFIG(release, debug|release) {
     TARGETNAME = QBbgLib
-    DESTDIRNAME = ../Win32/Release
+    DESTDIRNAME = ../bin/Release
     MOC_DIR += ./GeneratedFiles/release
     OBJECTS_DIR += release
 }
 TARGET=$$TARGETNAME
 DESTDIR=$$DESTDIRNAME
 QT += core
-DEFINES += QBBG_LIB_BUILD WIN64 QT_DLL QBBGLIB_LIB
+DEFINES += QBBG_LIB_BUILD QT_DLL QBBGLIB_LIB
 INCLUDEPATH += $(BLPPATH)/include \
     ./GeneratedFiles \
     . \
@@ -29,9 +29,7 @@ LIBS += -L"$(BLPPATH)/lib" \
 DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
-win32 {
-	target.path=$$PREFIX/lib
-}
+target.path=$$PREFIX/lib
 unix:!symbian {
 	target.path=$$PREFIX/lib/$${LIB_ARCH}
 }
