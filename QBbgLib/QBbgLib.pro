@@ -35,6 +35,9 @@ win32 {
 unix:!symbian {
 	target.path=$$PREFIX/lib/$${LIB_ARCH}
 }
+target.files = $$DESTDIRNAME/*.dll
+target.files += $$DESTDIRNAME/*.lib
+target.files += $$DESTDIRNAME/*.pdb
 headers.path=$$PREFIX/include
 headers.files = *.h
 INSTALLS += headers target
