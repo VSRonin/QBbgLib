@@ -9,6 +9,7 @@ namespace QBbgLib {
     class QBbgManagerPrivate;
     class QBbgRequestGroup;
     class QBbgWorkerThread;
+    class QBbgAbstractRequest;
     class QBBG_EXPORT QBbgManager : public QObject
     {
         Q_OBJECT
@@ -19,7 +20,9 @@ namespace QBbgLib {
         virtual ~QBbgManager();
     public:
         quint32 startRequest(const QBbgRequestGroup& rq);
+        quint32 startRequest(const QBbgAbstractRequest& rq);
         const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
+        const QBbgAbstractResponse* processRequest(const QBbgAbstractRequest& rq);
         const QBbgAbstractResponse* const getResult(quint32 group, qint64 id) const;
         QList<quint32> getResultGroups() const;
         QList<qint64> getResultIDs(quint32 group) const;
