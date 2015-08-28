@@ -38,5 +38,6 @@ target.files += $$DESTDIRNAME/*.lib
 target.files += $$DESTDIRNAME/*.pdb
 headers.path=$$PREFIX/include
 headers.files = *.h
+headers.files += ./Includes/*
 INSTALLS += headers target
 include(QBbgLib.pri)
