@@ -58,7 +58,7 @@ namespace QBbgLib {
             field() != "PORTFOLIO_MPOSITION"
             && field() != "PORTFOLIO_MWEIGHT"
             && field() != "PORTFOLIO_DATA"
-            && field() != "PORTFOLIO_MEMBER"
+            && field() != "PORTFOLIO_MEMBERS"
         ) 
             QBbgAbstractFieldRequest::setField(QString());
     }
@@ -72,8 +72,8 @@ namespace QBbgLib {
             return setField("PORTFOLIO_MWEIGHT");
         case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA:
             return setField("PORTFOLIO_DATA");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MEMBER:
-            return setField("PORTFOLIO_MEMBER");
+        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MEMBERS:
+            return setField("PORTFOLIO_MEMBERS");
         default:
             Q_UNREACHABLE();
         }
