@@ -12,12 +12,12 @@ namespace QBbgLib {
     private:
         QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other);
     public:
-        QBbgAbstractRequestPrivate(QBbgAbstractRequest* q);
+        QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);
         QBbgAbstractRequestPrivate(QBbgAbstractRequest* q,const QBbgAbstractRequestPrivate& other);
         virtual QBbgAbstractRequestPrivate& operator=(const QBbgAbstractRequestPrivate& other);
         qint64 m_ID;
         QBbgSecurity m_Security;
-        QBbgAbstractRequest::RequestType m_RqType;
+        const QBbgAbstractRequest::RequestType m_RqType;
     };
 }
 #endif // QBbgAbstractRequest_p_h__

@@ -82,14 +82,10 @@ namespace QBbgLib {
     QBbgReferenceDataResponse::QBbgReferenceDataResponse()
         :QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this))
     {
-        Q_D(QBbgReferenceDataResponse);
-        d->m_ResType = ReferenceDataResponse;
     }
     QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* dp)
         : QBbgAbstractFieldResponse(dp)
     {
-        Q_D(QBbgReferenceDataResponse);
-        d->m_ResType = ReferenceDataResponse;
     }
     QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this,*(other.d_func())))
@@ -101,7 +97,7 @@ namespace QBbgLib {
         return *this;
     }
     QBbgReferenceDataResponsePrivate::QBbgReferenceDataResponsePrivate(QBbgReferenceDataResponse* q)
-        :QBbgAbstractFieldResponsePrivate(q)
+        :QBbgAbstractFieldResponsePrivate(q,QBbgAbstractResponse::ResponseType::ReferenceDataResponse)
         , m_TableCols(0)
     {}
     QBbgReferenceDataResponsePrivate::QBbgReferenceDataResponsePrivate(QBbgReferenceDataResponse* q, const QBbgReferenceDataResponsePrivate& other)

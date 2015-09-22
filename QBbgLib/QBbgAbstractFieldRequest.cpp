@@ -10,8 +10,8 @@ namespace QBbgLib {
         d->m_Field = val.simplified().toUpper();
         d->m_Field.replace(QChar(' '), QChar('_'));
     }
-    QBbgAbstractFieldRequestPrivate::QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q)
-        : QBbgAbstractRequestPrivate(q)
+    QBbgAbstractFieldRequestPrivate::QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, QBbgAbstractRequest::RequestType typ)
+        : QBbgAbstractRequestPrivate(q,typ)
     {}
     QBbgAbstractFieldRequestPrivate::QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, const QBbgAbstractFieldRequestPrivate& a)
         : QBbgAbstractRequestPrivate(q,a)
@@ -51,7 +51,7 @@ namespace QBbgLib {
         return
             !d->m_Field.isEmpty()
             && d->m_Security.isValid()
-            && (d->m_RqType & FirstFielded)
+            && (static_cast<qint32>(d->m_RqType) & FirstFielded)
             ;
     }
 
@@ -81,8 +81,8 @@ namespace QBbgLib {
         return d->m_Overrides;
     }
 
-    QBbgAbstractFieldRequest::QBbgAbstractFieldRequest()
-        :QBbgAbstractRequest(new QBbgAbstractFieldRequestPrivate(this))
+    QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(RequestType typ)
+        :QBbgAbstractRequest(new QBbgAbstractFieldRequestPrivate(this,typ))
     {}
 
     QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a)

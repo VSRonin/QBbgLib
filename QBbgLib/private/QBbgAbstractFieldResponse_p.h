@@ -9,7 +9,7 @@ namespace QBbgLib {
         Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
         QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other);
     public:
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q);
+        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other);
         virtual QBbgAbstractFieldResponsePrivate& operator=(const QBbgAbstractFieldResponsePrivate& other);
         QString m_Header;

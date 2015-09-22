@@ -11,7 +11,7 @@ namespace QBbgLib {
 	{
         Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
 	public:
-		QBbgAbstractFieldRequest();
+        QBbgAbstractFieldRequest(RequestType typ/*=QBbgAbstractRequest::Invalid*/);
 		QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a);
         virtual bool operator==(const QBbgAbstractFieldRequest& a) const;
         virtual QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);

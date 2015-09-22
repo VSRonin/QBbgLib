@@ -43,7 +43,7 @@ namespace QBbgLib {
             }
 
             switch (QBbgAbstractResponse::stringToResponseType(message.messageType().string())) {
-            case QBbgAbstractResponse::PortfolioDataResponse:
+            case QBbgAbstractResponse::ResponseType::PortfolioDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
                 for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
@@ -61,8 +61,8 @@ namespace QBbgLib {
                     else {
                         BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                            const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                            Q_ASSERT(FoundRequ);
+                            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq)));
+                            const QBbgAbstractFieldRequest* const FoundRequ = static_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
                             if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
                                 bool foundExp = false;
                                 for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
@@ -125,7 +125,7 @@ namespace QBbgLib {
                 }
             }
             break;
-            case QBbgAbstractResponse::HistoricalDataResponse:
+            case QBbgAbstractResponse::ResponseType::HistoricalDataResponse:
             {
                 QString CurrentSecurity = message.getElement("securityData").getElementAsString("security");
                 BloombergLP::blpapi::Element fieldExcepArray = message.getElement("securityData").getElement("fieldExceptions"); //fieldExceptions[]
@@ -142,8 +142,9 @@ namespace QBbgLib {
                     QSet<qint64> recievedIDs;
                     QSet<qint64> recievedErrorsIDs;
                     for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                        const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                        Q_ASSERT(FoundRequ);
+                        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq)));
+                        const QBbgAbstractFieldRequest* const FoundRequ = static_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
+                        
                         bool foundExp = false;
                         for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
                             QString CurrentField = fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString("fieldId");
@@ -191,7 +192,7 @@ namespace QBbgLib {
                 }
             }
             break;
-            case QBbgAbstractResponse::ReferenceDataResponse:
+            case QBbgAbstractResponse::ResponseType::ReferenceDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
                 for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
@@ -209,8 +210,8 @@ namespace QBbgLib {
                     else {
                         BloombergLP::blpapi::Element fieldDataArray = secDataArray.getValueAsElement(secIter).getElement("fieldData"); //fieldData[]
                         for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                            const QBbgAbstractFieldRequest* const FoundRequ = dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
-                            Q_ASSERT(FoundRequ);
+                            Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq)));
+                            const QBbgAbstractFieldRequest* const FoundRequ = static_cast<const QBbgAbstractFieldRequest*>(m_Requests.request(*SingleReq));
                             if (!fieldDataArray.hasElement(FoundRequ->field().toLatin1().data())) {
                                 bool foundExp = false;
                                 for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
@@ -352,13 +353,13 @@ namespace QBbgLib {
     {
         QBbgAbstractResponse* TempRes = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
-        case QBbgAbstractRequest::ReferenceData:
+        case QBbgAbstractRequest::RequestType::ReferenceData:
             TempRes = new QBbgReferenceDataResponse();
             break;
-        case QBbgAbstractRequest::PortfolioData:
+        case QBbgAbstractRequest::RequestType::PortfolioData:
             TempRes = new QBbgPortfolioDataResponse();
             break;
-        case QBbgAbstractRequest::HistoricalData:
+        case QBbgAbstractRequest::RequestType::HistoricalData:
             TempRes = new QBbgHistoricalDataResponse();
             break;
         default:
@@ -374,7 +375,7 @@ namespace QBbgLib {
     {
         QBbgAbstractResponse* resToAdd = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
-        case QBbgAbstractRequest::ReferenceData:{
+        case QBbgAbstractRequest::RequestType::ReferenceData:{
             QBbgReferenceDataResponse *TempRes = new QBbgReferenceDataResponse();
             TempRes->setValue(Value, Header);
             resToAdd = TempRes;
@@ -391,9 +392,12 @@ namespace QBbgLib {
     void QBbgRequestResponseWorkerPrivate::HeaderRecieved(qint64 RequestID, const QString& Header)
     {
         if (!m_Results.contains(RequestID)) return;
-        QBbgAbstractFieldResponse* res = dynamic_cast<QBbgAbstractFieldResponse*>(m_Results[RequestID]);
-        Q_ASSERT_X(res, "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Setting header for non-fielded data");
-        res->setHeader(Header);
+        QBbgAbstractResponse* const abRes = m_Results[RequestID];
+        Q_ASSERT_X(dynamic_cast<QBbgAbstractFieldResponse*>(abRes), "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Setting header for non-fielded data");
+        if (static_cast<qint32>(abRes->responseType()) & QBbgAbstractResponse::FirstFielded) {
+            QBbgAbstractFieldResponse* res = static_cast<QBbgAbstractFieldResponse*>(m_Results[RequestID]);
+            res->setHeader(Header);
+        }
     }
     void QBbgRequestResponseWorkerPrivate::DataRecieved(qint64 RequestID)
     {
@@ -411,11 +415,11 @@ namespace QBbgLib {
     void QBbgRequestResponseWorkerPrivate::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
-        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::ReferenceData) {
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::ReferenceData) {
             if (TempIter == m_Results.end()) {
                 TempIter = m_Results.insert(RequestID, new QBbgReferenceDataResponse());
             }
-            dynamic_cast<QBbgReferenceDataResponse*>(TempIter.value())->addValueRow(Value, Header);
+            static_cast<QBbgReferenceDataResponse*>(TempIter.value())->addValueRow(Value, Header);
             return;
         }
         Q_UNREACHABLE(); //Only ReferenceData can recieve Data Rows
@@ -423,11 +427,11 @@ namespace QBbgLib {
     void QBbgRequestResponseWorkerPrivate::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
-        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::HistoricalData) {
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
             if (TempIter == m_Results.end()) {
                 TempIter = m_Results.insert(RequestID, new QBbgHistoricalDataResponse());
             }
-            dynamic_cast<QBbgHistoricalDataResponse*>(TempIter.value())->setValue(dt, val, period, Header);
+            static_cast<QBbgHistoricalDataResponse*>(TempIter.value())->setValue(dt, val, period, Header);
             return;
         }
         Q_UNREACHABLE(); //Only HistoricalData requests can receive Hist Data
@@ -435,11 +439,11 @@ namespace QBbgLib {
     void QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
-        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::PortfolioData) {
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::PortfolioData) {
             if (TempIter == m_Results.end()) {
                 TempIter = m_Results.insert(RequestID, new QBbgPortfolioDataResponse());
             }
-            QBbgPortfolioDataResponse* currRes = dynamic_cast<QBbgPortfolioDataResponse*>(TempIter.value());
+            QBbgPortfolioDataResponse* currRes = static_cast<QBbgPortfolioDataResponse*>(TempIter.value());
             Q_ASSERT((pos && currRes->size() > 0) == currRes->hasPosition());
             Q_ASSERT((mkVal && currRes->size() > 0) == currRes->hasMarketValue());
             Q_ASSERT((cst && currRes->size() > 0) == currRes->hasCost());
@@ -480,9 +484,9 @@ namespace QBbgLib {
                     request.append("securities", CurrentSingle->security().fullName().toLatin1().data());
                     UsedSecur.insert(CurrentSingle->security().fullName());
                 }
-                if (reqType & QBbgAbstractRequest::FirstFielded) {
-                    const QBbgAbstractFieldRequest* CurrentSingleFielded = dynamic_cast<const QBbgAbstractFieldRequest*>(CurrentSingle);
-                    Q_ASSERT(CurrentSingleFielded);
+                if (static_cast<qint32>(reqType) & QBbgAbstractRequest::FirstFielded) {
+                    Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(CurrentSingle));
+                    const QBbgAbstractFieldRequest* CurrentSingleFielded = static_cast<const QBbgAbstractFieldRequest*>(CurrentSingle);
                     if (!UsedFields.contains(CurrentSingle->security().fullName())) {
                         request.append("fields", CurrentSingleFielded->field().toLatin1().data());
                         UsedFields.insert(CurrentSingleFielded->field());
@@ -490,14 +494,14 @@ namespace QBbgLib {
                     if (GroupIter == ReqIter.value()->constBegin()) {
                         CurrentSingleFielded->overrides().addOverrideToRequest(request);
                     }
-                    if (reqType == QBbgAbstractRequest::ReferenceData) {
-                        const QBbgReferenceDataRequest* CurrentSingleRefData = dynamic_cast<const QBbgReferenceDataRequest*>(CurrentSingle);
-                        Q_ASSERT(CurrentSingleRefData);
+                    if (reqType == QBbgAbstractRequest::RequestType::ReferenceData) {
+                        Q_ASSERT(dynamic_cast<const QBbgReferenceDataRequest*>(CurrentSingle));
+                        const QBbgReferenceDataRequest* CurrentSingleRefData = static_cast<const QBbgReferenceDataRequest*>(CurrentSingle);
                         request.set("useUTCTime", CurrentSingleRefData->useUTCtime());
                     }
-                    else if (reqType == QBbgAbstractRequest::HistoricalData) {
-                        const QBbgHistoricalDataRequest* CurrentSingleHistData = dynamic_cast<const QBbgHistoricalDataRequest*>(CurrentSingle);
-                        Q_ASSERT(CurrentSingleHistData);
+                    else if (reqType == QBbgAbstractRequest::RequestType::HistoricalData) {
+                        Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(CurrentSingle));
+                        const QBbgHistoricalDataRequest* CurrentSingleHistData = static_cast<const QBbgHistoricalDataRequest*>(CurrentSingle);
                         request.set("startDate", CurrentSingleHistData->startDate().toString("yyyyMMdd").toLatin1().data());
                         request.set("endDate", (CurrentSingleHistData->endDate().isNull() ? QDate::currentDate() : CurrentSingleHistData->endDate()).toString("yyyyMMdd").toLatin1().data());
                         switch (CurrentSingleHistData->periodicityAdjustment()) {

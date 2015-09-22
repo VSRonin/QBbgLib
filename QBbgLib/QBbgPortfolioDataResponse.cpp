@@ -13,7 +13,7 @@ namespace QBbgLib {
     {}
 
     QBbgPortfolioDataResponsePrivate::QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q)
-        : QBbgAbstractFieldResponsePrivate(q)
+        : QBbgAbstractFieldResponsePrivate(q,QBbgAbstractResponse::ResponseType::PortfolioDataResponse)
     {}
 
     QBbgPortfolioDataResponsePrivate& QBbgPortfolioDataResponsePrivate::operator=(const QBbgPortfolioDataResponsePrivate& other)
@@ -188,15 +188,11 @@ namespace QBbgLib {
    QBbgPortfolioDataResponse::QBbgPortfolioDataResponse()
        : QBbgAbstractFieldResponse(new QBbgPortfolioDataResponsePrivate(this))
    {
-       Q_D(QBbgPortfolioDataResponse);
-       d->m_ResType = PortfolioDataResponse;
    }
 
    QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(QBbgPortfolioDataResponsePrivate* dp)
        : QBbgAbstractFieldResponse(dp)
    {
-       Q_D(QBbgPortfolioDataResponse);
-       d->m_ResType = PortfolioDataResponse;
    }
    QBbgPortfolioDataResponse& QBbgPortfolioDataResponse::operator=(QBbgPortfolioDataResponse& other)
    {

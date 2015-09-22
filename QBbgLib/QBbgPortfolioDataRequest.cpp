@@ -80,14 +80,12 @@ namespace QBbgLib {
     }
 
     QBbgPortfolioDataRequestPrivate::QBbgPortfolioDataRequestPrivate(QBbgPortfolioDataRequest* q)
-        :QBbgAbstractFieldRequestPrivate(q)
+        :QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::PortfolioData)
     {
-        m_RqType = QBbgAbstractRequest::PortfolioData;
     }
     QBbgPortfolioDataRequestPrivate::QBbgPortfolioDataRequestPrivate(QBbgPortfolioDataRequest* q, const QBbgPortfolioDataRequestPrivate& other)
         : QBbgAbstractFieldRequestPrivate(q, other)
     {
-        m_RqType = QBbgAbstractRequest::PortfolioData;
     }
     QBbgPortfolioDataRequestPrivate& QBbgPortfolioDataRequestPrivate::operator=(const QBbgPortfolioDataRequestPrivate& other)
     {

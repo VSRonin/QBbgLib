@@ -25,15 +25,15 @@ void PrintToTempFile(const QString& TempFileName, const QString& Message, bool P
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
-    QBbgLib::QBbgReferenceDataRequest a_req;
+    //QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
+    //QBbgLib::QBbgReferenceDataRequest a_req;
     QBbgLib::QBbgPortfolioDataRequest p_req;
-    QBbgLib::QBbgHistoricalDataRequest h_req;
-    p_req.setSecurity("TS-PX1915-38", QBbgLib::QBbgSecurity::Client);
+    //QBbgLib::QBbgHistoricalDataRequest h_req;
+    p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
     //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
-    //p_req.setReferenceDay(QDate(2014, 11, 20));
-    QBbgLib::QBbgOverride overrides;
-    overrides.setOverride("Allow dynamic cashflow calcs", "Y");
+    p_req.setReferenceDay(QDate(2015, 9, 3));
+    //QBbgLib::QBbgOverride overrides;
+   /* overrides.setOverride("Allow dynamic cashflow calcs", "Y");
     overrides.setOverride("mtg prepay typ", "CPR");
       overrides.setOverride("YLD flag", "1");
       overrides.setOverride("prepay speed vector", "5 12S 5 72R 16");
@@ -45,18 +45,18 @@ int main(int argc, char *argv[])
      overrides.setOverride("apply FWD rate", "N");
     a_req.setOverrides(overrides);
     a_req.setSecurity(secur);
-    a_req.setField("mtg cash flow");
+    a_req.setField("mtg cash flow");*/
 
-    h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
+   /* h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
     h_req.setField("PX_LAST");
     h_req.startDate(QDate(2015, 3, 14));
     h_req.endDate(QDate(2015, 4, 14));
-    h_req.nonTradingDayFill(QBbgLib::QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS);
+    h_req.nonTradingDayFill(QBbgLib::QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS);*/
 
     QBbgLib::QBbgRequestGroup req;
-    req.addRequest(a_req);
-    a_req.setField("name");
-    req.addRequest(a_req);
+    //req.addRequest(a_req);
+   // a_req.setField("name");
+    //req.addRequest(a_req);
     QBbgLib::QBbgManager mainManager;
     
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::recieved, [&mainManager](quint32 gr, qint64 id)
@@ -68,9 +68,9 @@ int main(int argc, char *argv[])
         }
         else {
             switch (genres->responseType()) {
-            case QBbgLib::QBbgAbstractResponse::ReferenceDataResponse:{
-                const QBbgLib::QBbgReferenceDataResponse* const res = dynamic_cast<const QBbgLib::QBbgReferenceDataResponse* const>(genres);
-                Q_ASSERT(res);
+            case QBbgLib::QBbgAbstractResponse::ResponseType::ReferenceDataResponse:{
+                Q_ASSERT(dynamic_cast<const QBbgLib::QBbgReferenceDataResponse* const>(genres));
+                const QBbgLib::QBbgReferenceDataResponse* const res = static_cast<const QBbgLib::QBbgReferenceDataResponse* const>(genres);
                 QString tmpStr;
                 if (res->hasValue()) {
                     qDebug() << res->header() << res->value();
@@ -98,9 +98,9 @@ int main(int argc, char *argv[])
                 PrintToTempFile("RefData", tmpStr, false);
             }
             break;
-            case QBbgLib::QBbgAbstractResponse::PortfolioDataResponse:{
-                const QBbgLib::QBbgPortfolioDataResponse* const res = dynamic_cast<const QBbgLib::QBbgPortfolioDataResponse* const>(genres);
-                Q_ASSERT(res);
+            case QBbgLib::QBbgAbstractResponse::ResponseType::PortfolioDataResponse:{
+                Q_ASSERT(dynamic_cast<const QBbgLib::QBbgPortfolioDataResponse* const>(genres));
+                const QBbgLib::QBbgPortfolioDataResponse* const res = static_cast<const QBbgLib::QBbgPortfolioDataResponse* const>(genres);
                 qDebug() << res->header();
                 PrintToTempFile("PortfolioData", res->header(), false);
                 for (int i = 0; i < res->size(); ++i) {
@@ -118,9 +118,9 @@ int main(int argc, char *argv[])
                 }
             }
             break;
-            case QBbgLib::QBbgAbstractResponse::HistoricalDataResponse:{
-                const QBbgLib::QBbgHistoricalDataResponse* const res = dynamic_cast<const QBbgLib::QBbgHistoricalDataResponse* const>(genres);
-                Q_ASSERT(res);
+            case QBbgLib::QBbgAbstractResponse::ResponseType::HistoricalDataResponse:{
+                Q_ASSERT(dynamic_cast<const QBbgLib::QBbgHistoricalDataResponse* const>(genres));
+                const QBbgLib::QBbgHistoricalDataResponse* const res = static_cast<const QBbgLib::QBbgHistoricalDataResponse* const>(genres);
                 qDebug() << res->header();
                 const auto allDates = res->dates();
                 for (auto i = allDates.constBegin(); i !=allDates.constEnd(); ++i) {
@@ -141,18 +141,18 @@ int main(int argc, char *argv[])
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
     p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
     req.addRequest(p_req);
-    a_req.setField("Gibberish");
+    //a_req.setField("Gibberish");
     //req.addRequest(a_req);
-    a_req.setSecurity(QString("invalid Mtge"));
+    //a_req.setSecurity(QString("invalid Mtge"));
     //req.addRequest(a_req);
-    a_req.setField("PX_LAST");
+    //a_req.setField("PX_LAST");
     //req.addRequest(a_req);
 
-    req.addRequest(h_req);
-    h_req.setField("PX_ASK");
-    req.addRequest(h_req);
-    h_req.setField("Gibberish");
-    req.addRequest(h_req);
+    //req.addRequest(h_req);
+    //h_req.setField("PX_ASK");
+    //req.addRequest(h_req);
+    //h_req.setField("Gibberish");
+    //req.addRequest(h_req);
 
     mainManager.startRequest(req);
     qDebug() << "Started";

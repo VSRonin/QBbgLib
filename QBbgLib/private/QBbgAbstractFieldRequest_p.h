@@ -9,7 +9,7 @@ namespace QBbgLib {
         QBbgAbstractFieldRequestPrivate(const QBbgAbstractFieldRequestPrivate& a);
     public:
         QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, const QBbgAbstractFieldRequestPrivate& a);
-        QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q);
+        QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);
         QBbgAbstractFieldRequestPrivate& operator=(const QBbgAbstractFieldRequestPrivate& a);
         bool operator==(const QBbgAbstractFieldRequestPrivate& a) const;
         QString m_Field;
