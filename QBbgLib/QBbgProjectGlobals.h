@@ -2,10 +2,6 @@
 #define ProjectGlobals_h__
 #ifdef _DEBUG
 //#define PRINT_RESPONSE_MESSAGE //Uncomment to debug response messages from Bloomberg
-#include <QDebug>
-#define LOGDEBUG(x) qDebug() << x;
-#else
-#define LOGDEBUG(x)
 #endif // _DEBUG
 #ifdef QBBG_LIB_BUILD
     #define QBBG_EXPORT __declspec(dllexport)
