@@ -230,7 +230,7 @@ namespace QBbgLib {
                                     continue;
                                     //SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
                             }
-                            else {
+                            else if (FoundRequ->security().fullName() == CurrentSecurity) {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getElement(FoundRequ->field().toLatin1().data());
                                 if (fieldDataValue.isArray()) {
                                     if (fieldDataValue.numValues() == 0) {
@@ -258,7 +258,7 @@ namespace QBbgLib {
                                         }
                                     }
                                 }
-                                else {
+                                else{
                                     /*if (fieldDataValue.getValueAsFloat64()>1000.0){
                                         std::ofstream myfile;
                                         myfile.open("C:/Temp/WrongResponse.txt", std::ios::out | std::ios::app);
@@ -391,7 +391,14 @@ namespace QBbgLib {
             break;
         }
         setResponseID(resToAdd, RequestID);
-        m_Results.insert(RequestID, resToAdd);
+        QHash<qint64, QBbgAbstractResponse*>::iterator i=m_Results.find(RequestID);
+        if (i == m_Results.end()) {
+            m_Results.insert(RequestID, resToAdd);
+        }
+        else{
+            delete i.value();
+            i.value() = resToAdd;
+        }
         DataRecieved(RequestID);
     }
     void QBbgRequestResponseWorkerPrivate::HeaderRecieved(qint64 RequestID, const QString& Header)
@@ -469,7 +476,7 @@ namespace QBbgLib {
     }
     void QBbgRequestResponseWorkerPrivate::SendRequ(QBbgAbstractRequest::ServiceType serv)
     {
-        QSet<QString> UsedSecur;
+        QSet<QBbgSecurity> UsedSecur;
         QSet<QString> UsedFields;
         BloombergLP::blpapi::Service refDataSvc = m_session->getService(QBbgAbstractRequest::serviceTypeToString(serv).toLatin1().data());
         for (QHash<qint64, QList<qint64>* >::const_iterator ReqIter = Groups.constBegin(); ReqIter != Groups.constEnd(); ++ReqIter) {
@@ -485,26 +492,26 @@ namespace QBbgLib {
                 if (!CurrentSingle->isValidReq()) {
                     SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, "Invalid Request");
                 }
-                if (!UsedSecur.contains(CurrentSingle->security().fullName())) {
+                if (!UsedSecur.contains(CurrentSingle->security())) {
                     request.append("securities", CurrentSingle->security().fullName().toLatin1().data());
-                    UsedSecur.insert(CurrentSingle->security().fullName());
+                    UsedSecur.insert(CurrentSingle->security());
                 }
                 if (static_cast<qint32>(reqType) & QBbgAbstractRequest::FirstFielded) {
                     Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(CurrentSingle));
                     const QBbgAbstractFieldRequest* CurrentSingleFielded = static_cast<const QBbgAbstractFieldRequest*>(CurrentSingle);
-                    if (!UsedFields.contains(CurrentSingle->security().fullName())) {
+                    if (!UsedFields.contains(CurrentSingleFielded->field())) {
                         request.append("fields", CurrentSingleFielded->field().toLatin1().data());
                         UsedFields.insert(CurrentSingleFielded->field());
                     }
                     if (GroupIter == ReqIter.value()->constBegin()) {
                         CurrentSingleFielded->overrides().addOverrideToRequest(request);
+                        if (reqType == QBbgAbstractRequest::RequestType::ReferenceData) {
+                            Q_ASSERT(dynamic_cast<const QBbgReferenceDataRequest*>(CurrentSingle));
+                            const QBbgReferenceDataRequest* CurrentSingleRefData = static_cast<const QBbgReferenceDataRequest*>(CurrentSingle);
+                            request.set("useUTCTime", CurrentSingleRefData->useUTCtime());
+                        }
                     }
-                    if (reqType == QBbgAbstractRequest::RequestType::ReferenceData) {
-                        Q_ASSERT(dynamic_cast<const QBbgReferenceDataRequest*>(CurrentSingle));
-                        const QBbgReferenceDataRequest* CurrentSingleRefData = static_cast<const QBbgReferenceDataRequest*>(CurrentSingle);
-                        request.set("useUTCTime", CurrentSingleRefData->useUTCtime());
-                    }
-                    else if (reqType == QBbgAbstractRequest::RequestType::HistoricalData) {
+                    if (reqType == QBbgAbstractRequest::RequestType::HistoricalData) {
                         Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(CurrentSingle));
                         const QBbgHistoricalDataRequest* CurrentSingleHistData = static_cast<const QBbgHistoricalDataRequest*>(CurrentSingle);
                         request.set("startDate", CurrentSingleHistData->startDate().toString("yyyyMMdd").toLatin1().data());

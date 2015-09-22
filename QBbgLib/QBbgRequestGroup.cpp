@@ -151,18 +151,6 @@ namespace QBbgLib {
     }
     void  QBbgRequestGroup::RequestGroups(QHash<qint64, QList<qint64>* >& Result, qint64 StartingID)const
     {
-
-        /*Q_D(const QBbgRequestGroup);
-        for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); ++i)
-            delete (i.value());
-        Result.clear();
-        for (QHash<qint64, QBbgAbstractRequest*>::const_iterator MainIter = d->RequestTable.constBegin(); MainIter != d->RequestTable.constEnd(); ++MainIter) {
-            QList<qint64>* tmp = new QList<qint64>();
-            tmp->append(MainIter.key());
-            Result.insert(MainIter.key(), tmp);
-        }
-        return;*/
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Q_D(const QBbgRequestGroup);
         for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); ++i)
             delete (i.value());
@@ -183,7 +171,7 @@ namespace QBbgLib {
                 }
             }
         }
-        { /*
+        { 
             // Merge back groups with different securities but with all the other factors in common
             bool tempMerge;
             for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end(); ++MainIter) {
@@ -193,7 +181,6 @@ namespace QBbgLib {
                         // SameRequest is a slow method, call it only if necessary
                         tempMerge = d->SameRequest(*(MainIter.value()), *(SecondIter.value()));
                     if (tempMerge) {
-                        MainIter.value()->append(*(SecondIter.value()));
                         delete SecondIter.value();
                         SecondIter = Result.erase(SecondIter);
                     }
@@ -202,50 +189,8 @@ namespace QBbgLib {
                     }
                 }
             }
-            */
+            
         }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*Q_D(const QBbgRequestGroup);
-        for (QHash<qint64, QList<qint64>* >::iterator i = Result.begin(); i != Result.end(); i++)
-            delete (i.value());
-        Result.clear();
-        QList<qint64> UsedIDs;
-        QList<QString> UsedFields;
-        for (QHash<qint64, QBbgAbstractRequest*>::const_iterator MainIter = d->RequestTable.constBegin(); MainIter != d->RequestTable.constEnd(); ++MainIter) {
-            if (UsedIDs.contains(MainIter.key()))continue;
-            UsedIDs.append(MainIter.key());
-            UsedFields.clear();
-            UsedFields.push_back(MainIter.value()->GetField());
-            QList<qint64>* CurrentGroup = new QList<qint64>();
-            CurrentGroup->push_back(MainIter.key());
-            for (QHash<qint64, QBbgAbstractRequest*>::const_iterator SecondIter = MainIter + 1; SecondIter != d->RequestTable.constEnd(); ++SecondIter) {
-                if (MainIter.value()->security() == SecondIter.value()->security()) {
-                    if (MainIter.value()->SameOverrides(*SecondIter.value())) {
-                        UsedIDs.append(SecondIter.key());
-                        CurrentGroup->append(SecondIter.key());
-                        UsedFields.append(SecondIter.value()->field());
-                    }
-                }
-            }
-            Result.insert(StartingID, CurrentGroup);
-            StartingID++;
-        }
-        for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end();) {
-            if (MainIter.value()->empty()) {
-                MainIter = Result.erase(MainIter);
-                continue;
-            }
-            for (QHash<qint64, QList<qint64>* >::iterator SecondIter = MainIter + 1; SecondIter != Result.end();) {
-                if (d->SameRequest(*(MainIter.value()), *(SecondIter.value()))) {
-                    MainIter.value()->append(*(SecondIter.value()));
-                    delete SecondIter.value();
-                    SecondIter = Result.erase(SecondIter);
-                    continue;
-                }
-                SecondIter++;
-            }
-            MainIter++;
-        }*/
     }
     QList<QBbgAbstractRequest::RequestType> QBbgRequestGroup::differentTypes() const
     {

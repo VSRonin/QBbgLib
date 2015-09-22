@@ -25,27 +25,32 @@ void PrintToTempFile(const QString& TempFileName, const QString& Message, bool P
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    //QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
-    //QBbgLib::QBbgReferenceDataRequest a_req;
-    QBbgLib::QBbgPortfolioDataRequest p_req;
+    QBbgLib::QBbgRequestGroup req;
+    QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
+    QBbgLib::QBbgSecurity otherSecur("XS0304280059", QBbgLib::QBbgSecurity::Mtge);
+    QBbgLib::QBbgReferenceDataRequest a_req;
+    //QBbgLib::QBbgPortfolioDataRequest p_req;
     //QBbgLib::QBbgHistoricalDataRequest h_req;
-    p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
+    //p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
     //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
-    p_req.setReferenceDay(QDate(2015, 9, 3));
-    //QBbgLib::QBbgOverride overrides;
-   /* overrides.setOverride("Allow dynamic cashflow calcs", "Y");
+    //p_req.setReferenceDay(QDate(2015, 9, 3));
+    QBbgLib::QBbgOverride overrides;
+    overrides.setOverride("Allow dynamic cashflow calcs", "Y");
     overrides.setOverride("mtg prepay typ", "CPR");
-      overrides.setOverride("YLD flag", "1");
-      overrides.setOverride("prepay speed vector", "5 12S 5 72R 16");
-      overrides.setOverride("Default_Type", "CDR");
-      overrides.setOverride("Default_Speed_Vector", "2");
-      overrides.setOverride("Loss_Severity", "25");
-     overrides.setOverride("Delinquency_Vector", "13 48S 20");
-     overrides.setOverride("Trigger_State", "S");
-     overrides.setOverride("apply FWD rate", "N");
+    overrides.setOverride("YLD flag", "1");
+    overrides.setOverride("prepay speed vector", "5 12S 5 72R 16");
+    overrides.setOverride("Default_Type", "CDR");
+    overrides.setOverride("Default_Speed_Vector", "2");
+    overrides.setOverride("Loss_Severity", "25");
+    overrides.setOverride("Delinquency_Vector", "13 48S 20");
+    overrides.setOverride("Trigger_State", "S");
+    overrides.setOverride("apply FWD rate", "N");
     a_req.setOverrides(overrides);
     a_req.setSecurity(secur);
-    a_req.setField("mtg cash flow");*/
+    a_req.setField("mtg cash flow");
+    req.addRequest(a_req);
+    a_req.setSecurity(otherSecur);
+    req.addRequest(a_req);
 
    /* h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
     h_req.setField("PX_LAST");
@@ -53,10 +58,13 @@ int main(int argc, char *argv[])
     h_req.endDate(QDate(2015, 4, 14));
     h_req.nonTradingDayFill(QBbgLib::QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS);*/
 
-    QBbgLib::QBbgRequestGroup req;
-    //req.addRequest(a_req);
-   // a_req.setField("name");
-    //req.addRequest(a_req);
+    
+   
+    //a_req.clearOverrides();
+    a_req.setField("name");
+    req.addRequest(a_req);
+    a_req.setSecurity(secur);
+    req.addRequest(a_req);
     QBbgLib::QBbgManager mainManager;
     
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::recieved, [&mainManager](quint32 gr, qint64 id)
@@ -139,8 +147,8 @@ int main(int argc, char *argv[])
         }
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
-    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
-    req.addRequest(p_req);
+    //p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
+    //req.addRequest(p_req);
     //a_req.setField("Gibberish");
     //req.addRequest(a_req);
     //a_req.setSecurity(QString("invalid Mtge"));
