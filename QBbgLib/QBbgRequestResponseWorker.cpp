@@ -11,7 +11,9 @@
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
+#ifdef PRINT_RESPONSE_MESSAGE
 #include <fstream>
+#endif // PRINT_RESPONSE_MESSAGE
 namespace QBbgLib {
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
@@ -31,8 +33,11 @@ namespace QBbgLib {
         while (iter.next()) {
             BloombergLP::blpapi::Message message = iter.message();
 #ifdef PRINT_RESPONSE_MESSAGE
-            message.print(std::cout);
-#endif // _DEBUG
+            std::ofstream myfile;
+            myfile.open("C:/Temp/ResponseLog.txt", std::ios::out | std::ios::app);
+            message.print(myfile);
+            myfile.close();
+#endif // PRINT_RESPONSE_MESSAGE
             const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), NULL);
             Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Recieving response from unknown request");
             if (message.hasElement("responseError")) {

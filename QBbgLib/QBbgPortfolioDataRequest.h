@@ -14,7 +14,7 @@ namespace QBbgLib {
             PORTFOLIO_MPOSITION,
             PORTFOLIO_MWEIGHT,
             PORTFOLIO_DATA,
-            PORTFOLIO_MEMBER
+            PORTFOLIO_MEMBERS
         };
         QBbgPortfolioDataRequest();
         QBbgPortfolioDataRequest(const QBbgPortfolioDataRequest& a);

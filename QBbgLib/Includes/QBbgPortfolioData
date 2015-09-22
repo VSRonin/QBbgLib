@@ -1,0 +1,4 @@
+#include <QBbgPortfolioDataRequest.h>
+#include <QBbgPortfolioDataResponse.h>
+#include <QBbgSecurity.h>
+#include <QBbgOverride.h>

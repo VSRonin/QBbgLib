@@ -1,0 +1,4 @@
+#include <QBbgHistoricalDataRequest.h>
+#include <QBbgHistoricalDataResponse.h>
+#include <QBbgSecurity.h>
+#include <QBbgOverride.h>

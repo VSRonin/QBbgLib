@@ -260,5 +260,7 @@
     <None Include="..\README.markdown">
       <Filter>Documentation</Filter>
     </None>
+    <None Include="QBbgLib.pri" />
+    <None Include="QBbgLib.pro" />
   </ItemGroup>
 </Project>

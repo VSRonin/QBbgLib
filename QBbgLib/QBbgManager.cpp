@@ -45,6 +45,14 @@ namespace QBbgLib {
         newTh.value()->start();
         return newTh.key();
     }
+
+    quint32 QBbgManager::startRequest(const QBbgAbstractRequest& rq)
+    {
+        QBbgRequestGroup rg;
+        rg.addRequest(rq);
+        return startRequest(rg);
+    }
+
     const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
     {
         Q_D(QBbgManager);
@@ -57,6 +65,16 @@ namespace QBbgLib {
         Q_ASSERT(d->m_ResultTable.contains(threadKey));
         return *(d->m_ResultTable.value(threadKey));
     }
+
+    const QBbgAbstractResponse* QBbgManager::processRequest(const QBbgAbstractRequest& rq)
+    {
+        QBbgRequestGroup rg;
+        rg.addRequest(rq);
+        const QHash<qint64, QBbgAbstractResponse* >& resHash= processRequest(rg);
+        Q_ASSERT(resHash.count() == 1);
+        return resHash.begin().value();
+    }
+
     void QBbgManager::handleResponse(qint64 reID, QBbgAbstractResponse* res)
     {
         Q_ASSERT(sender());
