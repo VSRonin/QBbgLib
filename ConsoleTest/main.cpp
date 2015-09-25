@@ -26,12 +26,12 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     QBbgLib::QBbgRequestGroup req;
-    QBbgLib::QBbgSecurity secur("XS0243658670", QBbgLib::QBbgSecurity::Mtge);
+    QBbgLib::QBbgSecurity secur("XS1112010134", QBbgLib::QBbgSecurity::Mtge);
     QBbgLib::QBbgSecurity otherSecur("XS0304280059", QBbgLib::QBbgSecurity::Mtge);
     QBbgLib::QBbgReferenceDataRequest a_req;
-    //QBbgLib::QBbgPortfolioDataRequest p_req;
+    QBbgLib::QBbgPortfolioDataRequest p_req;
     //QBbgLib::QBbgHistoricalDataRequest h_req;
-    //p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
+    p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
     //p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
     //p_req.setReferenceDay(QDate(2015, 9, 3));
     QBbgLib::QBbgOverride overrides;
@@ -147,8 +147,11 @@ int main(int argc, char *argv[])
         }
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
-    //p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
-    //req.addRequest(p_req);
+    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
+
+    req.addRequest(p_req);
+    p_req.setSecurity("TS-PX1915-14", QBbgLib::QBbgSecurity::Client);
+    req.addRequest(p_req);
     //a_req.setField("Gibberish");
     //req.addRequest(a_req);
     //a_req.setSecurity(QString("invalid Mtge"));

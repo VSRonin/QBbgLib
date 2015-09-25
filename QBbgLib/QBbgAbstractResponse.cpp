@@ -2,6 +2,11 @@
 #include "private/QBbgAbstractResponse_p.h"
 #include <QHash>
 namespace QBbgLib {
+
+QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate()
+{
+
+}
     QBbgAbstractResponse::~QBbgAbstractResponse()
     {
         delete d_ptr;

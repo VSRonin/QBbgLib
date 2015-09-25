@@ -6,6 +6,8 @@
 #include "QBbgRequestResponseWorker.h"
 #include <QCoreApplication>
 namespace QBbgLib {
+
+
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
         :q_ptr(qp)
     {

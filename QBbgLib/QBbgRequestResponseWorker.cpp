@@ -15,6 +15,11 @@
 #include <fstream>
 #endif // PRINT_RESPONSE_MESSAGE
 namespace QBbgLib {
+QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
+{
+
+}
+
     QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
         :QBbgAbstractWorkerPrivate(q, options)
     {}

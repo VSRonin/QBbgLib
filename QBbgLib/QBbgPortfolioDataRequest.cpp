@@ -2,6 +2,14 @@
 #include "private/QbbgPortfolioDataRequest_p.h"
 #include "QBbgSecurity.h"
 namespace QBbgLib {
+QBbgPortfolioDataRequest::~QBbgPortfolioDataRequest()
+{
+
+}
+QBbgPortfolioDataRequestPrivate::~QBbgPortfolioDataRequestPrivate()
+{
+
+}
     void QBbgPortfolioDataRequest::setSecurity(const QBbgSecurity& val)
     {
         if (val.extension() == QBbgSecurity::Client) {

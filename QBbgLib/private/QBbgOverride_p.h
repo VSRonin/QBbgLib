@@ -9,6 +9,7 @@ namespace QBbgLib {
         Q_DECLARE_PUBLIC(QBbgOverride)
         QBbgOverridePrivate(const QBbgOverridePrivate& other);
     public:
+        virtual ~QBbgOverridePrivate();
         QBbgOverridePrivate(QBbgOverride* q);
         QBbgOverridePrivate(QBbgOverride* q, const QBbgOverridePrivate& other);
         QBbgOverridePrivate& operator=(const QBbgOverridePrivate& other);

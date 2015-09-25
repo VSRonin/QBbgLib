@@ -41,10 +41,10 @@ namespace QBbgLib {
             , IntraDayTickResponse = FirstRealTime
             , IntraDayBarResponse
         };
+        virtual ~QBbgAbstractResponse();
         QBbgAbstractResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractResponse(const QBbgAbstractResponse& other);
         virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);
-    	virtual ~QBbgAbstractResponse();
         virtual BbgErrorCodes errorCode() const;
         virtual QString errorString() const;
         virtual QString errorMessage() const;

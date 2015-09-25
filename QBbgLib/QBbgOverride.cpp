@@ -4,6 +4,11 @@
 #include <QTime>
 #include <blpapi_session.h>
 namespace QBbgLib {
+
+QBbgOverridePrivate::~QBbgOverridePrivate()
+{
+
+}
     QBbgOverridePrivate::QBbgOverridePrivate(QBbgOverride* q)
         : q_ptr(q)
     {}

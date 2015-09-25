@@ -49,9 +49,9 @@ namespace QBbgLib {
         static QString serviceTypeToString(ServiceType a);
         static ServiceType stringToServiceType(const QString& a);
     public:
+        virtual ~QBbgAbstractRequest();
         QBbgAbstractRequest(RequestType typ/*=QBbgAbstractRequest::Invalid*/);
         QBbgAbstractRequest(const QBbgAbstractRequest& other);
-        virtual ~QBbgAbstractRequest();
         virtual QBbgAbstractRequest& operator=(const QBbgAbstractRequest& other);
         virtual const QBbgSecurity& security() const;
         virtual void setSecurity(const QBbgSecurity& val);

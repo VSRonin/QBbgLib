@@ -9,7 +9,7 @@ namespace QBbgLib {
     {
         Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
     public:
-        
+        virtual ~QBbgHistoricalDataRequestPrivate();
         QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q);
         QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other);
         virtual QBbgHistoricalDataRequestPrivate& operator=(const QBbgHistoricalDataRequestPrivate& other);

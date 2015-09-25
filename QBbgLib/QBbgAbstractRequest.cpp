@@ -2,6 +2,11 @@
 #include "private/QBbgAbstractRequest_p.h"
 #include <QHash>
 namespace QBbgLib {
+
+QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate()
+{
+
+}
     QBbgAbstractRequest::QBbgAbstractRequest(RequestType typ)
         : d_ptr(new QBbgAbstractRequestPrivate(this,typ))
     {}

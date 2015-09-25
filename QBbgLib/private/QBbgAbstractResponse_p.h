@@ -9,6 +9,7 @@ namespace QBbgLib {
         Q_DECLARE_PUBLIC(QBbgAbstractResponse)
         QBbgAbstractResponsePrivate(const QBbgAbstractResponsePrivate& other);
     public:
+        virtual ~QBbgAbstractResponsePrivate();
         QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, const QBbgAbstractResponsePrivate& other);
         virtual QBbgAbstractResponsePrivate& operator=(const QBbgAbstractResponsePrivate& other);

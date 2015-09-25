@@ -8,6 +8,7 @@ namespace QBbgLib {
     {
         Q_DECLARE_PRIVATE(QBbgReferenceDataRequest)
     public:
+        virtual ~QBbgReferenceDataRequest();
     	QBbgReferenceDataRequest();
         QBbgReferenceDataRequest(const QBbgReferenceDataRequest& a);
         virtual QBbgReferenceDataRequest& operator=(const QBbgReferenceDataRequest& a);

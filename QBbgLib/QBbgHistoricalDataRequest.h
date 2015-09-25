@@ -32,6 +32,7 @@ namespace QBbgLib {
             , ALL_CALENDAR_DAYS
             , ACTIVE_DAYS_ONLY
         };
+        virtual ~QBbgHistoricalDataRequest();
         QBbgHistoricalDataRequest();
         QBbgHistoricalDataRequest(const QBbgHistoricalDataRequest& a);
         virtual QBbgHistoricalDataRequest& operator=(const QBbgHistoricalDataRequest& a);

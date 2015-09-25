@@ -1,6 +1,14 @@
 #include "QBbgAbstractFieldResponse.h"
 #include "private/QBbgAbstractFieldResponse_p.h"
 namespace QBbgLib {
+    QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse()
+{
+
+}
+QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate()
+{
+
+}
     QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ)
         :QBbgAbstractResponsePrivate(q,typ)
     {}

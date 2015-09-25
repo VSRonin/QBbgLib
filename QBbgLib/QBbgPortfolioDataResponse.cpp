@@ -1,6 +1,14 @@
 #include "QBbgPortfolioDataResponse.h"
 #include "private/QBbgPortfolioDataResponse_p.h"
 namespace QBbgLib {
+QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse()
+{
+
+}
+QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
+{
+
+}
     QBbgPortfolioDataResponsePrivate::QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other)
         :QBbgAbstractFieldResponsePrivate(q, other)
         , m_Security(other.m_Security)

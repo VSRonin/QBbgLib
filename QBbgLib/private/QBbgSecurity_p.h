@@ -10,6 +10,7 @@ namespace QBbgLib {
         QBbgSecurity* q_ptr;
         QBbgSecurityPrivate(const QBbgSecurityPrivate& other);
     public:
+        virtual ~QBbgSecurityPrivate();
         QBbgSecurityPrivate(QBbgSecurity* q);
         QBbgSecurityPrivate(QBbgSecurity* q,const QBbgSecurityPrivate& other);
         QBbgSecurityPrivate& operator=(const QBbgSecurityPrivate& other);

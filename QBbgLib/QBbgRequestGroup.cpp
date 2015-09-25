@@ -5,6 +5,8 @@
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 namespace QBbgLib {
+
+
     qint64 QBbgRequestGroupPrivate::MaxID = 1;
     QBbgRequestGroup::QBbgRequestGroup()
         :d_ptr(new QBbgRequestGroupPrivate(this))
@@ -175,8 +177,9 @@ namespace QBbgLib {
             // Merge back groups with different securities but with all the other factors in common
             bool tempMerge;
             for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end(); ++MainIter) {
-                for (QHash<qint64, QList<qint64>* >::iterator SecondIter = MainIter+1; SecondIter != Result.end();) {
-                    tempMerge = request(MainIter.value()->first())->requestType() == request(SecondIter.value()->first())->requestType();
+                const QBbgAbstractRequest::RequestType mainType= request(MainIter.value()->first())->requestType();
+                for (QHash<qint64, QList<qint64>* >::iterator SecondIter = MainIter + 1; SecondIter != Result.end() && mainType == QBbgAbstractRequest::RequestType::ReferenceData;) {
+                    tempMerge = mainType == request(SecondIter.value()->first())->requestType();
                     if (tempMerge)
                         // SameRequest is a slow method, call it only if necessary
                         tempMerge = d->SameRequest(*(MainIter.value()), *(SecondIter.value()));

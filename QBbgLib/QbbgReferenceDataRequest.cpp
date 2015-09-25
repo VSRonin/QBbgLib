@@ -1,6 +1,14 @@
 #include "QbbgReferenceDataRequest.h"
 #include "private/QbbgReferenceDataRequest_p.h"
 namespace QBbgLib {
+QBbgReferenceDataRequest::~QBbgReferenceDataRequest()
+{
+
+}
+QBbgReferenceDataRequestPrivate::~QBbgReferenceDataRequestPrivate()
+{
+
+}
     QBbgReferenceDataRequestPrivate::QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q)
         : QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::ReferenceData)
         , m_UseUTCTime(false)

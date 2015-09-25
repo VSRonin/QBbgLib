@@ -16,6 +16,7 @@ namespace QBbgLib {
             PORTFOLIO_DATA,
             PORTFOLIO_MEMBERS
         };
+        virtual ~QBbgPortfolioDataRequest();
         QBbgPortfolioDataRequest();
         QBbgPortfolioDataRequest(const QBbgPortfolioDataRequest& a);
         virtual QBbgPortfolioDataRequest& operator=(const QBbgPortfolioDataRequest& a);

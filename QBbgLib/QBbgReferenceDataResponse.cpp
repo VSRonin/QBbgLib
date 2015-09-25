@@ -1,6 +1,11 @@
 #include "QBbgReferenceDataResponse.h"
 #include "private/QBbgReferenceDataResponse_p.h"
 namespace QBbgLib {
+
+QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate()
+{
+
+}
     bool QBbgReferenceDataResponse::hasValue() const
     {
         Q_D(const QBbgReferenceDataResponse);

@@ -8,6 +8,7 @@ namespace QBbgLib {
     private:
         QBbgAbstractFieldRequestPrivate(const QBbgAbstractFieldRequestPrivate& a);
     public:
+        virtual ~QBbgAbstractFieldRequestPrivate();
         QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, const QBbgAbstractFieldRequestPrivate& a);
         QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);
         QBbgAbstractFieldRequestPrivate& operator=(const QBbgAbstractFieldRequestPrivate& a);

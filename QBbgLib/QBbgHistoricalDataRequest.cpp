@@ -1,6 +1,14 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "private/QBbgHistoricalDataRequest_p.h"
 namespace QBbgLib {
+QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest()
+{
+
+}
+QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
+{
+
+}
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q)
         : QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::HistoricalData)
         , m_periodicityAdjustment(QBbgHistoricalDataRequest::CALENDAR)
