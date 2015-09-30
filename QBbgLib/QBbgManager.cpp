@@ -68,7 +68,7 @@ namespace QBbgLib {
         return *(d->m_ResultTable.value(threadKey));
     }
 
-    const QBbgAbstractResponse* QBbgManager::processRequest(const QBbgAbstractRequest& rq)
+    const QBbgAbstractResponse* const QBbgManager::processRequest(const QBbgAbstractRequest& rq)
     {
         QBbgRequestGroup rg;
         rg.addRequest(rq);
@@ -118,7 +118,7 @@ namespace QBbgLib {
         }
         Q_UNREACHABLE(); //Could not find sender()
     }
-    const QBbgAbstractResponse* const QBbgManager::getResult(quint32 group, qint64 id) const
+    const QBbgAbstractResponse* const QBbgManager::getResultGeneric(quint32 group, qint64 id) const
     {
         Q_D(const QBbgManager);
         const QHash < qint64, QBbgAbstractResponse* >* resGroup=d->m_ResultTable.value(group, NULL);

@@ -115,7 +115,7 @@ namespace QBbgLib {
     {
         return RequestTable.value(ID, NULL);
     }
-    const QBbgAbstractRequest* QBbgRequestGroup::request(qint64 ID) const
+    const QBbgAbstractRequest* const QBbgRequestGroup::request(qint64 ID) const
     {
         Q_D(const QBbgRequestGroup);
         return d->request(ID);
@@ -184,6 +184,7 @@ namespace QBbgLib {
                         // SameRequest is a slow method, call it only if necessary
                         tempMerge = d->SameRequest(*(MainIter.value()), *(SecondIter.value()));
                     if (tempMerge) {
+                        MainIter.value()->append(*SecondIter.value());
                         delete SecondIter.value();
                         SecondIter = Result.erase(SecondIter);
                     }
