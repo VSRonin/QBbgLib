@@ -1,8 +1,16 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "private/QBbgHistoricalDataRequest_p.h"
 namespace QBbgLib {
+QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest()
+{
+
+}
+QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
+{
+
+}
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q)
-        : QBbgAbstractFieldRequestPrivate(q)
+        : QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::HistoricalData)
         , m_periodicityAdjustment(QBbgHistoricalDataRequest::CALENDAR)
         , m_periodicitySelection(QBbgHistoricalDataRequest::DAILY)
         , m_useClosePrice(true)
@@ -18,7 +26,6 @@ namespace QBbgLib {
     {
         m_currency[0] = '\0';
         m_calendarCode[0] = '\0';
-        m_RqType = QBbgAbstractRequest::HistoricalData;
     }
 
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other)
@@ -44,7 +51,6 @@ namespace QBbgLib {
         for (int i = 0; i < (sizeof(m_calendarCode) / sizeof(*m_calendarCode)); ++i) {
             m_calendarCode[i] = other.m_calendarCode[i];
         }
-        m_RqType = QBbgAbstractRequest::HistoricalData;
     }
 
     bool QBbgHistoricalDataRequestPrivate::operator==(const QBbgHistoricalDataRequestPrivate& a) const

@@ -1,8 +1,16 @@
 #include "QBbgAbstractFieldResponse.h"
 #include "private/QBbgAbstractFieldResponse_p.h"
 namespace QBbgLib {
-    QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q)
-        :QBbgAbstractResponsePrivate(q)
+    QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse()
+{
+
+}
+QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate()
+{
+
+}
+    QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ)
+        :QBbgAbstractResponsePrivate(q,typ)
     {}
 
     QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other)
@@ -15,8 +23,8 @@ namespace QBbgLib {
         m_Header = other.m_Header;
         return *this;
     }
-    QBbgAbstractFieldResponse::QBbgAbstractFieldResponse()
-        :QBbgAbstractResponse(new QBbgAbstractResponsePrivate(this))
+    QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(ResponseType typ)
+        :QBbgAbstractResponse(new QBbgAbstractResponsePrivate(this,typ))
     {}
 
     QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(const QBbgAbstractFieldResponse& a)

@@ -12,6 +12,7 @@ namespace QBbgLib {
         Q_DECLARE_PUBLIC(QBbgHistoricalDataResponse)
         QBbgHistoricalDataResponsePrivate(const QBbgHistoricalDataResponsePrivate& other);
     public:
+        virtual ~QBbgHistoricalDataResponsePrivate();
         QBbgHistoricalDataResponsePrivate(QBbgHistoricalDataResponse* q, const QBbgHistoricalDataResponsePrivate& other);
         QBbgHistoricalDataResponsePrivate(QBbgHistoricalDataResponse* q);
         virtual QBbgHistoricalDataResponsePrivate& operator=(const QBbgHistoricalDataResponsePrivate& other);

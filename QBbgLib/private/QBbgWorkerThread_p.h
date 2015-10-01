@@ -10,6 +10,7 @@ namespace QBbgLib {
         Q_DECLARE_PUBLIC(QBbgWorkerThread)
         QBbgWorkerThreadPrivate(const QBbgWorkerThreadPrivate& other);
     public:
+        virtual ~QBbgWorkerThreadPrivate();
         QBbgWorkerThreadPrivate(QBbgWorkerThread* q, QBbgAbstractWorker* wrk);
         QBbgAbstractWorker* m_worker;
     protected:

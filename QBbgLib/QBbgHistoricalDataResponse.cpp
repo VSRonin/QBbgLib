@@ -1,6 +1,14 @@
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgHistoricalDataResponse_p.h"
 namespace QBbgLib {
+QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse()
+{
+
+}
+QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate()
+{
+
+}
     qint32 QBbgHistoricalDataResponse::size() const
     {
         Q_D(const QBbgHistoricalDataResponse);
@@ -70,15 +78,11 @@ namespace QBbgLib {
     QBbgHistoricalDataResponse::QBbgHistoricalDataResponse()
         :QBbgAbstractFieldResponse(new QBbgHistoricalDataResponsePrivate(this))
     {
-        Q_D(QBbgHistoricalDataResponse);
-        d->m_ResType = HistoricalDataResponse;
     }
 
     QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(QBbgHistoricalDataResponsePrivate* dp)
         : QBbgAbstractFieldResponse(dp)
     {
-        Q_D(QBbgHistoricalDataResponse);
-        d->m_ResType = HistoricalDataResponse;
     }
 
     QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(QBbgHistoricalDataResponse& other)
@@ -113,7 +117,7 @@ namespace QBbgLib {
         setErrorCode(NoErrors);
     }
     QBbgHistoricalDataResponsePrivate::QBbgHistoricalDataResponsePrivate(QBbgHistoricalDataResponse* q)
-        :QBbgAbstractFieldResponsePrivate(q)
+        :QBbgAbstractFieldResponsePrivate(q, QBbgAbstractResponse::ResponseType::HistoricalDataResponse)
     {}
 
     QBbgHistoricalDataResponsePrivate::QBbgHistoricalDataResponsePrivate(QBbgHistoricalDataResponse* q, const QBbgHistoricalDataResponsePrivate& other)

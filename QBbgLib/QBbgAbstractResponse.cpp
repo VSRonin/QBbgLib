@@ -1,12 +1,18 @@
 #include "QBbgAbstractResponse.h"
 #include "private/QBbgAbstractResponse_p.h"
+#include <QHash>
 namespace QBbgLib {
+
+QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate()
+{
+
+}
     QBbgAbstractResponse::~QBbgAbstractResponse()
     {
         delete d_ptr;
     }
-    QBbgAbstractResponse::QBbgAbstractResponse()
-        :d_ptr(new QBbgAbstractResponsePrivate(this))
+    QBbgAbstractResponse::QBbgAbstractResponse(ResponseType typ)
+        :d_ptr(new QBbgAbstractResponsePrivate(this,typ))
     {}
     QBbgAbstractResponse::QBbgAbstractResponse(const QBbgAbstractResponse& other)
         : d_ptr(new QBbgAbstractResponsePrivate(this, *(other.d_func())))
@@ -55,10 +61,10 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractResponse);
         return d->m_ID;
     }
-    QBbgAbstractResponsePrivate::QBbgAbstractResponsePrivate(QBbgAbstractResponse* q)
+    QBbgAbstractResponsePrivate::QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, QBbgAbstractResponse::ResponseType typ)
         : q_ptr(q)
         , m_ErrorCode(QBbgAbstractResponse::NoErrors)
-        , m_ResType(QBbgAbstractResponse::Invalid)
+        , m_ResType(typ)
         , m_ID(0)
     {}
     QBbgAbstractResponsePrivate::QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, const QBbgAbstractResponsePrivate& other)
@@ -69,8 +75,8 @@ namespace QBbgLib {
     {}
     QBbgAbstractResponsePrivate& QBbgAbstractResponsePrivate::operator=(const QBbgAbstractResponsePrivate& other)
     {
+        Q_ASSERT_X(m_ResType == other.m_ResType, "QBbgAbstractRequestPrivate::operator=", "Trying to copy between two diffrent Response types");
         m_ErrorCode = other.m_ErrorCode;
-        m_ResType = other.m_ResType;
         m_ID = m_ID;
         return *this;
     }
@@ -99,28 +105,28 @@ namespace QBbgLib {
     QBbgAbstractResponse::ResponseType QBbgAbstractResponse::stringToResponseType(QString a)
     {
         a = a.toLower().trimmed();
-        if (a == "BeqsResponse") return BeqsResponse;
-        else if (a == "historicaldataresponse") return HistoricalDataResponse;
-        else if (a == "referencedataresponse") return ReferenceDataResponse;
-        else if (a == "portfoliodataresponse") return PortfolioDataResponse;
-        else if (a == "intradaytickresponse") return IntraDayTickResponse;
-        else if (a == "intradaybarresponse") return IntraDayBarResponse;
-        else return Invalid;
+        if (a == "BeqsResponse") return ResponseType::BeqsResponse;
+        else if (a == "historicaldataresponse") return ResponseType::HistoricalDataResponse;
+        else if (a == "referencedataresponse") return ResponseType::ReferenceDataResponse;
+        else if (a == "portfoliodataresponse") return ResponseType::PortfolioDataResponse;
+        else if (a == "intradaytickresponse") return ResponseType::IntraDayTickResponse;
+        else if (a == "intradaybarresponse") return ResponseType::IntraDayBarResponse;
+        else return ResponseType::Invalid;
     }
     QString QBbgAbstractResponse::responseTypeToString(ResponseType a)
     {
         switch (a) {
-        case QBbgLib::QBbgAbstractResponse::BeqsResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::BeqsResponse:
             return "BeqsResponse";
-        case QBbgLib::QBbgAbstractResponse::HistoricalDataResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::HistoricalDataResponse:
             return "HistoricalDataResponse";
-        case QBbgLib::QBbgAbstractResponse::ReferenceDataResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::ReferenceDataResponse:
             return "ReferenceDataResponse";
-        case QBbgLib::QBbgAbstractResponse::PortfolioDataResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::PortfolioDataResponse:
             return "PortfolioDataResponse";
-        case QBbgLib::QBbgAbstractResponse::IntraDayTickResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::IntraDayTickResponse:
             return "IntraDayTickResponse";
-        case QBbgLib::QBbgAbstractResponse::IntraDayBarResponse:
+        case QBbgLib::QBbgAbstractResponse::ResponseType::IntraDayBarResponse:
             return "IntraDayBarResponse";
         default:
             return QString();
@@ -131,4 +137,9 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractResponse);
         return errorString() + " - " + d->m_ErrorMessage;
     }
+}
+
+uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed /*= 0*/)
+{
+    return qHash(static_cast<qint32>(key), seed);
 }

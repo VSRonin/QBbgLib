@@ -1,8 +1,14 @@
 #include "QBbgAbstractRequest.h"
 #include "private/QBbgAbstractRequest_p.h"
+#include <QHash>
 namespace QBbgLib {
-    QBbgAbstractRequest::QBbgAbstractRequest()
-        : d_ptr(new QBbgAbstractRequestPrivate(this))
+
+QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate()
+{
+
+}
+    QBbgAbstractRequest::QBbgAbstractRequest(RequestType typ)
+        : d_ptr(new QBbgAbstractRequestPrivate(this,typ))
     {}
     QBbgAbstractRequest::QBbgAbstractRequest(const QBbgAbstractRequest& other)
         : d_ptr(new QBbgAbstractRequestPrivate(this, *(other.d_ptr)))
@@ -15,10 +21,10 @@ namespace QBbgLib {
     {
         delete d_ptr;
     }
-    QBbgAbstractRequestPrivate::QBbgAbstractRequestPrivate(QBbgAbstractRequest* q)
+    QBbgAbstractRequestPrivate::QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, QBbgAbstractRequest::RequestType typ)
         : q_ptr(q)
         , m_ID(QBbgAbstractRequest::InvalidID)
-        , m_RqType(QBbgAbstractRequest::Invalid)
+        , m_RqType(typ)
     {}
     QBbgAbstractRequestPrivate::QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, const QBbgAbstractRequestPrivate& other)
         : q_ptr(q)
@@ -28,9 +34,9 @@ namespace QBbgLib {
     {}
     QBbgAbstractRequestPrivate& QBbgAbstractRequestPrivate::operator=(const QBbgAbstractRequestPrivate& other)
     {
+        Q_ASSERT_X(m_RqType == other.m_RqType, "QBbgAbstractRequestPrivate::operator=", "Trying to copy between two diffrent Request types");
         m_ID = other.m_ID;
         m_Security = other.m_Security;
-        m_RqType = other.m_RqType;
         return *this;
     }
     void QBbgAbstractRequest::setSecurity(const QBbgSecurity& val)
@@ -69,25 +75,25 @@ namespace QBbgLib {
     QString QBbgAbstractRequest::requestTypeToString(RequestType a)
     {
         switch (a) {
-        case Beqs: return "BeqsRequest";
-        case HistoricalData: return "HistoricalDataRequest";
-        case ReferenceData: return "ReferenceDataRequest";
-        case PortfolioData: return "PortfolioDataRequest";
-        case IntraDayTick: return "IntraDayTickRequest";
-        case IntraDayBar: return "IntraDayBarRequest";
+        case RequestType::Beqs: return "BeqsRequest";
+        case RequestType::HistoricalData: return "HistoricalDataRequest";
+        case RequestType::ReferenceData: return "ReferenceDataRequest";
+        case RequestType::PortfolioData: return "PortfolioDataRequest";
+        case RequestType::IntraDayTick: return "IntraDayTickRequest";
+        case RequestType::IntraDayBar: return "IntraDayBarRequest";
         default: return QString();
         }
     }
     QBbgAbstractRequest::RequestType QBbgAbstractRequest::stringToRequestType(QString a)
     {
         a = a.toLower().trimmed();
-        if (a == "beqsrequest") return Beqs;
-        else if (a == "historicaldatarequest") return HistoricalData;
-        else if (a == "referencedatarequest") return ReferenceData;
-        else if (a == "portfoliodatarequest") return PortfolioData;
-        else if (a == "intradaytickrequest") return IntraDayTick;
-        else if (a == "intradaybarrequest") return IntraDayBar;
-        else return Invalid;
+        if (a == "beqsrequest") return RequestType::Beqs;
+        else if (a == "historicaldatarequest") return RequestType::HistoricalData;
+        else if (a == "referencedatarequest") return RequestType::ReferenceData;
+        else if (a == "portfoliodatarequest") return RequestType::PortfolioData;
+        else if (a == "intradaytickrequest") return RequestType::IntraDayTick;
+        else if (a == "intradaybarrequest") return RequestType::IntraDayBar;
+        else return RequestType::Invalid;
     }
     bool QBbgAbstractRequest::isValidReq() const
     {
@@ -106,33 +112,33 @@ namespace QBbgLib {
     QBbgAbstractRequest::ServiceType QBbgAbstractRequest::serviceForRequest(RequestType a)
     {
         switch (a) {
-        case ReferenceData: 
-        case PortfolioData:
-        case HistoricalData:
-            return refdata;
+        case RequestType::ReferenceData:
+        case RequestType::PortfolioData:
+        case RequestType::HistoricalData:
+            return ServiceType::refdata;
         default: 
             Q_UNREACHABLE(); //Unhandled service type
-            return NoService;
+            return ServiceType::NoService;
         }
     }
    QString QBbgAbstractRequest::serviceTypeToString(ServiceType a)
    {
        switch (a) {           
-       case QBbgLib::QBbgAbstractRequest::refdata:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::refdata:
            return "//blp/refdata";
-       case QBbgLib::QBbgAbstractRequest::mktdata:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::mktdata:
            return "//blp/mktdata";
-       case QBbgLib::QBbgAbstractRequest::mktvwap:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::mktvwap:
            return "//blp/mktvwap";
-       case QBbgLib::QBbgAbstractRequest::mktbar:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::mktbar:
            return "//blp/mktbar";
-       case QBbgLib::QBbgAbstractRequest::apiflds:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::apiflds:
            return "//blp/apiflds";
-       case QBbgLib::QBbgAbstractRequest::pagedata:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::pagedata:
            return "//blp/pagedata";
-       case QBbgLib::QBbgAbstractRequest::tasvc:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::tasvc:
            return "//blp/tasvc";
-       case QBbgLib::QBbgAbstractRequest::apiauth:
+       case QBbgLib::QBbgAbstractRequest::ServiceType::apiauth:
            return "//blp/apiauth";
        default:
            return QString();
@@ -141,17 +147,22 @@ namespace QBbgLib {
 
    QBbgAbstractRequest::ServiceType QBbgAbstractRequest::stringToServiceType(const QString& a)
    {
-       if (a == "//blp/refdata") return refdata;
-       else if (a == "//blp/mktdata") return mktdata;
-       else if (a == "//blp/mktvwap") return mktvwap;
-       else if (a == "//blp/mktbar") return mktbar;
-       else if (a == "//blp/apiflds") return apiflds;
-       else if (a == "//blp/pagedata") return pagedata;
-       else if (a == "//blp/tasvc") return tasvc;
-       else if (a == "//blp/apiauth") return apiauth;
-       else return NoService;
+       if (a == "//blp/refdata") return ServiceType::refdata;
+       else if (a == "//blp/mktdata") return ServiceType::mktdata;
+       else if (a == "//blp/mktvwap") return ServiceType::mktvwap;
+       else if (a == "//blp/mktbar") return ServiceType::mktbar;
+       else if (a == "//blp/apiflds") return ServiceType::apiflds;
+       else if (a == "//blp/pagedata") return ServiceType::pagedata;
+       else if (a == "//blp/tasvc") return ServiceType::tasvc;
+       else if (a == "//blp/apiauth") return ServiceType::apiauth;
+       else return ServiceType::NoService;
    }
     
 
+}
+
+uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed)
+{
+    return qHash(static_cast<qint32>(key), seed);
 }
 

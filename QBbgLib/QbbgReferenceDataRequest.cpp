@@ -1,17 +1,23 @@
 #include "QbbgReferenceDataRequest.h"
 #include "private/QbbgReferenceDataRequest_p.h"
 namespace QBbgLib {
+QBbgReferenceDataRequest::~QBbgReferenceDataRequest()
+{
+
+}
+QBbgReferenceDataRequestPrivate::~QBbgReferenceDataRequestPrivate()
+{
+
+}
     QBbgReferenceDataRequestPrivate::QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q)
-        : QBbgAbstractFieldRequestPrivate(q)
+        : QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::ReferenceData)
         , m_UseUTCTime(false)
     {
-        m_RqType = QBbgAbstractRequest::ReferenceData;
     }
     QBbgReferenceDataRequestPrivate::QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q, const QBbgReferenceDataRequestPrivate& other)
         : QBbgAbstractFieldRequestPrivate(q, other)
         , m_UseUTCTime(other.m_UseUTCTime)
     {
-        m_RqType = QBbgAbstractRequest::ReferenceData;
     }
     QBbgReferenceDataRequestPrivate& QBbgReferenceDataRequestPrivate::operator=(const QBbgReferenceDataRequestPrivate& other)
     {

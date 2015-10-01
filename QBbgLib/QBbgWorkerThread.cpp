@@ -2,6 +2,11 @@
 #include "private/QBbgWorkerThread_p.h"
 #include "QBbgAbstractWorker.h"
 namespace QBbgLib {
+
+QBbgWorkerThreadPrivate::~QBbgWorkerThreadPrivate()
+{
+
+}
     QBbgWorkerThread::QBbgWorkerThread(QBbgWorkerThreadPrivate* dp, QObject* parent)
         :QThread(parent)
         , d_ptr(dp)

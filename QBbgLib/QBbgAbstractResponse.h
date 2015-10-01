@@ -5,12 +5,13 @@
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
     class QBbgAbstractWorkerPrivate;
+    class QBbgRequestResponseWorkerPrivate;
     class QBBG_EXPORT QBbgAbstractResponse
     {
     private:
         Q_DECLARE_PRIVATE(QBbgAbstractResponse)
     protected:
-        enum
+        enum : qint32
         {
             FirstFielded = 0x10
             , FirstRealTime = 0x20
@@ -30,7 +31,7 @@ namespace QBbgLib {
             , NoData = 0x100
         };
         Q_DECLARE_FLAGS(BbgErrorCodes, BbgErrorCodesF)
-        enum ResponseType
+        enum class ResponseType : qint32
         {
             Invalid=-1
             , BeqsResponse
@@ -40,10 +41,10 @@ namespace QBbgLib {
             , IntraDayTickResponse = FirstRealTime
             , IntraDayBarResponse
         };
-    	QBbgAbstractResponse();
+        virtual ~QBbgAbstractResponse();
+        QBbgAbstractResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractResponse(const QBbgAbstractResponse& other);
         virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);
-    	virtual ~QBbgAbstractResponse();
         virtual BbgErrorCodes errorCode() const;
         virtual QString errorString() const;
         virtual QString errorMessage() const;
@@ -61,7 +62,9 @@ namespace QBbgLib {
         virtual void setID(qint64 val);
 
         friend class QBbgAbstractWorkerPrivate;
+        friend class QBbgRequestResponseWorkerPrivate;
     };
 }
+QBBG_EXPORT uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed = 0);
 Q_DECLARE_OPERATORS_FOR_FLAGS(QBbgLib::QBbgAbstractResponse::BbgErrorCodes)
 #endif // QBbgAbstractResponse_h__

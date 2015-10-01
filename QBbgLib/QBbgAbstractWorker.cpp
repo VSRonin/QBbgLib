@@ -5,6 +5,8 @@
 #include <QTime>
 #include <QDateTime>
 namespace QBbgLib {
+
+
     QBbgAbstractWorkerPrivate::QBbgAbstractWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& option)
         :q_ptr(q)
         , m_session(new BloombergLP::blpapi::Session(option,this))
