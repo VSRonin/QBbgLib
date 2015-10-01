@@ -62,3 +62,4 @@ Makefile*
 *.qmlproject.user.*
 *.psess
 *vsp
+*.*.orig
