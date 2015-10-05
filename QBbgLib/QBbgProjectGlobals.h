@@ -1,7 +1,7 @@
 #ifndef ProjectGlobals_h__
 #define ProjectGlobals_h__
 #ifdef _DEBUG
-#define PRINT_RESPONSE_MESSAGE //Uncomment to debug response messages from Bloomberg
+//#define PRINT_RESPONSE_MESSAGE //Uncomment to debug response messages from Bloomberg
 #endif // _DEBUG
 #ifdef QBBG_LIB_BUILD
     #define QBBG_EXPORT __declspec(dllexport)
