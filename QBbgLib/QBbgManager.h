@@ -33,6 +33,9 @@ namespace QBbgLib {
         quint32 startRequest(const QBbgRequestGroup& rq);
         quint32 startRequest(const QBbgAbstractRequest& rq);
         const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
+        const QBbgReferenceDataResponse* const processRequest(const QBbgReferenceDataRequest& rq);
+        const QBbgHistoricalDataResponse* const processRequest(const QBbgHistoricalDataRequest& rq);
+        const QBbgPortfolioDataResponse* const processRequest(const QBbgPortfolioDataRequest& rq);
         const QBbgAbstractResponse* const processRequest(const QBbgAbstractRequest& rq);
         template <class T = QBbgAbstractResponse> const T* const getResult(quint32 group, qint64 id) const
         {

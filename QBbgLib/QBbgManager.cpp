@@ -5,6 +5,12 @@
 #include <QEventLoop>
 #include "QBbgRequestResponseWorker.h"
 #include <QCoreApplication>
+#include "QbbgReferenceDataRequest.h"
+#include "QBbgPortfolioDataRequest.h"
+#include "QBbgHistoricalDataRequest.h"
+#include "QBbgReferenceDataResponse.h"
+#include "QBbgPortfolioDataResponse.h"
+#include "QBbgHistoricalDataResponse.h"
 namespace QBbgLib {
 
 
@@ -75,6 +81,21 @@ namespace QBbgLib {
         const QHash<qint64, QBbgAbstractResponse* >& resHash= processRequest(rg);
         Q_ASSERT(resHash.count() == 1);
         return resHash.begin().value();
+    }
+
+    const QBbgPortfolioDataResponse* const QBbgManager::processRequest(const QBbgPortfolioDataRequest& rq)
+    {
+        return static_cast<const QBbgPortfolioDataResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
+    }
+
+    const QBbgReferenceDataResponse* const QBbgManager::processRequest(const QBbgReferenceDataRequest& rq)
+    {
+        return static_cast<const QBbgReferenceDataResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
+    }
+
+    const QBbgHistoricalDataResponse* const QBbgManager::processRequest(const QBbgHistoricalDataRequest& rq)
+    {
+        return static_cast<const QBbgHistoricalDataResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
     }
 
     void QBbgManager::handleResponse(qint64 reID, QBbgAbstractResponse* res)
