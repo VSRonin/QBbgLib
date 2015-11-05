@@ -4,6 +4,8 @@
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
+#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
+
 namespace QBbgLib {
 
 
@@ -161,19 +163,24 @@ namespace QBbgLib {
             bool found;
             for (QHash<qint64, QBbgAbstractRequest*>::const_iterator MainIter = d->RequestTable.constBegin(); MainIter != d->RequestTable.constEnd(); ++MainIter) {
                 found = false;
+#ifndef DISABLE_BULK_REQUESTS
                 for (QHash<qint64, QList<qint64>* >::iterator resIter = Result.begin(); !found && resIter != Result.end(); ++resIter) {
                     if (d->compatible(request(resIter.value()->first()), *MainIter)) {
                         resIter.value()->append(MainIter.key());
                         found = true;
                     }
                 }
+#endif // !DISABLE_BULK_REQUESTS
                 if (!found) {
                     QHash<qint64, QList<qint64>* >::iterator iter=Result.insert(StartingID++, new QList<qint64>());
                     iter.value()->append(MainIter.key());
                 }
             }
         }
+#ifndef DISABLE_BULK_REQUESTS
         { 
+
+
             // Merge back groups with different securities but with all the other factors in common
             bool tempMerge;
             for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end(); ++MainIter) {
@@ -195,6 +202,7 @@ namespace QBbgLib {
             }
             
         }
+#endif // !DISABLE_BULK_REQUESTS
     }
     QList<QBbgAbstractRequest::RequestType> QBbgRequestGroup::differentTypes() const
     {
