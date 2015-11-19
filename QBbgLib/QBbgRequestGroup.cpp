@@ -4,7 +4,7 @@
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
-#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
+//#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
 
 namespace QBbgLib {
 
