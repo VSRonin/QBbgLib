@@ -5,6 +5,7 @@
 #include "QBbgProjectGlobals.h"
 class QDate;
 class QTime;
+class QVariant;
 namespace BloombergLP { namespace blpapi { class Request; } }
 namespace QBbgLib {
     class QBbgOverridePrivate;
@@ -21,11 +22,14 @@ namespace QBbgLib {
         virtual qint32 size();
         virtual bool contains(const QString& Name) const;
         virtual bool isEmpty() const;
+        virtual void setOverride(const QString& Name, const QVariant& val);
         virtual void setOverride(const QString& Name, const QDate& val);
         virtual void setOverride(const QString& Name, const QTime& val);
         virtual void setOverride(const QString& Name, double val);
         virtual void setOverride(const QString& Name, qint32 val);
         virtual void setOverride(const QString& Name, qint64 val);
+        virtual void setOverride(const QString& Name, quint32 val);
+        virtual void setOverride(const QString& Name, quint64 val);
         virtual void setOverride(QString Name, const QString& val);
         virtual void setOverride(QString Name, const char* val);
         virtual QString overrideValue(const QString& Name) const;

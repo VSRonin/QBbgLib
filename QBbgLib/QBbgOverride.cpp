@@ -2,6 +2,7 @@
 #include "private/QBbgOverride_p.h"
 #include <QDate>
 #include <QTime>
+#include <QVariant>
 #include <blpapi_session.h>
 namespace QBbgLib {
 
@@ -125,7 +126,16 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
     {
         setOverride(Name, QString::number(val));
     }
+    void QBbgOverride::setOverride(const QString& Name, quint32 val)
+    {
+        setOverride(Name, QString::number(val));
+    }
+
     void QBbgOverride::setOverride(const QString& Name, qint64 val)
+    {
+        setOverride(Name, QString::number(val));
+    }
+    void QBbgOverride::setOverride(const QString& Name, quint64 val)
     {
         setOverride(Name, QString::number(val));
     }
@@ -143,7 +153,31 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
         return setOverride(Name, QString(val));
     }
 
-    void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
+    void QBbgOverride::setOverride(const QString& Name, const QVariant& val)
+    {
+        switch (val.type()){
+        case QMetaType::QString:
+            return setOverride(Name, val.toString());
+        case QMetaType::QDate:
+            return setOverride(Name, val.toDate());
+        case QMetaType::QTime:
+            return setOverride(Name, val.toTime());
+        case QMetaType::Double:
+            return setOverride(Name, val.toDouble());
+        case QMetaType::Int:
+            return setOverride(Name, val.toInt());
+        case QMetaType::LongLong:
+            return setOverride(Name, val.toLongLong());
+        case QMetaType::UInt:
+            return setOverride(Name, val.toUInt());
+        case QMetaType::ULongLong:
+            return setOverride(Name, val.toULongLong());
+        default:
+            Q_UNREACHABLE(); // Invalid override type
+        }
+    }
+
+void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
     {
         Q_D(const QBbgOverride);
         for (QHash<QString, QString>::const_iterator i = d->m_Overrides.constBegin(); i != d->m_Overrides.constEnd(); ++i) {
