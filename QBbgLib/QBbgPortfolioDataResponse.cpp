@@ -36,6 +36,28 @@ QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
         m_Weight = other.m_Weight;
         return *this;
     }
+    double QBbgPortfolioDataResponsePrivate::positionMultiplier(QBbgLib::QBbgSecurity::YellowKeys val) const
+    {
+        switch (val) {
+        case QBbgLib::QBbgSecurity::Govt:
+        case QBbgLib::QBbgSecurity::Corp:
+        case QBbgLib::QBbgSecurity::Mtge:
+        case QBbgLib::QBbgSecurity::Curncy:
+        case QBbgLib::QBbgSecurity::Muni:
+            return 1000.0;
+        case QBbgLib::QBbgSecurity::Pfd:
+        case QBbgLib::QBbgSecurity::Equity:
+            return 1.0;
+        case QBbgLib::QBbgSecurity::MMkt:
+        case QBbgLib::QBbgSecurity::Comdty:
+        case QBbgLib::QBbgSecurity::Index:
+            Q_ASSERT_X(false, "getMultipier()", "Unspecifed multiplier for extension");
+            return 1.0;
+        default:
+            Q_ASSERT_X(false, "getMultipier()", "Invalid Extension");
+            return 0.0;
+        }
+    }
 
     size_t QBbgPortfolioDataResponse::size() const
     {
@@ -155,8 +177,11 @@ QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
 
    void QBbgPortfolioDataResponse::addPosition(double val)
    {
+       
        Q_D(QBbgPortfolioDataResponse);
-       d->m_Position.append(val);
+       Q_ASSERT_X(d->m_Security.size() > d->m_Position.size() && d->m_Security.value(d->m_Position.size(),QBbgSecurity()).isValid(), "QBbgPortfolioDataResponse::addPosition", "set up security before calling addPosition");
+       const double mutilp = d->positionMultiplier(d->m_Security.at(d->m_Position.size()).extension());
+       d->m_Position.append(val * mutilp);
    }
 
    void QBbgPortfolioDataResponse::addMarketValue(double val)

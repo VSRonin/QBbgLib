@@ -10,7 +10,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgPortfolioDataResponse)
-            QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other);
+        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other);
     public:
         virtual ~QBbgPortfolioDataResponsePrivate();
         QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other);
@@ -23,9 +23,9 @@ namespace QBbgLib {
         QList<QDate> m_CostDate;
         QList<double> m_CostFx;
         QList<double> m_Weight;
+        double positionMultiplier(QBbgLib::QBbgSecurity::YellowKeys val) const;
 
     };
-
     
 }
 #endif // QBbgPortfolioDataResponse_p_h__
