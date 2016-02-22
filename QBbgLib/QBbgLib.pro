@@ -33,9 +33,6 @@ target.path=$$PREFIX/lib
 unix:!symbian {
 	target.path=$$PREFIX/lib/$${LIB_ARCH}
 }
-target.files = $$DESTDIRNAME/*.dll
-target.files += $$DESTDIRNAME/*.lib
-target.files += $$DESTDIRNAME/*.pdb
 headers.path=$$PREFIX/include
 headers.files = *.h
 headers.files += ./Includes/*
