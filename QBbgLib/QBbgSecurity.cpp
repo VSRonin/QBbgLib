@@ -1,6 +1,6 @@
 #include "QBbgSecurity.h"
 #include "private/QBbgSecurity_p.h"
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDataStream>
 #include <QHash>
 namespace QBbgLib {
@@ -59,10 +59,11 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
             setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
             SecString = SecString.left(SecString.lastIndexOf(' '));
         }
-        QRegExp priceSourceRegExp("\\S@(\\S)[\\s$]");
-        if (priceSourceRegExp.indexIn(SecString) >= 0) {
-            setPricingSource(priceSourceRegExp.cap(1));
-            SecString.replace(QRegExp("@\\S"), QString());
+        QRegularExpression priceSourceRegExp("\\s@(\\S+)[\\s$]");
+        QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
+        if (matchRes.hasMatch()) {
+            setPricingSource(matchRes.captured(1));
+            SecString.replace(QRegularExpression("@\\S+"), QString());
         }
         setName(SecString);
     }
@@ -78,7 +79,7 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
     void QBbgSecurity::setName(const QString& val)
     {
         Q_D(QBbgSecurity);
-        d->m_Name = val.trimmed().toUpper();
+        d->m_Name = val.simplified().toUpper();
     }
     const QString& QBbgSecurity::exchange() const
     {
@@ -88,7 +89,7 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
     void QBbgSecurity::setExchange(const QString& val)
     {
         Q_D(QBbgSecurity);
-        d->m_Exchange = val.trimmed();
+        d->m_Exchange = val.simplified();
     }
     const QString& QBbgSecurity::pricingSource() const
     {
