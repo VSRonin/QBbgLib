@@ -59,7 +59,7 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
             setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
             SecString = SecString.left(SecString.lastIndexOf(' '));
         }
-        QRegularExpression priceSourceRegExp("\\s@(\\S+)[\\s$]");
+        QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
         QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
         if (matchRes.hasMatch()) {
             setPricingSource(matchRes.captured(1));
