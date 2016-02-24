@@ -102,7 +102,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
                                     for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
                                         if (!fieldDataValue.getValueAsElement(RowIter).hasElement("Security")) 
                                             continue;
-                                        if (!QString(fieldDataValue.getValueAsElement(RowIter).getElementAsString("Security")).isEmpty())
+                                        if (QString(fieldDataValue.getValueAsElement(RowIter).getElementAsString("Security")).isEmpty())
                                             continue;
                                         if (fieldDataValue.getValueAsElement(RowIter).hasElement("Position")) tmpPos = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Position");
                                         if (fieldDataValue.getValueAsElement(RowIter).hasElement("Market Value")) tmpMkVal = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64("Market Value");
