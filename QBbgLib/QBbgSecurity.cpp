@@ -50,22 +50,24 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
     QBbgSecurity::QBbgSecurity(QString SecString)
         :d_ptr(new QBbgSecurityPrivate(this))
     {
-        SecString = SecString.simplified();
-        if (SecString.at(0) == '/') {
-            setExtension(stringToYellowKey(SecString.mid(1, SecString.indexOf('/', 1))));
-            SecString = SecString.mid(SecString.indexOf('/', 1) + 1);
+        if (!SecString.isEmpty()) {
+            SecString = SecString.simplified();
+            if (SecString.at(0) == '/') {
+                setExtension(stringToYellowKey(SecString.mid(1, SecString.indexOf('/', 1))));
+                SecString = SecString.mid(SecString.indexOf('/', 1) + 1);
+            }
+            else {
+                setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
+                SecString = SecString.left(SecString.lastIndexOf(' '));
+            }
+            QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
+            QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
+            if (matchRes.hasMatch()) {
+                setPricingSource(matchRes.captured(1));
+                SecString.replace(QRegularExpression("@\\S+"), QString());
+            }
+            setName(SecString);
         }
-        else {
-            setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
-            SecString = SecString.left(SecString.lastIndexOf(' '));
-        }
-        QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
-        QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
-        if (matchRes.hasMatch()) {
-            setPricingSource(matchRes.captured(1));
-            SecString.replace(QRegularExpression("@\\S+"), QString());
-        }
-        setName(SecString);
     }
     QBbgSecurity::~QBbgSecurity()
     {
