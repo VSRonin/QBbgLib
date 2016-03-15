@@ -6,7 +6,6 @@
 namespace QBbgLib {
     class QBbgAbstractRequestPrivate;
     class QBbgRequestGroup;
-    class QBbgRequestResponseWorkerPrivate;
     class QBbgRequestResponseWorker;
     class QBBG_EXPORT QBbgAbstractRequest
     {

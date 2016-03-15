@@ -9,7 +9,6 @@
 namespace QBbgLib {
     class QBbgRequestGroupPrivate;
     class QBbgRequestResponseWorker;
-    class QBbgRequestResponseWorkerPrivate;
 	class QBBG_EXPORT QBbgRequestGroup
 	{
     private:
@@ -60,7 +59,6 @@ namespace QBbgLib {
         QList<QString> differentServices() const;
 
         friend class QBbgRequestResponseWorker;
-        friend class QBbgRequestResponseWorkerPrivate;
 	};
 }
 #endif // QBbgRequest_h__

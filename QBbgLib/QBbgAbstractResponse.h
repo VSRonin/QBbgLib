@@ -4,8 +4,8 @@
 #include "QBbgProjectGlobals.h"
 namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
-    class QBbgAbstractWorkerPrivate;
-    class QBbgRequestResponseWorkerPrivate;
+    class QBbgAbstractWorker;
+    class QBbgRequestResponseWorker;
     class QBBG_EXPORT QBbgAbstractResponse
     {
     private:
@@ -61,8 +61,8 @@ namespace QBbgLib {
         virtual void setErrorCode(BbgErrorCodes ErrCd,const QString& errMsg=QString());
         virtual void setID(qint64 val);
 
-        friend class QBbgAbstractWorkerPrivate;
-        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgAbstractWorker;
+        friend class QBbgRequestResponseWorker;
     };
 }
 QBBG_EXPORT uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed = 0);

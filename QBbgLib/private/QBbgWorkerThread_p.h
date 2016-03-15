@@ -1,21 +1,28 @@
-#ifndef QBbgWorkerThread_p_h__
-#define QBbgWorkerThread_p_h__
-
-#include "QBbgWorkerThread.h"
+#ifndef QBbgWorkerThread_h__
+#define QBbgWorkerThread_h__
+#include <QThread>
 namespace QBbgLib {
     class QBbgAbstractWorker;
-    class QBbgWorkerThreadPrivate
+    class QBbgAbstractResponse;
+    class QBbgWorkerThread : public QThread
     {
-    private:
-        Q_DECLARE_PUBLIC(QBbgWorkerThread)
-        QBbgWorkerThreadPrivate(const QBbgWorkerThreadPrivate& other);
+        Q_OBJECT   
     public:
-        virtual ~QBbgWorkerThreadPrivate();
-        QBbgWorkerThreadPrivate(QBbgWorkerThread* q, QBbgAbstractWorker* wrk);
+        QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent = NULL);
+        virtual ~QBbgWorkerThread();
+    private:
         QBbgAbstractWorker* m_worker;
     protected:
-        QBbgWorkerThread* q_ptr;
+        void createConnections();
+    public slots:
+        void run();
+        void stop();
+    signals:
+        void started();
+        void stopped();
+        void dataRecieved(qint64 reID, QBbgAbstractResponse* res);
+        void progress(qint32 pct);
+        void finished();
     };
-
 }
-#endif // QBbgWorkerThread_p_h__
+#endif // QBbgWorkerThread_h__

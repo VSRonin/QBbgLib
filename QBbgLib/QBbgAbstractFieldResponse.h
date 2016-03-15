@@ -3,7 +3,7 @@
 #include "QBbgAbstractResponse.h"
 namespace QBbgLib {
     class QBbgAbstractFieldResponsePrivate;
-    class QBbgRequestResponseWorkerPrivate;
+    class QBbgRequestResponseWorker;
     class QBBG_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
     {
         Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
@@ -17,7 +17,7 @@ namespace QBbgLib {
         QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);
         virtual void setHeader(const QString& Header = QString());
 
-        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgAbstractFieldResponse_h__

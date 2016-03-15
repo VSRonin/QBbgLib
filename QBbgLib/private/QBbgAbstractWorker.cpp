@@ -1,52 +1,49 @@
-#include "QBbgAbstractWorker.h"
 #include "private/QBbgAbstractWorker_p.h"
 #include <blpapi_session.h>
 #include <QDate>
 #include <QTime>
 #include <QDateTime>
+#include <blpapi_session.h>
 namespace QBbgLib {
-
-
-    QBbgAbstractWorkerPrivate::QBbgAbstractWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& option)
-        :q_ptr(q)
-        , m_session(new BloombergLP::blpapi::Session(option,this))
-        , m_SessionRunning(false)
-    {}
-    QBbgAbstractWorkerPrivate::~QBbgAbstractWorkerPrivate()
+    QBbgAbstractWorker::~QBbgAbstractWorker()
     {
         if (m_SessionRunning)
             m_session->stop();
     }
-    QBbgAbstractWorker::QBbgAbstractWorker(QBbgAbstractWorkerPrivate* d, QObject* parent)
-        : d_ptr(d)
+    QBbgAbstractWorker::QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent)
+        : m_session(new BloombergLP::blpapi::Session(option))
+        , m_SessionRunning(false)
         , QObject(parent)
     {}
-
-    QBbgAbstractWorker::~QBbgAbstractWorker()
-    {
-        d_ptr->deleteLater();
-    }
-
     bool QBbgAbstractWorker::isAvailable() const
     {
-        Q_D(const QBbgAbstractWorker);
-        return !d->m_SessionRunning;
+        return !m_SessionRunning;
     }
     void QBbgAbstractWorker::stop()
     {
-        Q_D(QBbgAbstractWorker);
-        if (d->m_SessionRunning)
-            d->m_session->stopAsync();
+        if (m_SessionRunning)
+            m_session->stopAsync();
     }
-    void QBbgAbstractWorkerPrivate::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const
+
+    bool QBbgAbstractWorker::sessionRunning() const
+    {
+        return m_SessionRunning;
+    }
+
+    void QBbgAbstractWorker::setSessionRunning(bool val)
+    {
+        m_SessionRunning = val;
+    }
+
+    void QBbgAbstractWorker::setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const
     {
         res->setErrorCode(err,errMsg);
     }
-    void QBbgAbstractWorkerPrivate::setResponseID(QBbgAbstractResponse* res, qint64 corrID) const
+    void QBbgAbstractWorker::setResponseID(QBbgAbstractResponse* res, qint64 corrID) const
     {
         res->setID(corrID);
     }
-    QVariant QBbgAbstractWorkerPrivate::elementToVariant(BloombergLP::blpapi::Element& val)
+    QVariant QBbgAbstractWorker::elementToVariant(BloombergLP::blpapi::Element& val)
     {
         if (val.isNull()) return QVariant();
         //if (val.isNullValue()) return QVariant();
@@ -97,4 +94,10 @@ namespace QBbgLib {
             return QVariant();
         }
     }
+
+    QScopedPointer<BloombergLP::blpapi::Session>& QBbgAbstractWorker::session()
+    {
+        return m_session;
+    }
+
 }

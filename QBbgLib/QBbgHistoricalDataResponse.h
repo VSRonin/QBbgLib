@@ -6,7 +6,6 @@
 #include <QList>
 class QVariant;
 namespace QBbgLib {
-    class QBbgRequestResponseWorkerPrivate;
     class QBbgHistoricalDataResponsePrivate;
     class QBBG_EXPORT QBbgHistoricalDataResponse : public QBbgAbstractFieldResponse
     {
@@ -31,7 +30,7 @@ namespace QBbgLib {
         QBbgHistoricalDataResponse(QBbgHistoricalDataResponsePrivate* dp);
         virtual void setValue(const QDate& dt, const QVariant& val, const QString& period = QString(), const QString& Header = QString());
         virtual void clear();
-        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgHistoricalDataResponse_h__

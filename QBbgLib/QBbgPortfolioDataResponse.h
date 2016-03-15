@@ -5,7 +5,6 @@
 #include "QBbgProjectGlobals.h"
 class QDate;
 namespace QBbgLib {
-    class QBbgRequestResponseWorkerPrivate;
     class QBbgPortfolioDataResponsePrivate;
     class QBbgSecurity;
     class QBBG_EXPORT QBbgPortfolioDataResponse : public QBbgAbstractFieldResponse
@@ -43,7 +42,7 @@ namespace QBbgLib {
         virtual void addWeight(double val);
         virtual void clear();
 
-        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgPortfolioDataResponse_h__

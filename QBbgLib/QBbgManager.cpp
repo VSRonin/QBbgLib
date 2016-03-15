@@ -3,7 +3,7 @@
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>
-#include "QBbgRequestResponseWorker.h"
+#include "private/QBbgRequestResponseWorker_p.h"
 #include <QCoreApplication>
 #include "QbbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
@@ -11,7 +11,7 @@
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataResponse.h"
-#include "QBbgWorkerThread.h"
+#include "private/QBbgWorkerThread_p.h"
 namespace QBbgLib {
 
 

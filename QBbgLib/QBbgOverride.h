@@ -9,7 +9,7 @@ class QVariant;
 namespace BloombergLP { namespace blpapi { class Request; } }
 namespace QBbgLib {
     class QBbgOverridePrivate;
-    class QBbgRequestResponseWorkerPrivate;
+    class QBbgRequestResponseWorker;
     class QBBG_EXPORT QBbgOverride
     {
         Q_DECLARE_PRIVATE(QBbgOverride)
@@ -43,7 +43,7 @@ namespace QBbgLib {
         QBbgOverride(QBbgOverridePrivate* d);
         QBbgOverridePrivate* d_ptr;
 
-        friend class QBbgRequestResponseWorkerPrivate;
+        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgOverride_h__
