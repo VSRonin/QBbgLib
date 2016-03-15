@@ -4,6 +4,7 @@
 #include <QHash>
 #include <blpapi_sessionoptions.h>
 namespace QBbgLib {
+    class QBbgAbstractResponse;
     class QBbgWorkerThread;
     class QBbgManagerPrivate
     {

@@ -1,6 +1,5 @@
 #ifndef QBbgManager_h__
 #define QBbgManager_h__
-#include "QBbgWorkerThread.h"
 #include <QObject>
 #include "QBbgProjectGlobals.h"
 #include <QHash>
@@ -11,6 +10,7 @@ namespace QBbgLib {
     class QBbgWorkerThread;
     class QBbgAbstractRequest;
 
+    class QBbgAbstractResponse;
     class QBbgReferenceDataRequest;
     class QBbgHistoricalDataRequest;
     class QBbgPortfolioDataRequest;

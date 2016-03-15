@@ -11,6 +11,7 @@
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataResponse.h"
+#include "QBbgWorkerThread.h"
 namespace QBbgLib {
 
 
