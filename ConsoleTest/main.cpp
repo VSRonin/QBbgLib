@@ -10,16 +10,17 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
-#include <QFile>
+#include <QSaveFile>
 #include <QTextStream>
 #include <QVariant>
 void PrintToTempFile(const QString& TempFileName, const QString& Message, bool PrintTime)
 {
-    QFile TempFile("C:/Temp/" + TempFileName + ".log");
-    if (!TempFile.open(QIODevice::Append | QIODevice::Text)) return;
+    QSaveFile TempFile("C:/Temp/" + TempFileName + ".log");
+    if (!TempFile.open(QIODevice::Append | QIODevice::Text)) 
+        return;
     QTextStream TempWrite(&TempFile);
     TempWrite << (PrintTime ? QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm ") : QString()) + Message + '\n';
-    TempFile.close();
+    TempFile.commit();
 }
 
 int main(int argc, char *argv[])
