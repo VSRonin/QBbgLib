@@ -69,14 +69,14 @@ namespace QBbgLib {
         /*!
         \brief Creates a security based on its string representation
         \details If the input is invalid, a null security will be created
-        \arg Examples of valid strings are IBM US Equity ,  /isin/XS1372839214
+        \arg SecString Examples of valid strings are IBM US Equity ,  /isin/XS1372839214
         */
         QBbgSecurity(QString SecString);
         /*!
         \brief Creates a security based on its name and a security extension
         \details If the input is invalid, a null security will be created
-        \arg The security name without extension
-        \arg The security extension to use
+        \arg SecName The security name without extension
+        \arg SecKey The security extension to use
         */
         QBbgSecurity(const QString& SecName, YellowKeys SecKey);
         //! Creates a copy of another security

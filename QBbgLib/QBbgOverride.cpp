@@ -66,6 +66,12 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
         Q_D(const QBbgOverride);
         return d->m_Overrides.keys();
     }
+
+    QList<QString> QBbgOverride::getNames() const
+    {
+        return getKeys();
+    }
+
     bool QBbgOverride::operator==(const QBbgOverride& other) const
     {
         Q_D(const QBbgOverride);
@@ -80,7 +86,7 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
         Q_D(QBbgOverride);
         return  d->m_Overrides[Name];
     }
-    const QString QBbgOverride::operator[](const QString& Name) const
+    QString QBbgOverride::operator[](const QString& Name) const
     {
         Q_D(const QBbgOverride);
         return  d->m_Overrides[Name];
@@ -148,7 +154,7 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
             setOverride(Name, val.toString("HHmmss"));
     }
 
-    void QBbgOverride::setOverride(QString Name, const char* val)
+    void QBbgOverride::setOverride(QString Name, const char *const val)
     {
         return setOverride(Name, QString(val));
     }

@@ -4,12 +4,12 @@
 #include "QBbgProjectGlobals.h"
 #include <QHash>
 #include <QList>
+//! Namespace containing all classes of the QBbgLib
 namespace QBbgLib {
     class QBbgManagerPrivate;
     class QBbgRequestGroup;
     class QBbgWorkerThread;
     class QBbgAbstractRequest;
-
     class QBbgAbstractResponse;
     class QBbgReferenceDataRequest;
     class QBbgHistoricalDataRequest;
