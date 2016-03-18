@@ -2,10 +2,14 @@
 #define QbbgReferenceDataRequest_h__
 #include "QBbgProjectGlobals.h"
 #include "QBbgAbstractFieldRequest.h"
+#include <QObject>
 namespace QBbgLib {
     class QBbgReferenceDataRequestPrivate;
     class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {
+        Q_GADGET
+        Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
+        Q_PROPERTY(bool useUTCtime READ useUTCtime WRITE setUseUTCtime)
         Q_DECLARE_PRIVATE(QBbgReferenceDataRequest)
     public:
         virtual ~QBbgReferenceDataRequest();

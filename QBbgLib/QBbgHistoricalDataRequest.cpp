@@ -128,7 +128,7 @@ namespace QBbgLib {
         return d->m_calendarCode;
     }
 
-    void QBbgHistoricalDataRequest::calendarCode(QString val)
+    void QBbgHistoricalDataRequest::setCalendarCode(QString val)
     {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
@@ -195,7 +195,7 @@ namespace QBbgLib {
         return d->m_usePriceForPricing;
     }
 
-    void QBbgHistoricalDataRequest::usePriceForPricing(bool val)
+    void QBbgHistoricalDataRequest::setUsePriceForPricing(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_usePriceForPricing = val;
@@ -207,7 +207,7 @@ namespace QBbgLib {
         return d->m_useClosePrice;
     }
 
-    void QBbgHistoricalDataRequest::useClosePrice(bool val)
+    void QBbgHistoricalDataRequest::setUseClosePrice(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_useClosePrice = val;
@@ -219,7 +219,7 @@ namespace QBbgLib {
         return d->m_currency;
     }
 
-    void QBbgHistoricalDataRequest::currency(QString val)
+    void QBbgHistoricalDataRequest::setCurrency(QString val)
     {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
@@ -239,7 +239,7 @@ namespace QBbgLib {
         return d->m_periodicitySelection;
     }
 
-    void QBbgHistoricalDataRequest::periodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val)
+    void QBbgHistoricalDataRequest::setPeriodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_periodicitySelection = val;
@@ -251,7 +251,7 @@ namespace QBbgLib {
         return d->m_periodicityAdjustment;
     }
 
-    void QBbgHistoricalDataRequest::periodicityAdjustment(PeriodAdjustment val)
+    void QBbgHistoricalDataRequest::setPeriodicityAdjustment(PeriodAdjustment val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_periodicityAdjustment = val;
@@ -263,7 +263,7 @@ namespace QBbgLib {
         return d->m_endDate;
     }
 
-    void QBbgHistoricalDataRequest::endDate(const QDate& val)
+    void QBbgHistoricalDataRequest::setEndDate(const QDate& val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_endDate = val;
@@ -275,7 +275,7 @@ namespace QBbgLib {
         return d->m_startDate;
     }
 
-    void QBbgHistoricalDataRequest::startDate(const QDate& val)
+    void QBbgHistoricalDataRequest::setStartDate(const QDate& val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_startDate = val;
@@ -319,49 +319,49 @@ namespace QBbgLib {
         return *this;
     }
 
-    void QBbgHistoricalDataRequest::nonTradingDayFill(QBbgHistoricalDataRequest::NonTradingDayFill val)
+    void QBbgHistoricalDataRequest::setNonTradingDayFill(QBbgHistoricalDataRequest::NonTradingDayFill val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_nonTradingDayFill = val;
     }
 
-    void QBbgHistoricalDataRequest::fillWithNull(bool val)
+    void QBbgHistoricalDataRequest::setFillWithNull(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_fillWithNull = val;
     }
 
-    void QBbgHistoricalDataRequest::maxDataPoints(qint32 val)
+    void QBbgHistoricalDataRequest::setMaxDataPoints(qint32 val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_maxDataPoints = val;
     }
 
-    void QBbgHistoricalDataRequest::useRelativeDate(bool val)
+    void QBbgHistoricalDataRequest::setUseRelativeDate(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_useRelativeDate = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentNormal(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentNormal(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentNormal = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentAbnormal(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentAbnormal(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentAbnormal = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentSplit(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentSplit(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentSplit = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentFollowDPDF(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentFollowDPDF(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentFollowDPDF = val;

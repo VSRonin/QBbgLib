@@ -62,7 +62,7 @@ namespace QBbgLib {
         return startRequest(rg);
     }
 
-    const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
+    quint32 QBbgManager::processRequestID(const QBbgRequestGroup& rq)
     {
         Q_D(QBbgManager);
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
@@ -72,7 +72,20 @@ namespace QBbgLib {
         newTh.value()->start();
         waitLoop.exec();
         Q_ASSERT(d->m_ResultTable.contains(threadKey));
-        return *(d->m_ResultTable.value(threadKey));
+        return threadKey;
+    }
+
+    quint32 QBbgManager::processRequestID(const QBbgAbstractRequest& rq)
+    {
+        QBbgRequestGroup rg;
+        rg.addRequest(rq);
+        return processRequestID(rg);
+    }
+
+    const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
+    {
+        Q_D(QBbgManager);
+        return *(d->m_ResultTable.value(processRequestID(rq)));
     }
 
     const QBbgAbstractResponse* const QBbgManager::processRequest(const QBbgAbstractRequest& rq)

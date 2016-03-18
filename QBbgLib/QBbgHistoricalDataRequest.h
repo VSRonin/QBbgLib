@@ -4,11 +4,30 @@
 #include "QBbgProjectGlobals.h"
 #include "QBbgAbstractFieldRequest.h"
 #include <QDate>
+#include <QObject>
 namespace QBbgLib {
     class QBbgHistoricalDataRequestPrivate;
     class QBbgRequestGroupPrivate;
     class QBBG_EXPORT QBbgHistoricalDataRequest : public QBbgAbstractFieldRequest
     {
+        Q_GADGET
+        Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
+        Q_PROPERTY(bool isValidReq READ isValidReq)
+        Q_PROPERTY(QString calendarCode READ calendarCode WRITE setCalendarCode)
+        Q_PROPERTY(bool adjustmentFollowDPDF READ adjustmentFollowDPDF WRITE setAdjustmentFollowDPDF)
+        Q_PROPERTY(bool adjustmentSplit READ adjustmentSplit WRITE setAdjustmentSplit)
+        Q_PROPERTY(bool adjustmentAbnormal READ adjustmentAbnormal WRITE setAdjustmentAbnormal)
+        Q_PROPERTY(bool adjustmentNormal READ adjustmentNormal WRITE setAdjustmentNormal)
+        Q_PROPERTY(qint32 maxDataPoints READ maxDataPoints WRITE setMaxDataPoints)
+        Q_PROPERTY(bool useRelativeDate READ useRelativeDate WRITE setUseRelativeDate)
+        Q_PROPERTY(bool fillWithNull READ fillWithNull WRITE setFillWithNull)
+        Q_PROPERTY(NonTradingDayFill nonTradingDayFill READ nonTradingDayFill WRITE setNonTradingDayFill)
+        Q_PROPERTY(bool usePriceForPricing READ usePriceForPricing WRITE setUsePriceForPricing)
+        Q_PROPERTY(bool useClosePrice READ useClosePrice WRITE setUseClosePrice)
+        Q_PROPERTY(QString currency READ currency WRITE setCurrency)
+        Q_PROPERTY(PeriodSelection periodicitySelection READ periodicitySelection WRITE setPeriodicitySelection)
+        Q_PROPERTY(QDate endDate READ endDate WRITE setEndDate)
+        Q_PROPERTY(QDate startDate READ startDate WRITE setStartDate)
         Q_DECLARE_PRIVATE(QBbgHistoricalDataRequest)
     public:
         enum PeriodAdjustment
@@ -17,6 +36,7 @@ namespace QBbgLib {
             , CALENDAR
             , FISCAL
         };
+        Q_ENUM(PeriodAdjustment)
         enum PeriodSelection
         {
             DAILY
@@ -26,49 +46,51 @@ namespace QBbgLib {
             , SEMI_ANNUALLY
             , YEARLY
         };
+        Q_ENUM(PeriodSelection)
         enum NonTradingDayFill
         {
             NON_TRADING_WEEKDAYS
             , ALL_CALENDAR_DAYS
             , ACTIVE_DAYS_ONLY
         };
+        Q_ENUM(NonTradingDayFill)
         virtual ~QBbgHistoricalDataRequest();
         QBbgHistoricalDataRequest();
         QBbgHistoricalDataRequest(const QBbgHistoricalDataRequest& a);
         virtual QBbgHistoricalDataRequest& operator=(const QBbgHistoricalDataRequest& a);
         virtual bool operator==(const QBbgHistoricalDataRequest& a) const;
         virtual QString calendarCode() const;
-        virtual void calendarCode(QString val);
+        virtual void setCalendarCode(QString val);
         virtual bool adjustmentFollowDPDF() const;
-        virtual void adjustmentFollowDPDF(bool val);
+        virtual void setAdjustmentFollowDPDF(bool val);
         virtual bool adjustmentSplit() const;
-        virtual void adjustmentSplit(bool val);
+        virtual void setAdjustmentSplit(bool val);
         virtual bool adjustmentAbnormal() const;
-        virtual void adjustmentAbnormal(bool val);
+        virtual void setAdjustmentAbnormal(bool val);
         virtual bool adjustmentNormal() const;
-        virtual void adjustmentNormal(bool val);
-        virtual bool useRelativeDate() const;
-        virtual void useRelativeDate(bool val);
+        virtual void setAdjustmentNormal(bool val);
+        virtual bool useRelativeDate() const; // #TODO Check if it's usable
+        virtual void setUseRelativeDate(bool val);
         virtual qint32 maxDataPoints() const;
-        virtual void maxDataPoints(qint32 val);
+        virtual void setMaxDataPoints(qint32 val);
         virtual bool fillWithNull() const;
-        virtual void fillWithNull(bool val);
+        virtual void setFillWithNull(bool val);
         virtual  NonTradingDayFill nonTradingDayFill() const;
-        virtual  void nonTradingDayFill(NonTradingDayFill val);
+        virtual  void setNonTradingDayFill(NonTradingDayFill val);
         virtual bool usePriceForPricing() const;
-        virtual  void usePriceForPricing(bool val);
+        virtual  void setUsePriceForPricing(bool val);
         virtual bool useClosePrice() const;
-        virtual void useClosePrice(bool val);
+        virtual void setUseClosePrice(bool val);
         virtual QString currency() const;
-        virtual void currency(QString val);
+        virtual void setCurrency(QString val);
         virtual PeriodSelection periodicitySelection() const;
-        virtual void periodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val);
+        virtual void setPeriodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val);
         virtual PeriodAdjustment periodicityAdjustment() const;
-        virtual void periodicityAdjustment(PeriodAdjustment val);
+        virtual void setPeriodicityAdjustment(PeriodAdjustment val);
         virtual const QDate& endDate() const;
-        virtual void endDate(const QDate& val);
+        virtual void setEndDate(const QDate& val);
         virtual const QDate& startDate() const;
-        virtual void startDate(const QDate& val);
+        virtual void setStartDate(const QDate& val);
         virtual void setSecurity(const QBbgSecurity& val);
         virtual bool isValidReq() const;
     protected:
