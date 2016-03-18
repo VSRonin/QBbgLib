@@ -1,7 +1,7 @@
 #include "QBbgRequestGroup.h"
 #include "private/QBbgRequestGroup_p.h"
 #include <QSet>
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 //#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed

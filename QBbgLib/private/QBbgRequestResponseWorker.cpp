@@ -4,7 +4,7 @@
 #include "QBbgRequestGroup.h"
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgOverride.h"
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataResponse.h"

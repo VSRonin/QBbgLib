@@ -68,9 +68,6 @@
     <ClCompile Include="QBbgAbstractFieldRequest.cpp">
       <Filter>Source Files\RequestResponse\Requests</Filter>
     </ClCompile>
-    <ClCompile Include="QbbgReferenceDataRequest.cpp">
-      <Filter>Source Files\RequestResponse\Requests</Filter>
-    </ClCompile>
     <ClCompile Include="QBbgAbstractResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
@@ -182,6 +179,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgPortfolioDataRequest.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgReferenceDataRequest.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QbbgReferenceDataRequest.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -235,9 +235,6 @@
     <ClInclude Include="private\QBbgPortfolioDataResponse_p.h">
       <Filter>Private</Filter>
     </ClInclude>
-    <ClInclude Include="private\QbbgReferenceDataRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
     <ClInclude Include="private\QBbgReferenceDataResponse_p.h">
       <Filter>Private</Filter>
     </ClInclude>
@@ -245,6 +242,9 @@
       <Filter>Private</Filter>
     </ClInclude>
     <ClInclude Include="private\QBbgSecurity_p.h">
+      <Filter>Private</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgReferenceDataRequest_p.h">
       <Filter>Private</Filter>
     </ClInclude>
   </ItemGroup>

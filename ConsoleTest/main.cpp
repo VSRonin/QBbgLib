@@ -1,7 +1,7 @@
 #include <QtCore/QCoreApplication>
 #include "QBbgManager.h"
 #include "QBbgSecurity.h"
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgRequestGroup.h"
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataRequest.h"

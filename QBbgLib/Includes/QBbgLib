@@ -1,5 +1,5 @@
 #include <QBbgHistoricalData>
 #include <QBbgPortfolioData>
 #include <QBbgReferenceData>
-#include <QBbgManager.h>
-#include <QBbgRequestGroup.h>
+#include <QBbgManager>
+#include <QBbgRequestGroup>

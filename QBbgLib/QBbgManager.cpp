@@ -5,7 +5,7 @@
 #include <QEventLoop>
 #include "private/QBbgRequestResponseWorker_p.h"
 #include <QCoreApplication>
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgReferenceDataResponse.h"
