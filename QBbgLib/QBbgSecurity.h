@@ -17,6 +17,14 @@ namespace QBbgLib {
     */
     class QBBG_EXPORT QBbgSecurity
     {
+        Q_GADGET
+        Q_PROPERTY(QString name READ name WRITE setName)
+        Q_PROPERTY(QString fullName READ fullName)
+        Q_PROPERTY(bool isValid READ isValid)
+        Q_PROPERTY(YellowKeys extension READ extension WRITE setExtension)
+        Q_PROPERTY(QString pricingSource READ pricingSource WRITE setPricingSource)
+        Q_PROPERTY(QString exchange READ exchange WRITE setExchange)
+        
     private:
         enum { FirstPrefix=0x400 };
     public:
@@ -55,11 +63,14 @@ namespace QBbgLib {
             , cats
             , bbgid
         };
+        Q_ENUM(YellowKeys)
     private:
         Q_DECLARE_PRIVATE(QBbgSecurity)
         QBbgSecurityPrivate* d_ptr;
     protected:
+        //! Writes the security data to the QDataStream
         virtual void saveToStream(QDataStream& stream) const;
+        //! Reads the security data from the QDataStream
         virtual void loadFromStream(QDataStream& stream);
     public:
         /*!
@@ -83,6 +94,7 @@ namespace QBbgLib {
         QBbgSecurity(const QBbgSecurity& other);
         //! Copy another security
         QBbgSecurity& operator=(const QBbgSecurity& other);
+        //! Destructor
     	virtual ~QBbgSecurity();
         //! The security Name
         const QString& name() const;
@@ -109,9 +121,9 @@ namespace QBbgLib {
         //! Check if two securities are different
         bool operator!=(const QBbgSecurity& other) const;
         //! Converts a security extension to its string representation
-        static QString yellowKeyToString(YellowKeys a);
+        Q_INVOKABLE static QString yellowKeyToString(YellowKeys a);
         //! Converts a string representation to a security extension
-        static YellowKeys stringToYellowKey(QString a);
+        Q_INVOKABLE static YellowKeys stringToYellowKey(QString a);
         friend QDataStream& ::operator<<(QDataStream& stream, const QBbgSecurity& obj);
         friend QDataStream& ::operator>>(QDataStream& stream, QBbgSecurity& obj);
     };

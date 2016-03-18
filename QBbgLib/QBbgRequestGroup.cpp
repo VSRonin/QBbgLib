@@ -113,6 +113,16 @@ namespace QBbgLib {
         }
         return iter.key();
     }
+
+    qint64 QBbgRequestGroup::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
+    {
+        const qint64 oldID = a.getID();
+        a.setID(preferredID);
+        const qint64 result = addRequest(a);
+        a.setID(oldID);
+        return result;
+    }
+
     const QBbgAbstractRequest* QBbgRequestGroupPrivate::request(qint64 ID) const
     {
         return RequestTable.value(ID, NULL);

@@ -23,7 +23,6 @@ namespace QBbgLib {
     private:
         Q_DECLARE_PRIVATE(QBbgManager)
     protected:
-        
         QBbgManagerPrivate* d_ptr;
         QHash<quint32, QBbgWorkerThread* >::iterator createThread(const QBbgRequestGroup& rq);
         const QBbgAbstractResponse* const getResultGeneric(quint32 group, qint64 id) const;

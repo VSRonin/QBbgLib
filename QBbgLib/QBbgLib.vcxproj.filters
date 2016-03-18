@@ -71,9 +71,6 @@
     <ClCompile Include="QbbgReferenceDataRequest.cpp">
       <Filter>Source Files\RequestResponse\Requests</Filter>
     </ClCompile>
-    <ClCompile Include="QBbgRequestGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QBbgAbstractResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
@@ -134,21 +131,42 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorkerThread_p.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgRequestGroup.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgSecurity.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgSecurity.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgOverride.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgOverride.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestGroup.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestGroup.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgSecurity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QBbgAbstractFieldRequest.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
     <ClInclude Include="QbbgReferenceDataRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgRequestGroup.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
     <ClInclude Include="QBbgAbstractResponse.h">
@@ -159,12 +177,6 @@
     </ClInclude>
     <ClInclude Include="QBbgReferenceDataResponse.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgOverride.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgAbstractRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
     </ClInclude>
     <ClInclude Include="QBbgPortfolioDataRequest.h">
       <Filter>Header Files\RequestResponse\Requests</Filter>
@@ -233,6 +245,18 @@
     </CustomBuild>
     <CustomBuild Include="private\QBbgWorkerThread_p.h">
       <Filter>Private\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgSecurity.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgOverride.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgRequestGroup.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

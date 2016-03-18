@@ -1,6 +1,6 @@
 #ifndef QBbgAbstractRequest_h__
 #define QBbgAbstractRequest_h__
-#include <QtGlobal>
+#include <QObject>
 #include "QBbgSecurity.h"
 #include "QBbgProjectGlobals.h"
 namespace QBbgLib {
@@ -9,13 +9,17 @@ namespace QBbgLib {
     class QBbgRequestResponseWorker;
     class QBBG_EXPORT QBbgAbstractRequest
     {
+        Q_GADGET
+        Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
+        Q_PROPERTY(qint64 securityID READ getID WRITE setID)
+        Q_PROPERTY(bool isValidReq READ isValidReq)
+        Q_PROPERTY(RequestType requestType READ requestType)
     protected:
         enum : qint32
         {
             FirstFielded=0x10
             , FirstRealTime = 0x20
         };
-        enum { InvalidID = -1024 };
         enum class ServiceType
         {
             NoService=0
@@ -29,6 +33,10 @@ namespace QBbgLib {
             , apiauth
         };
     public:
+        enum SpecialIDs { 
+            InvalidID = -1024 
+        };
+        Q_ENUM(SpecialIDs)
         enum class RequestType : qint32
         {
             Invalid =-1
@@ -39,6 +47,7 @@ namespace QBbgLib {
             , IntraDayTick = FirstRealTime
             , IntraDayBar
         };
+        Q_ENUM(RequestType)
     protected:
         Q_DECLARE_PRIVATE(QBbgAbstractRequest)
         QBbgAbstractRequestPrivate* d_ptr;
@@ -48,8 +57,9 @@ namespace QBbgLib {
         static QString serviceTypeToString(ServiceType a);
         static ServiceType stringToServiceType(const QString& a);
     public:
+        //! Destructor
         virtual ~QBbgAbstractRequest();
-        QBbgAbstractRequest(RequestType typ/*=QBbgAbstractRequest::Invalid*/);
+        QBbgAbstractRequest(RequestType typ);
         QBbgAbstractRequest(const QBbgAbstractRequest& other);
         virtual QBbgAbstractRequest& operator=(const QBbgAbstractRequest& other);
         virtual const QBbgSecurity& security() const;
@@ -59,8 +69,8 @@ namespace QBbgLib {
         virtual void setID(qint64 val);
         virtual bool isValidReq() const;
         virtual RequestType requestType() const;
-        static QString requestTypeToString(RequestType a);
-        static RequestType stringToRequestType(QString a);
+        Q_INVOKABLE static QString requestTypeToString(RequestType a);
+        Q_INVOKABLE static RequestType stringToRequestType(QString a);
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;

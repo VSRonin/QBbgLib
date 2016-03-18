@@ -2,6 +2,7 @@
 #define QBbgOverride_h__
 #include <QString>
 #include <QList>
+#include <QObject>
 #include "QBbgProjectGlobals.h"
 class QDate;
 class QTime;
@@ -19,6 +20,9 @@ namespace QBbgLib {
     */
     class QBBG_EXPORT QBbgOverride
     {
+        Q_GADGET
+        Q_PROPERTY(qint32 size READ size)
+        Q_PROPERTY(bool isEmpty READ isEmpty)
         Q_DECLARE_PRIVATE(QBbgOverride)
     public:
         //! Construct an empty set of overrides
@@ -27,9 +31,10 @@ namespace QBbgLib {
         QBbgOverride(const QBbgOverride& other);
         //! Copies another set of overrides
         virtual QBbgOverride& operator=(const QBbgOverride& other);
+        //! Destructor
         virtual ~QBbgOverride();
         //! Removes all overrides from the set
-        virtual void clear();
+        Q_INVOKABLE virtual void clear();
         //! Returns the number of overrides set
         virtual qint32 size();
         /*!
@@ -37,7 +42,7 @@ namespace QBbgLib {
         \arg Name The name of the field to check
         \note This cannot recognize codes and explicit names e.g. ID_ISIN and ID005 will not be recognized as the same overrides
         */
-        virtual bool contains(const QString& Name) const;
+        Q_INVOKABLE virtual bool contains(const QString& Name) const;
         //! Returns true if the set contains no overrides
         virtual bool isEmpty() const;
         /*! 
@@ -45,7 +50,7 @@ namespace QBbgLib {
         \arg Name The field name to override
         \arg val The value to override with
         */
-        virtual void setOverride(const QString& Name, const QVariant& val);
+        Q_INVOKABLE virtual void setOverride(const QString& Name, const QVariant& val);
         //! Overloaded version of setOverride(const QString&, const QVariant&)
         virtual void setOverride(const QString& Name, const QDate& val);
         //! Overloaded version of setOverride(const QString&, const QVariant&)
@@ -68,9 +73,9 @@ namespace QBbgLib {
         \brief Returns the override value associated with the field name
         \details Returns a null string if the override was not set
         */
-        virtual QString overrideValue(const QString& Name) const;
+        Q_INVOKABLE virtual QString overrideValue(const QString& Name) const;
         //! Returns a list of all field names overridden
-        virtual QList<QString> getNames() const;
+        Q_INVOKABLE virtual QList<QString> getNames() const;
         //! Same as getNames
         virtual QList<QString> getKeys() const;
         //! Checks if two sets of overrides are identical
