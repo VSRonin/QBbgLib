@@ -257,7 +257,7 @@ namespace QBbgLib {
             if (FiledsA != FiledsB)
                 return false;
             if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
-                return false; // Can't send multiple securites with hist data
+                return false; // Can't send multiple securities with hist data
             }
             return true;
         }

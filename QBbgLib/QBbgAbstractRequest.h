@@ -7,11 +7,12 @@ namespace QBbgLib {
     class QBbgAbstractRequestPrivate;
     class QBbgRequestGroup;
     class QBbgRequestResponseWorker;
+    //! Base class for all requests sent to Bloomberg
     class QBBG_EXPORT QBbgAbstractRequest
     {
         Q_GADGET
         Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
-        Q_PROPERTY(qint64 securityID READ getID WRITE setID)
+        Q_PROPERTY(qint64 requestID READ getID WRITE setID)
         Q_PROPERTY(bool isValidReq READ isValidReq)
         Q_PROPERTY(RequestType requestType READ requestType)
     protected:
@@ -56,6 +57,10 @@ namespace QBbgLib {
         static QString serviceStringForRequest(RequestType a);
         static QString serviceTypeToString(ServiceType a);
         static ServiceType stringToServiceType(const QString& a);
+        //! Converts a request type to its associated string representation
+        static QString requestTypeToString(RequestType a);
+        //! Converts a string into a RequestType
+        static RequestType stringToRequestType(QString a);
     public:
         //! Destructor
         virtual ~QBbgAbstractRequest() =0;
@@ -78,14 +83,18 @@ namespace QBbgLib {
         virtual void setSecurity(const QString& SecName, QBbgSecurity::YellowKeys SecKey);
         /*!
         \brief Returns the current ID for the request
-        \details 
+        \details If the ID is not set or invalid SpecialIDs::InvalidID will be returned
         */
         virtual qint64 getID() const;
+        /*!
+        \brief Set the ID associated to the current request
+        \note Negative values are reserved so only 65 bits can be used to determine the ID
+        */
         virtual void setID(qint64 val);
+        //! Checks if the request is valid
         virtual bool isValidReq() const;
+        //! Returns the type of request
         virtual RequestType requestType() const;
-        Q_INVOKABLE static QString requestTypeToString(RequestType a);
-        Q_INVOKABLE static RequestType stringToRequestType(QString a);
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;
