@@ -45,9 +45,6 @@
     <Filter Include="Source Files\RequestResponse\Response">
       <UniqueIdentifier>{e3ef0e8a-3432-4d5c-b82b-a1a53fe5c584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Threads">
-      <UniqueIdentifier>{7ca94cd0-3c43-4bdd-944e-25dedb2fc84b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Private">
       <UniqueIdentifier>{6449eb06-0a70-44dc-9db7-ac51baa9abb3}</UniqueIdentifier>
     </Filter>
