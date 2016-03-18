@@ -4,7 +4,7 @@
 namespace QBbgLib {
 
     QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate() = default;
-}
+
     QBbgAbstractResponse::~QBbgAbstractResponse()
     {
         delete d_ptr;

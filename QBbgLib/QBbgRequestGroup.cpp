@@ -60,7 +60,7 @@ namespace QBbgLib {
         : q_ptr(q)
     {
         for (QHash<qint64, QBbgAbstractRequest*>::const_iterator i = a.RequestTable.constBegin(); i != a.RequestTable.constEnd(); i++) {
-            RequestTable.insert(i.key(), new QBbgAbstractRequest(*(i.value())));
+            addRequest(*(i.value()), i.key());
         }
     }
     QBbgRequestGroupPrivate& QBbgRequestGroupPrivate::operator= (const QBbgRequestGroupPrivate& a)
@@ -94,27 +94,28 @@ namespace QBbgLib {
     qint64 QBbgRequestGroup::addRequest(const QBbgAbstractRequest& a)
     {
         Q_D(QBbgRequestGroup);
-        QBbgAbstractRequest* newReq = d->createRequest(a);
-
-        while (newReq->getID() < 0 || d->RequestTable.contains(newReq->getID())) {
-            newReq->setID(d->increaseMaxID());
+        return d->addRequest(a);
+    }
+    qint64 QBbgRequestGroup::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
+    {
+        Q_D(QBbgRequestGroup);
+        return d->addRequest(a, preferredID);
+    }
+    qint64 QBbgRequestGroupPrivate::addRequest(const QBbgAbstractRequest& a)
+    {
+        
+        QBbgAbstractRequest* newReq = createRequest(a);
+        while (newReq->getID() < 0 || RequestTable.contains(newReq->getID())) {
+            newReq->setID(increaseMaxID());
         }
         if (!newReq->isValidReq()) {
             delete newReq;
             return QBbgAbstractRequest::InvalidID;
         }
-        QHash<qint64, QBbgAbstractRequest*>::iterator iter = d->RequestTable.find(newReq->getID());
-        if (iter == d->RequestTable.end()) {
-            iter=d->RequestTable.insert(newReq->getID(), newReq);
-        }
-        else {
-            delete iter.value();
-            iter.value() = newReq;
-        }
-        return iter.key();
+        return RequestTable.insert(newReq->getID(), newReq).key();
     }
 
-    qint64 QBbgRequestGroup::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
+    qint64 QBbgRequestGroupPrivate::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
     {
         const qint64 oldID = a.getID();
         a.setID(preferredID);

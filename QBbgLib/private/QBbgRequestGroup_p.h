@@ -19,6 +19,8 @@ namespace QBbgLib {
         static qint64 MaxID;
         QHash<qint64, QBbgAbstractRequest*>  RequestTable;
         void clear();
+        qint64 addRequest(const QBbgAbstractRequest& a);
+        qint64 addRequest(QBbgAbstractRequest& a, qint64 preferredID);
         const QBbgAbstractRequest* request(qint64 ID) const;
         bool SameRequest(const QList<qint64>& a, const QList<qint64>& b) const;
         bool compatible(const QBbgAbstractRequest* a, const QBbgAbstractRequest* b) const; 
