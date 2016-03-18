@@ -5,10 +5,7 @@
 #include <QHash>
 namespace QBbgLib {
 
-QBbgSecurityPrivate::~QBbgSecurityPrivate()
-{
-
-}
+    QBbgSecurityPrivate::~QBbgSecurityPrivate() = default;
     QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity* q)
         : q_ptr(q)
         , m_Extension(QBbgSecurity::Invalid)

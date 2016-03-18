@@ -3,10 +3,7 @@
 #include <QHash>
 namespace QBbgLib {
 
-QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate()
-{
-
-}
+    QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate() = default;
     QBbgAbstractRequest::QBbgAbstractRequest(RequestType typ)
         : d_ptr(new QBbgAbstractRequestPrivate(this,typ))
     {}

@@ -41,7 +41,7 @@ namespace QBbgLib {
             , IntraDayTickResponse = FirstRealTime
             , IntraDayBarResponse
         };
-        virtual ~QBbgAbstractResponse();
+        virtual ~QBbgAbstractResponse() =0;
         QBbgAbstractResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractResponse(const QBbgAbstractResponse& other);
         virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);

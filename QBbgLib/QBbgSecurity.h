@@ -130,7 +130,7 @@ namespace QBbgLib {
 }
 Q_DECLARE_METATYPE(QBbgLib::QBbgSecurity);
 /*! 
-\brief Allows Security to be used as a key of a QHash
+\brief Allows QBbgSecurity to be used as a key of a QHash
 \relates QBbgLib::QBbgSecurity
 */
 QBBG_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed);

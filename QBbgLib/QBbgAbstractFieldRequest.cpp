@@ -4,14 +4,8 @@
 #include <QList> 
 #include <QHash>
 namespace QBbgLib {
-    QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest()
-    {
-
-    }
-    QBbgAbstractFieldRequestPrivate::~QBbgAbstractFieldRequestPrivate()
-    {
-
-    }
+    QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest() = default;
+    QBbgAbstractFieldRequestPrivate::~QBbgAbstractFieldRequestPrivate() = default;
     void QBbgAbstractFieldRequest::setField(const QString& val)
     {
         Q_D(QBbgAbstractFieldRequest);

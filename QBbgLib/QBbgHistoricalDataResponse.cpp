@@ -1,14 +1,8 @@
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgHistoricalDataResponse_p.h"
 namespace QBbgLib {
-QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse()
-{
-
-}
-QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate()
-{
-
-}
+    QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse() = default;
+    QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate() = default;
     qint32 QBbgHistoricalDataResponse::size() const
     {
         Q_D(const QBbgHistoricalDataResponse);

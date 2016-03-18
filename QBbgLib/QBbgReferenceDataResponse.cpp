@@ -2,10 +2,7 @@
 #include "private/QBbgReferenceDataResponse_p.h"
 namespace QBbgLib {
 
-QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate()
-{
-
-}
+    QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate() = default;
     bool QBbgReferenceDataResponse::hasValue() const
     {
         Q_D(const QBbgReferenceDataResponse);

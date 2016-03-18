@@ -3,9 +3,7 @@
 #include <QHash>
 namespace QBbgLib {
 
-QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate()
-{
-
+    QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate() = default;
 }
     QBbgAbstractResponse::~QBbgAbstractResponse()
     {

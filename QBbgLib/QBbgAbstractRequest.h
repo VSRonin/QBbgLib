@@ -58,13 +58,28 @@ namespace QBbgLib {
         static ServiceType stringToServiceType(const QString& a);
     public:
         //! Destructor
-        virtual ~QBbgAbstractRequest();
+        virtual ~QBbgAbstractRequest() =0;
+        //! Creates a request of type typ
         QBbgAbstractRequest(RequestType typ);
+        //! Creates a copy of another request
         QBbgAbstractRequest(const QBbgAbstractRequest& other);
+        //! Copies another request
         virtual QBbgAbstractRequest& operator=(const QBbgAbstractRequest& other);
+        //! Returns the security associated with the request
         virtual const QBbgSecurity& security() const;
+        //! Sets the security for the current request to the specified one
         virtual void setSecurity(const QBbgSecurity& val);
+        /*!
+        \brief Overloaded from setSecurity
+        \arg SecName Name of the security to add
+        \arg SecKey Yellow key or code identifier for the security
+        \details Sets the security for the current request to the specified one
+        */
         virtual void setSecurity(const QString& SecName, QBbgSecurity::YellowKeys SecKey);
+        /*!
+        \brief Returns the current ID for the request
+        \details 
+        */
         virtual qint64 getID() const;
         virtual void setID(qint64 val);
         virtual bool isValidReq() const;
@@ -77,5 +92,9 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
     };
 }
+/*!
+\brief Allows QBbgAbstractRequest::RequestType to be used as a key of a QHash
+\relates QBbgLib::QBbgAbstractRequest
+*/
 QBBG_EXPORT uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed = 0);
 #endif // QBbgAbstractRequest_h__

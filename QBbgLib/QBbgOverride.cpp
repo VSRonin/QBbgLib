@@ -6,10 +6,7 @@
 #include <blpapi_session.h>
 namespace QBbgLib {
 
-QBbgOverridePrivate::~QBbgOverridePrivate()
-{
-
-}
+    QBbgOverridePrivate::~QBbgOverridePrivate() = default;
     QBbgOverridePrivate::QBbgOverridePrivate(QBbgOverride* q)
         : q_ptr(q)
     {}
