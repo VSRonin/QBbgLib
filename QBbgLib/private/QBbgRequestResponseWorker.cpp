@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #include "private/QBbgRequestResponseWorker_p.h"
 #include "QBbgReferenceDataResponse.h"
 #include <QSet>

@@ -34,6 +34,10 @@ along with QBbgLib.  If not, see <http://www.gnu.org/licenses/>.
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #define QBbgSecurity_p_h__
 #include "QBbgSecurity.h"
 #include <QString>

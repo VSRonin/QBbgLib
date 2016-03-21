@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #ifndef QBbgReferenceDataResponse_p_h__
 #define QBbgReferenceDataResponse_p_h__
 #include "QBbgReferenceDataResponse.h"

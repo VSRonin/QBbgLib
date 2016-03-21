@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #ifndef QBbgAbstractResponse_p_h__
 #define QBbgAbstractResponse_p_h__
 #include "QBbgAbstractResponse.h"

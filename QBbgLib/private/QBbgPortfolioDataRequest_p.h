@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #ifndef QBbgPortfolioDataRequest_p_h__
 #define QBbgPortfolioDataRequest_p_h__
 #include "QbbgPortfolioDataRequest.h"

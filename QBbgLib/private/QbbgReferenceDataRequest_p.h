@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #ifndef QbbgReferenceDataRequest_p_h__
 #define QbbgReferenceDataRequest_p_h__
 #include "QBbgReferenceDataRequest.h"

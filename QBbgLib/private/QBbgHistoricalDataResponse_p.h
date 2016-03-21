@@ -16,6 +16,10 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #ifndef QBbgHistoricalDataResponse_p_h__
 #define QBbgHistoricalDataResponse_p_h__
 #include "QBbgHistoricalDataResponse.h"

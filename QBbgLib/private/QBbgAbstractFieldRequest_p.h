@@ -16,6 +16,13 @@
 *                                                                               *
 \*******************************************************************************/
 
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
+#ifndef QBbgAbstractFieldRequest_p_h__
+#define QBbgAbstractFieldRequest_p_h__
+
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgAbstractRequest_p.h"
 #include "QBbgOverride.h"
@@ -36,3 +43,4 @@ namespace QBbgLib {
         bool SameOverrides(const QBbgAbstractFieldRequestPrivate& a)const;
     };
 }
+#endif // QBbgAbstractFieldRequest_p_h__
