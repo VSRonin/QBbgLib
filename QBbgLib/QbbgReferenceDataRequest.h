@@ -23,6 +23,13 @@
 #include <QObject>
 namespace QBbgLib {
     class QBbgReferenceDataRequestPrivate;
+    /*!
+    \brief A reference data request
+    \details This class can be used to query current data from Bloomberg.<br/>
+    Both single values and tables can be retrieved using this request.<br/>
+    This is equivalent to BDP() and BDS() bloomberg functions in excel.
+    \note For request with securities having the QBbgSecurity::Client extension, use QBbgPortfolioDataRequest instead
+    */
     class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {
         Q_GADGET
@@ -30,13 +37,21 @@ namespace QBbgLib {
         Q_PROPERTY(bool useUTCtime READ useUTCtime WRITE setUseUTCtime)
         Q_DECLARE_PRIVATE(QBbgReferenceDataRequest)
     public:
+        //! Destructor
         virtual ~QBbgReferenceDataRequest();
+        //! Creates an empty reference request
     	QBbgReferenceDataRequest();
+        //! Creates a copy of a reference request
         QBbgReferenceDataRequest(const QBbgReferenceDataRequest& a);
+        //! Copies another request
         virtual QBbgReferenceDataRequest& operator=(const QBbgReferenceDataRequest& a);
+        //! Checks if two requests are identical
         virtual bool operator==(const QBbgReferenceDataRequest& a) const;
+        //! If true all dates and times will be returned in UTC format
         bool useUTCtime() const;
+        //! Set whether all date and times should be referenced as UTC (Greenwich Time)
         void setUseUTCtime(bool a);
+        //! Reimplemented from QBbgAbstractRequest
         virtual void setSecurity(const QBbgSecurity& val);
     protected:
         QBbgReferenceDataRequest(QBbgReferenceDataRequestPrivate* d);

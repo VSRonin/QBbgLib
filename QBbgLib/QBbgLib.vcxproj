@@ -398,6 +398,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Documentation\DoxygenConfig.doxyfile" />
+    <None Include="..\LICENSE" />
     <None Include="..\README.markdown" />
     <None Include="QBbgLib.pri" />
     <None Include="QBbgLib.pro" />
@@ -487,7 +488,7 @@
       <OutputFile>$(OutDir)\$(ProjectName)d.dll</OutputFile>
       <AdditionalLibraryDirectories>$(BLPPATH)\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>blpapi3_32.lib;qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>blpapi3_64.lib;qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS%40QMAKE_SUBSYSTEM_SUFFIX%40</AdditionalOptions>
     </Link>
@@ -522,7 +523,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>$(BLPPATH)\lib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>blpapi3_32.lib;qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>blpapi3_64.lib;qtmain.lib;Qt5Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS%40QMAKE_SUBSYSTEM_SUFFIX%40</AdditionalOptions>
     </Link>

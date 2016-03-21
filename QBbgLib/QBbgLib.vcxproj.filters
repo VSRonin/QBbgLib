@@ -295,5 +295,8 @@
     </None>
     <None Include="QBbgLib.pri" />
     <None Include="QBbgLib.pro" />
+    <None Include="..\LICENSE">
+      <Filter>Documentation</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -20,6 +20,7 @@ isEmpty(PREFIX) {
  warning("PREFIX not specified")
  PREFIX = ../QBbgLib
 }
+BITSIZE = $$system(getconf LONG_BIT)
 CONFIG(debug, debug|release) {
     mac: TARGET = QBbgLib_debug
     win32: TARGET = QBbgLibd
@@ -39,8 +40,13 @@ INCLUDEPATH += $(BLPPATH)/include \
     ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
-LIBS += -L"$(BLPPATH)/lib" \
-    -lblpapi3_32
+LIBS += -L"$(BLPPATH)/lib"
+if (contains(BITSIZE, 64)){
+    LIBS += -lblpapi3_64
+}
+else{
+    LIBS += -lblpapi3_32
+}
 DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
