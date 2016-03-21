@@ -75,9 +75,7 @@ namespace QBbgLib {
         static QString serviceStringForRequest(RequestType a);
         static QString serviceTypeToString(ServiceType a);
         static ServiceType stringToServiceType(const QString& a);
-        //! Converts a request type to its associated string representation
         static QString requestTypeToString(RequestType a);
-        //! Converts a string into a RequestType
         static RequestType stringToRequestType(QString a);
     public:
         //! Destructor
