@@ -35,7 +35,15 @@ namespace QBbgLib {
 	class QBBG_EXPORT QBbgRequestGroup
 	{
         Q_GADGET
+        /*!
+        \brief The number of requests in the list
+        \getter size()
+        */
         Q_PROPERTY(qint32 size READ size)
+        /*!
+        \brief Checks if the request is valid
+        \getter isValidReq()
+        */
         Q_PROPERTY(bool isValidReq READ isValidReq)
     private:
         Q_DECLARE_PRIVATE(QBbgRequestGroup)

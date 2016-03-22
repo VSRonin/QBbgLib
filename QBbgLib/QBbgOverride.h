@@ -39,7 +39,15 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgOverride
     {
         Q_GADGET
+        /*!
+        \brief Number of overrides set
+        \getter size()
+        */
         Q_PROPERTY(qint32 size READ size)
+        /*!
+        \brief Checks if any override was set
+        \getter isEmpty()
+        */
         Q_PROPERTY(bool isEmpty READ isEmpty)
         Q_DECLARE_PRIVATE(QBbgOverride)
     public:

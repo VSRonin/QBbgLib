@@ -33,7 +33,17 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {
         Q_GADGET
+        /*!
+        \brief The security associated with the request
+        \getter security()
+        \setter setSecurity()
+        */
         Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
+        /*!
+        \brief Whether all dates and time results for this request should be in UTC format
+        \getter useUTCtime()
+        \setter setUseUTCtime()
+        */
         Q_PROPERTY(bool useUTCtime READ useUTCtime WRITE setUseUTCtime)
         Q_DECLARE_PRIVATE(QBbgReferenceDataRequest)
     public:

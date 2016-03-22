@@ -29,9 +29,27 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgAbstractRequest
     {
         Q_GADGET
+        /*!
+        \brief The security associated with the request
+        \getter security()
+        \setter setSecurity()
+        */
         Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
+        /*!
+        \brief The request unique identifier
+        \getter getID()
+        \setter setID()
+        */
         Q_PROPERTY(qint64 requestID READ getID WRITE setID)
+        /*!
+        \brief Checks if the request is valid
+        \getter isValidReq()
+        */
         Q_PROPERTY(bool isValidReq READ isValidReq)
+        /*!
+        \brief The type of the request
+        \getter requestType()
+        */
         Q_PROPERTY(RequestType requestType READ requestType)
     protected:
         enum : qint32
