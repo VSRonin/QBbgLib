@@ -12,7 +12,7 @@ Licensing adheres to LGPL v3. Please see the included LICENSE file
 To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API.
 For example, in Windows
 <pre><code>
-SET BLPPATH=C:\blp\API\APIv3\C++API\v3.8.18.1
+SET BLPPATH=C:\\blp\\API\\APIv3\\C++API\\v3.8.18.1
 </code></pre>
 Now run
 <pre><code>
@@ -20,6 +20,9 @@ qmake "PREFIX=&lt;InstallDirectory&gt;"
 make
 </code></pre>
 Replacing &lt;InstallDirectory&gt; with the destination where the library will be installed and make with your build tool name (nmake for MSVC, etc.).
+
+## Documentation
+Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it useing the included doxyfile.
 
 ## Example Usage
 Please refer to the example folder for code snippets that illustarte the library in action.

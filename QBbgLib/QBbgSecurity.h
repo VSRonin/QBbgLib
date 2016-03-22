@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib.If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
 *                                                                               *
 \*******************************************************************************/
 
@@ -36,11 +36,39 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgSecurity
     {
         Q_GADGET
+        /*!
+        \brief The name or identifier of the security
+        \getter name()
+        \setter setName()
+        */
         Q_PROPERTY(QString name READ name WRITE setName)
+        /*!
+        \brief The fully decorated name of the security
+        \getter fullName()
+        */
         Q_PROPERTY(QString fullName READ fullName)
+        /*!
+        \brief Check if the security is valid
+        \getter isValid()
+        */
         Q_PROPERTY(bool isValid READ isValid)
+        /*!
+        \brief The yellow key or identifier code for the security 
+        \getter extension()
+        \setter setExtension()
+        */
         Q_PROPERTY(YellowKeys extension READ extension WRITE setExtension)
+        /*!
+        \brief The price source to use
+        \getter pricingSource()
+        \setter setPricingSource()
+        */
         Q_PROPERTY(QString pricingSource READ pricingSource WRITE setPricingSource)
+        /*!
+        \brief The public exchange for the security
+        \getter exchange()
+        \setter setExchange()
+        */
         Q_PROPERTY(QString exchange READ exchange WRITE setExchange)
         
     private:
@@ -130,7 +158,7 @@ namespace QBbgLib {
         YellowKeys extension() const;
         //! Set the security Extension
         void setExtension(YellowKeys val);
-        //! Check is the security is valid
+        //! Check if the security is valid
         bool isValid() const;
         //! Returns the fully decorated security name including price source, exchange and extension
         QString fullName() const;
