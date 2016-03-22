@@ -86,13 +86,13 @@ namespace QBbgLib {
     void QBbgPortfolioDataRequest::setField(PortfolioFields val)
     {
         switch (val) {
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MPOSITION:
+        case PortfolioFields::PORTFOLIO_MPOSITION:
             return setField("PORTFOLIO_MPOSITION");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MWEIGHT:
+        case PortfolioFields::PORTFOLIO_MWEIGHT:
             return setField("PORTFOLIO_MWEIGHT");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA:
+        case PortfolioFields::PORTFOLIO_DATA:
             return setField("PORTFOLIO_DATA");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MEMBERS:
+        case PortfolioFields::PORTFOLIO_MEMBERS:
             return setField("PORTFOLIO_MEMBERS");
         default:
             Q_UNREACHABLE();

@@ -181,7 +181,7 @@ int main(int argc, char *argv[])
         }
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
-    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA);
+    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PortfolioFields::PORTFOLIO_DATA);
 
     req.addRequest(p_req);
     p_req.setSecurity("TS-PX1915-14", QBbgLib::QBbgSecurity::Client);

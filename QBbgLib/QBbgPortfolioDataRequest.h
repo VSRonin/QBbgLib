@@ -60,12 +60,12 @@ namespace QBbgLib {
         Q_DECLARE_PRIVATE(QBbgPortfolioDataRequest)
     public:
         //! Available fields for the request
-        enum PortfolioFields
+        enum class PortfolioFields
         {
-            PORTFOLIO_MPOSITION, /*!< The list and nominal of holdings in the portfolio */
-            PORTFOLIO_MWEIGHT, /*!< The list and relative weight of holdings in the portfolio */
+            PORTFOLIO_MPOSITION, /*!< The list of securities and nominal of holdings in the portfolio */
+            PORTFOLIO_MWEIGHT, /*!< The list of securities and relative weight of holdings in the portfolio */
             PORTFOLIO_DATA, /*!< All available portfolio data */
-            PORTFOLIO_MEMBERS /*!< The list of the securities in the portfolio */
+            PORTFOLIO_MEMBERS /*!< The list of securities in the portfolio */
         };
         Q_ENUM(PortfolioFields)
         //! Destructor
