@@ -123,4 +123,5 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgOverride);
 #endif // QBbgOverride_h__

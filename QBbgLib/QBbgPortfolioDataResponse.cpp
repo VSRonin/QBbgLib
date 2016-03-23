@@ -82,7 +82,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size())
             return QBbgSecurity();
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Security.at(index);
+        return d->m_Security.at(static_cast<int>(index));
     }
 
     double QBbgPortfolioDataResponse::position(size_t index) const
@@ -90,7 +90,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasPosition())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Position.at(index);
+        return d->m_Position.at(static_cast<int>(index));
     }
 
     double QBbgPortfolioDataResponse::marketValue(size_t index) const
@@ -98,7 +98,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasMarketValue())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_MarketValue.at(index);
+        return d->m_MarketValue.at(static_cast<int>(index));
     }
 
     double QBbgPortfolioDataResponse::cost(size_t index) const
@@ -106,7 +106,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasCost())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Cost.at(index);
+        return d->m_Cost.at(static_cast<int>(index));
     }
 
     double QBbgPortfolioDataResponse::costFx(size_t index) const
@@ -114,7 +114,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasCostFx())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_CostFx.at(index);
+        return d->m_CostFx.at(static_cast<int>(index));
     }
 
     double QBbgPortfolioDataResponse::weight(size_t index) const
@@ -122,7 +122,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasWeight())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Weight.at(index);
+        return d->m_Weight.at(static_cast<int>(index));
     }
 
    QDate QBbgPortfolioDataResponse::costDate(size_t index) const
@@ -130,7 +130,7 @@ namespace QBbgLib {
         if (index < 0 || index >= size() || !hasCostDate())
             return QDate();
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_CostDate.at(index);
+        return d->m_CostDate.at(static_cast<int>(index));
     }
 
    bool QBbgPortfolioDataResponse::hasPosition() const
@@ -226,7 +226,7 @@ namespace QBbgLib {
        d->m_Weight.append(val);
    }
 
-   QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(QBbgPortfolioDataResponse& other)
+   QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(const QBbgPortfolioDataResponse& other)
        :QBbgAbstractFieldResponse(new QBbgPortfolioDataResponsePrivate(this,*(other.d_func())))
    {}
 
@@ -239,7 +239,7 @@ namespace QBbgLib {
        : QBbgAbstractFieldResponse(dp)
    {
    }
-   QBbgPortfolioDataResponse& QBbgPortfolioDataResponse::operator=(QBbgPortfolioDataResponse& other)
+   QBbgPortfolioDataResponse& QBbgPortfolioDataResponse::operator=(const QBbgPortfolioDataResponse& other)
    {
        Q_D(QBbgPortfolioDataResponse);
        d->operator=(*(other.d_func()));

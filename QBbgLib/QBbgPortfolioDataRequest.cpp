@@ -79,7 +79,7 @@ namespace QBbgLib {
             && field() != "PORTFOLIO_MWEIGHT"
             && field() != "PORTFOLIO_DATA"
             && field() != "PORTFOLIO_MEMBERS"
-        ) 
+            )
             QBbgAbstractFieldRequest::setField(QString());
     }
 

@@ -62,27 +62,10 @@ namespace QBbgLib {
         setName(SecName);
         setExtension(SecKey);
     }
-    QBbgSecurity::QBbgSecurity(QString SecString)
+    QBbgSecurity::QBbgSecurity(const QString& SecString)
         :d_ptr(new QBbgSecurityPrivate(this))
     {
-        if (!SecString.isEmpty()) {
-            SecString = SecString.simplified();
-            if (SecString.at(0) == '/') {
-                setExtension(stringToYellowKey(SecString.mid(1, SecString.indexOf('/', 1))));
-                SecString = SecString.mid(SecString.indexOf('/', 1) + 1);
-            }
-            else {
-                setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
-                SecString = SecString.left(SecString.lastIndexOf(' '));
-            }
-            QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
-            QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
-            if (matchRes.hasMatch()) {
-                setPricingSource(matchRes.captured(1));
-                SecString.replace(QRegularExpression("@\\S+"), QString());
-            }
-            setName(SecString);
-        }
+        setFullName(SecString);
     }
     QBbgSecurity::~QBbgSecurity()
     {
@@ -213,6 +196,28 @@ namespace QBbgLib {
             Result += yellowKeyToString(d->m_Extension);
         }
         return Result;
+    }
+
+    void QBbgSecurity::setFullName(QString val)
+    {
+        if (!val.isEmpty()) {
+            val = val.simplified();
+            if (val.at(0) == '/') {
+                setExtension(stringToYellowKey(val.mid(1, val.indexOf('/', 1))));
+                val = val.mid(val.indexOf('/', 1) + 1);
+            }
+            else {
+                setExtension(stringToYellowKey(val.right(val.size() - val.lastIndexOf(' '))));
+                val = val.left(val.lastIndexOf(' '));
+            }
+            QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
+            QRegularExpressionMatch matchRes = priceSourceRegExp.match(val);
+            if (matchRes.hasMatch()) {
+                setPricingSource(matchRes.captured(1));
+                val.replace(QRegularExpression("@\\S+"), QString());
+            }
+            setName(val);
+        }
     }
 
     bool QBbgSecurity::operator!=(const QBbgSecurity& other) const

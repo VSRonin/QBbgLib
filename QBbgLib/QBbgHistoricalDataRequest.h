@@ -117,4 +117,5 @@ namespace QBbgLib {
         friend class QBbgRequestGroupPrivate;
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgHistoricalDataRequest);
 #endif // QBbgHistoricalDataRequest_h__

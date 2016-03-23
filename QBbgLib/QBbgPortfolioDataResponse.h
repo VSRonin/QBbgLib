@@ -32,8 +32,8 @@ namespace QBbgLib {
     public:
         virtual ~QBbgPortfolioDataResponse();
         QBbgPortfolioDataResponse();
-        QBbgPortfolioDataResponse(QBbgPortfolioDataResponse& other);
-        virtual QBbgPortfolioDataResponse& operator=(QBbgPortfolioDataResponse& other);
+        QBbgPortfolioDataResponse(const QBbgPortfolioDataResponse& other);
+        virtual QBbgPortfolioDataResponse& operator=(const QBbgPortfolioDataResponse& other);
         virtual size_t size() const;
         virtual QBbgSecurity security(size_t index) const;
         virtual double position(size_t index) const;
@@ -63,4 +63,5 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgPortfolioDataResponse);
 #endif // QBbgPortfolioDataResponse_h__

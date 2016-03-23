@@ -20,7 +20,23 @@ isEmpty(PREFIX) {
  warning("PREFIX not specified")
  PREFIX = ../QBbgLib
 }
-BITSIZE = $$system(getconf LONG_BIT)
+win32{
+    win64{
+        COMPILING64 = true
+    }
+    else{
+        COMPILING64 = false
+    }
+}
+else {
+    COMPILING64 = contains($$system(getconf LONG_BIT), 64)
+}
+if(COMPILING64){
+    message("Compiling 64 bit")
+}
+else{
+    message("Compiling 32 bit")
+}
 CONFIG(debug, debug|release) {
     mac: TARGET = QBbgLib_debug
     win32: TARGET = QBbgLibd
@@ -41,7 +57,7 @@ INCLUDEPATH += $(BLPPATH)/include \
     . \
     ./GeneratedFiles/Debug
 LIBS += -L"$(BLPPATH)/lib"
-if (contains(BITSIZE, 64)){
+if (COMPILING64){
     LIBS += -lblpapi3_64
 }
 else{
@@ -51,9 +67,11 @@ DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 CONFIG += build_all
-target.path = $$PREFIX/lib
-unix:!symbian {
-	target.path=$$PREFIX/lib/$${LIB_ARCH}
+if (COMPILING64){
+    target.path = $$PREFIX/lib64
+}
+else{
+    target.path = $$PREFIX/lib32
 }
 headers.path=$$PREFIX/include
 headers.files = *.h

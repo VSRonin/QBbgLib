@@ -97,11 +97,11 @@ namespace QBbgLib {
     {
     }
 
-    QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(QBbgHistoricalDataResponse& other)
+    QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(const QBbgHistoricalDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgHistoricalDataResponsePrivate(this, *(other.d_func())))
     {}
 
-    QBbgHistoricalDataResponse& QBbgHistoricalDataResponse::operator=(QBbgHistoricalDataResponse& other)
+    QBbgHistoricalDataResponse& QBbgHistoricalDataResponse::operator=(const QBbgHistoricalDataResponse& other)
     {
         Q_D(QBbgHistoricalDataResponse);
         d->operator=(*(other.d_func()));

@@ -106,4 +106,5 @@ namespace QBbgLib {
         QBbgPortfolioDataRequest(QBbgPortfolioDataRequestPrivate* d);
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgPortfolioDataRequest);
 #endif // QBbgPortfolioDataRequest_h__

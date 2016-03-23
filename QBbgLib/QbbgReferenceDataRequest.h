@@ -67,4 +67,5 @@ namespace QBbgLib {
         QBbgReferenceDataRequest(QBbgReferenceDataRequestPrivate* d);
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgReferenceDataRequest);
 #endif // QbbgReferenceDataRequest_h__

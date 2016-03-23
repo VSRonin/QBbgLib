@@ -32,8 +32,8 @@ namespace QBbgLib {
     public:
         virtual ~QBbgHistoricalDataResponse();
         QBbgHistoricalDataResponse();
-        QBbgHistoricalDataResponse(QBbgHistoricalDataResponse& other);
-        virtual QBbgHistoricalDataResponse& operator=(QBbgHistoricalDataResponse& other);
+        QBbgHistoricalDataResponse(const QBbgHistoricalDataResponse& other);
+        virtual QBbgHistoricalDataResponse& operator=(const QBbgHistoricalDataResponse& other);
         virtual qint32 size() const;
         virtual bool isEmpty() const;
         virtual QVariant value(const QDate& a) const;
@@ -51,4 +51,5 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgHistoricalDataResponse);
 #endif // QBbgHistoricalDataResponse_h__

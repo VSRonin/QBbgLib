@@ -107,10 +107,10 @@ namespace QBbgLib {
         : QBbgAbstractFieldResponse(dp)
     {
     }
-    QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponse& other)
+    QBbgReferenceDataResponse::QBbgReferenceDataResponse(const QBbgReferenceDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this,*(other.d_func())))
     {}
-    QBbgReferenceDataResponse& QBbgReferenceDataResponse::operator=(QBbgReferenceDataResponse& other)
+    QBbgReferenceDataResponse& QBbgReferenceDataResponse::operator=(const QBbgReferenceDataResponse& other)
     {
         Q_D(QBbgReferenceDataResponse);
         d->operator=(*(other.d_func()));

@@ -130,4 +130,5 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
 	};
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgRequestGroup);
 #endif // QBbgRequest_h__

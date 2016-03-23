@@ -82,14 +82,13 @@ namespace QBbgLib {
 
     quint32 QBbgManager::processRequestID(const QBbgRequestGroup& rq)
     {
-        Q_D(QBbgManager);
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
         const quint32 threadKey = newTh.key();
         QEventLoop waitLoop;
         connect(newTh.value(), &QBbgWorkerThread::finished, &waitLoop, &QEventLoop::quit);
         newTh.value()->start();
         waitLoop.exec();
-        Q_ASSERT(d->m_ResultTable.contains(threadKey));
+        Q_ASSERT(d_func()->m_ResultTable.contains(threadKey));
         return threadKey;
     }
 

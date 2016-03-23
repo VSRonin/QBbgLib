@@ -32,8 +32,8 @@ namespace QBbgLib {
     public:
     	QBbgReferenceDataResponse();
         virtual ~QBbgReferenceDataResponse();
-        QBbgReferenceDataResponse(QBbgReferenceDataResponse& other);
-        virtual QBbgReferenceDataResponse& operator=(QBbgReferenceDataResponse& other);
+        QBbgReferenceDataResponse(const QBbgReferenceDataResponse& other);
+        virtual QBbgReferenceDataResponse& operator=(const QBbgReferenceDataResponse& other);
         virtual qint32 rows() const;
         virtual qint32 columns() const;
         virtual const QBbgReferenceDataResponse* getTableValue(qint32 r, qint32 c) const;
@@ -50,4 +50,5 @@ namespace QBbgLib {
         friend class QBbgRequestResponseWorker;
     };
 }
+Q_DECLARE_METATYPE(QBbgLib::QBbgReferenceDataResponse);
 #endif // QBbgReferenceDataResponse_h__

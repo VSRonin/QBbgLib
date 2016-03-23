@@ -45,8 +45,9 @@ namespace QBbgLib {
         /*!
         \brief The fully decorated name of the security
         \getter fullName()
+        \setter setFullName()
         */
-        Q_PROPERTY(QString fullName READ fullName)
+        Q_PROPERTY(QString fullName READ fullName WRITE setFullName)
         /*!
         \brief Check if the security is valid
         \getter isValid()
@@ -128,7 +129,7 @@ namespace QBbgLib {
         \details If the input is invalid, a null security will be created
         \arg SecString Examples of valid strings are IBM US Equity ,  /isin/XS1372839214
         */
-        QBbgSecurity(QString SecString);
+        QBbgSecurity(const QString& SecString);
         /*!
         \brief Creates a security based on its name and a security extension
         \details If the input is invalid, a null security will be created
@@ -162,6 +163,8 @@ namespace QBbgLib {
         bool isValid() const;
         //! Returns the fully decorated security name including price source, exchange and extension
         QString fullName() const;
+        //! Extract the security from the decorated name
+        void setFullName(QString val);
         //! Check if two securities are the same
         bool operator==(const QBbgSecurity& other) const;
         //! Check if two securities are different
