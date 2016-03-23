@@ -16,7 +16,4 @@
 #################################################################################
 
 TEMPLATE = subdirs
-SUBDIRS += QBbgLib 
-Examples.file =	examples/examples.pro
-Examples.depends = QBbgLib
-SUBDIRS += Examples
+SUBDIRS += SynchronousRequest/SynchronousRequest.pro
