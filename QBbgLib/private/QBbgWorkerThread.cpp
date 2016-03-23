@@ -32,8 +32,8 @@ namespace QBbgLib {
     }
     void QBbgWorkerThread::run()
     {
-        m_worker->start();
-        exec();
+        if(m_worker->start())
+            exec();
     }
     QBbgWorkerThread::~QBbgWorkerThread()
     {

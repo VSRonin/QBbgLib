@@ -605,20 +605,20 @@ namespace QBbgLib {
         }
     }
 
-    void QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
+    bool QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
     {
         setRequest(req);
-        start();
+        return start();
     }
 
-    void QBbgRequestResponseWorker::start()
+    bool QBbgRequestResponseWorker::start()
     {
         if (sessionRunning()) 
-            return;
+            return false;
         Q_ASSERT_X(m_Requests.size() > 0, "QBbgRequestResponseWorker::start()", "Starting with empty request");
         setSessionRunning(true);
         m_ResurnedResults = 0;
-        session()->startAsync();
+        return session()->startAsync();
     }
 
     const QBbgAbstractResponse* QBbgRequestResponseWorker::result(qint64 id) const

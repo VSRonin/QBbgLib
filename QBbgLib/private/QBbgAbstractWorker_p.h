@@ -24,25 +24,18 @@
 #define QBbgAbstractWorker_h__
 #include <QObject>
 #include <QVariant>
-#include <QScopedPointer>
+#include <memory>
 #include "QBbgAbstractResponse.h"
-namespace BloombergLP {
-    namespace blpapi {
-        class SessionOptions;
-        class Element;
-        class Event;
-        class Session;
-    }
-}
+#include <blpapi_session.h>
 namespace QBbgLib {
     class QBbgAbstractResponse;
     class QBbgRequestGroup;
-    class QBbgAbstractWorker : public QObject
+    class QBbgAbstractWorker : public QObject, public BloombergLP::blpapi::EventHandler
     {
         Q_OBJECT
     public:
         QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent=NULL);
-        virtual ~QBbgAbstractWorker();
+        virtual ~QBbgAbstractWorker() = 0;
         virtual bool isAvailable() const;
         virtual void stop();
     protected:
@@ -52,12 +45,12 @@ namespace QBbgLib {
         virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const;
         virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
         virtual QVariant elementToVariant(BloombergLP::blpapi::Element& val);
-        QScopedPointer<BloombergLP::blpapi::Session>& session();
+        std::unique_ptr<BloombergLP::blpapi::Session>& session();
     private:
         bool m_SessionRunning;
-        QScopedPointer<BloombergLP::blpapi::Session> m_session;
+        std::unique_ptr<BloombergLP::blpapi::Session> m_session;
     public slots:
-        virtual void start() = 0;
+        virtual bool start() = 0;
         virtual void setRequest(const QBbgRequestGroup& req)=0;
     signals:
         void started();

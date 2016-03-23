@@ -41,12 +41,12 @@ namespace QBbgLib {
         QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = nullptr);
         virtual const QBbgAbstractResponse* result(qint64 id) const;
     public slots:
-        virtual void start();
-        virtual void start(const QBbgRequestGroup& req);
+        virtual bool start() override;
+        virtual bool start(const QBbgRequestGroup& req);
         virtual void setRequest(const QBbgRequestGroup& req);     
         virtual void ClearResults();
     protected:
-        virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal);
+        virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal) override;
         virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession);
         virtual void SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg);
         virtual void DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header);

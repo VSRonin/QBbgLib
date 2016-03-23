@@ -33,7 +33,7 @@ namespace QBbgLib {
             m_session->stop();
     }
     QBbgAbstractWorker::QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent)
-        : m_session(new BloombergLP::blpapi::Session(option))
+        : m_session(new BloombergLP::blpapi::Session(option,this))
         , m_SessionRunning(false)
         , QObject(parent)
     {}
@@ -117,7 +117,7 @@ namespace QBbgLib {
         }
     }
 
-    QScopedPointer<BloombergLP::blpapi::Session>& QBbgAbstractWorker::session()
+    std::unique_ptr<BloombergLP::blpapi::Session>& QBbgAbstractWorker::session()
     {
         return m_session;
     }
