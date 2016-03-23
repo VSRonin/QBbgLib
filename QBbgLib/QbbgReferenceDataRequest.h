@@ -29,6 +29,8 @@ namespace QBbgLib {
     Both single values and tables can be retrieved using this request.<br/>
     This is equivalent to BDP() and BDS() bloomberg functions in excel.
     \note For request with securities having the QBbgSecurity::Client extension, use QBbgPortfolioDataRequest instead
+    \par Usage<br/>
+    \snippet SynchronousRequest.cpp 1
     */
     class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {

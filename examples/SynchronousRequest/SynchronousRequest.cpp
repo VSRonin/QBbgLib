@@ -5,8 +5,9 @@
 #include <iostream>
 #include <QVariant>
 
-void singleRequest(QBbgLib::QBbgManager& bbgManager)
+void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
 {
+    //! [1]
     // Create a reference data request
     QBbgLib::QBbgReferenceDataRequest req;
 
@@ -15,8 +16,9 @@ void singleRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Set the field to download
     req.setField("SECURITY_NAME"); // Single Value
+    //! [1]
     // req.setField("DES_CASH_FLOW"); // Table, uncomment to demonstrate
-    
+
     // Send the request and wait for the response
     const QBbgLib::QBbgReferenceDataResponse * const resp = bbgManager.processRequest(req);
 
@@ -74,6 +76,6 @@ int main(int argc, char *argv[])
     // Create the main manager
     QBbgLib::QBbgManager bbgManager;
    
-    singleRequest(bbgManager);
+    singleReferenceDataRequest(bbgManager);
     return 0;
 }

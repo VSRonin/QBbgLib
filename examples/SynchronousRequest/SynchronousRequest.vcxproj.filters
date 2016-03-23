@@ -21,7 +21,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="SynchronousRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
