@@ -42,6 +42,7 @@ namespace QBbgLib {
         virtual QList<QDate> findValues(const QVariant& a) const;
         virtual QString periodForDate(const QDate& a)const;
         virtual QDate dateForPeriod(const QString& period)const;
+        virtual QDate date(int period) const;
         virtual QList<QDate> dates() const;
         virtual QList<QString> periods() const;
     protected:

@@ -49,7 +49,13 @@ namespace QBbgLib {
     {
         if (period < 0 || period >= size()) return QVariant();
         Q_D(const QBbgHistoricalDataResponse);
-        return  *(d->m_values.begin() + period);
+        return  (d->m_values.constBegin() + period).value();
+    }
+    QDate QBbgHistoricalDataResponse::date(int period) const
+    {
+        if (period < 0 || period >= size()) return QDate();
+        Q_D(const QBbgHistoricalDataResponse);
+        return  (d->m_values.constBegin() + period).key();
     }
 
     QList<QDate> QBbgHistoricalDataResponse::findValues(const QVariant& a) const
