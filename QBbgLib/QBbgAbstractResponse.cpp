@@ -98,7 +98,7 @@ namespace QBbgLib {
     }
     QString QBbgAbstractResponse::bbgErrorCode2String(BbgErrorCodes a)
     {
-        if (a == NoErrors) return "NoErrors";
+        if (a == NoErrors) return "No Errors";
         QString Result;
         if (a & ResponseError) Result += "Response Error, ";
         if (a & SecurityError) Result += "Invalid Security, ";

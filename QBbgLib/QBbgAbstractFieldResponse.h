@@ -22,14 +22,27 @@
 namespace QBbgLib {
     class QBbgAbstractFieldResponsePrivate;
     class QBbgRequestResponseWorker;
+    //! Base class for Bloomberg Responses based on field request
     class QBBG_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
     {
+        Q_GADGET
+        /*!
+        \brief Header for the response
+        \getter header()
+        \setter setHeader()
+        */
+        Q_PROPERTY(header READ header)
         Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
     public:
+        //! Destructor
         virtual ~QBbgAbstractFieldResponse() = 0;
         QBbgAbstractFieldResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
         QBbgAbstractFieldResponse(const QBbgAbstractFieldResponse& a);
         virtual QBbgAbstractFieldResponse& operator=(const QBbgAbstractFieldResponse& a);
+        /*!
+        \brief Header for the response
+        \details This will contain the field name or the column header for tabular results
+        */
         virtual const QString& header() const;
     protected:
         QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);

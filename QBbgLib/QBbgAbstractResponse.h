@@ -25,18 +25,47 @@ namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
     class QBbgAbstractWorker;
     class QBbgRequestResponseWorker;
+    //! Base Class for Bloomberg Responses
     class QBBG_EXPORT QBbgAbstractResponse
     {
         Q_GADGET
+        /*!
+        \brief The error code associated with the response
+        \getter errorCode()
+        */
+        Q_PROPERTY(BbgErrorCodes errorCode READ errorCode)
+        /*!
+        \brief String representation of the error
+        \getter errorString()
+        */
+        Q_PROPERTY(QString errorString READ errorString)
+        /*!
+        \brief The details of the error
+        \getter errorMessage()
+        */
+        Q_PROPERTY(QString errorMessage READ errorMessage)
+        /*!
+        \brief Checks if the response has any error
+        \getter hasErrors()
+        */
+        Q_PROPERTY(bool hasErrors READ hasErrors)
+        /*!
+        \brief Check if the response contains any value
+        \getter isEmpty()
+        */
+        Q_PROPERTY(bool isEmpty READ isEmpty)
+        /*!
+        \brief The ID of the response
+        \getter getID()
+        */
+        Q_PROPERTY(qint64 responseID READ getID)
+        /*!
+        \brief Returns the type of the current response
+        \getter responseType()
+        */
+        Q_PROPERTY(ResponseType responseType READ responseType)
     private:
         Q_DECLARE_PRIVATE(QBbgAbstractResponse)
-        Q_PROPERTY(BbgErrorCodes errorCode READ errorCode)
-        Q_PROPERTY(QString errorString READ errorString)
-        Q_PROPERTY(QString errorMessage READ errorMessage)
-        Q_PROPERTY(bool hasErrors READ hasErrors)
-        Q_PROPERTY(bool isEmpty READ isEmpty)
-        Q_PROPERTY(qint64 responseID READ getID)
-        Q_PROPERTY(ResponseType responseType READ responseType)
     protected:
         enum : qint32
         {
@@ -44,43 +73,69 @@ namespace QBbgLib {
             , FirstRealTime = 0x20
         };
     public:
+        //! Flags representing possible errors
         enum BbgErrorCodesF
         {
-            NoErrors = 0
-            , ResponseError = 0x1
-            , SecurityError = 0x2
-            , InvalidInputs = 0x4
-            , SessionError = 0x8
-            , ServiceError = 0x10
-            , FieldError = 0x20
-            , UnknownError = 0x40
-            , SessionStopped = 0x80
-            , NoData = 0x100
+            NoErrors = 0 /*!< No error occurred*/
+            , ResponseError = 0x1 /*!< Response error */
+            , SecurityError = 0x2 /*!< Invalid security */
+            , InvalidInputs = 0x4 /*!< Invalid inputs */
+            , SessionError = 0x8 /*!< Session error */
+            , ServiceError = 0x10 /*!< Service error */
+            , FieldError = 0x20 /*!< Invalid field */
+            , UnknownError = 0x40 /*!< Unknown error */
+            , SessionStopped = 0x80 /*!< Process stopped by user*/
+            , NoData = 0x100 /*!< No data available */
         };
         Q_ENUM(BbgErrorCodesF)
         Q_DECLARE_FLAGS(BbgErrorCodes, BbgErrorCodesF)
+        //! Type of response
         enum class ResponseType : qint32
         {
-            Invalid=-1
-            , BeqsResponse
-            , HistoricalDataResponse = FirstFielded
-            , ReferenceDataResponse
-            , PortfolioDataResponse
-            , IntraDayTickResponse = FirstRealTime
-            , IntraDayBarResponse
+            Invalid=-1 /*!< Invalid Type */
+            , BeqsResponse /*!< Currently Unavailable */
+            , HistoricalDataResponse = FirstFielded /*!< Response associated with an historical data request */
+            , ReferenceDataResponse /*!< Response associated with a reference data request */
+            , PortfolioDataResponse  /*!< Response associated with a portfolio request */
+            , IntraDayTickResponse = FirstRealTime /*!< Currently Unavailable */
+            , IntraDayBarResponse  /*!< Currently Unavailable */
         };
         Q_ENUM(ResponseType)
+        //! Destructor
         virtual ~QBbgAbstractResponse() =0;
-        QBbgAbstractResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
+        //! Creates a response of the selected type
+        QBbgAbstractResponse(ResponseType typ);
+        //! Creates a copy of another response
         QBbgAbstractResponse(const QBbgAbstractResponse& other);
+        //! Copies another response
         virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);
+        //! The error code associated with the response
         virtual BbgErrorCodes errorCode() const;
+        /*!
+        \brief String representation of the error
+        \details This is equivalent to bbgErrorCode2String(errorCode())
+        */
         virtual QString errorString() const;
+        /*!
+        \brief The details of the error
+        \details This string contains more detailed information regarding the error
+        */
         virtual QString errorMessage() const;
+        /*!
+        \brief Checks if the response has any error
+        \details This is equivalent to errorCode() == BbgErrorCodesF::NoErrors
+        */
         virtual bool hasErrors() const;
+        //! Check if the response contains any value
         virtual bool isEmpty() const =0;
+        //! Converts an error code to the its string representation
         Q_INVOKABLE static QString bbgErrorCode2String(BbgErrorCodes a);
+        /*!
+        \brief The ID of the response
+        \details This is the same as the request associated with this response
+        */
         virtual qint64 getID() const;
+        //! Returns the type of the current response
         virtual ResponseType responseType()const;
     protected:
         QBbgAbstractResponsePrivate* d_ptr;

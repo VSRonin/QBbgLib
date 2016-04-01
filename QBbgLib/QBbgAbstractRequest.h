@@ -70,19 +70,21 @@ namespace QBbgLib {
             , apiauth
         };
     public:
+        //! Special requestID codes
         enum SpecialIDs { 
-            InvalidID = -1024 
+            InvalidID = -1024 /*!< Invalid Request */
         };
         Q_ENUM(SpecialIDs)
+        //! Type of Request
         enum class RequestType : qint32
         {
-            Invalid =-1
-            , Beqs
-            , HistoricalData = FirstFielded
-            , ReferenceData
-            , PortfolioData
-            , IntraDayTick = FirstRealTime
-            , IntraDayBar
+            Invalid = -1 /*!< Invalid Type */
+            , Beqs /*!< Currently Unavailable */
+            , HistoricalData = FirstFielded /*!< Request for historical data */
+            , ReferenceData /*!< Request for static data */
+            , PortfolioData /*!< Request for portfolio data */
+            , IntraDayTick = FirstRealTime /*!< Currently Unavailable */
+            , IntraDayBar /*!< Currently Unavailable */
         };
         Q_ENUM(RequestType)
     protected:
