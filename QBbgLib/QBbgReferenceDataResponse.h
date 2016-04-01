@@ -21,25 +21,75 @@
 #include "QBbgAbstractFieldResponse.h"
 #include "QBbgProjectGlobals.h"
 #include <QList>
-class QVariant;
+#include <QVariant>
 namespace QBbgLib {
     class QBbgRequestResponseWorker;
     class QBbgReferenceDataResponsePrivate;
+    /*! 
+    \brief Response for static data
+    \details The result can be either a single value or a table depending on the request
+    */
     class QBBG_EXPORT QBbgReferenceDataResponse : public QBbgAbstractFieldResponse
     {
+        Q_GADGET
+        /*!
+        \brief The number of rows in the tabular result
+        \getter rows()
+        */
+        Q_PROPERTY(qint32 rows READ rows)
+        /*!
+        \brief The number of columns in the tabular result
+        \getter columns()
+        */
+        Q_PROPERTY(qint32 columns READ columns)
+        /*!
+        \brief Whether the response has tabular results or not
+        \getter hasTable()
+        */
+        Q_PROPERTY(bool hasTable READ hasTable)
+        /*!
+        \brief Whether the response has a single value or not
+        \getter hasTable()
+        */
+        Q_PROPERTY(QVariant value READ value)
     private:
         Q_DECLARE_PRIVATE(QBbgReferenceDataResponse)
     public:
+        //! Creates an empty response
     	QBbgReferenceDataResponse();
+        //! Destructor
         virtual ~QBbgReferenceDataResponse();
+        //! Creates a copy of another response
         QBbgReferenceDataResponse(const QBbgReferenceDataResponse& other);
+        //! Copies another response
         virtual QBbgReferenceDataResponse& operator=(const QBbgReferenceDataResponse& other);
+        /*!
+        \brief Number of rows in the tabular result
+        \details If hasTable() is false this will return 0
+        */
         virtual qint32 rows() const;
+        /*!
+        \brief Number of columns in the tabular result
+        \details If hasTable() is false this will return 0
+        */
         virtual qint32 columns() const;
-        virtual const QBbgReferenceDataResponse* getTableValue(qint32 r, qint32 c) const;
+        /*!
+        \brief Returns the result associated with a table cell
+        \arg r The row index of the table
+        \arg c The column index of the table
+        \details If hasTable() is false or any index is out of range a null pointer will be returned
+        */
+        Q_INVOKABLE virtual const QBbgReferenceDataResponse* getTableValue(qint32 r, qint32 c) const;
+        //! Checks if the response has tabular results
         virtual bool hasTable() const;
+        //! Checks if the response has a single value
         virtual bool hasValue()const;
+        //! Reimplemented from QBbgAbstractResponse::isEmpty()
         virtual bool isEmpty() const;
+        /*!
+        \brief Returns the single value of the result 
+        \details If hasValue() is false this will return a null QVariant
+        */
         virtual const QVariant& value() const;
     protected:
         QBbgReferenceDataResponse(QBbgReferenceDataResponsePrivate* dp);
