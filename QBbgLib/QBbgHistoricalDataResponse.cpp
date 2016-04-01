@@ -21,7 +21,7 @@
 namespace QBbgLib {
     QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse() = default;
     QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate() = default;
-    qint32 QBbgHistoricalDataResponse::size() const
+    int QBbgHistoricalDataResponse::size() const
     {
         Q_D(const QBbgHistoricalDataResponse);
         return d->m_values.size();

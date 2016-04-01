@@ -25,29 +25,109 @@ class QDate;
 namespace QBbgLib {
     class QBbgPortfolioDataResponsePrivate;
     class QBbgSecurity;
+    /*! 
+    \brief A response for portfolio information.
+    \details The results will be ordered by currency then by yellow key then by security name. Cash will always appear at the end of the list.
+    */
     class QBBG_EXPORT QBbgPortfolioDataResponse : public QBbgAbstractFieldResponse
     {
+        Q_GADGET
+        /*!
+        \brief Number of securities in the portfolio
+        \getter size()
+        */
+        Q_PROPERTY(int size READ size)
+        /*!
+        \brief The result contains the nominal amount of the securities in the portfolio
+        \getter hasPosition()
+        */
+        Q_PROPERTY(bool hasPosition READ hasPosition)
+        /*!
+        \brief The result contains the market value of the securities in the portfolio
+        \getter hasMarketValue()
+        */
+        Q_PROPERTY(bool hasMarketValue READ hasMarketValue)
+        /*!
+        \brief The result contains the cost of the securities in the portfolio
+        \getter hasCost()
+        */
+        Q_PROPERTY(bool hasCost READ hasCost)
+        /*!
+        \brief The result contains the cost date of the securities in the portfolio
+        \getter hasCostDate()
+        */
+        Q_PROPERTY(bool hasCostDate READ hasCostDate)
+        /*!
+        \brief The result contains the cost FX rate of the securities in the portfolio
+        \getter hasCostFx()
+        */
+        Q_PROPERTY(bool hasCostFx READ hasCostFx)
+        /*!
+        \brief The result contains the relative weight of the securities in the portfolio
+        \getter hasWeight()
+        */
+        Q_PROPERTY(bool hasWeight READ hasWeight)
     private:
         Q_DECLARE_PRIVATE(QBbgPortfolioDataResponse)
     public:
+        //! Destructor
         virtual ~QBbgPortfolioDataResponse();
+        //! Creates an empty portfolio response
         QBbgPortfolioDataResponse();
+        //! Creates a copy of another portfolio response
         QBbgPortfolioDataResponse(const QBbgPortfolioDataResponse& other);
+        //! Copies another portfolio response
         virtual QBbgPortfolioDataResponse& operator=(const QBbgPortfolioDataResponse& other);
-        virtual size_t size() const;
-        virtual QBbgSecurity security(size_t index) const;
-        virtual double position(size_t index) const;
-        virtual double marketValue(size_t index) const;
-        virtual double cost(size_t index) const;
-        virtual QDate costDate(size_t index) const;
-        virtual double costFx(size_t index) const;
-        virtual double weight(size_t index) const;
+        //! Returns the number of securities in the portfolio
+        virtual int size() const;
+        /*! 
+        \brief Returns the nth security in the list
+        \details If index is out of range an invalid security will be returned
+        */
+        Q_INVOKABLE virtual QBbgSecurity security(int index) const;
+        /*!
+        \brief Returns the nominal amount of the nth security in the portfolio
+        \details If index is out of range or hasPosition() is false, 0 returned
+        */
+        Q_INVOKABLE virtual double position(int index) const;
+        /*!
+        \brief Returns the market value of the nth security in the portfolio
+        \details If index is out of range or hasMarketValue() is false, 0 returned
+        */
+        Q_INVOKABLE virtual double marketValue(int index) const;
+        /*!
+        \brief Returns the cost of the nth security in the portfolio
+        \details If index is out of range or hasCost() is false, 0 returned
+        */
+        Q_INVOKABLE virtual double cost(int index) const;
+        /*!
+        \brief Returns the cost date of the nth security in the portfolio
+        \details If index is out of range or hasCostDate() is false, a null date is returned
+        */
+        Q_INVOKABLE virtual QDate costDate(int index) const;
+        /*!
+        \brief Returns the cost FX rate of the nth security in the portfolio
+        \details If index is out of range or hasCostFx() is false, 0 returned
+        */
+        Q_INVOKABLE virtual double costFx(int index) const;
+        /*!
+        \brief Returns the cost relative weight of the nth security in the portfolio
+        \details If index is out of range or hasWeight() is false, 0 returned
+        */
+        Q_INVOKABLE virtual double weight(int index) const;
+        //! Checks if result contains the nominal amount of the securities in the portfolio
         virtual bool hasPosition() const;
+        //! Checks if result contains the market value of the securities in the portfolio
         virtual bool hasMarketValue() const;
+        //! Checks if result contains the cost of the securities in the portfolio
         virtual bool hasCost() const;
+        //! Checks if result contains the cost date of the securities in the portfolio
         virtual bool hasCostDate() const;
+        //! Checks if result contains the cost FX rate of the securities in the portfolio
         virtual bool hasCostFx() const;
+        //! Checks if result contains the relative weight of the securities in the portfolio
         virtual bool hasWeight() const;
+        //! Reimplemented from QBbgAbstractResponse::isEmpty()
         virtual bool isEmpty() const;
     protected:
         QBbgPortfolioDataResponse(QBbgPortfolioDataResponsePrivate* dp);

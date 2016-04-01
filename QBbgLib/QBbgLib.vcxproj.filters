@@ -191,18 +191,24 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractFieldResponse.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgHistoricalDataResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgHistoricalDataResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgPortfolioDataResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgPortfolioDataResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QBbgReferenceDataResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgPortfolioDataResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgHistoricalDataResponse.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
     </ClInclude>
     <ClInclude Include="private\QBbgAbstractFieldRequest_p.h">
@@ -289,6 +295,12 @@
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </CustomBuild>
     <CustomBuild Include="QBbgAbstractFieldResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgHistoricalDataResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgPortfolioDataResponse.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
     </CustomBuild>
   </ItemGroup>

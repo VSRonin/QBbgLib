@@ -31,13 +31,16 @@ namespace QBbgLib {
         \getter header()
         \setter setHeader()
         */
-        Q_PROPERTY(header READ header)
+        Q_PROPERTY(QString header READ header)
         Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
     public:
         //! Destructor
         virtual ~QBbgAbstractFieldResponse() = 0;
-        QBbgAbstractFieldResponse(ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
+        //! Creates a field response of the selected type
+        QBbgAbstractFieldResponse(ResponseType typ);
+        //! Creates a copy of another field response
         QBbgAbstractFieldResponse(const QBbgAbstractFieldResponse& a);
+        //! Copies another field response
         virtual QBbgAbstractFieldResponse& operator=(const QBbgAbstractFieldResponse& a);
         /*!
         \brief Header for the response
