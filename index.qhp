@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QtHelpProject version="1.0">
+  <namespace>QBbgLib.1.0</namespace>
+  <virtualFolder>doc</virtualFolder>
+  <filterSection>
+    <filterAttribute>doxygen</filterAttribute>
+    <toc>
+      <section title="QBbgLib 1.0" ref="index.html">
+        <section title="Deprecated List" ref="deprecated.html" />
+        <section title="Namespaces">
+          <section title="Namespace List" ref="namespaces.html">
+            <section title="QBbgLib" ref="namespace_q_bbg_lib.html" />
+          </section>
+        </section>
+        <section title="Classes">
+          <section title="Class List" ref="annotated.html">
+            <section title="QBbgLib" ref="namespace_q_bbg_lib.html">
+              <section title="QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">
+                <section title="~QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a142c72cd00976ee7b300e7f18dd208ec" />
+                <section title="QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a615c38c57a8190a40914b2bbf35b258f" />
+                <section title="QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a3ba8fd1d7114958a96dbd9df2dffaaff" />
+                <section title="clearOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a5a3e4f731a62b47b8277cde7cedf0ed9" />
+                <section title="field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a30c35a636b4ce004c32afb43a4e84924" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#acf9d2647dff9e6a56987d8ee19644034" />
+                <section title="operator==" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#aa04ba8f5f88a18bb0d87f589ffce6d1e" />
+                <section title="overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a33ef34b5086bcf68a38e03fbd506664a" />
+                <section title="setField" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ac209d8ccb8206e2e7887b7a050945b67" />
+                <section title="setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ab4f3299f5e6dfe0cb57ac9179860b06c" />
+                <section title="QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae6592b663aafa771b9eccde74d320187" />
+                <section title="QBbgRequestGroupPrivate" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3eb300a71cf8462511fe054aaf2dfef" />
+                <section title="field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a86632a5d1ae6e1f2074d33b17e4bb954" />
+                <section title="overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae4b242bfeb29ba7645ed8e2ddb8e2cde" />
+              </section>
+              <section title="QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html">
+                <section title="~QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#ad99f57fbf8a52d73c77992e45a953508" />
+                <section title="QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a922874d202691054fb5a0ae9904dd08d" />
+                <section title="QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#aeaa868649eab8ba01fcbb66da6819d56" />
+                <section title="header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a5add8e764caa774386735f40c33b225e" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a2e4e743310ece495a6d838ccca2ad58c" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a50d42b3c1fbead41b00fee763bb82a6d" />
+              </section>
+              <section title="QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">
+                <section title="RequestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbd">
+                  <section title="Invalid" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda4bbb8f967da6d1a610596d7257179c2b" />
+                  <section title="Beqs" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdafc6e59c20cf14ad8d75856ebf863456e" />
+                  <section title="HistoricalData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda32c57c1afb0340df4b972afb570e0259" />
+                  <section title="ReferenceData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdae229f3fb7af13c9a0d50f787ae7d5430" />
+                  <section title="PortfolioData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdaa0de9f3e84ce68480e8919febdeacd71" />
+                  <section title="IntraDayTick" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654" />
+                  <section title="IntraDayBar" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdad8cee52a76e258e617f0dd74aef08836" />
+                </section>
+                <section title="SpecialIDs" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#addbe61db6aa940dd874f091d7d47a3aa">
+                  <section title="InvalidID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#addbe61db6aa940dd874f091d7d47a3aaaa505b0defb1aa47d5531cb014e4949f8" />
+                </section>
+                <section title="~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+                <section title="QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+                <section title="QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+                <section title="getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a9eb7dd72d86a33796f845a8b6078db61" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+                <section title="requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+                <section title="security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+                <section title="setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+                <section title="setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6cb9ade14c0fc5aa11ecce294749c442" />
+                <section title="setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+                <section title="QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ae6592b663aafa771b9eccde74d320187" />
+                <section title="QBbgRequestGroupPrivate" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad3eb300a71cf8462511fe054aaf2dfef" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="QBbgRequestResponseWorkerPrivate" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad02a5ee8f428bfb8b129a01e6b3822cd" />
+                <section title="qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+                <section title="requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+                <section title="requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+                <section title="security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+              </section>
+              <section title="QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html">
+                <section title="BbgErrorCodesF" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831">
+                  <section title="NoErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a992d551b2e0ebdeecf3c0463d34f826f" />
+                  <section title="ResponseError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831abfb7593bf15539bdec964b4f1d583f37" />
+                  <section title="SecurityError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831aa541eecc58dd4b144002075967c1e668" />
+                  <section title="InvalidInputs" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a5ef32b9021d6d1b006b52f2c70e7b7de" />
+                  <section title="SessionError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a0db6a4c67f06faa07550bfbd50157d3f" />
+                  <section title="ServiceError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a62bab521454fe604ae41c3e459031753" />
+                  <section title="FieldError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a479c104b70914dcff073dbc3c6917694" />
+                  <section title="UnknownError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a556e62298f94436c683c3fb541735a52" />
+                  <section title="SessionStopped" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a08d153dfb39bf9cd3411bebabe6fec4a" />
+                  <section title="NoData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831acaa04b87a4c0491c59cb29ddb320fa25" />
+                </section>
+                <section title="ResponseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96">
+                  <section title="Invalid" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a4bbb8f967da6d1a610596d7257179c2b" />
+                  <section title="BeqsResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a34e29fd88f37254642bd2ef0ad778870" />
+                  <section title="HistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a25575f4a3cf6255d1fafcdcabe1dd836" />
+                  <section title="ReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96ac4c43740b1a337d5749604a9b9838849" />
+                  <section title="PortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a3cecc1f351106b64d107cc56903fe087" />
+                  <section title="IntraDayTickResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96acb22ea99ca3c8914dbb4ed4defe71150" />
+                  <section title="IntraDayBarResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96ad926caefbf49b4c90ea52c677edf7f71" />
+                </section>
+                <section title="~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+                <section title="QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+                <section title="QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+                <section title="errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+                <section title="errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+                <section title="errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+                <section title="getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+                <section title="hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a459471922203cc85066a8ec5eae36894" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+                <section title="responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+                <section title="QBbgAbstractWorker" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a91c91e0c5782c7b6ee17091c35ab8f9b" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+                <section title="errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+                <section title="errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+                <section title="errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+                <section title="hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+                <section title="responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+                <section title="responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+              </section>
+              <section title="QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html">
+                <section title="NonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bdd">
+                  <section title="NON_TRADING_WEEKDAYS" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bddacff1a34769129bb703dde85b084c2ae0" />
+                  <section title="ALL_CALENDAR_DAYS" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bdda2821e3ee3488f16f1bbbc9176dbb4240" />
+                  <section title="ACTIVE_DAYS_ONLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bddace060fff4bfccda347bbf51f4d83c492" />
+                </section>
+                <section title="PeriodAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553">
+                  <section title="ACTUAL" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a27c34d52fc18fc47c5a8884cbef33079" />
+                  <section title="CALENDAR" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a1b3c9568d3a4c804bded6c04c1ba4d3d" />
+                  <section title="FISCAL" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a64dc0cf97c7400ff5f06b1ec1a500265" />
+                </section>
+                <section title="PeriodSelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2">
+                  <section title="DAILY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a5be7a4ce2bb312717e2d51257d4af7c9" />
+                  <section title="WEEKLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a3e89329569be85f49d2f37c0f961c2cd" />
+                  <section title="MONTHLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a2db61275a22ad700dbfacb39d14bb53a" />
+                  <section title="QUARTERLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2aed2cc7ed5bd89f206a21d1cf2f9dc5e0" />
+                  <section title="SEMI_ANNUALLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a65674fc15f8a77831c8cc782517a0fb1" />
+                  <section title="YEARLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2ad320a8ab6b463413d84dc4b2d20fb0bd" />
+                </section>
+                <section title="~QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5b9a720df9a58e6ce9f16315c7385814" />
+                <section title="QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a529cc021288114fefb3cdde0ac06d6b4" />
+                <section title="QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a6434a2d3d9e425ca70dcc82c0d60a6f4" />
+                <section title="adjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a57f947d0c8ff7caab93dda3d52ea61a9" />
+                <section title="adjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aaf2b56921bcd6e8971f2fc56feb2e2c0" />
+                <section title="adjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a196d037e24d226d4bfbc43ce00b19ec8" />
+                <section title="adjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a87168e1bffd09341313e1f73858060a5" />
+                <section title="calendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a779085f6e0936d27e7584e12276edab9" />
+                <section title="currency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa5ac2e4818a4f0e25bb5ad4085d0d921" />
+                <section title="endDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a370dbd43171feadf3b17e8b07b31f932" />
+                <section title="fillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a1f578e77be6148d85921408fde0d49cd" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8dc188774daa43d253db5d8ae560f8ee" />
+                <section title="maxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a0f9f5ae82614f2fc931ee5da7430ba37" />
+                <section title="nonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a47446327f9a8096ef2e6ac744d8bd2fc" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a84e6df0cd288f10f011bce00def1d3f4" />
+                <section title="operator==" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4331a567faddcfcb6685fa819e4068ab" />
+                <section title="periodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a7b6fabd3d7832410527c52d78a2b9eae" />
+                <section title="periodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a2e968581410079895a3c2a9b722eaaf1" />
+                <section title="setAdjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acf1266530aba50be92ea115518ba90fa" />
+                <section title="setAdjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a143d498b37f276fece71be6a6ed92470" />
+                <section title="setAdjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a592ffcd7cd18b91124744196292bf53a" />
+                <section title="setAdjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af1dc56a433586ded2c25e3e581664c38" />
+                <section title="setCalendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae437e76d51ad326cb0e887b60a248169" />
+                <section title="setCurrency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5423ed41d3cb3954836096f20f146fcd" />
+                <section title="setEndDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab0859817aff31d73b414eefaf66f6618" />
+                <section title="setFillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a20b75c55f87589ede04652f566e976b1" />
+                <section title="setMaxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ad20dcaa060164f41a9a9ac17276fe796" />
+                <section title="setNonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab65a15fb821c830f7b11219083b52702" />
+                <section title="setPeriodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab980c88860f07b1d2bd3585d1ada5891" />
+                <section title="setPeriodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4221c002cbfe489eebb51e6b6ac1313a" />
+                <section title="setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a33d3b33f5e5b1eaaa8da22afa432708a" />
+                <section title="setStartDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a97c8e40b02dd88b96ec80f7b11705769" />
+                <section title="setUseClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acd692864a593285607228221a0a83980" />
+                <section title="setUsePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8a51c47b97f28c0b5073ea0fae768dba" />
+                <section title="setUseRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a582acc5efae08008df9397324cef4820" />
+                <section title="startDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ac3eca09f4067e4e260c6cc20deaab4dc" />
+                <section title="useClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa1f6dce69025d14c359fe2049fb8d7f5" />
+                <section title="usePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a97df4341d8299c09bf9f0944bcb771b0" />
+                <section title="useRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#abf1a7e4083e491af50bf809479a36494" />
+                <section title="QBbgRequestGroupPrivate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ad3eb300a71cf8462511fe054aaf2dfef" />
+                <section title="adjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acee8814024906739468b968fbdb6c8cc" />
+                <section title="adjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5aa549ab99bc7598bf7c69a2b3fb90f6" />
+                <section title="adjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a876bf734dc0b5225e8f64ed34678a03b" />
+                <section title="adjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a43a68343037088a5b3f5b1e1ab41dd4e" />
+                <section title="calendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5ce17138a5c30268221e06307171cb37" />
+                <section title="currency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab7d732bf4a90dde392581473304f0b60" />
+                <section title="endDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#add3892d977f8b8abf5c1675ea2260830" />
+                <section title="fillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#addcaa0d1c90777a70ebd2d816d5a3bc1" />
+                <section title="maxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa59ec892aec92bf195eda015aa17cf91" />
+                <section title="nonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af12f8b42b74dc70074cf5ce54f76de97" />
+                <section title="periodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4cbae7c9bb894aba98b126fd2ed137ed" />
+                <section title="periodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a1788a3a55f82167494cbc38723b041a9" />
+                <section title="startDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae06832bb4763ec3d8655c1bce28fb1ce" />
+                <section title="useClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae31da5fc4eeac02ecf0c562de6dfdedd" />
+                <section title="usePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab975a63d9e63a2f191d9b6175c65af31" />
+                <section title="useRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af46ea8cca4f49efa9295c9b8f6f12ca2" />
+              </section>
+              <section title="QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html">
+                <section title="~QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a939a0914ee39818b075dcefb5ca4bb55" />
+                <section title="QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a01d9e025c52e3100e6b1de01412de854" />
+                <section title="QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a5b7c07c8320ecaf9b3d3c431a119754b" />
+                <section title="date" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a03e455470696f3405db15ce3bc6e569c" />
+                <section title="dateForPeriod" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#aa9b40e9778fb56e5a1fc705fb02da943" />
+                <section title="dates" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a8fb17367704f829584ae1ff4d7cd79d9" />
+                <section title="findValues" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a825f05902fe8e1ba445d0c13c69e0f4d" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#ac8cba50340fd5f54bf2a5877b9e87fb8" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a7762b90d1d0adff1c299f6550bf0285e" />
+                <section title="periodForDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af2d0b82321fbce91afe43d077c92071b" />
+                <section title="periods" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a0f91b36ede066c6b60ae4156ec9559a4" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a27b08adf5ea14a02cd6ae911d0ef96e7" />
+                <section title="value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a0dcc8d4c3d2aed842aeb8b067d5ac20e" />
+                <section title="value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a5d4107cd962d351713afe06daadb59f9" />
+                <section title="value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a045b770de17ac207d480b5111343ceea" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="dates" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af8093c1d165bccd47945e523425daea7" />
+                <section title="periods" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#add62e1e6874555547fa4b3fde4675b2d" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af530b28b8533259737bd1d7672498c15" />
+              </section>
+              <section title="QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html">
+                <section title="QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#ae866b9ce9ce8e7656c866c29f7ad1646" />
+                <section title="~QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a254ff475e6b824a1d953a7a8e651deb8" />
+                <section title="allFinished" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#af073d977cf28755e866906383a5403ac" />
+                <section title="finished" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aecde61337a281397ee87a45da489394e" />
+                <section title="getResult" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a66e700624451bd7fc3ab009d49543448" />
+                <section title="getResultGroups" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a98dd6c42414b0887238338d0de2a9daf" />
+                <section title="getResultIDs" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aa4e41d2bc3e9efe3c3e9d5582aeee44e" />
+                <section title="processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a921637a44e0537f8c3c6ba124e906350" />
+                <section title="processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a617d0c7421b1bf675019d88360559aa9" />
+                <section title="processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aa2402fd07b113c186a5c4c60ca92f277" />
+                <section title="processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a4196b0339dca2b4ba125ef946bf36acd" />
+                <section title="processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a92eb50bb8b41af162f7a11cf8018ff7d" />
+                <section title="processRequestID" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a33772c946fc2de7ce156dc38a93143e9" />
+                <section title="processRequestID" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a6e7a4b2a50b58a6ec185456550811f41" />
+                <section title="recieved" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#ab1c5a1698cc998436ecd5163d96b8cc2" />
+                <section title="startRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a0b7807abbd89ed7c9835fd26694f7151" />
+                <section title="startRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a0850366cb5e28d63de053baacd1b588b" />
+                <section title="resultGroups" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a1274f5f64d6c40e6d2d59053ec60156a" />
+              </section>
+              <section title="QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html">
+                <section title="QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ac9b8a5f13e94438880b7ff785ffe3b2a" />
+                <section title="QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ac32a33b4362db886f6f61b57f3bce0f1" />
+                <section title="~QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a8199756d5119a8b8ff9fec1bf06d73f1" />
+                <section title="clear" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ae36afc20cbc4210f6ec175f13a786d97" />
+                <section title="contains" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a0f51dd8a7ee85284332d027f2e7436c4" />
+                <section title="getKeys" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a39afa8121ecd958faba0a6a16733e573" />
+                <section title="getNames" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ad9e176181f8b2f84611aee34decdec0d" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a6440c0485c7f0f80f74c2bd4caeb7dba" />
+                <section title="operator!=" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a6f84c65d2d7814a6c50c0474ec4eee69" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a270cf5a993296852535bbbab1e013aa0" />
+                <section title="operator==" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a62ac71f13fac5bdf3179b5172a5ab09a" />
+                <section title="operator[]" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a5deb318f563424da037a2b266aa2af56" />
+                <section title="operator[]" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ab44bac30ef3bdf44e45bf61268484aa9" />
+                <section title="overrideValue" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a70184e37bb9b73ba205b0cf8e17330d9" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a5ae2833e14c81918b1f19bcc6fbf1945" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a7597497cdc5feed513c8d2031e9b2022" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a0c54d562b033f1404e427bd3ddddf3b0" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a9bc09d792076e03c346cfad23858ddd0" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a89592dae413d1ee1ec0b11719fdbff25" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a333a545cd849b0d640d25a0e613cab64" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a10930a3410a7ce6f20773b9154756b36" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a3707021470904a3c1507e4dd8de05799" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a3cf8a996fd83dabcfe3b3aed75379322" />
+                <section title="setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a7ba02b7f0e8823158696378790b21e24" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_override.html#aede23c987960798fd8ee933916933942" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_override.html#aa5f6f294d7631cf86b160deb19e499b4" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ab6ee333416190a5b10aaeea909962e10" />
+              </section>
+              <section title="QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html">
+                <section title="PortfolioFields" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2">
+                  <section title="PORTFOLIO_MPOSITION" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a70f10d632817b7901d801403a98edf49" />
+                  <section title="PORTFOLIO_MWEIGHT" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a20604c2365106d0790f45de3a9c20891" />
+                  <section title="PORTFOLIO_DATA" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2ac410f0ba6faf573870c13e0069080f43" />
+                  <section title="PORTFOLIO_MEMBERS" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a2aa32e55f127c236ebadae754330c575" />
+                </section>
+                <section title="~QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ac67c2fbc14ed0a53429c5a077de085d1" />
+                <section title="QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#acdc01fc03de0b5d5e9440b1b25dd8a7a" />
+                <section title="QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ab7c8227b1e17685bc52ca26e5254ed63" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a4ddcaddbe854048c4d89fe99d0e01a93" />
+                <section title="referenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a419d86504b80228fe0ac85128815080d" />
+                <section title="setField" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a39376debda83205a5ad259c23d1b4388" />
+                <section title="setField" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a216fc02b4e200d53d22eefaad8bc242b" />
+                <section title="setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ab3fbee890ff55ebc2583ed8b22e88f10" />
+                <section title="setPortfolio" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ad1dce564a80fda1bc12570cc12fe91b1" />
+                <section title="setReferenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#aba3e76e1731d6fc3445b8260aadf4bee" />
+                <section title="setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#af7e544cc2cda1d66b5ab21514a792783" />
+                <section title="referenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a2790b21b4608f3bbeb9d161c89a89828" />
+              </section>
+              <section title="QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html">
+                <section title="~QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a6e33cf6b8ea948a85a29bb76007b963f" />
+                <section title="QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a37e72dcabe8b75974b1fffeb69a5d946" />
+                <section title="QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a505c4131440eacbb7130d1582deb5814" />
+                <section title="cost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a788bb0bb8be9abe2031aa7ba6db12b52" />
+                <section title="costDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a2388f48ea2b3b7a455e3e64a196e9373" />
+                <section title="costFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a6fbc5b4c11ed92d38efac3b584adac7b" />
+                <section title="hasCost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a3361078b7c758f4a93b22ae9956ffe20" />
+                <section title="hasCostDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a816971540b921c28a73a2b8558cdea05" />
+                <section title="hasCostFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a66509011059cedf2a0ccfe70974145f4" />
+                <section title="hasMarketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a40586ece98144d3b87dc6d05bc1fc478" />
+                <section title="hasPosition" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a5b909ad7c4290680e0a01ea3f93e072c" />
+                <section title="hasWeight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a34276cbb1dfc2af5963e9b42ed820c4e" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ae304620f8888c04a76bff33d687b8a60" />
+                <section title="marketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a887bb9d83eb37e10afce6b8c0b4fa86f" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#aad8ae2bbc6a508fcc4d299585c660454" />
+                <section title="position" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a837249e8a7936d0e5f70b486a75613a5" />
+                <section title="security" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#acfd28fac93383d01416aaab580d7ca49" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a446c3e4b4cca08f75d0a4b9ee459875e" />
+                <section title="weight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a7e7f0bbf0b29caf1a9255a6a3261b2dd" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="hasCost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a0de8c32540444b0bc149421e4b71470d" />
+                <section title="hasCostDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#aeaf551338588510502814d15a977e46c" />
+                <section title="hasCostFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a29be2dec3aea699a84421655da6193cd" />
+                <section title="hasMarketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a4f7cd277cb5987e5c989defc8547dafd" />
+                <section title="hasPosition" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab72f4c97cf32bb4e5fd1aaaaa57a066b" />
+                <section title="hasWeight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a44168c1b2da23408a90fde69ad593837" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab6d418b8afb0cd3f449ee21a6b362bf2" />
+              </section>
+              <section title="QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html">
+                <section title="~QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aeb767081d5419f298a37bb045fcac3d1" />
+                <section title="QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a06dd051eef280d9d897f34707a2a03fb" />
+                <section title="QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a7b90ec763d8946f7f248483fd770deb8" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa2e593fda3ff0b45ab8730b11309e81c" />
+                <section title="operator==" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ac99e0397e8645560796297cae6912853" />
+                <section title="setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa7cec6a7ca91fb0a4fad8843782f102a" />
+                <section title="setUseUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a1f5fef28658d316334d57cdefb054d2f" />
+                <section title="useUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ab0e0fa2676e429f9651a8a51f12ba265" />
+                <section title="useUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ac69feac9e36fc417bb9feb0812f37880" />
+              </section>
+              <section title="QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html">
+                <section title="QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a97134a33a0dd059ae4ca4b2c5eedaaf3" />
+                <section title="~QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a47d30822b2624ec05e8513e03f148d69" />
+                <section title="QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a0ea98a94507dfd3e44ffa1b005881703" />
+                <section title="columns" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ab0ec20c474bcbfa0f99deaf9735fa150" />
+                <section title="getTableValue" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ae5bcbcaff36bdf937d38d66db1f93127" />
+                <section title="hasTable" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a8b184b212121be0323ba6e1836f701f6" />
+                <section title="hasValue" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#aca7a65e78e36cbf06aface2da0ff2d7f" />
+                <section title="isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a1f402469678111a12f2a7a2109ad21db" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a3ce483b0a0db8cbb4a0e6fae8444a261" />
+                <section title="rows" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ad7effdd35e53a86c7243d82704becffa" />
+                <section title="value" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a00f1af24c9c50706980bbcabc4d7ab23" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="columns" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a0336e98888a14d2703f5aa68215d376c" />
+                <section title="hasTable" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#aacb0e02205a7ef20c32e36d0e78cd904" />
+                <section title="rows" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a7090808c963978c98883c3f32a47dcac" />
+                <section title="value" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a9d59cf53d11c6b364bf3cfc54875c06c" />
+              </section>
+              <section title="QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html">
+                <section title="QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ae45d5a7dfbd756356cb5436b6d25ef6d" />
+                <section title="QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a646df7fb9100160fde48946300545a93" />
+                <section title="~QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#abf88b635e19d3547410279ce0219a2f0" />
+                <section title="addRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a98d8fac8f60c81c36984a51b71162ffd" />
+                <section title="addRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a2e73c06a75fa53fd608125984266c3ac" />
+                <section title="clear" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ad0b53fc87794afea5eb4094b3f72b795" />
+                <section title="differentTypes" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#acc09b82c6359ce06b318b780d748c09b" />
+                <section title="findSecurity" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a0e669b72c1a42d00a96b3aa3a5855b76" />
+                <section title="getRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a44a2a972f23ec1dc3387854793e828f8" />
+                <section title="IDList" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a5c544b06f7ea01719a7fa7314fd1bc98" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ac27870fa45082070b032e746e901b4bc" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a3142f41b125d829937e22b82294b500e" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ae7a74b90e7c9681bfd8edd8de6af0bb2" />
+                <section title="QBbgRequestResponseWorker" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a6c984b2f71f3cb96ca5e139b2ed23af8" />
+                <section title="isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a250fc4095367139220d3a49ed773afdd" />
+                <section title="size" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a4febfe81eb1ea7d800179168d45be810" />
+              </section>
+              <section title="QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html">
+                <section title="YellowKeys" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246">
+                  <section title="Invalid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a8555dfbbb7834814f4d77b2378556b3a" />
+                  <section title="Govt" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aaa322e5e8d3fbf06614a4d7b56ab32af" />
+                  <section title="Corp" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af5c269b2490a6cb34adb510c00ae3a6a" />
+                  <section title="Mtge" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa734c5125b2aa6f82e14e2c79c5208b2" />
+                  <section title="MMkt" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa08c92ab19c93f107f8523dabb0266f2" />
+                  <section title="Muni" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a3e1c08e8d08cde68d7eb6fe5e7aebd09" />
+                  <section title="Pfd" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aeb4ae379cceaca6c494cba07d39675c8" />
+                  <section title="Equity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac3b7a27ab377177148a7bfa01ce9483a" />
+                  <section title="Comdty" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a16683e77abc433a199f4382d360440de" />
+                  <section title="Index" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa67188a36f0fecb1f94e8cc742c0376a" />
+                  <section title="Curncy" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a1f747a9b4f3fdcd0fa0b20bf7aed465d" />
+                  <section title="Client" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af1c63f7827c433d99bb2a06d0e73f9a6" />
+                  <section title="cusip" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af75c3d9054c765b6952b828e32a1c4b1" />
+                  <section title="wpk" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2805af53e3e5db55b725b0756f5ce5ac" />
+                  <section title="isin" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac1a36fc8505be509b16757c261dd0b76" />
+                  <section title="buid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac25ecbd0680fe50c54cadfbbc0e40b52" />
+                  <section title="sedol1" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a12a9ca46d48bdd5ff18e656288c0f56d" />
+                  <section title="sedol2" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2b4b57bf0259ada0f99ec08b90847c6c" />
+                  <section title="sicovam" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2a4eccb2f38060b9fa047f2452748012" />
+                  <section title="common" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ae60cfca168c7027da9af98b8bf3a2976" />
+                  <section title="bsid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ae9f549632a0bce357d8be4c3cd6648c2" />
+                  <section title="svm" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aadb7ce3ca5c185e28855d5f3624d0bb7" />
+                  <section title="cins" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac547f9a671004bd4830362bfc2db5fdc" />
+                  <section title="cats" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a50b31fb7a31af207de586269c4c48b31" />
+                  <section title="bbgid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a3b26112a27b6f33743c8865c3d368255" />
+                </section>
+                <section title="QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ab071f0a956b592445a5aa3c3cf49a95d" />
+                <section title="QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a9d645da759d1e859f710632b2d57cbe9" />
+                <section title="QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#aad2fbaf6d5b24d546eeb32217c3d7f57" />
+                <section title="QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a89521dc274a5d34097ec05e90e20f644" />
+                <section title="~QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a33a8a153a6455df5c52f35799f67a0d1" />
+                <section title="exchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a99b0809ee43db8edd936c652942d18ef" />
+                <section title="extension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a65a7e9bf0a7a6b2f4e587909fd283f90" />
+                <section title="fullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a33acddbe3bf1878e49a81cf4b60270f3" />
+                <section title="isValid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a6a11c492b0634bbb83bdf77b68329e9e" />
+                <section title="name" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ae5102c98728306d4f67bf7e6d18653cd" />
+                <section title="operator!=" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a0b5223d52b3c9ab45b08bd5110dc8eaf" />
+                <section title="operator=" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a3d6619debec73f372e0da3038f0c77ec" />
+                <section title="operator==" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a85be8030db92d5b8b271098a8c5a0e91" />
+                <section title="pricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a576d95415a6191042c9edf70dcf83252" />
+                <section title="setExchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a49ce9d1c0e6793d3fd53192f66da68b4" />
+                <section title="setExtension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ada23d8c40c97960bf3054b84b1514751" />
+                <section title="setFullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a9227cd67507362d2e662c2be0ef6f7f4" />
+                <section title="setName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a3da111a81f2af5282c519074c5bcfc61" />
+                <section title="setPricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ab9fd46abb0b889d199d0b107d4b03db9" />
+                <section title="operator&lt;&lt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a63c189cd6508e065fb3cb12591d9407d" />
+                <section title="operator&gt;&gt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a66e00855900330855852489bd6afb4f6" />
+                <section title="qHash" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ac3e95896a691904dcad244aa115dd6ae" />
+                <section title="exchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#accc2b73163166e13871c4255317458ef" />
+                <section title="extension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a042141740a3a0958296de4d7b30d7694" />
+                <section title="fullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a5e86cd4d778e14eea92ffd107c98d10b" />
+                <section title="isValid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a04c63c2a5b37a0dfc6bde250da316d55" />
+                <section title="name" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a84fe6ca0aed34dce8bede88683728dc9" />
+                <section title="pricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#af0196e197b159b653473d5d86d6795f0" />
+              </section>
+            </section>
+          </section>
+          <section title="Class Index" ref="classes.html" />
+          <section title="Class Hierarchy" ref="hierarchy.html">
+            <section title="QBbgLib::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">
+              <section title="QBbgLib::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">
+                <section title="QBbgLib::QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html" />
+                <section title="QBbgLib::QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html" />
+                <section title="QBbgLib::QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html" />
+              </section>
+            </section>
+            <section title="QBbgLib::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html">
+              <section title="QBbgLib::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html">
+                <section title="QBbgLib::QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html" />
+                <section title="QBbgLib::QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html" />
+                <section title="QBbgLib::QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html" />
+              </section>
+            </section>
+            <section title="QBbgLib::QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html" />
+            <section title="QBbgLib::QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html" />
+            <section title="QBbgLib::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html" />
+            <section title="QObject">
+              <section title="QBbgLib::QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html" />
+            </section>
+          </section>
+          <section title="Class Members" ref="functions.html">
+            <section title="All" ref="functions.html">
+              <section title="a" ref="functions.html" />
+              <section title="b" ref="functions_b.html" />
+              <section title="c" ref="functions_c.html" />
+              <section title="d" ref="functions_d.html" />
+              <section title="e" ref="functions_e.html" />
+              <section title="f" ref="functions_f.html" />
+              <section title="g" ref="functions_g.html" />
+              <section title="h" ref="functions_h.html" />
+              <section title="i" ref="functions_i.html" />
+              <section title="m" ref="functions_m.html" />
+              <section title="n" ref="functions_n.html" />
+              <section title="o" ref="functions_o.html" />
+              <section title="p" ref="functions_p.html" />
+              <section title="q" ref="functions_q.html" />
+              <section title="r" ref="functions_r.html" />
+              <section title="s" ref="functions_s.html" />
+              <section title="u" ref="functions_u.html" />
+              <section title="v" ref="functions_v.html" />
+              <section title="w" ref="functions_w.html" />
+              <section title="y" ref="functions_y.html" />
+              <section title="~" ref="functions_~.html" />
+            </section>
+            <section title="Functions" ref="functions_func.html">
+              <section title="a" ref="functions_func.html" />
+              <section title="b" ref="functions_func_b.html" />
+              <section title="c" ref="functions_func_c.html" />
+              <section title="d" ref="functions_func_d.html" />
+              <section title="e" ref="functions_func_e.html" />
+              <section title="f" ref="functions_func_f.html" />
+              <section title="g" ref="functions_func_g.html" />
+              <section title="h" ref="functions_func_h.html" />
+              <section title="i" ref="functions_func_i.html" />
+              <section title="m" ref="functions_func_m.html" />
+              <section title="n" ref="functions_func_n.html" />
+              <section title="o" ref="functions_func_o.html" />
+              <section title="p" ref="functions_func_p.html" />
+              <section title="q" ref="functions_func_q.html" />
+              <section title="r" ref="functions_func_r.html" />
+              <section title="s" ref="functions_func_s.html" />
+              <section title="u" ref="functions_func_u.html" />
+              <section title="v" ref="functions_func_v.html" />
+              <section title="w" ref="functions_func_w.html" />
+              <section title="y" ref="functions_func_y.html" />
+              <section title="~" ref="functions_func_~.html" />
+            </section>
+            <section title="Enumerations" ref="functions_enum.html" />
+            <section title="Enumerator" ref="functions_eval.html" />
+            <section title="Properties" ref="functions_prop.html" />
+            <section title="Related Functions" ref="functions_rela.html" />
+          </section>
+        </section>
+        <section title="Files">
+          <section title="File List" ref="files.html">
+            <section title="QBbgLib" ref="dir_cdd19a09e49ca3a0d1e33572f219e2f2.html">
+              <section title="QBbgAbstractFieldRequest.h" ref="_q_bbg_abstract_field_request_8h_source.html" />
+              <section title="QBbgAbstractFieldResponse.h" ref="_q_bbg_abstract_field_response_8h_source.html" />
+              <section title="QBbgAbstractRequest.h" ref="_q_bbg_abstract_request_8h_source.html" />
+              <section title="QBbgAbstractResponse.h" ref="_q_bbg_abstract_response_8h_source.html" />
+              <section title="QBbgHistoricalDataRequest.h" ref="_q_bbg_historical_data_request_8h_source.html" />
+              <section title="QBbgHistoricalDataResponse.h" ref="_q_bbg_historical_data_response_8h_source.html" />
+              <section title="QBbgManager.h" ref="_q_bbg_manager_8h_source.html" />
+              <section title="QBbgOverride.h" ref="_q_bbg_override_8h_source.html" />
+              <section title="QBbgPortfolioDataRequest.h" ref="_q_bbg_portfolio_data_request_8h_source.html" />
+              <section title="QBbgPortfolioDataResponse.h" ref="_q_bbg_portfolio_data_response_8h_source.html" />
+              <section title="QBbgProjectGlobals.h" ref="_q_bbg_project_globals_8h_source.html" />
+              <section title="QbbgReferenceDataRequest.h" ref="_qbbg_reference_data_request_8h_source.html" />
+              <section title="QBbgReferenceDataResponse.h" ref="_q_bbg_reference_data_response_8h_source.html" />
+              <section title="QBbgRequestGroup.h" ref="_q_bbg_request_group_8h_source.html" />
+              <section title="QBbgSecurity.h" ref="_q_bbg_security_8h_source.html" />
+            </section>
+          </section>
+        </section>
+      </section>
+    </toc>
+    <keywords>
+      <keyword name="Deprecated List" id="Deprecated List" ref="deprecated.html" />
+      <keyword name="QBbgLib" id="QBbgLib" ref="namespace_q_bbg_lib.html" />
+      <keyword name="QBbgLib::QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a615c38c57a8190a40914b2bbf35b258f" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a3ba8fd1d7114958a96dbd9df2dffaaff" />
+      <keyword name="~QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a142c72cd00976ee7b300e7f18dd208ec" />
+      <keyword name="clearOverrides" id="QBbgLib::QBbgAbstractFieldRequest::clearOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a5a3e4f731a62b47b8277cde7cedf0ed9" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a30c35a636b4ce004c32afb43a4e84924" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractFieldRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#acf9d2647dff9e6a56987d8ee19644034" />
+      <keyword name="operator==" id="QBbgLib::QBbgAbstractFieldRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#aa04ba8f5f88a18bb0d87f589ffce6d1e" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a33ef34b5086bcf68a38e03fbd506664a" />
+      <keyword name="setField" id="QBbgLib::QBbgAbstractFieldRequest::setField" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ac209d8ccb8206e2e7887b7a050945b67" />
+      <keyword name="setOverrides" id="QBbgLib::QBbgAbstractFieldRequest::setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ab4f3299f5e6dfe0cb57ac9179860b06c" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+      <keyword name="~QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractRequest::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+      <keyword name="setID" id="QBbgLib::QBbgAbstractRequest::setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6cb9ade14c0fc5aa11ecce294749c442" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a86632a5d1ae6e1f2074d33b17e4bb954" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae4b242bfeb29ba7645ed8e2ddb8e2cde" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+      <keyword name="requestID" id="QBbgLib::QBbgAbstractRequest::requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractRequest::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+      <keyword name="QBbgLib::QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a922874d202691054fb5a0ae9904dd08d" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#aeaa868649eab8ba01fcbb66da6819d56" />
+      <keyword name="~QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#ad99f57fbf8a52d73c77992e45a953508" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a5add8e764caa774386735f40c33b225e" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a2e4e743310ece495a6d838ccca2ad58c" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+      <keyword name="~QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractResponse::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a459471922203cc85066a8ec5eae36894" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a50d42b3c1fbead41b00fee763bb82a6d" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+      <keyword name="responseID" id="QBbgLib::QBbgAbstractResponse::responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+      <keyword name="bbgErrorCode2String" id="QBbgLib::QBbgAbstractResponse::bbgErrorCode2String" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a208bca5f74e65ba26b26c5259e2cb689" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractResponse::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+      <keyword name="QBbgLib::QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+      <keyword name="~QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractRequest::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a9eb7dd72d86a33796f845a8b6078db61" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+      <keyword name="setID" id="QBbgLib::QBbgAbstractRequest::setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6cb9ade14c0fc5aa11ecce294749c442" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+      <keyword name="requestID" id="QBbgLib::QBbgAbstractRequest::requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractRequest::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+      <keyword name="Invalid" id="QBbgLib::QBbgAbstractRequest::Invalid" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda4bbb8f967da6d1a610596d7257179c2b" />
+      <keyword name="Beqs" id="QBbgLib::QBbgAbstractRequest::Beqs" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdafc6e59c20cf14ad8d75856ebf863456e" />
+      <keyword name="HistoricalData" id="QBbgLib::QBbgAbstractRequest::HistoricalData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda32c57c1afb0340df4b972afb570e0259" />
+      <keyword name="ReferenceData" id="QBbgLib::QBbgAbstractRequest::ReferenceData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdae229f3fb7af13c9a0d50f787ae7d5430" />
+      <keyword name="PortfolioData" id="QBbgLib::QBbgAbstractRequest::PortfolioData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdaa0de9f3e84ce68480e8919febdeacd71" />
+      <keyword name="IntraDayTick" id="QBbgLib::QBbgAbstractRequest::IntraDayTick" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654" />
+      <keyword name="IntraDayBar" id="QBbgLib::QBbgAbstractRequest::IntraDayBar" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdad8cee52a76e258e617f0dd74aef08836" />
+      <keyword name="InvalidID" id="QBbgLib::QBbgAbstractRequest::InvalidID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#addbe61db6aa940dd874f091d7d47a3aaaa505b0defb1aa47d5531cb014e4949f8" />
+      <keyword name="QBbgLib::QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+      <keyword name="~QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractResponse::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a459471922203cc85066a8ec5eae36894" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+      <keyword name="bbgErrorCode2String" id="QBbgLib::QBbgAbstractResponse::bbgErrorCode2String" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a208bca5f74e65ba26b26c5259e2cb689" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+      <keyword name="responseID" id="QBbgLib::QBbgAbstractResponse::responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractResponse::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+      <keyword name="NoErrors" id="QBbgLib::QBbgAbstractResponse::NoErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a992d551b2e0ebdeecf3c0463d34f826f" />
+      <keyword name="ResponseError" id="QBbgLib::QBbgAbstractResponse::ResponseError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831abfb7593bf15539bdec964b4f1d583f37" />
+      <keyword name="SecurityError" id="QBbgLib::QBbgAbstractResponse::SecurityError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831aa541eecc58dd4b144002075967c1e668" />
+      <keyword name="InvalidInputs" id="QBbgLib::QBbgAbstractResponse::InvalidInputs" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a5ef32b9021d6d1b006b52f2c70e7b7de" />
+      <keyword name="SessionError" id="QBbgLib::QBbgAbstractResponse::SessionError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a0db6a4c67f06faa07550bfbd50157d3f" />
+      <keyword name="ServiceError" id="QBbgLib::QBbgAbstractResponse::ServiceError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a62bab521454fe604ae41c3e459031753" />
+      <keyword name="FieldError" id="QBbgLib::QBbgAbstractResponse::FieldError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a479c104b70914dcff073dbc3c6917694" />
+      <keyword name="UnknownError" id="QBbgLib::QBbgAbstractResponse::UnknownError" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a556e62298f94436c683c3fb541735a52" />
+      <keyword name="SessionStopped" id="QBbgLib::QBbgAbstractResponse::SessionStopped" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a08d153dfb39bf9cd3411bebabe6fec4a" />
+      <keyword name="NoData" id="QBbgLib::QBbgAbstractResponse::NoData" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831acaa04b87a4c0491c59cb29ddb320fa25" />
+      <keyword name="Invalid" id="QBbgLib::QBbgAbstractResponse::Invalid" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a4bbb8f967da6d1a610596d7257179c2b" />
+      <keyword name="BeqsResponse" id="QBbgLib::QBbgAbstractResponse::BeqsResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a34e29fd88f37254642bd2ef0ad778870" />
+      <keyword name="HistoricalDataResponse" id="QBbgLib::QBbgAbstractResponse::HistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a25575f4a3cf6255d1fafcdcabe1dd836" />
+      <keyword name="ReferenceDataResponse" id="QBbgLib::QBbgAbstractResponse::ReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96ac4c43740b1a337d5749604a9b9838849" />
+      <keyword name="PortfolioDataResponse" id="QBbgLib::QBbgAbstractResponse::PortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96a3cecc1f351106b64d107cc56903fe087" />
+      <keyword name="IntraDayTickResponse" id="QBbgLib::QBbgAbstractResponse::IntraDayTickResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96acb22ea99ca3c8914dbb4ed4defe71150" />
+      <keyword name="IntraDayBarResponse" id="QBbgLib::QBbgAbstractResponse::IntraDayBarResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af2732a1201a6eecb70cd614e0b4eae96ad926caefbf49b4c90ea52c677edf7f71" />
+      <keyword name="QBbgLib::QBbgHistoricalDataRequest" id="QBbgLib::QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html" />
+      <keyword name="QBbgHistoricalDataRequest" id="QBbgLib::QBbgHistoricalDataRequest::QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a529cc021288114fefb3cdde0ac06d6b4" />
+      <keyword name="QBbgHistoricalDataRequest" id="QBbgLib::QBbgHistoricalDataRequest::QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a6434a2d3d9e425ca70dcc82c0d60a6f4" />
+      <keyword name="~QBbgHistoricalDataRequest" id="QBbgLib::QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5b9a720df9a58e6ce9f16315c7385814" />
+      <keyword name="adjustmentAbnormal" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a57f947d0c8ff7caab93dda3d52ea61a9" />
+      <keyword name="adjustmentFollowDPDF" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aaf2b56921bcd6e8971f2fc56feb2e2c0" />
+      <keyword name="adjustmentNormal" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a196d037e24d226d4bfbc43ce00b19ec8" />
+      <keyword name="adjustmentSplit" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a87168e1bffd09341313e1f73858060a5" />
+      <keyword name="calendarCode" id="QBbgLib::QBbgHistoricalDataRequest::calendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a779085f6e0936d27e7584e12276edab9" />
+      <keyword name="currency" id="QBbgLib::QBbgHistoricalDataRequest::currency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa5ac2e4818a4f0e25bb5ad4085d0d921" />
+      <keyword name="endDate" id="QBbgLib::QBbgHistoricalDataRequest::endDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a370dbd43171feadf3b17e8b07b31f932" />
+      <keyword name="fillWithNull" id="QBbgLib::QBbgHistoricalDataRequest::fillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a1f578e77be6148d85921408fde0d49cd" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgHistoricalDataRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8dc188774daa43d253db5d8ae560f8ee" />
+      <keyword name="maxDataPoints" id="QBbgLib::QBbgHistoricalDataRequest::maxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a0f9f5ae82614f2fc931ee5da7430ba37" />
+      <keyword name="nonTradingDayFill" id="QBbgLib::QBbgHistoricalDataRequest::nonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a47446327f9a8096ef2e6ac744d8bd2fc" />
+      <keyword name="operator=" id="QBbgLib::QBbgHistoricalDataRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a84e6df0cd288f10f011bce00def1d3f4" />
+      <keyword name="operator==" id="QBbgLib::QBbgHistoricalDataRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4331a567faddcfcb6685fa819e4068ab" />
+      <keyword name="periodicityAdjustment" id="QBbgLib::QBbgHistoricalDataRequest::periodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a7b6fabd3d7832410527c52d78a2b9eae" />
+      <keyword name="periodicitySelection" id="QBbgLib::QBbgHistoricalDataRequest::periodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a2e968581410079895a3c2a9b722eaaf1" />
+      <keyword name="setAdjustmentAbnormal" id="QBbgLib::QBbgHistoricalDataRequest::setAdjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acf1266530aba50be92ea115518ba90fa" />
+      <keyword name="setAdjustmentFollowDPDF" id="QBbgLib::QBbgHistoricalDataRequest::setAdjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a143d498b37f276fece71be6a6ed92470" />
+      <keyword name="setAdjustmentNormal" id="QBbgLib::QBbgHistoricalDataRequest::setAdjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a592ffcd7cd18b91124744196292bf53a" />
+      <keyword name="setAdjustmentSplit" id="QBbgLib::QBbgHistoricalDataRequest::setAdjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af1dc56a433586ded2c25e3e581664c38" />
+      <keyword name="setCalendarCode" id="QBbgLib::QBbgHistoricalDataRequest::setCalendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae437e76d51ad326cb0e887b60a248169" />
+      <keyword name="setCurrency" id="QBbgLib::QBbgHistoricalDataRequest::setCurrency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5423ed41d3cb3954836096f20f146fcd" />
+      <keyword name="setEndDate" id="QBbgLib::QBbgHistoricalDataRequest::setEndDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab0859817aff31d73b414eefaf66f6618" />
+      <keyword name="setFillWithNull" id="QBbgLib::QBbgHistoricalDataRequest::setFillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a20b75c55f87589ede04652f566e976b1" />
+      <keyword name="setMaxDataPoints" id="QBbgLib::QBbgHistoricalDataRequest::setMaxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ad20dcaa060164f41a9a9ac17276fe796" />
+      <keyword name="setNonTradingDayFill" id="QBbgLib::QBbgHistoricalDataRequest::setNonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab65a15fb821c830f7b11219083b52702" />
+      <keyword name="setPeriodicityAdjustment" id="QBbgLib::QBbgHistoricalDataRequest::setPeriodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab980c88860f07b1d2bd3585d1ada5891" />
+      <keyword name="setPeriodicitySelection" id="QBbgLib::QBbgHistoricalDataRequest::setPeriodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4221c002cbfe489eebb51e6b6ac1313a" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgHistoricalDataRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a33d3b33f5e5b1eaaa8da22afa432708a" />
+      <keyword name="setStartDate" id="QBbgLib::QBbgHistoricalDataRequest::setStartDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a97c8e40b02dd88b96ec80f7b11705769" />
+      <keyword name="setUseClosePrice" id="QBbgLib::QBbgHistoricalDataRequest::setUseClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acd692864a593285607228221a0a83980" />
+      <keyword name="setUsePriceForPricing" id="QBbgLib::QBbgHistoricalDataRequest::setUsePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8a51c47b97f28c0b5073ea0fae768dba" />
+      <keyword name="setUseRelativeDate" id="QBbgLib::QBbgHistoricalDataRequest::setUseRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a582acc5efae08008df9397324cef4820" />
+      <keyword name="startDate" id="QBbgLib::QBbgHistoricalDataRequest::startDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ac3eca09f4067e4e260c6cc20deaab4dc" />
+      <keyword name="useClosePrice" id="QBbgLib::QBbgHistoricalDataRequest::useClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa1f6dce69025d14c359fe2049fb8d7f5" />
+      <keyword name="usePriceForPricing" id="QBbgLib::QBbgHistoricalDataRequest::usePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a97df4341d8299c09bf9f0944bcb771b0" />
+      <keyword name="useRelativeDate" id="QBbgLib::QBbgHistoricalDataRequest::useRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#abf1a7e4083e491af50bf809479a36494" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a615c38c57a8190a40914b2bbf35b258f" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a3ba8fd1d7114958a96dbd9df2dffaaff" />
+      <keyword name="~QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a142c72cd00976ee7b300e7f18dd208ec" />
+      <keyword name="clearOverrides" id="QBbgLib::QBbgAbstractFieldRequest::clearOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a5a3e4f731a62b47b8277cde7cedf0ed9" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a30c35a636b4ce004c32afb43a4e84924" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#acf9d2647dff9e6a56987d8ee19644034" />
+      <keyword name="operator==" id="QBbgLib::QBbgAbstractFieldRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#aa04ba8f5f88a18bb0d87f589ffce6d1e" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a33ef34b5086bcf68a38e03fbd506664a" />
+      <keyword name="setField" id="QBbgLib::QBbgAbstractFieldRequest::setField" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ac209d8ccb8206e2e7887b7a050945b67" />
+      <keyword name="setOverrides" id="QBbgLib::QBbgAbstractFieldRequest::setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ab4f3299f5e6dfe0cb57ac9179860b06c" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+      <keyword name="~QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractRequest::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+      <keyword name="setID" id="QBbgLib::QBbgAbstractRequest::setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+      <keyword name="adjustmentAbnormal" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentAbnormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#acee8814024906739468b968fbdb6c8cc" />
+      <keyword name="adjustmentFollowDPDF" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentFollowDPDF" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5aa549ab99bc7598bf7c69a2b3fb90f6" />
+      <keyword name="adjustmentNormal" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentNormal" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a876bf734dc0b5225e8f64ed34678a03b" />
+      <keyword name="adjustmentSplit" id="QBbgLib::QBbgHistoricalDataRequest::adjustmentSplit" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a43a68343037088a5b3f5b1e1ab41dd4e" />
+      <keyword name="calendarCode" id="QBbgLib::QBbgHistoricalDataRequest::calendarCode" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a5ce17138a5c30268221e06307171cb37" />
+      <keyword name="currency" id="QBbgLib::QBbgHistoricalDataRequest::currency" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab7d732bf4a90dde392581473304f0b60" />
+      <keyword name="endDate" id="QBbgLib::QBbgHistoricalDataRequest::endDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#add3892d977f8b8abf5c1675ea2260830" />
+      <keyword name="fillWithNull" id="QBbgLib::QBbgHistoricalDataRequest::fillWithNull" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#addcaa0d1c90777a70ebd2d816d5a3bc1" />
+      <keyword name="maxDataPoints" id="QBbgLib::QBbgHistoricalDataRequest::maxDataPoints" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa59ec892aec92bf195eda015aa17cf91" />
+      <keyword name="nonTradingDayFill" id="QBbgLib::QBbgHistoricalDataRequest::nonTradingDayFill" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af12f8b42b74dc70074cf5ce54f76de97" />
+      <keyword name="periodicityAdjustment" id="QBbgLib::QBbgHistoricalDataRequest::periodicityAdjustment" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a4cbae7c9bb894aba98b126fd2ed137ed" />
+      <keyword name="periodicitySelection" id="QBbgLib::QBbgHistoricalDataRequest::periodicitySelection" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a1788a3a55f82167494cbc38723b041a9" />
+      <keyword name="startDate" id="QBbgLib::QBbgHistoricalDataRequest::startDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae06832bb4763ec3d8655c1bce28fb1ce" />
+      <keyword name="useClosePrice" id="QBbgLib::QBbgHistoricalDataRequest::useClosePrice" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae31da5fc4eeac02ecf0c562de6dfdedd" />
+      <keyword name="usePriceForPricing" id="QBbgLib::QBbgHistoricalDataRequest::usePriceForPricing" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab975a63d9e63a2f191d9b6175c65af31" />
+      <keyword name="useRelativeDate" id="QBbgLib::QBbgHistoricalDataRequest::useRelativeDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af46ea8cca4f49efa9295c9b8f6f12ca2" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a86632a5d1ae6e1f2074d33b17e4bb954" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae4b242bfeb29ba7645ed8e2ddb8e2cde" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+      <keyword name="requestID" id="QBbgLib::QBbgAbstractRequest::requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractRequest::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+      <keyword name="NON_TRADING_WEEKDAYS" id="QBbgLib::QBbgHistoricalDataRequest::NON_TRADING_WEEKDAYS" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bddacff1a34769129bb703dde85b084c2ae0" />
+      <keyword name="ALL_CALENDAR_DAYS" id="QBbgLib::QBbgHistoricalDataRequest::ALL_CALENDAR_DAYS" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bdda2821e3ee3488f16f1bbbc9176dbb4240" />
+      <keyword name="ACTIVE_DAYS_ONLY" id="QBbgLib::QBbgHistoricalDataRequest::ACTIVE_DAYS_ONLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a45e5762c73b25c170bc6a0b7388c6bddace060fff4bfccda347bbf51f4d83c492" />
+      <keyword name="ACTUAL" id="QBbgLib::QBbgHistoricalDataRequest::ACTUAL" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a27c34d52fc18fc47c5a8884cbef33079" />
+      <keyword name="CALENDAR" id="QBbgLib::QBbgHistoricalDataRequest::CALENDAR" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a1b3c9568d3a4c804bded6c04c1ba4d3d" />
+      <keyword name="FISCAL" id="QBbgLib::QBbgHistoricalDataRequest::FISCAL" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a21a266997fec4778052961dc4212e553a64dc0cf97c7400ff5f06b1ec1a500265" />
+      <keyword name="DAILY" id="QBbgLib::QBbgHistoricalDataRequest::DAILY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a5be7a4ce2bb312717e2d51257d4af7c9" />
+      <keyword name="WEEKLY" id="QBbgLib::QBbgHistoricalDataRequest::WEEKLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a3e89329569be85f49d2f37c0f961c2cd" />
+      <keyword name="MONTHLY" id="QBbgLib::QBbgHistoricalDataRequest::MONTHLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a2db61275a22ad700dbfacb39d14bb53a" />
+      <keyword name="QUARTERLY" id="QBbgLib::QBbgHistoricalDataRequest::QUARTERLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2aed2cc7ed5bd89f206a21d1cf2f9dc5e0" />
+      <keyword name="SEMI_ANNUALLY" id="QBbgLib::QBbgHistoricalDataRequest::SEMI_ANNUALLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2a65674fc15f8a77831c8cc782517a0fb1" />
+      <keyword name="YEARLY" id="QBbgLib::QBbgHistoricalDataRequest::YEARLY" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a08dff12d9df0f233a78580024145b0a2ad320a8ab6b463413d84dc4b2d20fb0bd" />
+      <keyword name="QBbgLib::QBbgHistoricalDataResponse" id="QBbgLib::QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html" />
+      <keyword name="QBbgHistoricalDataResponse" id="QBbgLib::QBbgHistoricalDataResponse::QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a01d9e025c52e3100e6b1de01412de854" />
+      <keyword name="QBbgHistoricalDataResponse" id="QBbgLib::QBbgHistoricalDataResponse::QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a5b7c07c8320ecaf9b3d3c431a119754b" />
+      <keyword name="~QBbgHistoricalDataResponse" id="QBbgLib::QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a939a0914ee39818b075dcefb5ca4bb55" />
+      <keyword name="date" id="QBbgLib::QBbgHistoricalDataResponse::date" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a03e455470696f3405db15ce3bc6e569c" />
+      <keyword name="dateForPeriod" id="QBbgLib::QBbgHistoricalDataResponse::dateForPeriod" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#aa9b40e9778fb56e5a1fc705fb02da943" />
+      <keyword name="dates" id="QBbgLib::QBbgHistoricalDataResponse::dates" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a8fb17367704f829584ae1ff4d7cd79d9" />
+      <keyword name="findValues" id="QBbgLib::QBbgHistoricalDataResponse::findValues" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a825f05902fe8e1ba445d0c13c69e0f4d" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgHistoricalDataResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#ac8cba50340fd5f54bf2a5877b9e87fb8" />
+      <keyword name="operator=" id="QBbgLib::QBbgHistoricalDataResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a7762b90d1d0adff1c299f6550bf0285e" />
+      <keyword name="periodForDate" id="QBbgLib::QBbgHistoricalDataResponse::periodForDate" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af2d0b82321fbce91afe43d077c92071b" />
+      <keyword name="periods" id="QBbgLib::QBbgHistoricalDataResponse::periods" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a0f91b36ede066c6b60ae4156ec9559a4" />
+      <keyword name="size" id="QBbgLib::QBbgHistoricalDataResponse::size" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a27b08adf5ea14a02cd6ae911d0ef96e7" />
+      <keyword name="value" id="QBbgLib::QBbgHistoricalDataResponse::value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a0dcc8d4c3d2aed842aeb8b067d5ac20e" />
+      <keyword name="value" id="QBbgLib::QBbgHistoricalDataResponse::value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a5d4107cd962d351713afe06daadb59f9" />
+      <keyword name="value" id="QBbgLib::QBbgHistoricalDataResponse::value" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#a045b770de17ac207d480b5111343ceea" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a922874d202691054fb5a0ae9904dd08d" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#aeaa868649eab8ba01fcbb66da6819d56" />
+      <keyword name="~QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#ad99f57fbf8a52d73c77992e45a953508" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a5add8e764caa774386735f40c33b225e" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a2e4e743310ece495a6d838ccca2ad58c" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+      <keyword name="~QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractResponse::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+      <keyword name="dates" id="QBbgLib::QBbgHistoricalDataResponse::dates" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af8093c1d165bccd47945e523425daea7" />
+      <keyword name="periods" id="QBbgLib::QBbgHistoricalDataResponse::periods" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#add62e1e6874555547fa4b3fde4675b2d" />
+      <keyword name="size" id="QBbgLib::QBbgHistoricalDataResponse::size" ref="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af530b28b8533259737bd1d7672498c15" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a50d42b3c1fbead41b00fee763bb82a6d" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+      <keyword name="responseID" id="QBbgLib::QBbgAbstractResponse::responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+      <keyword name="bbgErrorCode2String" id="QBbgLib::QBbgAbstractResponse::bbgErrorCode2String" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a208bca5f74e65ba26b26c5259e2cb689" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractResponse::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+      <keyword name="QBbgLib::QBbgManager" id="QBbgLib::QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html" />
+      <keyword name="allFinished" id="QBbgLib::QBbgManager::allFinished" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#af073d977cf28755e866906383a5403ac" />
+      <keyword name="finished" id="QBbgLib::QBbgManager::finished" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aecde61337a281397ee87a45da489394e" />
+      <keyword name="recieved" id="QBbgLib::QBbgManager::recieved" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#ab1c5a1698cc998436ecd5163d96b8cc2" />
+      <keyword name="QBbgManager" id="QBbgLib::QBbgManager::QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#ae866b9ce9ce8e7656c866c29f7ad1646" />
+      <keyword name="~QBbgManager" id="QBbgLib::QBbgManager::~QBbgManager" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a254ff475e6b824a1d953a7a8e651deb8" />
+      <keyword name="getResult" id="QBbgLib::QBbgManager::getResult" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a66e700624451bd7fc3ab009d49543448" />
+      <keyword name="getResultGroups" id="QBbgLib::QBbgManager::getResultGroups" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a98dd6c42414b0887238338d0de2a9daf" />
+      <keyword name="getResultIDs" id="QBbgLib::QBbgManager::getResultIDs" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aa4e41d2bc3e9efe3c3e9d5582aeee44e" />
+      <keyword name="processRequest" id="QBbgLib::QBbgManager::processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a921637a44e0537f8c3c6ba124e906350" />
+      <keyword name="processRequest" id="QBbgLib::QBbgManager::processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a617d0c7421b1bf675019d88360559aa9" />
+      <keyword name="processRequest" id="QBbgLib::QBbgManager::processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#aa2402fd07b113c186a5c4c60ca92f277" />
+      <keyword name="processRequest" id="QBbgLib::QBbgManager::processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a4196b0339dca2b4ba125ef946bf36acd" />
+      <keyword name="processRequest" id="QBbgLib::QBbgManager::processRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a92eb50bb8b41af162f7a11cf8018ff7d" />
+      <keyword name="processRequestID" id="QBbgLib::QBbgManager::processRequestID" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a33772c946fc2de7ce156dc38a93143e9" />
+      <keyword name="processRequestID" id="QBbgLib::QBbgManager::processRequestID" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a6e7a4b2a50b58a6ec185456550811f41" />
+      <keyword name="startRequest" id="QBbgLib::QBbgManager::startRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a0b7807abbd89ed7c9835fd26694f7151" />
+      <keyword name="startRequest" id="QBbgLib::QBbgManager::startRequest" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a0850366cb5e28d63de053baacd1b588b" />
+      <keyword name="resultGroups" id="QBbgLib::QBbgManager::resultGroups" ref="class_q_bbg_lib_1_1_q_bbg_manager.html#a1274f5f64d6c40e6d2d59053ec60156a" />
+      <keyword name="QBbgLib::QBbgOverride" id="QBbgLib::QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html" />
+      <keyword name="QBbgOverride" id="QBbgLib::QBbgOverride::QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ac9b8a5f13e94438880b7ff785ffe3b2a" />
+      <keyword name="QBbgOverride" id="QBbgLib::QBbgOverride::QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ac32a33b4362db886f6f61b57f3bce0f1" />
+      <keyword name="~QBbgOverride" id="QBbgLib::QBbgOverride::~QBbgOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a8199756d5119a8b8ff9fec1bf06d73f1" />
+      <keyword name="clear" id="QBbgLib::QBbgOverride::clear" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ae36afc20cbc4210f6ec175f13a786d97" />
+      <keyword name="contains" id="QBbgLib::QBbgOverride::contains" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a0f51dd8a7ee85284332d027f2e7436c4" />
+      <keyword name="getKeys" id="QBbgLib::QBbgOverride::getKeys" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a39afa8121ecd958faba0a6a16733e573" />
+      <keyword name="getNames" id="QBbgLib::QBbgOverride::getNames" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ad9e176181f8b2f84611aee34decdec0d" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgOverride::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a6440c0485c7f0f80f74c2bd4caeb7dba" />
+      <keyword name="operator!=" id="QBbgLib::QBbgOverride::operator!=" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a6f84c65d2d7814a6c50c0474ec4eee69" />
+      <keyword name="operator=" id="QBbgLib::QBbgOverride::operator=" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a270cf5a993296852535bbbab1e013aa0" />
+      <keyword name="operator==" id="QBbgLib::QBbgOverride::operator==" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a62ac71f13fac5bdf3179b5172a5ab09a" />
+      <keyword name="operator[]" id="QBbgLib::QBbgOverride::operator[]" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a5deb318f563424da037a2b266aa2af56" />
+      <keyword name="operator[]" id="QBbgLib::QBbgOverride::operator[]" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ab44bac30ef3bdf44e45bf61268484aa9" />
+      <keyword name="overrideValue" id="QBbgLib::QBbgOverride::overrideValue" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a70184e37bb9b73ba205b0cf8e17330d9" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a5ae2833e14c81918b1f19bcc6fbf1945" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a7597497cdc5feed513c8d2031e9b2022" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a0c54d562b033f1404e427bd3ddddf3b0" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a9bc09d792076e03c346cfad23858ddd0" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a89592dae413d1ee1ec0b11719fdbff25" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a333a545cd849b0d640d25a0e613cab64" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a10930a3410a7ce6f20773b9154756b36" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a3707021470904a3c1507e4dd8de05799" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a3cf8a996fd83dabcfe3b3aed75379322" />
+      <keyword name="setOverride" id="QBbgLib::QBbgOverride::setOverride" ref="class_q_bbg_lib_1_1_q_bbg_override.html#a7ba02b7f0e8823158696378790b21e24" />
+      <keyword name="size" id="QBbgLib::QBbgOverride::size" ref="class_q_bbg_lib_1_1_q_bbg_override.html#aede23c987960798fd8ee933916933942" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgOverride::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_override.html#aa5f6f294d7631cf86b160deb19e499b4" />
+      <keyword name="size" id="QBbgLib::QBbgOverride::size" ref="class_q_bbg_lib_1_1_q_bbg_override.html#ab6ee333416190a5b10aaeea909962e10" />
+      <keyword name="QBbgLib::QBbgPortfolioDataRequest" id="QBbgLib::QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html" />
+      <keyword name="QBbgPortfolioDataRequest" id="QBbgLib::QBbgPortfolioDataRequest::QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#acdc01fc03de0b5d5e9440b1b25dd8a7a" />
+      <keyword name="QBbgPortfolioDataRequest" id="QBbgLib::QBbgPortfolioDataRequest::QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ab7c8227b1e17685bc52ca26e5254ed63" />
+      <keyword name="~QBbgPortfolioDataRequest" id="QBbgLib::QBbgPortfolioDataRequest::~QBbgPortfolioDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ac67c2fbc14ed0a53429c5a077de085d1" />
+      <keyword name="operator=" id="QBbgLib::QBbgPortfolioDataRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a4ddcaddbe854048c4d89fe99d0e01a93" />
+      <keyword name="referenceDay" id="QBbgLib::QBbgPortfolioDataRequest::referenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a419d86504b80228fe0ac85128815080d" />
+      <keyword name="setField" id="QBbgLib::QBbgPortfolioDataRequest::setField" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a39376debda83205a5ad259c23d1b4388" />
+      <keyword name="setField" id="QBbgLib::QBbgPortfolioDataRequest::setField" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a216fc02b4e200d53d22eefaad8bc242b" />
+      <keyword name="setOverrides" id="QBbgLib::QBbgPortfolioDataRequest::setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ab3fbee890ff55ebc2583ed8b22e88f10" />
+      <keyword name="setPortfolio" id="QBbgLib::QBbgPortfolioDataRequest::setPortfolio" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#ad1dce564a80fda1bc12570cc12fe91b1" />
+      <keyword name="setReferenceDay" id="QBbgLib::QBbgPortfolioDataRequest::setReferenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#aba3e76e1731d6fc3445b8260aadf4bee" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgPortfolioDataRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#af7e544cc2cda1d66b5ab21514a792783" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a615c38c57a8190a40914b2bbf35b258f" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a3ba8fd1d7114958a96dbd9df2dffaaff" />
+      <keyword name="~QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a142c72cd00976ee7b300e7f18dd208ec" />
+      <keyword name="clearOverrides" id="QBbgLib::QBbgAbstractFieldRequest::clearOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a5a3e4f731a62b47b8277cde7cedf0ed9" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a30c35a636b4ce004c32afb43a4e84924" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractFieldRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#acf9d2647dff9e6a56987d8ee19644034" />
+      <keyword name="operator==" id="QBbgLib::QBbgAbstractFieldRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#aa04ba8f5f88a18bb0d87f589ffce6d1e" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a33ef34b5086bcf68a38e03fbd506664a" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+      <keyword name="~QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractRequest::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+      <keyword name="setID" id="QBbgLib::QBbgAbstractRequest::setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+      <keyword name="referenceDay" id="QBbgLib::QBbgPortfolioDataRequest::referenceDay" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a2790b21b4608f3bbeb9d161c89a89828" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a86632a5d1ae6e1f2074d33b17e4bb954" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae4b242bfeb29ba7645ed8e2ddb8e2cde" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+      <keyword name="requestID" id="QBbgLib::QBbgAbstractRequest::requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractRequest::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+      <keyword name="PORTFOLIO_MPOSITION" id="QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MPOSITION" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a70f10d632817b7901d801403a98edf49" />
+      <keyword name="PORTFOLIO_MWEIGHT" id="QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MWEIGHT" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a20604c2365106d0790f45de3a9c20891" />
+      <keyword name="PORTFOLIO_DATA" id="QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2ac410f0ba6faf573870c13e0069080f43" />
+      <keyword name="PORTFOLIO_MEMBERS" id="QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MEMBERS" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#a54a0015becd52989cab10a6d582b82c2a2aa32e55f127c236ebadae754330c575" />
+      <keyword name="QBbgLib::QBbgPortfolioDataResponse" id="QBbgLib::QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html" />
+      <keyword name="QBbgPortfolioDataResponse" id="QBbgLib::QBbgPortfolioDataResponse::QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a37e72dcabe8b75974b1fffeb69a5d946" />
+      <keyword name="QBbgPortfolioDataResponse" id="QBbgLib::QBbgPortfolioDataResponse::QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a505c4131440eacbb7130d1582deb5814" />
+      <keyword name="~QBbgPortfolioDataResponse" id="QBbgLib::QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a6e33cf6b8ea948a85a29bb76007b963f" />
+      <keyword name="cost" id="QBbgLib::QBbgPortfolioDataResponse::cost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a788bb0bb8be9abe2031aa7ba6db12b52" />
+      <keyword name="costDate" id="QBbgLib::QBbgPortfolioDataResponse::costDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a2388f48ea2b3b7a455e3e64a196e9373" />
+      <keyword name="costFx" id="QBbgLib::QBbgPortfolioDataResponse::costFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a6fbc5b4c11ed92d38efac3b584adac7b" />
+      <keyword name="hasCost" id="QBbgLib::QBbgPortfolioDataResponse::hasCost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a3361078b7c758f4a93b22ae9956ffe20" />
+      <keyword name="hasCostDate" id="QBbgLib::QBbgPortfolioDataResponse::hasCostDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a816971540b921c28a73a2b8558cdea05" />
+      <keyword name="hasCostFx" id="QBbgLib::QBbgPortfolioDataResponse::hasCostFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a66509011059cedf2a0ccfe70974145f4" />
+      <keyword name="hasMarketValue" id="QBbgLib::QBbgPortfolioDataResponse::hasMarketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a40586ece98144d3b87dc6d05bc1fc478" />
+      <keyword name="hasPosition" id="QBbgLib::QBbgPortfolioDataResponse::hasPosition" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a5b909ad7c4290680e0a01ea3f93e072c" />
+      <keyword name="hasWeight" id="QBbgLib::QBbgPortfolioDataResponse::hasWeight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a34276cbb1dfc2af5963e9b42ed820c4e" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgPortfolioDataResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ae304620f8888c04a76bff33d687b8a60" />
+      <keyword name="marketValue" id="QBbgLib::QBbgPortfolioDataResponse::marketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a887bb9d83eb37e10afce6b8c0b4fa86f" />
+      <keyword name="operator=" id="QBbgLib::QBbgPortfolioDataResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#aad8ae2bbc6a508fcc4d299585c660454" />
+      <keyword name="position" id="QBbgLib::QBbgPortfolioDataResponse::position" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a837249e8a7936d0e5f70b486a75613a5" />
+      <keyword name="security" id="QBbgLib::QBbgPortfolioDataResponse::security" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#acfd28fac93383d01416aaab580d7ca49" />
+      <keyword name="size" id="QBbgLib::QBbgPortfolioDataResponse::size" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a446c3e4b4cca08f75d0a4b9ee459875e" />
+      <keyword name="weight" id="QBbgLib::QBbgPortfolioDataResponse::weight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a7e7f0bbf0b29caf1a9255a6a3261b2dd" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a922874d202691054fb5a0ae9904dd08d" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#aeaa868649eab8ba01fcbb66da6819d56" />
+      <keyword name="~QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#ad99f57fbf8a52d73c77992e45a953508" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a5add8e764caa774386735f40c33b225e" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a2e4e743310ece495a6d838ccca2ad58c" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+      <keyword name="~QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractResponse::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+      <keyword name="hasCost" id="QBbgLib::QBbgPortfolioDataResponse::hasCost" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a0de8c32540444b0bc149421e4b71470d" />
+      <keyword name="hasCostDate" id="QBbgLib::QBbgPortfolioDataResponse::hasCostDate" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#aeaf551338588510502814d15a977e46c" />
+      <keyword name="hasCostFx" id="QBbgLib::QBbgPortfolioDataResponse::hasCostFx" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a29be2dec3aea699a84421655da6193cd" />
+      <keyword name="hasMarketValue" id="QBbgLib::QBbgPortfolioDataResponse::hasMarketValue" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a4f7cd277cb5987e5c989defc8547dafd" />
+      <keyword name="hasPosition" id="QBbgLib::QBbgPortfolioDataResponse::hasPosition" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab72f4c97cf32bb4e5fd1aaaaa57a066b" />
+      <keyword name="hasWeight" id="QBbgLib::QBbgPortfolioDataResponse::hasWeight" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a44168c1b2da23408a90fde69ad593837" />
+      <keyword name="size" id="QBbgLib::QBbgPortfolioDataResponse::size" ref="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab6d418b8afb0cd3f449ee21a6b362bf2" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a50d42b3c1fbead41b00fee763bb82a6d" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+      <keyword name="responseID" id="QBbgLib::QBbgAbstractResponse::responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+      <keyword name="bbgErrorCode2String" id="QBbgLib::QBbgAbstractResponse::bbgErrorCode2String" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a208bca5f74e65ba26b26c5259e2cb689" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractResponse::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+      <keyword name="QBbgLib::QBbgReferenceDataRequest" id="QBbgLib::QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html" />
+      <keyword name="QBbgReferenceDataRequest" id="QBbgLib::QBbgReferenceDataRequest::QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a06dd051eef280d9d897f34707a2a03fb" />
+      <keyword name="QBbgReferenceDataRequest" id="QBbgLib::QBbgReferenceDataRequest::QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a7b90ec763d8946f7f248483fd770deb8" />
+      <keyword name="~QBbgReferenceDataRequest" id="QBbgLib::QBbgReferenceDataRequest::~QBbgReferenceDataRequest" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aeb767081d5419f298a37bb045fcac3d1" />
+      <keyword name="operator=" id="QBbgLib::QBbgReferenceDataRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa2e593fda3ff0b45ab8730b11309e81c" />
+      <keyword name="operator==" id="QBbgLib::QBbgReferenceDataRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ac99e0397e8645560796297cae6912853" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgReferenceDataRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa7cec6a7ca91fb0a4fad8843782f102a" />
+      <keyword name="setUseUTCtime" id="QBbgLib::QBbgReferenceDataRequest::setUseUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#a1f5fef28658d316334d57cdefb054d2f" />
+      <keyword name="useUTCtime" id="QBbgLib::QBbgReferenceDataRequest::useUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ab0e0fa2676e429f9651a8a51f12ba265" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a615c38c57a8190a40914b2bbf35b258f" />
+      <keyword name="QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a3ba8fd1d7114958a96dbd9df2dffaaff" />
+      <keyword name="~QBbgAbstractFieldRequest" id="QBbgLib::QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a142c72cd00976ee7b300e7f18dd208ec" />
+      <keyword name="clearOverrides" id="QBbgLib::QBbgAbstractFieldRequest::clearOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a5a3e4f731a62b47b8277cde7cedf0ed9" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a30c35a636b4ce004c32afb43a4e84924" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractFieldRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#acf9d2647dff9e6a56987d8ee19644034" />
+      <keyword name="operator==" id="QBbgLib::QBbgAbstractFieldRequest::operator==" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#aa04ba8f5f88a18bb0d87f589ffce6d1e" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a33ef34b5086bcf68a38e03fbd506664a" />
+      <keyword name="setField" id="QBbgLib::QBbgAbstractFieldRequest::setField" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ac209d8ccb8206e2e7887b7a050945b67" />
+      <keyword name="setOverrides" id="QBbgLib::QBbgAbstractFieldRequest::setOverrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ab4f3299f5e6dfe0cb57ac9179860b06c" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#abf9658a72cdc7b8f3c46b6160e7abd35" />
+      <keyword name="QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a060a6b163a7c62f8528d00859a3504f1" />
+      <keyword name="~QBbgAbstractRequest" id="QBbgLib::QBbgAbstractRequest::~QBbgAbstractRequest" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a3e3dbe432143e2a49b39d9ec8af14cb8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractRequest::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a955ddd103ab2b21fa1356cc223ad1d90" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractRequest::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a5e91567bae1d28161001e2982409e034" />
+      <keyword name="setID" id="QBbgLib::QBbgAbstractRequest::setID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a66411f530abc30c2d6c3c9792c183ca1" />
+      <keyword name="setSecurity" id="QBbgLib::QBbgAbstractRequest::setSecurity" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ad1e9ed31dc345fdca9a81f6946f24f35" />
+      <keyword name="useUTCtime" id="QBbgLib::QBbgReferenceDataRequest::useUTCtime" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ac69feac9e36fc417bb9feb0812f37880" />
+      <keyword name="field" id="QBbgLib::QBbgAbstractFieldRequest::field" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#a86632a5d1ae6e1f2074d33b17e4bb954" />
+      <keyword name="overrides" id="QBbgLib::QBbgAbstractFieldRequest::overrides" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ae4b242bfeb29ba7645ed8e2ddb8e2cde" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgAbstractRequest::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#acc6735ef66608aa9d5f39f9a49f44552" />
+      <keyword name="requestID" id="QBbgLib::QBbgAbstractRequest::requestID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a50d8765f46d580c5d3a6282e22e4d3d8" />
+      <keyword name="requestType" id="QBbgLib::QBbgAbstractRequest::requestType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#ab49d59befbb92807837972477042fdcf" />
+      <keyword name="security" id="QBbgLib::QBbgAbstractRequest::security" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractRequest::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aee31bee5ef5ccfda5b647b00e231bcca" />
+      <keyword name="QBbgLib::QBbgReferenceDataResponse" id="QBbgLib::QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html" />
+      <keyword name="QBbgReferenceDataResponse" id="QBbgLib::QBbgReferenceDataResponse::QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a97134a33a0dd059ae4ca4b2c5eedaaf3" />
+      <keyword name="QBbgReferenceDataResponse" id="QBbgLib::QBbgReferenceDataResponse::QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a0ea98a94507dfd3e44ffa1b005881703" />
+      <keyword name="~QBbgReferenceDataResponse" id="QBbgLib::QBbgReferenceDataResponse::~QBbgReferenceDataResponse" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a47d30822b2624ec05e8513e03f148d69" />
+      <keyword name="columns" id="QBbgLib::QBbgReferenceDataResponse::columns" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ab0ec20c474bcbfa0f99deaf9735fa150" />
+      <keyword name="getTableValue" id="QBbgLib::QBbgReferenceDataResponse::getTableValue" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ae5bcbcaff36bdf937d38d66db1f93127" />
+      <keyword name="hasTable" id="QBbgLib::QBbgReferenceDataResponse::hasTable" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a8b184b212121be0323ba6e1836f701f6" />
+      <keyword name="hasValue" id="QBbgLib::QBbgReferenceDataResponse::hasValue" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#aca7a65e78e36cbf06aface2da0ff2d7f" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgReferenceDataResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a1f402469678111a12f2a7a2109ad21db" />
+      <keyword name="operator=" id="QBbgLib::QBbgReferenceDataResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a3ce483b0a0db8cbb4a0e6fae8444a261" />
+      <keyword name="rows" id="QBbgLib::QBbgReferenceDataResponse::rows" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#ad7effdd35e53a86c7243d82704becffa" />
+      <keyword name="value" id="QBbgLib::QBbgReferenceDataResponse::value" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a00f1af24c9c50706980bbcabc4d7ab23" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a922874d202691054fb5a0ae9904dd08d" />
+      <keyword name="QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#aeaa868649eab8ba01fcbb66da6819d56" />
+      <keyword name="~QBbgAbstractFieldResponse" id="QBbgLib::QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#ad99f57fbf8a52d73c77992e45a953508" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a5add8e764caa774386735f40c33b225e" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractFieldResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a2e4e743310ece495a6d838ccca2ad58c" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ac1c9d73dc7e0265b0a856faf6e60d678" />
+      <keyword name="QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a150b28c62f8beeb98a4b016a2fb44b7d" />
+      <keyword name="~QBbgAbstractResponse" id="QBbgLib::QBbgAbstractResponse::~QBbgAbstractResponse" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad258ddfe2abeffa353d8a1ae53e1e161" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a0714628b880dfb8511ec8a0b067d1a7a" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a63619c165912737c3ec21c8216266892" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ad88d2c02835142cc318a78e465dd9ca8" />
+      <keyword name="getID" id="QBbgLib::QBbgAbstractResponse::getID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#adcb3da12fb8e4a8086056d250d086064" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a5a8b6ba18da9d3c836a7489275415547" />
+      <keyword name="operator=" id="QBbgLib::QBbgAbstractResponse::operator=" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a952f0064f7719935e34abc318717f17b" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#ab94fe71113336cae3590af87c9de0d1e" />
+      <keyword name="columns" id="QBbgLib::QBbgReferenceDataResponse::columns" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a0336e98888a14d2703f5aa68215d376c" />
+      <keyword name="hasTable" id="QBbgLib::QBbgReferenceDataResponse::hasTable" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#aacb0e02205a7ef20c32e36d0e78cd904" />
+      <keyword name="rows" id="QBbgLib::QBbgReferenceDataResponse::rows" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a7090808c963978c98883c3f32a47dcac" />
+      <keyword name="value" id="QBbgLib::QBbgReferenceDataResponse::value" ref="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#a9d59cf53d11c6b364bf3cfc54875c06c" />
+      <keyword name="header" id="QBbgLib::QBbgAbstractFieldResponse::header" ref="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html#a50d42b3c1fbead41b00fee763bb82a6d" />
+      <keyword name="errorCode" id="QBbgLib::QBbgAbstractResponse::errorCode" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083" />
+      <keyword name="errorMessage" id="QBbgLib::QBbgAbstractResponse::errorMessage" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#af85b9ab880885a258b80ba15cac7562f" />
+      <keyword name="errorString" id="QBbgLib::QBbgAbstractResponse::errorString" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a" />
+      <keyword name="hasErrors" id="QBbgLib::QBbgAbstractResponse::hasErrors" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8" />
+      <keyword name="isEmpty" id="QBbgLib::QBbgAbstractResponse::isEmpty" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150" />
+      <keyword name="responseID" id="QBbgLib::QBbgAbstractResponse::responseID" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a88a6be86b20de21c8289cb7f761af9d0" />
+      <keyword name="responseType" id="QBbgLib::QBbgAbstractResponse::responseType" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a4fe547bfdab3ba5d5028c95784c19992" />
+      <keyword name="bbgErrorCode2String" id="QBbgLib::QBbgAbstractResponse::bbgErrorCode2String" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a208bca5f74e65ba26b26c5259e2cb689" />
+      <keyword name="qHash" id="QBbgLib::QBbgAbstractResponse::qHash" ref="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#aeaf3d3f8a821be49327ce42650ae2cdc" />
+      <keyword name="QBbgLib::QBbgRequestGroup" id="QBbgLib::QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html" />
+      <keyword name="QBbgRequestGroup" id="QBbgLib::QBbgRequestGroup::QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ae45d5a7dfbd756356cb5436b6d25ef6d" />
+      <keyword name="QBbgRequestGroup" id="QBbgLib::QBbgRequestGroup::QBbgRequestGroup" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a646df7fb9100160fde48946300545a93" />
+      <keyword name="addRequest" id="QBbgLib::QBbgRequestGroup::addRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a98d8fac8f60c81c36984a51b71162ffd" />
+      <keyword name="addRequest" id="QBbgLib::QBbgRequestGroup::addRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a2e73c06a75fa53fd608125984266c3ac" />
+      <keyword name="clear" id="QBbgLib::QBbgRequestGroup::clear" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ad0b53fc87794afea5eb4094b3f72b795" />
+      <keyword name="differentTypes" id="QBbgLib::QBbgRequestGroup::differentTypes" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#acc09b82c6359ce06b318b780d748c09b" />
+      <keyword name="findSecurity" id="QBbgLib::QBbgRequestGroup::findSecurity" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a0e669b72c1a42d00a96b3aa3a5855b76" />
+      <keyword name="getRequest" id="QBbgLib::QBbgRequestGroup::getRequest" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a44a2a972f23ec1dc3387854793e828f8" />
+      <keyword name="IDList" id="QBbgLib::QBbgRequestGroup::IDList" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a5c544b06f7ea01719a7fa7314fd1bc98" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgRequestGroup::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ac27870fa45082070b032e746e901b4bc" />
+      <keyword name="operator=" id="QBbgLib::QBbgRequestGroup::operator=" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a3142f41b125d829937e22b82294b500e" />
+      <keyword name="size" id="QBbgLib::QBbgRequestGroup::size" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#ae7a74b90e7c9681bfd8edd8de6af0bb2" />
+      <keyword name="isValidReq" id="QBbgLib::QBbgRequestGroup::isValidReq" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a250fc4095367139220d3a49ed773afdd" />
+      <keyword name="size" id="QBbgLib::QBbgRequestGroup::size" ref="class_q_bbg_lib_1_1_q_bbg_request_group.html#a4febfe81eb1ea7d800179168d45be810" />
+      <keyword name="QBbgLib::QBbgSecurity" id="QBbgLib::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html" />
+      <keyword name="QBbgSecurity" id="QBbgLib::QBbgSecurity::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ab071f0a956b592445a5aa3c3cf49a95d" />
+      <keyword name="QBbgSecurity" id="QBbgLib::QBbgSecurity::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a9d645da759d1e859f710632b2d57cbe9" />
+      <keyword name="QBbgSecurity" id="QBbgLib::QBbgSecurity::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#aad2fbaf6d5b24d546eeb32217c3d7f57" />
+      <keyword name="QBbgSecurity" id="QBbgLib::QBbgSecurity::QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a89521dc274a5d34097ec05e90e20f644" />
+      <keyword name="~QBbgSecurity" id="QBbgLib::QBbgSecurity::~QBbgSecurity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a33a8a153a6455df5c52f35799f67a0d1" />
+      <keyword name="exchange" id="QBbgLib::QBbgSecurity::exchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a99b0809ee43db8edd936c652942d18ef" />
+      <keyword name="extension" id="QBbgLib::QBbgSecurity::extension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a65a7e9bf0a7a6b2f4e587909fd283f90" />
+      <keyword name="fullName" id="QBbgLib::QBbgSecurity::fullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a33acddbe3bf1878e49a81cf4b60270f3" />
+      <keyword name="isValid" id="QBbgLib::QBbgSecurity::isValid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a6a11c492b0634bbb83bdf77b68329e9e" />
+      <keyword name="name" id="QBbgLib::QBbgSecurity::name" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ae5102c98728306d4f67bf7e6d18653cd" />
+      <keyword name="operator!=" id="QBbgLib::QBbgSecurity::operator!=" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a0b5223d52b3c9ab45b08bd5110dc8eaf" />
+      <keyword name="operator=" id="QBbgLib::QBbgSecurity::operator=" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a3d6619debec73f372e0da3038f0c77ec" />
+      <keyword name="operator==" id="QBbgLib::QBbgSecurity::operator==" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a85be8030db92d5b8b271098a8c5a0e91" />
+      <keyword name="pricingSource" id="QBbgLib::QBbgSecurity::pricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a576d95415a6191042c9edf70dcf83252" />
+      <keyword name="setExchange" id="QBbgLib::QBbgSecurity::setExchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a49ce9d1c0e6793d3fd53192f66da68b4" />
+      <keyword name="setExtension" id="QBbgLib::QBbgSecurity::setExtension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ada23d8c40c97960bf3054b84b1514751" />
+      <keyword name="setFullName" id="QBbgLib::QBbgSecurity::setFullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a9227cd67507362d2e662c2be0ef6f7f4" />
+      <keyword name="setName" id="QBbgLib::QBbgSecurity::setName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a3da111a81f2af5282c519074c5bcfc61" />
+      <keyword name="setPricingSource" id="QBbgLib::QBbgSecurity::setPricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ab9fd46abb0b889d199d0b107d4b03db9" />
+      <keyword name="stringToYellowKey" id="QBbgLib::QBbgSecurity::stringToYellowKey" ref="class_q_bbg_lib_1_1_q_bbg_security.html#abc721f597cb2adef12632f9ab35ee59f" />
+      <keyword name="yellowKeyToString" id="QBbgLib::QBbgSecurity::yellowKeyToString" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a94c263acfb65caa7f1329274b7bb4151" />
+      <keyword name="exchange" id="QBbgLib::QBbgSecurity::exchange" ref="class_q_bbg_lib_1_1_q_bbg_security.html#accc2b73163166e13871c4255317458ef" />
+      <keyword name="extension" id="QBbgLib::QBbgSecurity::extension" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a042141740a3a0958296de4d7b30d7694" />
+      <keyword name="fullName" id="QBbgLib::QBbgSecurity::fullName" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a5e86cd4d778e14eea92ffd107c98d10b" />
+      <keyword name="isValid" id="QBbgLib::QBbgSecurity::isValid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a04c63c2a5b37a0dfc6bde250da316d55" />
+      <keyword name="name" id="QBbgLib::QBbgSecurity::name" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a84fe6ca0aed34dce8bede88683728dc9" />
+      <keyword name="pricingSource" id="QBbgLib::QBbgSecurity::pricingSource" ref="class_q_bbg_lib_1_1_q_bbg_security.html#af0196e197b159b653473d5d86d6795f0" />
+      <keyword name="operator&lt;&lt;" id="QBbgLib::QBbgSecurity::operator&lt;&lt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a63c189cd6508e065fb3cb12591d9407d" />
+      <keyword name="operator&gt;&gt;" id="QBbgLib::QBbgSecurity::operator&gt;&gt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a66e00855900330855852489bd6afb4f6" />
+      <keyword name="qHash" id="QBbgLib::QBbgSecurity::qHash" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ac3e95896a691904dcad244aa115dd6ae" />
+    </keywords>
+    <files>
+      <file>tabs.css</file>
+      <file>tab_a.png</file>
+      <file>tab_b.png</file>
+      <file>tab_h.png</file>
+      <file>tab_s.png</file>
+      <file>nav_h.png</file>
+      <file>nav_f.png</file>
+      <file>bc_s.png</file>
+      <file>doxygen.png</file>
+      <file>closed.png</file>
+      <file>open.png</file>
+      <file>bdwn.png</file>
+      <file>sync_on.png</file>
+      <file>sync_off.png</file>
+      <file>doc.png</file>
+      <file>folderopen.png</file>
+      <file>folderclosed.png</file>
+      <file>arrowdown.png</file>
+      <file>arrowright.png</file>
+      <file>splitbar.png</file>
+      <file>doxygen.css</file>
+      <file>search/search_l.png</file>
+      <file>search/search_m.png</file>
+      <file>search/search_r.png</file>
+      <file>search/close.png</file>
+      <file>search/mag_sel.png</file>
+      <file>search/search.css</file>
+      <file>search/search.js</file>
+      <file>_q_bbg_abstract_field_request_8h_source.html</file>
+      <file>_q_bbg_abstract_field_response_8h_source.html</file>
+      <file>_q_bbg_abstract_request_8h_source.html</file>
+      <file>_q_bbg_abstract_response_8h_source.html</file>
+      <file>_q_bbg_historical_data_request_8h_source.html</file>
+      <file>_q_bbg_historical_data_response_8h_source.html</file>
+      <file>_q_bbg_manager_8h_source.html</file>
+      <file>_q_bbg_override_8h_source.html</file>
+      <file>_q_bbg_portfolio_data_request_8h_source.html</file>
+      <file>_q_bbg_portfolio_data_response_8h_source.html</file>
+      <file>_q_bbg_project_globals_8h_source.html</file>
+      <file>_qbbg_reference_data_request_8h_source.html</file>
+      <file>_q_bbg_reference_data_response_8h_source.html</file>
+      <file>_q_bbg_request_group_8h_source.html</file>
+      <file>_q_bbg_security_8h_source.html</file>
+      <file>deprecated.html</file>
+      <file>namespace_q_bbg_lib.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_request.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_request-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_response.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_field_response-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_request.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_request.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_request-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_response.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_response.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_abstract_response-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_request.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_request.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_request-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_response.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_response.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_historical_data_response-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_manager.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_manager.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_manager-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_override.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_override-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_request-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_portfolio_data_response-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_request.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_request.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_request-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_response.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_response.png</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_reference_data_response-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_request_group.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_request_group-members.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_security.html</file>
+      <file>class_q_bbg_lib_1_1_q_bbg_security-members.html</file>
+      <file>dir_cdd19a09e49ca3a0d1e33572f219e2f2.html</file>
+      <file>index.html</file>
+      <file>pages.html</file>
+      <file>namespaces.html</file>
+      <file>annotated.html</file>
+      <file>classes.html</file>
+      <file>hierarchy.html</file>
+      <file>functions.html</file>
+      <file>functions_b.html</file>
+      <file>functions_c.html</file>
+      <file>functions_d.html</file>
+      <file>functions_e.html</file>
+      <file>functions_f.html</file>
+      <file>functions_g.html</file>
+      <file>functions_h.html</file>
+      <file>functions_i.html</file>
+      <file>functions_m.html</file>
+      <file>functions_n.html</file>
+      <file>functions_o.html</file>
+      <file>functions_p.html</file>
+      <file>functions_q.html</file>
+      <file>functions_r.html</file>
+      <file>functions_s.html</file>
+      <file>functions_u.html</file>
+      <file>functions_v.html</file>
+      <file>functions_w.html</file>
+      <file>functions_y.html</file>
+      <file>functions_~.html</file>
+      <file>functions_func.html</file>
+      <file>functions_func_b.html</file>
+      <file>functions_func_c.html</file>
+      <file>functions_func_d.html</file>
+      <file>functions_func_e.html</file>
+      <file>functions_func_f.html</file>
+      <file>functions_func_g.html</file>
+      <file>functions_func_h.html</file>
+      <file>functions_func_i.html</file>
+      <file>functions_func_m.html</file>
+      <file>functions_func_n.html</file>
+      <file>functions_func_o.html</file>
+      <file>functions_func_p.html</file>
+      <file>functions_func_q.html</file>
+      <file>functions_func_r.html</file>
+      <file>functions_func_s.html</file>
+      <file>functions_func_u.html</file>
+      <file>functions_func_v.html</file>
+      <file>functions_func_w.html</file>
+      <file>functions_func_y.html</file>
+      <file>functions_func_~.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_enum.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_prop.html</file>
+      <file>functions_rela.html</file>
+      <file>files.html</file>
+    </files>
+  </filterSection>
+</QtHelpProject>
