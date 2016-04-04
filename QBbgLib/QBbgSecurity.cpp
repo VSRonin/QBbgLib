@@ -1,3 +1,21 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgSecurity.h"
 #include "private/QBbgSecurity_p.h"
 #include <QRegularExpression>
@@ -5,10 +23,7 @@
 #include <QHash>
 namespace QBbgLib {
 
-QBbgSecurityPrivate::~QBbgSecurityPrivate()
-{
-
-}
+    QBbgSecurityPrivate::~QBbgSecurityPrivate() = default;
     QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity* q)
         : q_ptr(q)
         , m_Extension(QBbgSecurity::Invalid)
@@ -47,27 +62,10 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
         setName(SecName);
         setExtension(SecKey);
     }
-    QBbgSecurity::QBbgSecurity(QString SecString)
+    QBbgSecurity::QBbgSecurity(const QString& SecString)
         :d_ptr(new QBbgSecurityPrivate(this))
     {
-        if (!SecString.isEmpty()) {
-            SecString = SecString.simplified();
-            if (SecString.at(0) == '/') {
-                setExtension(stringToYellowKey(SecString.mid(1, SecString.indexOf('/', 1))));
-                SecString = SecString.mid(SecString.indexOf('/', 1) + 1);
-            }
-            else {
-                setExtension(stringToYellowKey(SecString.right(SecString.size() - SecString.lastIndexOf(' '))));
-                SecString = SecString.left(SecString.lastIndexOf(' '));
-            }
-            QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
-            QRegularExpressionMatch matchRes = priceSourceRegExp.match(SecString);
-            if (matchRes.hasMatch()) {
-                setPricingSource(matchRes.captured(1));
-                SecString.replace(QRegularExpression("@\\S+"), QString());
-            }
-            setName(SecString);
-        }
+        setFullName(SecString);
     }
     QBbgSecurity::~QBbgSecurity()
     {
@@ -198,6 +196,28 @@ QBbgSecurityPrivate::~QBbgSecurityPrivate()
             Result += yellowKeyToString(d->m_Extension);
         }
         return Result;
+    }
+
+    void QBbgSecurity::setFullName(QString val)
+    {
+        if (!val.isEmpty()) {
+            val = val.simplified();
+            if (val.at(0) == '/') {
+                setExtension(stringToYellowKey(val.mid(1, val.indexOf('/', 1))));
+                val = val.mid(val.indexOf('/', 1) + 1);
+            }
+            else {
+                setExtension(stringToYellowKey(val.right(val.size() - val.lastIndexOf(' '))));
+                val = val.left(val.lastIndexOf(' '));
+            }
+            QRegularExpression priceSourceRegExp("\\s@(\\S+)(?:\\s|$)");
+            QRegularExpressionMatch matchRes = priceSourceRegExp.match(val);
+            if (matchRes.hasMatch()) {
+                setPricingSource(matchRes.captured(1));
+                val.replace(QRegularExpression("@\\S+"), QString());
+            }
+            setName(val);
+        }
     }
 
     bool QBbgSecurity::operator!=(const QBbgSecurity& other) const

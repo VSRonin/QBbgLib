@@ -1,0 +1,3 @@
+#include <QBbgManager.h>
+#define REGISTER_QML_QBBGMANAGER \
+	qmlRegisterType<QBbgLib::QBbgManager>("QBbgLib", 1, 0, "QBbgManager");

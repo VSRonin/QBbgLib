@@ -1,15 +1,27 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgHistoricalDataResponse_p.h"
 namespace QBbgLib {
-QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse()
-{
-
-}
-QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate()
-{
-
-}
-    qint32 QBbgHistoricalDataResponse::size() const
+    QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse() = default;
+    QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate() = default;
+    int QBbgHistoricalDataResponse::size() const
     {
         Q_D(const QBbgHistoricalDataResponse);
         return d->m_values.size();
@@ -37,7 +49,13 @@ QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate()
     {
         if (period < 0 || period >= size()) return QVariant();
         Q_D(const QBbgHistoricalDataResponse);
-        return  *(d->m_values.begin() + period);
+        return  (d->m_values.constBegin() + period).value();
+    }
+    QDate QBbgHistoricalDataResponse::date(int period) const
+    {
+        if (period < 0 || period >= size()) return QDate();
+        Q_D(const QBbgHistoricalDataResponse);
+        return  (d->m_values.constBegin() + period).key();
     }
 
     QList<QDate> QBbgHistoricalDataResponse::findValues(const QVariant& a) const
@@ -85,11 +103,11 @@ QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate()
     {
     }
 
-    QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(QBbgHistoricalDataResponse& other)
+    QBbgHistoricalDataResponse::QBbgHistoricalDataResponse(const QBbgHistoricalDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgHistoricalDataResponsePrivate(this, *(other.d_func())))
     {}
 
-    QBbgHistoricalDataResponse& QBbgHistoricalDataResponse::operator=(QBbgHistoricalDataResponse& other)
+    QBbgHistoricalDataResponse& QBbgHistoricalDataResponse::operator=(const QBbgHistoricalDataResponse& other)
     {
         Q_D(QBbgHistoricalDataResponse);
         d->operator=(*(other.d_func()));

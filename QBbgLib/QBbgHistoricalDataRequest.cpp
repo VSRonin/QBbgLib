@@ -1,14 +1,26 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgHistoricalDataRequest.h"
 #include "private/QBbgHistoricalDataRequest_p.h"
 namespace QBbgLib {
-QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest()
-{
-
-}
-QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
-{
-
-}
+    QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest() = default;
+    QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate() = default;
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q)
         : QBbgAbstractFieldRequestPrivate(q, QBbgAbstractRequest::RequestType::HistoricalData)
         , m_periodicityAdjustment(QBbgHistoricalDataRequest::CALENDAR)
@@ -134,7 +146,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_calendarCode;
     }
 
-    void QBbgHistoricalDataRequest::calendarCode(QString val)
+    void QBbgHistoricalDataRequest::setCalendarCode(QString val)
     {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
@@ -201,7 +213,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_usePriceForPricing;
     }
 
-    void QBbgHistoricalDataRequest::usePriceForPricing(bool val)
+    void QBbgHistoricalDataRequest::setUsePriceForPricing(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_usePriceForPricing = val;
@@ -213,7 +225,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_useClosePrice;
     }
 
-    void QBbgHistoricalDataRequest::useClosePrice(bool val)
+    void QBbgHistoricalDataRequest::setUseClosePrice(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_useClosePrice = val;
@@ -225,7 +237,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_currency;
     }
 
-    void QBbgHistoricalDataRequest::currency(QString val)
+    void QBbgHistoricalDataRequest::setCurrency(QString val)
     {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
@@ -245,7 +257,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_periodicitySelection;
     }
 
-    void QBbgHistoricalDataRequest::periodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val)
+    void QBbgHistoricalDataRequest::setPeriodicitySelection(QBbgHistoricalDataRequest::PeriodSelection val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_periodicitySelection = val;
@@ -257,7 +269,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_periodicityAdjustment;
     }
 
-    void QBbgHistoricalDataRequest::periodicityAdjustment(PeriodAdjustment val)
+    void QBbgHistoricalDataRequest::setPeriodicityAdjustment(PeriodAdjustment val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_periodicityAdjustment = val;
@@ -269,7 +281,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_endDate;
     }
 
-    void QBbgHistoricalDataRequest::endDate(const QDate& val)
+    void QBbgHistoricalDataRequest::setEndDate(const QDate& val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_endDate = val;
@@ -281,7 +293,7 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return d->m_startDate;
     }
 
-    void QBbgHistoricalDataRequest::startDate(const QDate& val)
+    void QBbgHistoricalDataRequest::setStartDate(const QDate& val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_startDate = val;
@@ -325,49 +337,49 @@ QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate()
         return *this;
     }
 
-    void QBbgHistoricalDataRequest::nonTradingDayFill(QBbgHistoricalDataRequest::NonTradingDayFill val)
+    void QBbgHistoricalDataRequest::setNonTradingDayFill(QBbgHistoricalDataRequest::NonTradingDayFill val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_nonTradingDayFill = val;
     }
 
-    void QBbgHistoricalDataRequest::fillWithNull(bool val)
+    void QBbgHistoricalDataRequest::setFillWithNull(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_fillWithNull = val;
     }
 
-    void QBbgHistoricalDataRequest::maxDataPoints(qint32 val)
+    void QBbgHistoricalDataRequest::setMaxDataPoints(qint32 val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_maxDataPoints = val;
     }
 
-    void QBbgHistoricalDataRequest::useRelativeDate(bool val)
+    void QBbgHistoricalDataRequest::setUseRelativeDate(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_useRelativeDate = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentNormal(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentNormal(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentNormal = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentAbnormal(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentAbnormal(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentAbnormal = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentSplit(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentSplit(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentSplit = val;
     }
 
-    void QBbgHistoricalDataRequest::adjustmentFollowDPDF(bool val)
+    void QBbgHistoricalDataRequest::setAdjustmentFollowDPDF(bool val)
     {
         Q_D(QBbgHistoricalDataRequest);
         d->m_adjustmentFollowDPDF = val;

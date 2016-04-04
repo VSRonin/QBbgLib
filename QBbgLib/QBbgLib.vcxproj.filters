@@ -45,14 +45,14 @@
     <Filter Include="Source Files\RequestResponse\Response">
       <UniqueIdentifier>{e3ef0e8a-3432-4d5c-b82b-a1a53fe5c584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Threads">
-      <UniqueIdentifier>{747b186d-9dd3-4308-8818-03a8726d3eb4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Threads">
-      <UniqueIdentifier>{7ca94cd0-3c43-4bdd-944e-25dedb2fc84b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Private">
       <UniqueIdentifier>{6449eb06-0a70-44dc-9db7-ac51baa9abb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Threads">
+      <UniqueIdentifier>{747b186d-9dd3-4308-8818-03a8726d3eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Workers">
+      <UniqueIdentifier>{0132162a-640b-4a39-9f5b-99366a4174ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,12 +65,6 @@
     <ClCompile Include="QBbgAbstractFieldRequest.cpp">
       <Filter>Source Files\RequestResponse\Requests</Filter>
     </ClCompile>
-    <ClCompile Include="QbbgReferenceDataRequest.cpp">
-      <Filter>Source Files\RequestResponse\Requests</Filter>
-    </ClCompile>
-    <ClCompile Include="QBbgRequestGroup.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QBbgAbstractResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
@@ -82,15 +76,6 @@
     </ClCompile>
     <ClCompile Include="QBbgOverride.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QBbgRequestResponseWorker.cpp">
-      <Filter>Source Files\RequestResponse</Filter>
-    </ClCompile>
-    <ClCompile Include="QBbgAbstractWorker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="QBbgWorkerThread.cpp">
-      <Filter>Source Files\Threads</Filter>
     </ClCompile>
     <ClCompile Include="QBbgManager.cpp">
       <Filter>Source Files</Filter>
@@ -107,28 +92,25 @@
     <ClCompile Include="QBbgHistoricalDataResponse.cpp">
       <Filter>Source Files\RequestResponse\Response</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorkerThread.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorkerThread.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestResponseWorker.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgManager.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgManager.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker.cpp">
+    <ClCompile Include="private\QBbgAbstractWorker.cpp">
+      <Filter>Private\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="private\QBbgRequestResponseWorker.cpp">
+      <Filter>Private\Workers</Filter>
+    </ClCompile>
+    <ClCompile Include="private\QBbgWorkerThread.cpp">
+      <Filter>Private\Threads</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker_p.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker_p.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestResponseWorker_p.cpp">
@@ -137,55 +119,100 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker_p.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker_p.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorkerThread_p.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractWorker_p.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorkerThread_p.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgRequestGroup.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgSecurity.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgSecurity.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgOverride.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgOverride.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgRequestGroup.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestGroup.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractFieldRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractFieldRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgHistoricalDataRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgHistoricalDataRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgPortfolioDataRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgPortfolioDataRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgReferenceDataRequest.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QbbgReferenceDataRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QbbgReferenceDataRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractFieldResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractFieldResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgHistoricalDataResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgHistoricalDataResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgPortfolioDataResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgPortfolioDataResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgReferenceDataResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgReferenceDataResponse.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgSecurity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgAbstractFieldRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QbbgReferenceDataRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgRequestGroup.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgAbstractResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgAbstractFieldResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgReferenceDataResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgOverride.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgAbstractRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgPortfolioDataRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgPortfolioDataResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgHistoricalDataRequest.h">
-      <Filter>Header Files\RequestResponse\Requests</Filter>
-    </ClInclude>
-    <ClInclude Include="QBbgHistoricalDataResponse.h">
-      <Filter>Header Files\RequestResponse\Response</Filter>
     </ClInclude>
     <ClInclude Include="private\QBbgAbstractFieldRequest_p.h">
       <Filter>Private</Filter>
@@ -217,9 +244,6 @@
     <ClInclude Include="private\QBbgPortfolioDataResponse_p.h">
       <Filter>Private</Filter>
     </ClInclude>
-    <ClInclude Include="private\QbbgReferenceDataRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
     <ClInclude Include="private\QBbgReferenceDataResponse_p.h">
       <Filter>Private</Filter>
     </ClInclude>
@@ -229,28 +253,61 @@
     <ClInclude Include="private\QBbgSecurity_p.h">
       <Filter>Private</Filter>
     </ClInclude>
-    <ClInclude Include="private\QBbgWorkerThread_p.h">
+    <ClInclude Include="private\QBbgReferenceDataRequest_p.h">
       <Filter>Private</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="QBbgAbstractWorker.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="QBbgRequestResponseWorker.h">
-      <Filter>Header Files\RequestResponse</Filter>
-    </CustomBuild>
-    <CustomBuild Include="QBbgWorkerThread.h">
-      <Filter>Header Files\Threads</Filter>
-    </CustomBuild>
     <CustomBuild Include="QBbgManager.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="private\QBbgRequestResponseWorker_p.h">
-      <Filter>Private</Filter>
-    </CustomBuild>
     <CustomBuild Include="private\QBbgAbstractWorker_p.h">
-      <Filter>Private</Filter>
+      <Filter>Private\Workers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="private\QBbgRequestResponseWorker_p.h">
+      <Filter>Private\Workers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="private\QBbgWorkerThread_p.h">
+      <Filter>Private\Threads</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgSecurity.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgOverride.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgRequestGroup.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractFieldRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgHistoricalDataRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgPortfolioDataRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QbbgReferenceDataRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractFieldResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgHistoricalDataResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgPortfolioDataResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgReferenceDataResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -262,5 +319,8 @@
     </None>
     <None Include="QBbgLib.pri" />
     <None Include="QBbgLib.pro" />
+    <None Include="..\LICENSE">
+      <Filter>Documentation</Filter>
+    </None>
   </ItemGroup>
 </Project>

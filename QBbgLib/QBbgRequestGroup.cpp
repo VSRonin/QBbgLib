@@ -1,7 +1,25 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgRequestGroup.h"
 #include "private/QBbgRequestGroup_p.h"
 #include <QSet>
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 //#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
@@ -60,7 +78,7 @@ namespace QBbgLib {
         : q_ptr(q)
     {
         for (QHash<qint64, QBbgAbstractRequest*>::const_iterator i = a.RequestTable.constBegin(); i != a.RequestTable.constEnd(); i++) {
-            RequestTable.insert(i.key(), new QBbgAbstractRequest(*(i.value())));
+            addRequest(*(i.value()), i.key());
         }
     }
     QBbgRequestGroupPrivate& QBbgRequestGroupPrivate::operator= (const QBbgRequestGroupPrivate& a)
@@ -94,25 +112,36 @@ namespace QBbgLib {
     qint64 QBbgRequestGroup::addRequest(const QBbgAbstractRequest& a)
     {
         Q_D(QBbgRequestGroup);
-        QBbgAbstractRequest* newReq = d->createRequest(a);
-
-        while (newReq->getID() < 0 || d->RequestTable.contains(newReq->getID())) {
-            newReq->setID(d->increaseMaxID());
+        return d->addRequest(a);
+    }
+    qint64 QBbgRequestGroup::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
+    {
+        Q_D(QBbgRequestGroup);
+        return d->addRequest(a, preferredID);
+    }
+    qint64 QBbgRequestGroupPrivate::addRequest(const QBbgAbstractRequest& a)
+    {
+        
+        QBbgAbstractRequest* newReq = createRequest(a);
+        while (newReq->getID() < 0 || RequestTable.contains(newReq->getID())) {
+            newReq->setID(increaseMaxID());
         }
         if (!newReq->isValidReq()) {
             delete newReq;
             return QBbgAbstractRequest::InvalidID;
         }
-        QHash<qint64, QBbgAbstractRequest*>::iterator iter = d->RequestTable.find(newReq->getID());
-        if (iter == d->RequestTable.end()) {
-            iter=d->RequestTable.insert(newReq->getID(), newReq);
-        }
-        else {
-            delete iter.value();
-            iter.value() = newReq;
-        }
-        return iter.key();
+        return RequestTable.insert(newReq->getID(), newReq).key();
     }
+
+    qint64 QBbgRequestGroupPrivate::addRequest(QBbgAbstractRequest& a, qint64 preferredID)
+    {
+        const qint64 oldID = a.getID();
+        a.setID(preferredID);
+        const qint64 result = addRequest(a);
+        a.setID(oldID);
+        return result;
+    }
+
     const QBbgAbstractRequest* QBbgRequestGroupPrivate::request(qint64 ID) const
     {
         return RequestTable.value(ID, NULL);
@@ -246,7 +275,7 @@ namespace QBbgLib {
             if (FiledsA != FiledsB)
                 return false;
             if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
-                return false; // Can't send multiple securites with hist data
+                return false; // Can't send multiple securities with hist data
             }
             return true;
         }

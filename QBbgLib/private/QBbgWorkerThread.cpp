@@ -20,33 +20,45 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
-#ifndef QBbgReferenceDataResponse_p_h__
-#define QBbgReferenceDataResponse_p_h__
-#include "QBbgReferenceDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
-#include <QList>
+#include "private/QBbgWorkerThread_p.h"
+#include "private/QBbgAbstractWorker_p.h"
 namespace QBbgLib {
-    class QBbgReferenceDataResponsePrivate : public QBbgAbstractFieldResponsePrivate
+
+    QBbgWorkerThread::QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent)
+        :QThread(parent)
+        , m_worker(wrk)
     {
-    private:
-        Q_DECLARE_PUBLIC(QBbgReferenceDataResponse)
-        QBbgReferenceDataResponsePrivate(const QBbgReferenceDataResponsePrivate& other);
-    public:
-        virtual ~QBbgReferenceDataResponsePrivate();
-        QBbgReferenceDataResponsePrivate(QBbgReferenceDataResponse* q, const QBbgReferenceDataResponsePrivate& other);
-        QBbgReferenceDataResponsePrivate(QBbgReferenceDataResponse* q);
-        virtual QBbgReferenceDataResponsePrivate& operator=(const QBbgReferenceDataResponsePrivate& other);
-        QVariant m_Value;
-        QList<QBbgReferenceDataResponse*> m_TableResultRows;
-        qint32 m_TableCols;
-    	
-    };
+        createConnections();
+    }
+    void QBbgWorkerThread::run()
+    {
+        if(m_worker->start())
+            exec();
+    }
+    QBbgWorkerThread::~QBbgWorkerThread()
+    {
+        while (isRunning()) {
+            quit();
+            wait(2000);
+        }
+        Q_ASSERT_X(!isRunning(), "~QBbgWorkerThread()", "Destroying thread while still running");
+    }
+    void QBbgWorkerThread::createConnections()
+    {
+        connect(m_worker, &QBbgAbstractWorker::started, this, &QBbgWorkerThread::started);
+        connect(m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::stopped);
+        connect(m_worker, &QBbgAbstractWorker::dataRecieved, this, &QBbgWorkerThread::dataRecieved);
+        connect(m_worker, &QBbgAbstractWorker::progress, this, &QBbgWorkerThread::progress);
+        connect(m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::finished);
+        connect(this, &QBbgWorkerThread::finished, this, &QBbgWorkerThread::deleteLater);
+        connect(m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::quit);
+        connect(m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::quit);
+    }
 
-    
+    void QBbgWorkerThread::stop()
+    {
+        m_worker->stop();
+    }
 
-   
-
-    
 
 }
-#endif // QBbgReferenceDataResponse_p_h__

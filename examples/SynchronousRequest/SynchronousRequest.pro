@@ -15,8 +15,32 @@
 # along with QBbgLib.  If not, see <http://www.gnu.org/licenses/>.              #
 #################################################################################
 
-TEMPLATE = subdirs
-SUBDIRS += QBbgLib 
-Examples.file =	examples/examples.pro
-Examples.depends = QBbgLib
-SUBDIRS += Examples
+TEMPLATE = app
+TARGET = SynchronousRequest
+QT += core
+DEFINES += QT_DLL
+INCLUDEPATH += ../../QBbgLib \
+    ./GeneratedFiles \
+    .
+CONFIG(debug, debug|release) {
+    DESTDIR = ../bin/Debug
+    INCLUDEPATH += ./GeneratedFiles/Debug
+    MOC_DIR += ./GeneratedFiles/debug
+    OBJECTS_DIR += debug
+    LIBS += -L"../../bin/Debug"
+    LIBS += -lQBbglibd
+}
+CONFIG(release, debug|release) {
+    TARGET = SynchronousRequest
+    INCLUDEPATH += ./GeneratedFiles/release
+    DESTDIR = ../bin/Release
+    MOC_DIR += ./GeneratedFiles/release
+    OBJECTS_DIR += release
+    LIBS += -L"../../bin/Release"
+    LIBS += -lQBbglib
+}
+DEPENDPATH += .
+UI_DIR += ./GeneratedFiles
+RCC_DIR += ./GeneratedFiles
+CONFIG += build_all
+SOURCES += ./SynchronousRequest.cpp

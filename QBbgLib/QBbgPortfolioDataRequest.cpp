@@ -1,15 +1,27 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QbbgPortfolioDataRequest.h"
 #include "private/QbbgPortfolioDataRequest_p.h"
 #include "QBbgSecurity.h"
 namespace QBbgLib {
-QBbgPortfolioDataRequest::~QBbgPortfolioDataRequest()
-{
-
-}
-QBbgPortfolioDataRequestPrivate::~QBbgPortfolioDataRequestPrivate()
-{
-
-}
+    QBbgPortfolioDataRequest::~QBbgPortfolioDataRequest() = default;
+    QBbgPortfolioDataRequestPrivate::~QBbgPortfolioDataRequestPrivate() = default;
     void QBbgPortfolioDataRequest::setSecurity(const QBbgSecurity& val)
     {
         if (val.extension() == QBbgSecurity::Client) {
@@ -67,20 +79,20 @@ QBbgPortfolioDataRequestPrivate::~QBbgPortfolioDataRequestPrivate()
             && field() != "PORTFOLIO_MWEIGHT"
             && field() != "PORTFOLIO_DATA"
             && field() != "PORTFOLIO_MEMBERS"
-        ) 
+            )
             QBbgAbstractFieldRequest::setField(QString());
     }
 
     void QBbgPortfolioDataRequest::setField(PortfolioFields val)
     {
         switch (val) {
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MPOSITION:
+        case PortfolioFields::PORTFOLIO_MPOSITION:
             return setField("PORTFOLIO_MPOSITION");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MWEIGHT:
+        case PortfolioFields::PORTFOLIO_MWEIGHT:
             return setField("PORTFOLIO_MWEIGHT");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_DATA:
+        case PortfolioFields::PORTFOLIO_DATA:
             return setField("PORTFOLIO_DATA");
-        case QBbgLib::QBbgPortfolioDataRequest::PORTFOLIO_MEMBERS:
+        case PortfolioFields::PORTFOLIO_MEMBERS:
             return setField("PORTFOLIO_MEMBERS");
         default:
             Q_UNREACHABLE();

@@ -1,14 +1,26 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgPortfolioDataResponse.h"
 #include "private/QBbgPortfolioDataResponse_p.h"
 namespace QBbgLib {
-QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse()
-{
-
-}
-QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
-{
-
-}
+    QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse() = default;
+    QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate() = default;
     QBbgPortfolioDataResponsePrivate::QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other)
         :QBbgAbstractFieldResponsePrivate(q, other)
         , m_Security(other.m_Security)
@@ -59,66 +71,66 @@ QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
         }
     }
 
-    size_t QBbgPortfolioDataResponse::size() const
+    int QBbgPortfolioDataResponse::size() const
     {
         Q_D(const QBbgPortfolioDataResponse);
         return d->m_Security.size();
     }
 
-    QBbgSecurity QBbgPortfolioDataResponse::security(size_t index) const
+    QBbgSecurity QBbgPortfolioDataResponse::security(int index) const
     {
         if (index < 0 || index >= size())
             return QBbgSecurity();
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Security.at(index);
+        return d->m_Security.at(static_cast<int>(index));
     }
 
-    double QBbgPortfolioDataResponse::position(size_t index) const
+    double QBbgPortfolioDataResponse::position(int index) const
     {
         if (index < 0 || index >= size() || !hasPosition())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Position.at(index);
+        return d->m_Position.at(static_cast<int>(index));
     }
 
-    double QBbgPortfolioDataResponse::marketValue(size_t index) const
+    double QBbgPortfolioDataResponse::marketValue(int index) const
     {
         if (index < 0 || index >= size() || !hasMarketValue())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_MarketValue.at(index);
+        return d->m_MarketValue.at(static_cast<int>(index));
     }
 
-    double QBbgPortfolioDataResponse::cost(size_t index) const
+    double QBbgPortfolioDataResponse::cost(int index) const
     {
         if (index < 0 || index >= size() || !hasCost())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Cost.at(index);
+        return d->m_Cost.at(static_cast<int>(index));
     }
 
-    double QBbgPortfolioDataResponse::costFx(size_t index) const
+    double QBbgPortfolioDataResponse::costFx(int index) const
     {
         if (index < 0 || index >= size() || !hasCostFx())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_CostFx.at(index);
+        return d->m_CostFx.at(static_cast<int>(index));
     }
 
-    double QBbgPortfolioDataResponse::weight(size_t index) const
+    double QBbgPortfolioDataResponse::weight(int index) const
     {
         if (index < 0 || index >= size() || !hasWeight())
             return 0.0;
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_Weight.at(index);
+        return d->m_Weight.at(static_cast<int>(index));
     }
 
-   QDate QBbgPortfolioDataResponse::costDate(size_t index) const
+    QDate QBbgPortfolioDataResponse::costDate(int index) const
     {
         if (index < 0 || index >= size() || !hasCostDate())
             return QDate();
         Q_D(const QBbgPortfolioDataResponse);
-        return d->m_CostDate.at(index);
+        return d->m_CostDate.at(static_cast<int>(index));
     }
 
    bool QBbgPortfolioDataResponse::hasPosition() const
@@ -214,7 +226,7 @@ QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
        d->m_Weight.append(val);
    }
 
-   QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(QBbgPortfolioDataResponse& other)
+   QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(const QBbgPortfolioDataResponse& other)
        :QBbgAbstractFieldResponse(new QBbgPortfolioDataResponsePrivate(this,*(other.d_func())))
    {}
 
@@ -227,7 +239,7 @@ QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate()
        : QBbgAbstractFieldResponse(dp)
    {
    }
-   QBbgPortfolioDataResponse& QBbgPortfolioDataResponse::operator=(QBbgPortfolioDataResponse& other)
+   QBbgPortfolioDataResponse& QBbgPortfolioDataResponse::operator=(const QBbgPortfolioDataResponse& other)
    {
        Q_D(QBbgPortfolioDataResponse);
        d->operator=(*(other.d_func()));

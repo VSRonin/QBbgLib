@@ -1,3 +1,21 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgOverride.h"
 #include "private/QBbgOverride_p.h"
 #include <QDate>
@@ -6,10 +24,7 @@
 #include <blpapi_session.h>
 namespace QBbgLib {
 
-QBbgOverridePrivate::~QBbgOverridePrivate()
-{
-
-}
+    QBbgOverridePrivate::~QBbgOverridePrivate() = default;
     QBbgOverridePrivate::QBbgOverridePrivate(QBbgOverride* q)
         : q_ptr(q)
     {}
@@ -66,6 +81,12 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
         Q_D(const QBbgOverride);
         return d->m_Overrides.keys();
     }
+
+    QList<QString> QBbgOverride::getNames() const
+    {
+        return getKeys();
+    }
+
     bool QBbgOverride::operator==(const QBbgOverride& other) const
     {
         Q_D(const QBbgOverride);
@@ -80,7 +101,7 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
         Q_D(QBbgOverride);
         return  d->m_Overrides[Name];
     }
-    const QString QBbgOverride::operator[](const QString& Name) const
+    QString QBbgOverride::operator[](const QString& Name) const
     {
         Q_D(const QBbgOverride);
         return  d->m_Overrides[Name];
@@ -148,7 +169,7 @@ QBbgOverridePrivate::~QBbgOverridePrivate()
             setOverride(Name, val.toString("HHmmss"));
     }
 
-    void QBbgOverride::setOverride(QString Name, const char* val)
+    void QBbgOverride::setOverride(QString Name, const char *const val)
     {
         return setOverride(Name, QString(val));
     }

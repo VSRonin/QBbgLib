@@ -1,11 +1,26 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgReferenceDataResponse.h"
 #include "private/QBbgReferenceDataResponse_p.h"
 namespace QBbgLib {
 
-QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate()
-{
-
-}
+    QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate() = default;
     bool QBbgReferenceDataResponse::hasValue() const
     {
         Q_D(const QBbgReferenceDataResponse);
@@ -92,10 +107,10 @@ QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate()
         : QBbgAbstractFieldResponse(dp)
     {
     }
-    QBbgReferenceDataResponse::QBbgReferenceDataResponse(QBbgReferenceDataResponse& other)
+    QBbgReferenceDataResponse::QBbgReferenceDataResponse(const QBbgReferenceDataResponse& other)
         : QBbgAbstractFieldResponse(new QBbgReferenceDataResponsePrivate(this,*(other.d_func())))
     {}
-    QBbgReferenceDataResponse& QBbgReferenceDataResponse::operator=(QBbgReferenceDataResponse& other)
+    QBbgReferenceDataResponse& QBbgReferenceDataResponse::operator=(const QBbgReferenceDataResponse& other)
     {
         Q_D(QBbgReferenceDataResponse);
         d->operator=(*(other.d_func()));

@@ -1,38 +1,53 @@
-#include "QBbgRequestResponseWorker.h"
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
+/*******************************************************************************\
+* This file does not form part of the public API                                *
+\*******************************************************************************/
+
 #include "private/QBbgRequestResponseWorker_p.h"
 #include "QBbgReferenceDataResponse.h"
 #include <QSet>
 #include "QBbgRequestGroup.h"
 #include "QBbgAbstractFieldRequest.h"
 #include "QBbgOverride.h"
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
+#include <blpapi_session.h>
 #ifdef PRINT_RESPONSE_MESSAGE
 #include <fstream>
 #endif // PRINT_RESPONSE_MESSAGE
 namespace QBbgLib {
-QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
-{
 
-}
-
-    QBbgRequestResponseWorkerPrivate::QBbgRequestResponseWorkerPrivate(QBbgAbstractWorker* q, const BloombergLP::blpapi::SessionOptions& options)
-        :QBbgAbstractWorkerPrivate(q, options)
-    {}
-    QBbgRequestResponseWorkerPrivate::~QBbgRequestResponseWorkerPrivate()
+    QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
     {
         for (QHash<qint64, QList<qint64>* >::iterator i = Groups.begin(); i != Groups.end(); ++i)
             delete i.value();
     }
-    qint64 QBbgRequestResponseWorkerPrivate::CorrelationForService(const QString& a) const
+    qint64 QBbgRequestResponseWorker::CorrelationForService(const QString& a) const
     {
         return -static_cast<qint64>(QBbgAbstractRequest::stringToServiceType(a));
     }
-    void QBbgRequestResponseWorkerPrivate::handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal)
+    void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal)
     {
         BloombergLP::blpapi::MessageIterator iter(event);
         while (iter.next()) {
@@ -44,7 +59,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
             myfile.close();
 #endif // PRINT_RESPONSE_MESSAGE
             const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), NULL);
-            Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Recieving response from unknown request");
+            Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorker::handleResponseEvent", "Recieving response from unknown request");
             if (message.hasElement("responseError")) {
                 for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                     SetError(*SingleReq, QBbgAbstractResponse::ResponseError, message.getElement("responseError").getElementAsString("message"));
@@ -175,7 +190,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
                             }
                             for (size_t fieldDataIter = 0; fieldDataIter < fieldDataArray.numValues(); ++fieldDataIter) {
                                 BloombergLP::blpapi::Element fieldDataValue = fieldDataArray.getValueAsElement(fieldDataIter);
-                                Q_ASSERT_X(fieldDataValue.hasElement("date"), "QBbgRequestResponseWorkerPrivate::handleResponseEvent", "Historical data has no date element");
+                                Q_ASSERT_X(fieldDataValue.hasElement("date"), "QBbgRequestResponseWorker::handleResponseEvent", "Historical data has no date element");
                                 if (!recievedErrorsIDs.contains(*SingleReq) && !fieldDataValue.hasElement("date")) {
                                     recievedErrorsIDs.insert(*SingleReq);
                                     SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
@@ -294,15 +309,14 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
 
     }
 
-    bool QBbgRequestResponseWorkerPrivate::processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession)
+    bool QBbgRequestResponseWorker::processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession)
     {
-        Q_Q(QBbgRequestResponseWorker);
-        if (!m_SessionRunning)
+        if (!sessionRunning())
             return false;
         switch (event.eventType()) {
         case BloombergLP::blpapi::Event::SESSION_STATUS: {
             BloombergLP::blpapi::MessageIterator iter(event);
-            while (iter.next() && m_SessionRunning) {
+            while (iter.next() && sessionRunning()) {
                 BloombergLP::blpapi::Message message = iter.message();
                 QString MessageType = message.messageType().string();
                 if (MessageType == "SessionStarted") {
@@ -310,13 +324,13 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
                     for (QList<QString>::const_iterator rqIter = servicesToOpen.constBegin(); rqIter != servicesToOpen.constEnd(); ++rqIter) {
                         CurrentSession->openServiceAsync(rqIter->toLatin1().data(), BloombergLP::blpapi::CorrelationId(CorrelationForService(*rqIter)));
                     }
-                    q->started(); // Emit signal
+                    emit started(); // Emit signal
                 }
                 else if (MessageType == "SessionConnectionUp") continue;
                 else if (MessageType == "SessionConnectionDown") continue;
                 else if (MessageType == "SessionTerminated") {
-                    m_SessionRunning = false;
-                    q->finished();
+                    setSessionRunning(false);
+                    emit finished();
                 }
                 else /*if (MessageType == "SessionStartupFailure")*/ {
                     const QList<qint64> allRq = m_Requests.IDList();
@@ -362,7 +376,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         return true;
     }
 
-    void QBbgRequestResponseWorkerPrivate::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg)
+    void QBbgRequestResponseWorker::SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg)
     {
         QBbgAbstractResponse* TempRes = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
@@ -384,7 +398,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         m_Results.insert(RequestID, TempRes);
         DataRecieved(RequestID);
     }
-    void QBbgRequestResponseWorkerPrivate::DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header)
+    void QBbgRequestResponseWorker::DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header)
     {
         QBbgAbstractResponse* resToAdd = NULL;
         switch (m_Requests.request(RequestID)->requestType()) {
@@ -409,30 +423,28 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         }
         DataRecieved(RequestID);
     }
-    void QBbgRequestResponseWorkerPrivate::HeaderRecieved(qint64 RequestID, const QString& Header)
+    void QBbgRequestResponseWorker::HeaderRecieved(qint64 RequestID, const QString& Header)
     {
         if (!m_Results.contains(RequestID)) return;
         QBbgAbstractResponse* const abRes = m_Results[RequestID];
-        Q_ASSERT_X(dynamic_cast<QBbgAbstractFieldResponse*>(abRes), "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Setting header for non-fielded data");
+        Q_ASSERT_X(dynamic_cast<QBbgAbstractFieldResponse*>(abRes), "QBbgRequestResponseWorker::HeaderRecieved", "Setting header for non-fielded data");
         if (static_cast<qint32>(abRes->responseType()) & QBbgAbstractResponse::FirstFielded) {
             QBbgAbstractFieldResponse* res = static_cast<QBbgAbstractFieldResponse*>(m_Results[RequestID]);
             res->setHeader(Header);
         }
     }
-    void QBbgRequestResponseWorkerPrivate::DataRecieved(qint64 RequestID)
+    void QBbgRequestResponseWorker::DataRecieved(qint64 RequestID)
     {
-        Q_Q(QBbgRequestResponseWorker);
         QHash<qint64, QBbgAbstractResponse*>::iterator i = m_Results.find(RequestID);
         Q_ASSERT(i != m_Results.end());
-        q->dataRecieved(RequestID, i.value());
-        //m_Results.erase(i);
-        q->progress((100 * ++m_ResurnedResults) / m_Requests.size());
-        Q_ASSERT_X(m_ResurnedResults <= m_Requests.size(), "QBbgRequestResponseWorkerPrivate::HeaderRecieved", "Too many results returned");
+        emit dataRecieved(RequestID, i.value());
+        emit progress((100 * ++m_ResurnedResults) / m_Requests.size());
+        Q_ASSERT_X(m_ResurnedResults <= m_Requests.size(), "QBbgRequestResponseWorker::HeaderRecieved", "Too many results returned");
         if (m_ResurnedResults >= m_Requests.size()) {
-            m_session->stopAsync();
+            session()->stopAsync();
         }
     }
-    void QBbgRequestResponseWorkerPrivate::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
+    void QBbgRequestResponseWorker::DataRowRecieved(qint64 RequestID, const QList<QVariant>& Value, const QList<QString>& Header)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
         if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::ReferenceData) {
@@ -444,7 +456,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         }
         Q_UNREACHABLE(); //Only ReferenceData can recieve Data Rows
     }
-    void QBbgRequestResponseWorkerPrivate::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
+    void QBbgRequestResponseWorker::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
         if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
@@ -456,7 +468,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         }
         Q_UNREACHABLE(); //Only HistoricalData requests can receive Hist Data
     }
-    void QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
+    void QBbgRequestResponseWorker::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
         if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::PortfolioData) {
@@ -471,7 +483,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
             Q_ASSERT((cstFx && currRes->size() > 0) == currRes->hasCostFx());
             Q_ASSERT((wei && currRes->size() > 0) == currRes->hasWeight());
             currRes->addSecurity(Sec);
-            Q_ASSERT_X(currRes->security(currRes->size() - 1).isValid(), "QBbgRequestResponseWorkerPrivate::PortfolioDataRecieved", "Invalid security recieved");
+            Q_ASSERT_X(currRes->security(currRes->size() - 1).isValid(), "QBbgRequestResponseWorker::PortfolioDataRecieved", "Invalid security recieved");
             if (pos) currRes->addPosition(*pos);
             if (mkVal) currRes->addMarketValue(*mkVal);
             if (cst) currRes->addCost(*cst);
@@ -482,11 +494,11 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
         }
         Q_UNREACHABLE(); //Only PortfolioData can receive Portfolio Data
     }
-    void QBbgRequestResponseWorkerPrivate::SendRequ(QBbgAbstractRequest::ServiceType serv)
+    void QBbgRequestResponseWorker::SendRequ(QBbgAbstractRequest::ServiceType serv)
     {
         QSet<QBbgSecurity> UsedSecur;
         QSet<QString> UsedFields;
-        BloombergLP::blpapi::Service refDataSvc = m_session->getService(QBbgAbstractRequest::serviceTypeToString(serv).toLatin1().data());
+        BloombergLP::blpapi::Service refDataSvc = session()->getService(QBbgAbstractRequest::serviceTypeToString(serv).toLatin1().data());
         for (QHash<qint64, QList<qint64>* >::const_iterator ReqIter = Groups.constBegin(); ReqIter != Groups.constEnd(); ++ReqIter) {
             QBbgAbstractRequest::RequestType reqType = m_Requests.request(ReqIter.value()->first())->requestType();
             if (QBbgAbstractRequest::serviceForRequest(reqType) != serv) continue;
@@ -496,7 +508,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
             UsedFields.clear();
             for (QList<qint64>::const_iterator GroupIter = ReqIter.value()->constBegin(); GroupIter != ReqIter.value()->constEnd(); ++GroupIter) {
                 const QBbgAbstractRequest* CurrentSingle = m_Requests.request(*GroupIter);
-                Q_ASSERT_X(CurrentSingle, "QBbgRequestResponseWorkerPrivate::SendRequ", "trying to send NULL request");
+                Q_ASSERT_X(CurrentSingle, "QBbgRequestResponseWorker::SendRequ", "trying to send NULL request");
                 if (!CurrentSingle->isValidReq()) {
                     SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, "Invalid Request");
                 }
@@ -589,45 +601,44 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
                     }
                 }
             }
-            m_session->sendRequest(request, requestId);
+            session()->sendRequest(request, requestId);
         }
     }
 
-    void QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
+    bool QBbgRequestResponseWorker::start(const QBbgRequestGroup& req)
     {
         setRequest(req);
-        start();
+        return start();
     }
 
-    void QBbgRequestResponseWorker::start()
+    bool QBbgRequestResponseWorker::start()
     {
-        Q_D(QBbgRequestResponseWorker);
-        if (d->m_SessionRunning) return;
-        Q_ASSERT_X(d->m_Requests.size() > 0, "QBbgRequestResponseWorker::start()", "Starting with empty request");
-        d->m_SessionRunning = true;
-        d->m_ResurnedResults = 0;
-        d->m_session->startAsync();
+        if (sessionRunning()) 
+            return false;
+        Q_ASSERT_X(m_Requests.size() > 0, "QBbgRequestResponseWorker::start()", "Starting with empty request");
+        setSessionRunning(true);
+        m_ResurnedResults = 0;
+        return session()->startAsync();
     }
 
     const QBbgAbstractResponse* QBbgRequestResponseWorker::result(qint64 id) const
     {
-        Q_D(const QBbgRequestResponseWorker);
-        return d->m_Results.value(id, NULL);
+        return m_Results.value(id, NULL);
     }
 
     QBbgRequestResponseWorker::QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent)
-        :QBbgAbstractWorker(new QBbgRequestResponseWorkerPrivate(this, option), parent)
+        :QBbgAbstractWorker(option, parent)
     {}
 
     void QBbgRequestResponseWorker::setRequest(const QBbgRequestGroup& req)
     {
-        Q_D(QBbgRequestResponseWorker);
-        if (d->m_SessionRunning) return;
-        d->m_Requests = req;
-        d->m_Requests.RequestGroups(d->Groups);
+        if (sessionRunning())
+            return;
+        m_Requests = req;
+        m_Requests.RequestGroups(Groups);
     }
 
-    void QBbgRequestResponseWorkerPrivate::fillNoData()
+    void QBbgRequestResponseWorker::fillNoData()
     {
         QList<qint64> allIDs=m_Requests.IDList();
         for (QList<qint64>::const_iterator i = allIDs.constBegin(); i != allIDs.constEnd(); ++i) {
@@ -637,7 +648,6 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
     }
     void QBbgRequestResponseWorker::ClearResults()
     {
-        Q_D(QBbgRequestResponseWorker);
-        d->m_Results.clear();
+        m_Results.clear();
     }
 }

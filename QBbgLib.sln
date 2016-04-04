@@ -7,6 +7,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleTest", "ConsoleTest\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QBbgLib", "QBbgLib\QBbgLib.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BFD2D79-116A-4DD7-B26E-EA54EE38C718}"
+	ProjectSection(SolutionItems) = preProject
+		QBbgLib.pro = QBbgLib.pro
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{DCE060ED-393D-4680-963E-D7F6B74171F2}"
+	ProjectSection(SolutionItems) = preProject
+		examples\examples.pro = examples\examples.pro
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SynchronousRequest", "examples\SynchronousRequest\SynchronousRequest.vcxproj", "{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -39,9 +51,24 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|Win32.Build.0 = Debug|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|x64.ActiveCfg = Debug|x64
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Debug|x64.Build.0 = Debug|x64
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|Win32.ActiveCfg = Release|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|Win32.Build.0 = Release|Win32
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|x64.ActiveCfg = Release|x64
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20DBFA0C-D5AE-45FE-81AB-82E181BF087A} = {DCE060ED-393D-4680-963E-D7F6B74171F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		Qt5Version = $(DefaultQtVersion)

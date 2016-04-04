@@ -1,16 +1,35 @@
+/*******************************************************************************\
+* This file is part of QBbgLib.                                                 *
+*                                                                               *
+* QBbgLib is free software : you can redistribute it and / or modify            *
+* it under the terms of the GNU Lesser General Public License as published by   *
+* the Free Software Foundation, either version 3 of the License, or             *
+* (at your option) any later version.                                           *
+*                                                                               *
+* QBbgLib is distributed in the hope that it will be useful,                    *
+* but WITHOUT ANY WARRANTY; without even the implied warranty of                *
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the                   *
+* GNU Lesser General Public License for more details.                           *
+*                                                                               *
+* You should have received a copy of the GNU Lesser General Public License      *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+*                                                                               *
+\*******************************************************************************/
+
 #include "QBbgManager.h"
 #include "private/QBbgManager_p.h"
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>
-#include "QBbgRequestResponseWorker.h"
+#include "private/QBbgRequestResponseWorker_p.h"
 #include <QCoreApplication>
-#include "QbbgReferenceDataRequest.h"
+#include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataResponse.h"
+#include "private/QBbgWorkerThread_p.h"
 namespace QBbgLib {
 
 
@@ -61,17 +80,29 @@ namespace QBbgLib {
         return startRequest(rg);
     }
 
-    const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
+    quint32 QBbgManager::processRequestID(const QBbgRequestGroup& rq)
     {
-        Q_D(QBbgManager);
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
         const quint32 threadKey = newTh.key();
         QEventLoop waitLoop;
         connect(newTh.value(), &QBbgWorkerThread::finished, &waitLoop, &QEventLoop::quit);
         newTh.value()->start();
         waitLoop.exec();
-        Q_ASSERT(d->m_ResultTable.contains(threadKey));
-        return *(d->m_ResultTable.value(threadKey));
+        Q_ASSERT(d_func()->m_ResultTable.contains(threadKey));
+        return threadKey;
+    }
+
+    quint32 QBbgManager::processRequestID(const QBbgAbstractRequest& rq)
+    {
+        QBbgRequestGroup rg;
+        rg.addRequest(rq);
+        return processRequestID(rg);
+    }
+
+    const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
+    {
+        Q_D(QBbgManager);
+        return *(d->m_ResultTable.value(processRequestID(rq)));
     }
 
     const QBbgAbstractResponse* const QBbgManager::processRequest(const QBbgAbstractRequest& rq)
