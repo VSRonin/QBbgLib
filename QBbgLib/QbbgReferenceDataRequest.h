@@ -28,19 +28,11 @@ namespace QBbgLib {
     \details This class can be used to query current data from Bloomberg.<br/>
     Both single values and tables can be retrieved using this request.<br/>
     This is equivalent to BDP() and BDS() bloomberg functions in excel.
-    \note For request with securities having the QBbgSecurity::Client extension, use QBbgPortfolioDataRequest instead
-    \par Usage<br/>
-    \snippet SynchronousRequest.cpp 1
+    \note For request with securities having the QBbgSecurity::Client extension, use QBbgPortfolioDataRequest instead.
     */
     class QBBG_EXPORT QBbgReferenceDataRequest : public QBbgAbstractFieldRequest
     {
         Q_GADGET
-        /*!
-        \brief The security associated with the request
-        \getter security()
-        \setter setSecurity()
-        */
-        Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
         /*!
         \brief Whether all dates and time results for this request should be in UTC format
         \getter useUTCtime()

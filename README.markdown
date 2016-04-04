@@ -16,13 +16,15 @@ SET BLPPATH=C:\\blp\\API\\APIv3\\C++API\\v3.8.18.1
 </code></pre>
 Now run
 <pre><code>
-qmake "PREFIX=&lt;InstallDirectory&gt;"
-make
+qmake "PREFIX=InstallDirectory"
+nmake
 </code></pre>
-Replacing &lt;InstallDirectory&gt; with the destination where the library will be installed and make with your build tool name (nmake for MSVC, etc.).
+Replacing InstallDirectory with the destination where the library will be installed and nmake with your build tool name (mingw-32-make for MinGW, etc.).
 
 ## Documentation
-Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it useing the included doxyfile.
+Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it using the included doxyfile config.<br/>
+The conceptual schema of how this library work is represented in the image<br/>
+![Schema](http://i278.photobucket.com/albums/kk113/V-Ronin/Schema.png)
 
 ## Example Usage
 Please refer to the example folder for code snippets that illustarte the library in action.

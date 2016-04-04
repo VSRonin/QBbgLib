@@ -34,24 +34,6 @@ namespace QBbgLib {
     {
         Q_GADGET
         /*!
-        \brief The security associated with the request
-        \getter security()
-        \setter setSecurity()
-        */
-        Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
-        /*!
-        \brief The field associated with the request
-        \getter field()
-        \setter setField()
-        */
-        Q_PROPERTY(QString field READ field WRITE setField)
-        /*!
-        \brief The overrides applied to the request
-        \getter overrides()
-        \setter setOverrides()
-        */
-        Q_PROPERTY(QBbgOverride overrides READ overrides WRITE setOverrides)
-        /*!
         \brief The portfolio reference date
         \getter referenceDay()
         \setter setReferenceDay()

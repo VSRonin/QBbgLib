@@ -45,11 +45,6 @@ namespace QBbgLib {
         \setter setOverrides()
         */
         Q_PROPERTY(QBbgOverride overrides READ overrides WRITE setOverrides)
-        /*!
-        \brief Checks if the request is valid
-        \getter isValidReq()
-        */
-        Q_PROPERTY(bool isValidReq READ isValidReq)
         Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
 	public:
         //! Destructor

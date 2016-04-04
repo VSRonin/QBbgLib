@@ -21,10 +21,10 @@
 
 #include "QBbgAbstractFieldResponse.h"
 #include "QBbgProjectGlobals.h"
-class QDate;
+#include "QBbgSecurity.h"
+#include <QDate>
 namespace QBbgLib {
     class QBbgPortfolioDataResponsePrivate;
-    class QBbgSecurity;
     /*! 
     \brief A response for portfolio information.
     \details The results will be ordered by currency then by yellow key then by security name. Cash will always appear at the end of the list.
