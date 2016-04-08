@@ -133,35 +133,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Q_DECLARE_PRIVATE(<a class="code" href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">QBbgAbstractFieldRequest</a>)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    public:</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        virtual ~<a class="code" href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">QBbgAbstractFieldRequest</a>() = 0;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        QBbgAbstractFieldRequest(<a class="code" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbd">RequestType</a> typ);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest&amp; a);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        virtual <span class="keywordtype">bool</span> operator==(const QBbgAbstractFieldRequest&amp; a) const;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        virtual QBbgAbstractFieldRequest&amp; operator=(const QBbgAbstractFieldRequest&amp; a);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        virtual const QString&amp; field() const;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        virtual <span class="keywordtype">void</span> setField(const QString&amp; val);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        virtual const <a class="code" href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgOverride</a>&amp; overrides() const;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        virtual <span class="keywordtype">void</span> setOverrides(const <a class="code" href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgOverride</a>&amp; Overr);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        Q_INVOKABLE virtual <span class="keywordtype">void</span> clearOverrides();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        virtual <span class="keywordtype">bool</span> isValidReq() const;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    protected:</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        virtual <span class="keywordtype">bool</span> sameOverrides(const QBbgAbstractFieldRequest&amp; a)const;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        friend class QBbgRequestGroupPrivate;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        friend class <a class="code" href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgRequestGroup</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    };</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif // SingleBbgRequest_h__</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        virtual <span class="keywordtype">bool</span> operator==(const QBbgAbstractFieldRequest&amp; a) const;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        virtual QBbgAbstractFieldRequest&amp; operator=(const QBbgAbstractFieldRequest&amp; a);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        virtual const QString&amp; field() const;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        virtual <span class="keywordtype">void</span> setField(const QString&amp; val);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        virtual const <a class="code" href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgOverride</a>&amp; overrides() const;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        virtual <span class="keywordtype">void</span> setOverrides(const <a class="code" href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgOverride</a>&amp; Overr);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        Q_INVOKABLE virtual <span class="keywordtype">void</span> clearOverrides();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        virtual <span class="keywordtype">bool</span> isValidReq() const;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    protected:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        virtual <span class="keywordtype">bool</span> sameOverrides(const QBbgAbstractFieldRequest&amp; a)const;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        friend class QBbgRequestGroupPrivate;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        friend class <a class="code" href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgRequestGroup</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif // SingleBbgRequest_h__</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_override_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgLib::QBbgOverride</a></div><div class="ttdoc">A set of overrides. </div><div class="ttdef"><b>Definition:</b> QBbgOverride.h:39</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_request_group_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgLib::QBbgRequestGroup</a></div><div class="ttdoc">A list of requests. </div><div class="ttdef"><b>Definition:</b> QBbgRequestGroup.h:35</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_field_request_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">QBbgLib::QBbgAbstractFieldRequest</a></div><div class="ttdoc">Request with fields and overrides. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractFieldRequest.h:33</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_request_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgLib::QBbgAbstractRequest</a></div><div class="ttdoc">Base class for all requests sent to Bloomberg. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractRequest.h:29</div></div>
-<div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_request_html_a2bb57c81884f27a4f7d5e894b6e35dbd"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbd">QBbgLib::QBbgAbstractRequest::RequestType</a></div><div class="ttdeci">RequestType</div><div class="ttdoc">Type of Request. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractRequest.h:79</div></div>
 <div class="ttc" id="namespace_q_bbg_lib_html"><div class="ttname"><a href="namespace_q_bbg_lib.html">QBbgLib</a></div><div class="ttdoc">Namespace containing all classes of the QBbgLib. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractFieldRequest.h:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 4 2016 16:50:37 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 8 2016 12:50:15 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
