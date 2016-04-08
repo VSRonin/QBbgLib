@@ -28,6 +28,7 @@ namespace QBbgLib {
         :QThread(parent)
         , m_worker(wrk)
     {
+        m_worker->setParent(this);
         createConnections();
     }
     void QBbgWorkerThread::run()

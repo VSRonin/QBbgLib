@@ -103,10 +103,6 @@ namespace QBbgLib {
         Q_ENUM(ResponseType)
         //! Destructor
         virtual ~QBbgAbstractResponse() =0;
-        //! Creates a response of the selected type
-        QBbgAbstractResponse(ResponseType typ);
-        //! Creates a copy of another response
-        QBbgAbstractResponse(const QBbgAbstractResponse& other);
         //! Copies another response
         virtual QBbgAbstractResponse& operator=(const QBbgAbstractResponse& other);
         //! The error code associated with the response
@@ -139,6 +135,7 @@ namespace QBbgLib {
         virtual ResponseType responseType()const;
     protected:
         QBbgAbstractResponsePrivate* d_ptr;
+        QBbgAbstractResponse() = delete;
         QBbgAbstractResponse(QBbgAbstractResponsePrivate* d);
         virtual void setErrorCode(BbgErrorCodes ErrCd,const QString& errMsg=QString());
         virtual void setID(qint64 val);

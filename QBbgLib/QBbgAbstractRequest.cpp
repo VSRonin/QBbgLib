@@ -22,12 +22,6 @@
 namespace QBbgLib {
 
     QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate() = default;
-    QBbgAbstractRequest::QBbgAbstractRequest(RequestType typ)
-        : d_ptr(new QBbgAbstractRequestPrivate(this,typ))
-    {}
-    QBbgAbstractRequest::QBbgAbstractRequest(const QBbgAbstractRequest& other)
-        : d_ptr(new QBbgAbstractRequestPrivate(this, *(other.d_ptr)))
-    {}
 
     QBbgAbstractRequest::QBbgAbstractRequest(QBbgAbstractRequestPrivate* d)
         : d_ptr(d)

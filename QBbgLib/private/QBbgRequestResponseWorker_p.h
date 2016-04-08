@@ -38,7 +38,7 @@ namespace QBbgLib {
         Q_OBJECT
     public:
         virtual ~QBbgRequestResponseWorker();
-        QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = nullptr);
+        QBbgRequestResponseWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent);
         virtual const QBbgAbstractResponse* result(qint64 id) const;
     public slots:
         virtual bool start() override;

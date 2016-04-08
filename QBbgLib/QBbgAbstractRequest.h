@@ -91,6 +91,7 @@ namespace QBbgLib {
         Q_DECLARE_PRIVATE(QBbgAbstractRequest)
         QBbgAbstractRequestPrivate* d_ptr;
         QBbgAbstractRequest(QBbgAbstractRequestPrivate* d);
+        QBbgAbstractRequest() = delete;
         static ServiceType serviceForRequest(RequestType a);
         static QString serviceStringForRequest(RequestType a);
         static QString serviceTypeToString(ServiceType a);
@@ -100,10 +101,6 @@ namespace QBbgLib {
     public:
         //! Destructor
         virtual ~QBbgAbstractRequest() =0;
-        //! Creates a request of type typ
-        QBbgAbstractRequest(RequestType typ);
-        //! Creates a copy of another request
-        QBbgAbstractRequest(const QBbgAbstractRequest& other);
         //! Copies another request
         virtual QBbgAbstractRequest& operator=(const QBbgAbstractRequest& other);
         //! Returns the security associated with the request

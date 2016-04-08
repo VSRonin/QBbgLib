@@ -30,7 +30,7 @@ namespace QBbgLib {
     {
         Q_OBJECT   
     public:
-        QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent = NULL);
+        QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent);
         virtual ~QBbgWorkerThread();
     private:
         QBbgAbstractWorker* m_worker;

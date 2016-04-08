@@ -35,13 +35,7 @@ namespace QBbgLib {
         m_Header = other.m_Header;
         return *this;
     }
-    QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(ResponseType typ)
-        :QBbgAbstractResponse(new QBbgAbstractResponsePrivate(this,typ))
-    {}
-
-    QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(const QBbgAbstractFieldResponse& a)
-        : QBbgAbstractResponse(new QBbgAbstractResponsePrivate(this,*(a.d_func())))
-    {}
+ 
 
     QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d)
         : QBbgAbstractResponse(d)

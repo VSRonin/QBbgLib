@@ -34,7 +34,7 @@ namespace QBbgLib {
     private:
         QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other);
     public:
-        virtual ~QBbgAbstractRequestPrivate();
+        virtual ~QBbgAbstractRequestPrivate()=0;
         QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);
         QBbgAbstractRequestPrivate(QBbgAbstractRequest* q,const QBbgAbstractRequestPrivate& other);
         virtual QBbgAbstractRequestPrivate& operator=(const QBbgAbstractRequestPrivate& other);

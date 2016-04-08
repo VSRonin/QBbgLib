@@ -34,7 +34,7 @@ namespace QBbgLib {
     {
         Q_OBJECT
     public:
-        QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent=NULL);
+        QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent);
         virtual ~QBbgAbstractWorker() = 0;
         virtual bool isAvailable() const;
         virtual void stop();

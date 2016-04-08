@@ -54,6 +54,9 @@
     <Filter Include="Private\Workers">
       <UniqueIdentifier>{0132162a-640b-4a39-9f5b-99366a4174ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Includes">
+      <UniqueIdentifier>{6500cee6-dfe0-43bd-8950-9766d0a1ddd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QBbgSecurity.cpp">
@@ -321,6 +324,24 @@
     <None Include="QBbgLib.pro" />
     <None Include="..\LICENSE">
       <Filter>Documentation</Filter>
+    </None>
+    <None Include="Includes\QBbgHistoricalData">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgLib">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgManager">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgPortfolioData">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgReferenceData">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgRequestGroup">
+      <Filter>Includes</Filter>
     </None>
   </ItemGroup>
 </Project>

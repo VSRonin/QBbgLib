@@ -101,14 +101,6 @@ namespace QBbgLib {
         return d->m_Overrides;
     }
 
-    QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(RequestType typ)
-        :QBbgAbstractRequest(new QBbgAbstractFieldRequestPrivate(this,typ))
-    {}
-
-    QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a)
-        : QBbgAbstractRequest(new QBbgAbstractFieldRequestPrivate(this, *(a.d_func())))
-    {}
-
     QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d)
         : QBbgAbstractRequest(d)
     {}

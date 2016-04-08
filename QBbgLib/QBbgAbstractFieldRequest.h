@@ -49,10 +49,6 @@ namespace QBbgLib {
 	public:
         //! Destructor
         virtual ~QBbgAbstractFieldRequest() = 0;
-        //! Creates a request of type typ
-        QBbgAbstractFieldRequest(RequestType typ);
-        //! Creates a request that is a copy of another
-		QBbgAbstractFieldRequest(const QBbgAbstractFieldRequest& a);
         //! Checks if two requests are identical
         virtual bool operator==(const QBbgAbstractFieldRequest& a) const;
         //! Copies another request
@@ -75,6 +71,7 @@ namespace QBbgLib {
 	protected:
         virtual bool sameOverrides(const QBbgAbstractFieldRequest& a)const;
         QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);
+        QBbgAbstractFieldRequest() = delete;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestGroup;
 	};

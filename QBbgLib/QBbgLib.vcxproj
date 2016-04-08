@@ -500,6 +500,12 @@
     <None Include="..\Documentation\DoxygenConfig.doxyfile" />
     <None Include="..\LICENSE" />
     <None Include="..\README.markdown" />
+    <None Include="Includes\QBbgHistoricalData" />
+    <None Include="Includes\QBbgLib" />
+    <None Include="Includes\QBbgManager" />
+    <None Include="Includes\QBbgPortfolioData" />
+    <None Include="Includes\QBbgReferenceData" />
+    <None Include="Includes\QBbgRequestGroup" />
     <None Include="QBbgLib.pri" />
     <None Include="QBbgLib.pro" />
   </ItemGroup>
@@ -566,6 +572,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4702;4127;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

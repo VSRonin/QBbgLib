@@ -27,12 +27,6 @@ namespace QBbgLib {
     {
         delete d_ptr;
     }
-    QBbgAbstractResponse::QBbgAbstractResponse(ResponseType typ)
-        :d_ptr(new QBbgAbstractResponsePrivate(this,typ))
-    {}
-    QBbgAbstractResponse::QBbgAbstractResponse(const QBbgAbstractResponse& other)
-        : d_ptr(new QBbgAbstractResponsePrivate(this, *(other.d_func())))
-    {}
     QBbgAbstractResponse::QBbgAbstractResponse(QBbgAbstractResponsePrivate* d)
         : d_ptr(d)
     {}

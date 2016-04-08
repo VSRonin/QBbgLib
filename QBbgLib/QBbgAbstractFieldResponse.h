@@ -36,10 +36,6 @@ namespace QBbgLib {
     public:
         //! Destructor
         virtual ~QBbgAbstractFieldResponse() = 0;
-        //! Creates a field response of the selected type
-        QBbgAbstractFieldResponse(ResponseType typ);
-        //! Creates a copy of another field response
-        QBbgAbstractFieldResponse(const QBbgAbstractFieldResponse& a);
         //! Copies another field response
         virtual QBbgAbstractFieldResponse& operator=(const QBbgAbstractFieldResponse& a);
         /*!
@@ -48,6 +44,7 @@ namespace QBbgLib {
         */
         virtual const QString& header() const;
     protected:
+        QBbgAbstractFieldResponse() = delete;
         QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);
         virtual void setHeader(const QString& Header = QString());
 

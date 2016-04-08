@@ -59,7 +59,7 @@ namespace QBbgLib {
             Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
         }
-        QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options);
+        QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options,this);
         newWorker->setRequest(rq);
         QBbgWorkerThread* newThread = new QBbgWorkerThread(newWorker, this);
         connect(newThread, &QBbgWorkerThread::dataRecieved, this, &QBbgManager::handleResponse);
@@ -207,7 +207,6 @@ namespace QBbgLib {
             Q_ASSERT(i.value());
             if (i.value()->isRunning()) {
                 i.value()->stop();
-                //i.value()->wait(2000);
             }
         }
     }
