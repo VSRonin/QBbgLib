@@ -57,7 +57,7 @@ namespace QBbgLib {
         const QBbgAbstractResponse* const getResultGeneric(quint32 group, qint64 id) const;
     public:
         //! Constructs a Bloomberg manager
-        QBbgManager(QObject* parent);
+        QBbgManager(QObject* parent = nullptr);
         //! Destructor
         virtual ~QBbgManager();
         /*!
