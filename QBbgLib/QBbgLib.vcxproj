@@ -185,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="private\QBbgAbstractFieldRequest_p.h" />
     <ClInclude Include="private\QBbgAbstractFieldResponse_p.h" />
+    <ClInclude Include="private\QBbgAbstractIntradayRequest_p.h" />
     <ClInclude Include="private\QBbgAbstractRequest_p.h" />
     <ClInclude Include="private\QBbgAbstractResponse_p.h" />
     <CustomBuild Include="QBbgRequestGroup.h">
@@ -485,7 +486,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DNDEBUG -DQBBG_LIB_BUILD -DQBBGLIB_LIB -DQT_CORE_LIB -DQT_DLL -DQT_NO_DEBUG -DUNICODE -DWIN32 -DWIN64 -D_WINDLL "-I$(BLPPATH)\include" "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
     </CustomBuild>
-    <ClInclude Include="QBbgAbstractIntradayRequest_p.h" />
     <ClInclude Include="QBbgProjectGlobals.h" />
     <CustomBuild Include="QbbgReferenceDataRequest.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

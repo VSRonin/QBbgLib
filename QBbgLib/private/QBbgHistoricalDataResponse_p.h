@@ -23,7 +23,7 @@
 #ifndef QBbgHistoricalDataResponse_p_h__
 #define QBbgHistoricalDataResponse_p_h__
 #include "QBbgHistoricalDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 #include "QBbgSecurity.h"
 #include <QList>
 #include <QDate>

@@ -21,7 +21,7 @@
 \*******************************************************************************/
 
 #include "QBbgAbstractIntradayRequest.h"
-#include "QBbgAbstractIntradayRequest_p.h"
+#include "Private/QBbgAbstractIntradayRequest_p.h"
 namespace QBbgLib {
     QBbgAbstractIntradayRequest::~QBbgAbstractIntradayRequest() = default;
     QBbgAbstractIntradayRequestPrivate::~QBbgAbstractIntradayRequestPrivate() = default;

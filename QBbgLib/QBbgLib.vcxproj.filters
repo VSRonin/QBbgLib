@@ -268,7 +268,7 @@
     <ClInclude Include="private\QBbgReferenceDataRequest_p.h">
       <Filter>Private</Filter>
     </ClInclude>
-    <ClInclude Include="QBbgAbstractIntradayRequest_p.h">
+    <ClInclude Include="private\QBbgAbstractIntradayRequest_p.h">
       <Filter>Private</Filter>
     </ClInclude>
   </ItemGroup>

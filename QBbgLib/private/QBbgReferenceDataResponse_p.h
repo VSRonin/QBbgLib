@@ -23,7 +23,7 @@
 #ifndef QBbgReferenceDataResponse_p_h__
 #define QBbgReferenceDataResponse_p_h__
 #include "QBbgReferenceDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 #include <QList>
 namespace QBbgLib {
     class QBbgReferenceDataResponsePrivate : public QBbgAbstractFieldResponsePrivate

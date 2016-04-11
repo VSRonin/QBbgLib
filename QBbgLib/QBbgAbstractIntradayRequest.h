@@ -23,7 +23,6 @@
 #include "QBbgAbstractFieldRequest.h"
 #include <QDateTime>
 #include <QObject>
-
 namespace QBbgLib {
     class QBbgAbstractIntradayRequestPrivate;
     class QBbgRequestGroupPrivate;
@@ -35,13 +34,19 @@ namespace QBbgLib {
         \getter endDateTime
         \setter setEndDateTime
         */
-        Q_PROPERTY(QDate endDateTime READ endDateTime WRITE setEndDateTime)
+        Q_PROPERTY(QDateTime endDateTime READ endDateTime WRITE setEndDateTime)
         /*!
         \brief The first date/time of the period to retrieve data
         \getter startDateTime
         \setter setStartDateTime
         */
-        Q_PROPERTY(QDate startDateTime READ startDateTime WRITE setStartDateTime)
+        Q_PROPERTY(QDateTime startDateTime READ startDateTime WRITE setStartDateTime)
+        /*!
+        \brief The type of event to retrieve
+        \getter eventType
+        \setter setEventType
+        */
+        Q_PROPERTY(QDateTime eventType READ eventType WRITE setEventType)
         Q_DECLARE_PRIVATE(QBbgAbstractIntradayRequest)
     public:
         //! Type of event to capture
@@ -84,7 +89,4 @@ namespace QBbgLib {
         friend class QBbgRequestGroupPrivate;
     };
 }
-Q_DECLARE_OPERATORS_FOR_FLAGS(QBbgLib::QBbgAbstractIntradayRequest::EventTypes);
-Q_DECLARE_METATYPE(QBbgLib::QBbgAbstractIntradayRequest);
-
 #endif // QBbgIntradayTickRequest_h__

@@ -24,7 +24,7 @@
 #define QBbgAbstractFieldRequest_p_h__
 
 #include "QBbgAbstractFieldRequest.h"
-#include "QBbgAbstractRequest_p.h"
+#include "private/QBbgAbstractRequest_p.h"
 #include "QBbgOverride.h"
 namespace QBbgLib {
     class QBbgAbstractFieldRequestPrivate : public QBbgAbstractRequestPrivate

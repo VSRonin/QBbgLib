@@ -23,7 +23,7 @@
 #ifndef QBbgPortfolioDataRequest_p_h__
 #define QBbgPortfolioDataRequest_p_h__
 #include "QbbgPortfolioDataRequest.h"
-#include "QBbgAbstractFieldRequest_p.h"
+#include "private/QBbgAbstractFieldRequest_p.h"
 namespace QBbgLib {
     class QBbgPortfolioDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
     {

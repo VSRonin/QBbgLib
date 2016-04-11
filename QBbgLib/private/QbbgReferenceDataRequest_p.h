@@ -23,7 +23,7 @@
 #ifndef QbbgReferenceDataRequest_p_h__
 #define QbbgReferenceDataRequest_p_h__
 #include "QBbgReferenceDataRequest.h"
-#include "QBbgAbstractFieldRequest_p.h"
+#include "private/QBbgAbstractFieldRequest_p.h"
 namespace QBbgLib {
     class QBbgReferenceDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
     {
