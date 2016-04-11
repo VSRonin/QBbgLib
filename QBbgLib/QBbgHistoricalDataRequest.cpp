@@ -304,6 +304,9 @@ namespace QBbgLib {
         if (val.extension() != QBbgSecurity::Client) {
             QBbgAbstractFieldRequest::setSecurity(val);
         }
+        else {
+            QBbgAbstractRequest::setSecurity(QBbgSecurity());
+        }
     }
 
     bool QBbgHistoricalDataRequest::isValidReq() const

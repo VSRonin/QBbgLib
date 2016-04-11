@@ -31,7 +31,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
-        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other);
+        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other)=delete;
     public:
         virtual ~QBbgAbstractFieldResponsePrivate()=0;
         QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);

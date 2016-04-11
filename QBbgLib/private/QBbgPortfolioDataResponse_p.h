@@ -32,7 +32,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgPortfolioDataResponse)
-        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other);
+        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other)=delete;
     public:
         virtual ~QBbgPortfolioDataResponsePrivate();
         QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other);

@@ -12,35 +12,36 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.              *
 *                                                                               *
 \*******************************************************************************/
+
 
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
-#ifndef QBbgAbstractFieldRequest_p_h__
-#define QBbgAbstractFieldRequest_p_h__
 
-#include "QBbgAbstractFieldRequest.h"
-#include "QBbgAbstractRequest_p.h"
-#include "QBbgOverride.h"
+#ifndef QBbgAbstractIntradayRequest_p_h__
+#define QBbgAbstractIntradayRequest_p_h__
+
+#include "QBbgAbstractIntradayRequest.h"
+#include "Private/QBbgAbstractRequest_p.h"
+#include <QDateTime>
 namespace QBbgLib {
-    class QBbgAbstractFieldRequestPrivate : public QBbgAbstractRequestPrivate
+    class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractRequestPrivate
     {
-        Q_DECLARE_PUBLIC(QBbgAbstractFieldRequest)
-    private:
-        QBbgAbstractFieldRequestPrivate(const QBbgAbstractFieldRequestPrivate& a)=delete;
+        Q_DECLARE_PUBLIC(QBbgAbstractIntradayRequest)
     public:
-        virtual ~QBbgAbstractFieldRequestPrivate()=0;
-        QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, const QBbgAbstractFieldRequestPrivate& a);
-        QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, QBbgAbstractRequest::RequestType typ);
-        QBbgAbstractFieldRequestPrivate& operator=(const QBbgAbstractFieldRequestPrivate& a);
-        bool operator==(const QBbgAbstractFieldRequestPrivate& a) const;
-        QString m_Field;
-        QBbgOverride m_Overrides;
-        bool SameOverrides(const QBbgAbstractFieldRequestPrivate& a)const;
+        virtual ~QBbgAbstractIntradayRequestPrivate() = 0;
+        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, const QBbgAbstractIntradayRequestPrivate& a);
+        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, QBbgAbstractRequest::RequestType typ);
+        QBbgAbstractIntradayRequestPrivate& operator=(const QBbgAbstractIntradayRequestPrivate& a);
+        QDateTime m_startDate;
+        QDateTime m_endDate;
+        QBbgAbstractIntradayRequest::EventType m_eventType;
+    private:
+        QBbgAbstractIntradayRequestPrivate(const QBbgAbstractIntradayRequestPrivate& other) = delete;
     };
 }
-#endif // QBbgAbstractFieldRequest_p_h__
+#endif // QBbgAbstractIntradayRequest_p_h__

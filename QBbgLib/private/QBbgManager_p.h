@@ -32,7 +32,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgManager)
-        QBbgManagerPrivate(const QBbgManagerPrivate&);
+        QBbgManagerPrivate(const QBbgManagerPrivate&)=delete;
     public:
         QBbgManagerPrivate(QBbgManager* qp);
         virtual ~QBbgManagerPrivate();

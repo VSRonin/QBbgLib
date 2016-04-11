@@ -29,7 +29,7 @@ namespace QBbgLib {
     class QBbgOverridePrivate
     {
         Q_DECLARE_PUBLIC(QBbgOverride)
-        QBbgOverridePrivate(const QBbgOverridePrivate& other);
+        QBbgOverridePrivate(const QBbgOverridePrivate& other)=delete;
     public:
         virtual ~QBbgOverridePrivate();
         QBbgOverridePrivate(QBbgOverride* q);

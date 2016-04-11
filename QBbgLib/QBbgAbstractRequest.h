@@ -55,7 +55,7 @@ namespace QBbgLib {
         enum : qint32
         {
             FirstFielded=0x10
-            , FirstRealTime = 0x20
+            , FirstIntraday = 0x20
         };
         enum class ServiceType
         {
@@ -83,7 +83,7 @@ namespace QBbgLib {
             , HistoricalData = FirstFielded /*!< Request for historical data */
             , ReferenceData /*!< Request for static data */
             , PortfolioData /*!< Request for portfolio data */
-            , IntraDayTick = FirstRealTime /*!< Currently Unavailable */
+            , IntraDayTick = FirstIntraday /*!< Currently Unavailable */
             , IntraDayBar /*!< Currently Unavailable */
         };
         Q_ENUM(RequestType)

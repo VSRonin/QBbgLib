@@ -24,20 +24,20 @@
 #define QBbgHistoricalDataRequest_p_h__
 
 #include "QBbgHistoricalDataRequest.h"
-#include "QBbgAbstractFieldRequest_p.h"
+#include "Private/QBbgAbstractFieldRequest_p.h"
 #include <QDate>
 namespace QBbgLib {
     class QBbgHistoricalDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
     {
         Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
+    private:
+        QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate& other);
     public:
         virtual ~QBbgHistoricalDataRequestPrivate();
         QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q);
         QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other);
         virtual QBbgHistoricalDataRequestPrivate& operator=(const QBbgHistoricalDataRequestPrivate& other);
         virtual bool operator==(const QBbgHistoricalDataRequestPrivate& a) const;
-    private:
-        QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate& other);
         QDate m_startDate;
         QDate m_endDate;
         QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
