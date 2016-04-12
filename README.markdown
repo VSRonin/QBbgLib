@@ -33,20 +33,20 @@ Please refer to the example folder for code snippets that illustarte the library
 This library is still under development. This is a list of what has been done, what needs to be done and what could be done.
 
 * Implemented Functionalities
-    * Reference Data ( BDP() and BDS() in excel ) [100% ready](http://progressed.io/bar/100?title=done) 
-    * Historical Data ( BDH() in excel ) [100% ready](http://progressed.io/bar/100?title=done) 
-    * Portfolio Data ( BDS() in excel using a Client security ) [100% ready](http://progressed.io/bar/100?title=done) 
-    * Intraday Tick Data ( BDH() in excel using IntrRw=true ) [100% ready](http://progressed.io/bar/100?title=done) 
+    * Reference Data ( BDP() and BDS() in excel ) ![100% ready](http://progressed.io/bar/100?title=done) 
+    * Historical Data ( BDH() in excel ) ![100% ready](http://progressed.io/bar/100?title=done) 
+    * Portfolio Data ( BDS() in excel using a Client security ) ![100% ready](http://progressed.io/bar/100?title=done) 
+    * Intraday Tick Data ( BDH() in excel using IntrRw=true ) ![100% ready](http://progressed.io/bar/100?title=done) 
 * Missing Functionalities
-    * Intraday Bar Data ( BDH() in excel specifying BarType ) [50% ready](http://progressed.io/bar/50) 
-    * EQS ( BEQS() in excel ) [10% ready](http://progressed.io/bar/10)
-    * Field Info ( BFieldInfo() in excel ) [0% ready](http://progressed.io/bar/0)
-    * Field Search ( FLDS on the terminal ) [0% ready](http://progressed.io/bar/0)
-    * Categorized Field Search [0% ready](http://progressed.io/bar/0)
-    * Real Time Data [0% ready](http://progressed.io/bar/0)
-    * API Authorisation [0% ready](http://progressed.io/bar/0)
+    * Intraday Bar Data ( BDH() in excel specifying BarType ) ![50% ready](http://progressed.io/bar/50) 
+    * EQS ( BEQS() in excel ) ![10% ready](http://progressed.io/bar/10)
+    * Field Info ( BFieldInfo() in excel ) ![0% ready](http://progressed.io/bar/0)
+    * Field Search ( FLDS on the terminal ) ![0% ready](http://progressed.io/bar/0)
+    * Categorized Field Search ![0% ready](http://progressed.io/bar/0)
+    * Real Time Data ![0% ready](http://progressed.io/bar/0)
+    * API Authorisation ![0% ready](http://progressed.io/bar/0)
 * Missing and Undocumented Functionalities ( these are available on the API but there is no mention of them in the docs )
-    * Download forward curves [0% ready](http://progressed.io/bar/0)
+    * Download forward curves ![0% ready](http://progressed.io/bar/0)
 * Whishlist
     * Make the library depend only on STL and possibly [Boost](http://www.boost.org/) and make Qt only optional
     * Make library usable from [QML](http://doc.qt.io/qt-5/qtqml-index.html)
