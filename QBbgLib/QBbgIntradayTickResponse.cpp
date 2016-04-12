@@ -74,6 +74,7 @@ namespace QBbgLib {
     {
         QBbgAbstractIntradayResponse::addValue(dt, val);
         Q_D(QBbgIntradayTickResponse);
+        d->m_size.append(siz);
         d->m_conditionCode.append(cC);
         d->m_exchangeCode.append(eC);
         d->m_micCode.append(mC);
@@ -92,6 +93,7 @@ namespace QBbgLib {
         d->m_brokerBuyCode.clear();
         d->m_brokerSellCode.clear();
         d->m_rpsCode.clear();
+        d->m_size.clear();
     }
 
     void QBbgIntradayTickResponse::removeEmptyLists()
@@ -126,7 +128,7 @@ namespace QBbgLib {
     double QBbgIntradayTickResponse::tickSize(int period) const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return d->m_size.value(period, -1.0);
+        return d->m_size.value(period, 0.0);
     }
 
     QString QBbgIntradayTickResponse::conditionCode(int period) const
@@ -138,7 +140,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasConditionCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_conditionCode.constBegin(), d->m_conditionCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_conditionCode.constBegin(), d->m_conditionCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::exchangeCode(int period) const
@@ -150,7 +152,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasExchangeCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_exchangeCode.constBegin(), d->m_exchangeCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_exchangeCode.constBegin(), d->m_exchangeCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::micCode(int period) const
@@ -162,7 +164,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasMicCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_micCode.constBegin(), d->m_micCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_micCode.constBegin(), d->m_micCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::brokerBuyCode(int period) const
@@ -174,7 +176,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasBrokerBuyCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_brokerBuyCode.constBegin(), d->m_brokerBuyCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_brokerBuyCode.constBegin(), d->m_brokerBuyCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::brokerSellCode(int period) const
@@ -186,7 +188,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasBrokerSellCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_brokerSellCode.constBegin(), d->m_brokerSellCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_brokerSellCode.constBegin(), d->m_brokerSellCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::rpsCode(int period) const
@@ -198,7 +200,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasRpsCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_rpsCode.constBegin(), d->m_rpsCode.constEnd(), [](const QString& val) {!val.isEmpty(); });
+        return std::any_of(d->m_rpsCode.constBegin(), d->m_rpsCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
     }
 
     void QBbgIntradayTickResponse::setType(const QBbgAbstractIntradayRequest::EventType& val)

@@ -79,18 +79,6 @@ namespace QBbgLib {
         return d->m_time.value(period);
     }
 
-    int QBbgAbstractIntradayResponse::findDate(const QDateTime& val) const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_time.indexOf(val);
-    }
-
-    int QBbgAbstractIntradayResponse::findValue(const double& val) const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_value.indexOf(val);
-    }
-
     int QBbgAbstractIntradayResponse::size() const
     {
         Q_D(const QBbgAbstractIntradayResponse);
