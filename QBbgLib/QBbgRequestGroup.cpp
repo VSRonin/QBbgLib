@@ -22,6 +22,7 @@
 #include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
+#include "QBbgIntradayTickRequest.h"
 //#define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
 
 namespace QBbgLib {
@@ -54,10 +55,12 @@ namespace QBbgLib {
             return new QBbgPortfolioDataRequest(static_cast<const QBbgPortfolioDataRequest&>(a));
         case QBbgAbstractRequest::RequestType::HistoricalData:
             return new QBbgHistoricalDataRequest(static_cast<const QBbgHistoricalDataRequest&>(a));
+        case QBbgAbstractRequest::RequestType::IntraDayTick:
+            return new QBbgIntradayTickRequest(static_cast<const QBbgIntradayTickRequest&>(a));
             //TODO add other types
         default:
             Q_UNREACHABLE(); //Unhandled request type
-            return NULL;
+            return nullptr;
         }
     }
     qint32 QBbgRequestGroup::size() const
@@ -214,7 +217,7 @@ namespace QBbgLib {
             bool tempMerge;
             for (QHash<qint64, QList<qint64>* >::iterator MainIter = Result.begin(); MainIter != Result.end(); ++MainIter) {
                 const QBbgAbstractRequest::RequestType mainType= request(MainIter.value()->first())->requestType();
-                for (QHash<qint64, QList<qint64>* >::iterator SecondIter = MainIter + 1; SecondIter != Result.end() && mainType == QBbgAbstractRequest::RequestType::ReferenceData;) {
+                for (QHash<qint64, QList<qint64>* >::iterator SecondIter = MainIter + 1; SecondIter != Result.end();) {
                     tempMerge = mainType == request(SecondIter.value()->first())->requestType();
                     if (tempMerge)
                         // SameRequest is a slow method, call it only if necessary
@@ -254,6 +257,9 @@ namespace QBbgLib {
     bool QBbgRequestGroupPrivate::SameRequest(const QList<qint64>& a, const QList<qint64>& b) const
     {
         if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstFielded) {
+            if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
+                return false; // Can't send multiple securities with hist data
+            }
             QSet<QString> FiledsA;
             QSet<QString> FiledsB;
             if (a.empty()) return false;
@@ -274,12 +280,40 @@ namespace QBbgLib {
             }
             if (FiledsA != FiledsB)
                 return false;
-            if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
-                return false; // Can't send multiple securities with hist data
-            }
             return true;
         }
-        // #TODO do realtime
+        else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstIntraday) {
+            QSet<QBbgAbstractIntradayRequest::EventType> EventsA;
+            QSet<QBbgAbstractIntradayRequest::EventType> EventsB;
+            if (a.empty()) return false;
+            if (b.empty()) return false;
+            Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(a.first())));
+            Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(b.first())));
+            if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::IntraDayTick){
+                Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(request(a.first())));
+                Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(request(b.first())));
+                if(!
+                    static_cast<const QBbgIntradayTickRequest*>(request(a.first()))->sameOptions(
+                        *static_cast<const QBbgIntradayTickRequest*>(request(b.first()))
+                    )
+                )
+                return false; 
+            }
+            else{
+                Q_UNREACHABLE(); // only IntraDayTick is available
+            }
+            for (QList<qint64>::const_iterator i = a.constBegin(); i != a.constEnd(); ++i) {
+                Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(*i)));
+                EventsA.insert(static_cast<const QBbgAbstractIntradayRequest*>(request(*i))->eventType());
+            }
+            for (QList<qint64>::const_iterator i = b.constBegin(); i != b.constEnd(); ++i) {
+                Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(*i)));
+                EventsB.insert(static_cast<const QBbgAbstractIntradayRequest*>(request(*i))->eventType());
+            }
+            if (EventsA != EventsB)
+                return false;
+            return true;
+        }
         Q_UNREACHABLE(); //Unhandled request type
         return false;
         
@@ -296,13 +330,22 @@ namespace QBbgLib {
         case QBbgAbstractRequest::RequestType::PortfolioData:
             Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(a));
             Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(b));
-            if (!static_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*static_cast<const QBbgAbstractFieldRequest*>(b))) return false;
+            if (!static_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*static_cast<const QBbgAbstractFieldRequest*>(b))) 
+                return false;
             break;
         case QBbgAbstractRequest::RequestType::HistoricalData:
             Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(a));
             Q_ASSERT(dynamic_cast<const QBbgHistoricalDataRequest*>(b));
-            if (!static_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*static_cast<const QBbgAbstractFieldRequest*>(b))) return false;
-            if (!static_cast<const QBbgHistoricalDataRequest*>(a)->equalHistoricalFields(*static_cast<const QBbgHistoricalDataRequest*>(b))) return false;
+            if (!static_cast<const QBbgAbstractFieldRequest*>(a)->sameOverrides(*static_cast<const QBbgAbstractFieldRequest*>(b))) 
+                return false;
+            if (!static_cast<const QBbgHistoricalDataRequest*>(a)->equalHistoricalFields(*static_cast<const QBbgHistoricalDataRequest*>(b))) 
+                return false;
+            break;
+        case QBbgAbstractRequest::RequestType::IntraDayTick:
+            Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(a));
+            Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(b));
+            if (!static_cast<const QBbgIntradayTickRequest*>(a)->sameOptions(*static_cast<const QBbgIntradayTickRequest*>(b)))
+                return false;
             break;
         default:
             Q_UNREACHABLE(); //Unhandled request type

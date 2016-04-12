@@ -84,13 +84,23 @@ namespace QBbgLib {
     QString QBbgAbstractRequest::requestTypeToString(RequestType a)
     {
         switch (a) {
-        case RequestType::Beqs: return "BeqsRequest";
-        case RequestType::HistoricalData: return "HistoricalDataRequest";
-        case RequestType::ReferenceData: return "ReferenceDataRequest";
-        case RequestType::PortfolioData: return "PortfolioDataRequest";
-        case RequestType::IntraDayTick: return "IntraDayTickRequest";
-        case RequestType::IntraDayBar: return "IntraDayBarRequest";
-        default: return QString();
+        case RequestType::Beqs: 
+            return QStringLiteral("BeqsRequest");
+        case RequestType::HistoricalData: 
+            return QStringLiteral("HistoricalDataRequest");
+        case RequestType::ReferenceData: 
+            return QStringLiteral("ReferenceDataRequest");
+        case RequestType::PortfolioData: 
+            return QStringLiteral("PortfolioDataRequest");
+        case RequestType::IntraDayTick: 
+            return QStringLiteral("IntraDayTickRequest");
+        case RequestType::IntraDayBar:
+            return QStringLiteral("IntraDayBarRequest");
+        case RequestType::Invalid:
+            return QString();
+        default: 
+            Q_UNREACHABLE();
+            return QString();
         }
     }
     QBbgAbstractRequest::RequestType QBbgAbstractRequest::stringToRequestType(QString a)
@@ -114,6 +124,16 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractRequest);
         return d->m_RqType;
     }
+
+    bool QBbgAbstractRequest::operator==(const QBbgAbstractRequest& other) const
+    {
+        Q_D(const QBbgAbstractRequest);
+        return 
+            d->m_RqType == other.d_func()->m_RqType
+            && d->m_Security == other.d_func()->m_Security
+            ;
+    }
+
     QString QBbgAbstractRequest::serviceStringForRequest(RequestType a)
     {
         return serviceTypeToString(serviceForRequest(a));
@@ -124,6 +144,8 @@ namespace QBbgLib {
         case RequestType::ReferenceData:
         case RequestType::PortfolioData:
         case RequestType::HistoricalData:
+        case RequestType::IntraDayTick:
+        case RequestType::IntraDayBar:
             return ServiceType::refdata;
         default: 
             Q_UNREACHABLE(); //Unhandled service type

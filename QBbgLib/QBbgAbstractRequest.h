@@ -128,6 +128,8 @@ namespace QBbgLib {
         virtual bool isValidReq() const;
         //! Returns the type of request
         virtual RequestType requestType() const;
+        //! Checks if two requests are identical
+        virtual bool operator==(const QBbgAbstractRequest& other) const;
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;

@@ -35,7 +35,6 @@ namespace QBbgLib {
         virtual QBbgPortfolioDataRequestPrivate& operator=(const QBbgPortfolioDataRequestPrivate& other);
     private:
         QBbgPortfolioDataRequestPrivate(const QBbgPortfolioDataRequestPrivate& other) = delete;
-        
     };
 
     

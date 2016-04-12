@@ -16,8 +16,8 @@
 *                                                                               *
 \*******************************************************************************/
 
-#ifndef QBbgIntradayTickRequest_h__
-#define QBbgIntradayTickRequest_h__
+#ifndef QBbgAbstractIntradayRequest_h__
+#define QBbgAbstractIntradayRequest_h__
 
 #include "QBbgProjectGlobals.h"
 #include "QBbgAbstractFieldRequest.h"
@@ -25,7 +25,7 @@
 #include <QObject>
 namespace QBbgLib {
     class QBbgAbstractIntradayRequestPrivate;
-    class QBbgRequestGroupPrivate;
+    //! Base class for intraday requests
     class QBBG_EXPORT QBbgAbstractIntradayRequest : public QBbgAbstractRequest
     {
         Q_GADGET
@@ -46,11 +46,11 @@ namespace QBbgLib {
         \getter eventType
         \setter setEventType
         */
-        Q_PROPERTY(QDateTime eventType READ eventType WRITE setEventType)
+        Q_PROPERTY(EventType eventType READ eventType WRITE setEventType)
         Q_DECLARE_PRIVATE(QBbgAbstractIntradayRequest)
     public:
         //! Type of event to capture
-        enum class EventType{
+        enum class EventType : qint8{
             Invalid /*!< Invalid Request Event Type*/
             , TRADE /*!< Corresponds to LAST_PRICE */
             , BID /*!< Depending on the exchange bid ticks will be returned as BID, BID_BEST or BEST_BID. */
@@ -63,6 +63,8 @@ namespace QBbgLib {
             , BEST_ASK /*!< Depending on the exchange ask ticks will be returned as ASK, ASK_BEST or BEST_ASK. */
         };
         Q_ENUM(EventType)
+        //! Converts EventType to its string representation
+        static QString EventTypeString(const EventType& val);
         //! Destructor
         virtual ~QBbgAbstractIntradayRequest() =0;
         //! Copies another tick data request
@@ -83,10 +85,17 @@ namespace QBbgLib {
         virtual EventType eventType() const;
         //! Set the type of event to retrieve
         virtual void setEventType(EventType val);
+        //! Checks if two requests are identical
+        virtual bool operator==(const QBbgAbstractIntradayRequest& other) const;
     protected:
         QBbgAbstractIntradayRequest() = delete;
         QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate* d);
-        friend class QBbgRequestGroupPrivate;
     };
 }
-#endif // QBbgIntradayTickRequest_h__
+/*!
+\brief Allows EventType to be used as a key of a QHash
+\relates QBbgLib::QBbgAbstractIntradayRequest
+*/
+QBBG_EXPORT uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed);
+#endif // QBbgAbstractIntradayRequest_h__
+

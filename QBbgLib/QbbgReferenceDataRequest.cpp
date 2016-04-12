@@ -53,14 +53,13 @@ namespace QBbgLib {
         d->operator=(*(a.d_func()));
         return *this;
     }
-    bool QBbgReferenceDataRequestPrivate::operator==(const QBbgReferenceDataRequestPrivate& a) const
-    {
-        return m_UseUTCTime == a.m_UseUTCTime && QBbgAbstractFieldRequestPrivate::operator==(a);
-    }
     bool QBbgReferenceDataRequest::operator==(const QBbgReferenceDataRequest& a) const
     {
         Q_D(const QBbgReferenceDataRequest);
-        return d->operator==(*(a.d_func()));
+        return 
+            d->m_UseUTCTime == a.d_func()->m_UseUTCTime 
+            && QBbgAbstractFieldRequest::operator==(a)
+            ;
     }
     void QBbgReferenceDataRequest::setUseUTCtime(bool a)
     {

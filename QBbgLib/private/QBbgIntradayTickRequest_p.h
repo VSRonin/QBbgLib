@@ -20,43 +20,28 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
-#ifndef QBbgHistoricalDataRequest_p_h__
-#define QBbgHistoricalDataRequest_p_h__
+#ifndef QBbgIntradayTickRequest_p_h__
+#define QBbgIntradayTickRequest_p_h__
 
-#include "QBbgHistoricalDataRequest.h"
-#include "Private/QBbgAbstractFieldRequest_p.h"
-#include <QDate>
+#include "QBbgIntradayTickRequest.h"
+#include "private/QBbgAbstractIntradayRequest_p.h"
 namespace QBbgLib {
-    class QBbgHistoricalDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
+    class QBbgIntradayTickRequestPrivate : public QBbgAbstractIntradayRequestPrivate
     {
-        Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
-    private:
-        QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate& other);
+        Q_DECLARE_PUBLIC(QBbgIntradayTickRequest)
     public:
-        virtual ~QBbgHistoricalDataRequestPrivate();
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q);
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other);
-        virtual QBbgHistoricalDataRequestPrivate& operator=(const QBbgHistoricalDataRequestPrivate& other);
-        QDate m_startDate;
-        QDate m_endDate;
-        QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
-        QBbgHistoricalDataRequest::PeriodSelection m_periodicitySelection;
-        char m_currency[3 + 1];
-        bool m_useClosePrice;
-        bool m_usePriceForPricing;
-        QBbgHistoricalDataRequest::NonTradingDayFill m_nonTradingDayFill;
-        bool m_fillWithNull;
-        qint32 m_maxDataPoints;
-        bool m_useRelativeDate;
-        bool m_adjustmentNormal;
-        bool m_adjustmentAbnormal;
-        bool m_adjustmentSplit;
-        bool m_adjustmentFollowDPDF;
-        char m_calendarCode[2 + 1];
+        virtual ~QBbgIntradayTickRequestPrivate();
+        QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q);
+        QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q, const QBbgIntradayTickRequestPrivate& other);
+        virtual QBbgIntradayTickRequestPrivate& operator=(const QBbgIntradayTickRequestPrivate& other);
+        bool m_includeConditionCodes;
+        bool m_includeNonPlottable;
+        bool m_includeExchangeCodes;
+        bool m_includeBrokerCodes;
+        bool m_includeRpsCodes;
+        bool m_includeBicMicCodes;
+    private:
+        QBbgIntradayTickRequestPrivate(const QBbgIntradayTickRequestPrivate& other) = delete;
     };
-
-    
-
 }
-#endif // QBbgHistoricalDataRequest_p_h__
-
+#endif // QBbgIntradayTickRequest_p_h__

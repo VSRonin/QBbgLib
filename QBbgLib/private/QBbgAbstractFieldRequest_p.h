@@ -37,7 +37,6 @@ namespace QBbgLib {
         QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, const QBbgAbstractFieldRequestPrivate& a);
         QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest* q, QBbgAbstractRequest::RequestType typ);
         QBbgAbstractFieldRequestPrivate& operator=(const QBbgAbstractFieldRequestPrivate& a);
-        bool operator==(const QBbgAbstractFieldRequestPrivate& a) const;
         QString m_Field;
         QBbgOverride m_Overrides;
         bool SameOverrides(const QBbgAbstractFieldRequestPrivate& a)const;

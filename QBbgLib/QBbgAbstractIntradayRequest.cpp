@@ -75,6 +75,17 @@ namespace QBbgLib {
         d->m_eventType = val;
     }
 
+    bool QBbgAbstractIntradayRequest::operator==(const QBbgAbstractIntradayRequest& other) const
+    {
+        Q_D(const QBbgAbstractIntradayRequest);
+        return
+            QBbgAbstractRequest::operator==(other)
+            && d->m_eventType == other.d_func()->m_eventType
+            && d->m_startDate == other.d_func()->m_startDate
+            && d->m_endDate == other.d_func()->m_endDate
+            ;
+    }
+
     const QDateTime& QBbgAbstractIntradayRequest::endDateTime() const
     {
         Q_D(const QBbgAbstractIntradayRequest);
@@ -108,4 +119,38 @@ namespace QBbgLib {
             QBbgAbstractRequest::setSecurity(QBbgSecurity());
         }
     }
+
+    QString QBbgAbstractIntradayRequest::EventTypeString(const EventType& val)
+    {
+        switch (val) {
+        case EventType::Invalid:
+            return QString();
+        case EventType::TRADE:
+            return QStringLiteral("TRADE");
+        case EventType::BID:
+            return QStringLiteral("BID");
+        case EventType::ASK:
+            return QStringLiteral("ASK");
+        case EventType::BID_BEST:
+            return QStringLiteral("BID_BEST");
+        case EventType::ASK_BEST:
+            return QStringLiteral("ASK_BEST");
+        case EventType::MID_PRICE:
+            return QStringLiteral("MID_PRICE");
+        case EventType::AT_TRADE:
+            return QStringLiteral("AT_TRADE");
+        case EventType::BEST_BID:
+            return QStringLiteral("BEST_BID");
+        case EventType::BEST_ASK:
+            return QStringLiteral("BEST_ASK");
+        default:
+            Q_UNREACHABLE();
+        }
+    }
+}
+
+uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed)
+{
+    static_assert(std::is_same<qint8, typename std::underlying_type<QBbgLib::QBbgAbstractIntradayRequest::EventType>::type>::value, "qint8 EventType is not base for");
+    return qHash(static_cast<qint8>(key), seed);
 }

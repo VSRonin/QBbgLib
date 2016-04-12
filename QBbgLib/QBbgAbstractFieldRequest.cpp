@@ -74,21 +74,15 @@ namespace QBbgLib {
             && (static_cast<qint32>(d->m_RqType) & FirstFielded)
             ;
     }
-
-    bool QBbgAbstractFieldRequestPrivate::operator==(const QBbgAbstractFieldRequestPrivate& a) const
-    {
-        if (
-            (m_Security != a.m_Security)
-            || (m_Field != a.m_Field)
-            || (m_RqType != a.m_RqType)
-            )
-            return false;
-        return m_Overrides == a.m_Overrides;
-    }
     bool QBbgAbstractFieldRequest::operator==(const QBbgAbstractFieldRequest& a) const
     {
         Q_D(const QBbgAbstractFieldRequest);
-        return d->operator==(*(a.d_func()));
+        if (
+            !QBbgAbstractRequest::operator==(a)
+            || (d->m_Field != a.d_func()->m_Field)
+            )
+            return false;
+        return d->m_Overrides == a.d_func()->m_Overrides;
     }
     const QString& QBbgAbstractFieldRequest::field() const
     {

@@ -33,7 +33,6 @@ namespace QBbgLib {
         QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q);
         QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q, const QBbgReferenceDataRequestPrivate& other);
         virtual QBbgReferenceDataRequestPrivate& operator=(const QBbgReferenceDataRequestPrivate& other);
-        virtual bool operator==(const QBbgReferenceDataRequestPrivate& a) const;
     private:
         QBbgReferenceDataRequestPrivate(const QBbgReferenceDataRequestPrivate& other) = delete;
         bool m_UseUTCTime;
