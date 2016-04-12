@@ -19,24 +19,24 @@
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
-#ifndef QBbgAbstractFieldResponse_p_h__
-#define QBbgAbstractFieldResponse_p_h__
 
-#include "QBbgAbstractFieldResponse.h"
+#include "QBbgAbstractIntradayResponse.h"
 #include "private/QBbgAbstractResponse_p.h"
-#include <QString>
+#include <QDateTime>
+#include <QVariant>
+#include <QList>
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate : public QBbgAbstractResponsePrivate
+    class QBbgAbstractIntradayResponsePrivate : public QBbgAbstractResponsePrivate
     {
     private:
-        Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
-        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other)=delete;
+        Q_DECLARE_PUBLIC(QBbgAbstractIntradayResponse)
+        QBbgAbstractIntradayResponsePrivate(const QBbgAbstractIntradayResponsePrivate& other) = delete;
     public:
-        virtual ~QBbgAbstractFieldResponsePrivate()=0;
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other);
-        virtual QBbgAbstractFieldResponsePrivate& operator=(const QBbgAbstractFieldResponsePrivate& other);
-        QString m_Header;
+        virtual ~QBbgAbstractIntradayResponsePrivate() = 0;
+        QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, QBbgAbstractResponse::ResponseType typ);
+        QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, const QBbgAbstractIntradayResponsePrivate& other);
+        virtual QBbgAbstractIntradayResponsePrivate& operator=(const QBbgAbstractIntradayResponsePrivate& other);
+        QList<QDateTime> m_time;
+        QList<QVariant> m_value;
     };
 }
-#endif // QBbgAbstractFieldResponse_p_h__

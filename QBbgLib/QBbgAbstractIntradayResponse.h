@@ -16,27 +16,35 @@
 *                                                                               *
 \*******************************************************************************/
 
-/*******************************************************************************\
-* This file does not form part of the public API                                *
-\*******************************************************************************/
-#ifndef QBbgAbstractFieldResponse_p_h__
-#define QBbgAbstractFieldResponse_p_h__
+#ifndef QBbgAbstractIntradayResponse_h__
+#define QBbgAbstractIntradayResponse_h__
 
-#include "QBbgAbstractFieldResponse.h"
-#include "private/QBbgAbstractResponse_p.h"
-#include <QString>
+#include "QBbgAbstractResponse.h"
+#include <QVariant>
+#include <QDateTime>
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate : public QBbgAbstractResponsePrivate
+    class QBbgAbstractIntradayResponsePrivate;
+    class QBbgRequestResponseWorker;
+    //! Base class for Bloomberg Responses based on intraday requests
+    class QBBG_EXPORT QBbgAbstractIntradayResponse : public QBbgAbstractResponse
     {
-    private:
-        Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
-        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other)=delete;
+        Q_GADGET
+        Q_DECLARE_PRIVATE(QBbgAbstractIntradayResponse)
     public:
-        virtual ~QBbgAbstractFieldResponsePrivate()=0;
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other);
-        virtual QBbgAbstractFieldResponsePrivate& operator=(const QBbgAbstractFieldResponsePrivate& other);
-        QString m_Header;
+        //! Destructor
+        virtual ~QBbgAbstractIntradayResponse() = 0;
+        //! Copies another intraday response
+        virtual QBbgAbstractIntradayResponse& operator=(const QBbgAbstractIntradayResponse& a);
+        Q_INVOKABLE virtual QVariant value(int period) const;
+        Q_INVOKABLE virtual QDateTime dateTime(int period) const;
+        Q_INVOKABLE virtual int findDate(const QDateTime& val) const;
+        Q_INVOKABLE virtual int findValue(const QVariant& val) const;
+    protected:
+        virtual void addValue(const QDateTime& dt, const QVariant& val);
+        virtual void clear();
+        QBbgAbstractIntradayResponse() = delete;
+        QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d);
+        friend class QBbgRequestResponseWorker;
     };
 }
-#endif // QBbgAbstractFieldResponse_p_h__
+#endif // QBbgAbstractIntradayResponse_h__

@@ -283,36 +283,7 @@ namespace QBbgLib {
             return true;
         }
         else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstIntraday) {
-            QSet<QBbgAbstractIntradayRequest::EventType> EventsA;
-            QSet<QBbgAbstractIntradayRequest::EventType> EventsB;
-            if (a.empty()) return false;
-            if (b.empty()) return false;
-            Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(a.first())));
-            Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(b.first())));
-            if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::IntraDayTick){
-                Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(request(a.first())));
-                Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(request(b.first())));
-                if(!
-                    static_cast<const QBbgIntradayTickRequest*>(request(a.first()))->sameOptions(
-                        *static_cast<const QBbgIntradayTickRequest*>(request(b.first()))
-                    )
-                )
-                return false; 
-            }
-            else{
-                Q_UNREACHABLE(); // only IntraDayTick is available
-            }
-            for (QList<qint64>::const_iterator i = a.constBegin(); i != a.constEnd(); ++i) {
-                Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(*i)));
-                EventsA.insert(static_cast<const QBbgAbstractIntradayRequest*>(request(*i))->eventType());
-            }
-            for (QList<qint64>::const_iterator i = b.constBegin(); i != b.constEnd(); ++i) {
-                Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(request(*i)));
-                EventsB.insert(static_cast<const QBbgAbstractIntradayRequest*>(request(*i))->eventType());
-            }
-            if (EventsA != EventsB)
-                return false;
-            return true;
+            return false; // Can't send multiple securities with hist intraday request
         }
         Q_UNREACHABLE(); //Unhandled request type
         return false;
