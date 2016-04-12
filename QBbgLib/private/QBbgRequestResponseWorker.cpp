@@ -32,6 +32,8 @@
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
+#include "QBbgIntradayTickRequest.h"
+#include "QBbgIntradayTickResponse.h"
 #include <blpapi_session.h>
 #ifdef PRINT_RESPONSE_MESSAGE
 #include <fstream>
@@ -60,7 +62,7 @@ namespace QBbgLib {
             message.print(myfile);
             myfile.close();
 #endif // PRINT_RESPONSE_MESSAGE
-            const QList<qint64>* CurrentGroup = Groups.value(message.correlationId().asInteger(), NULL);
+            const QList<qint64>* const CurrentGroup = Groups.value(message.correlationId().asInteger(), nullptr);
             Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorker::handleResponseEvent", "Recieving response from unknown request");
             if (message.hasElement("responseError")) {
                 for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
@@ -70,6 +72,53 @@ namespace QBbgLib {
             }
 
             switch (QBbgAbstractResponse::stringToResponseType(message.messageType().string())) {
+            case QBbgAbstractResponse::ResponseType::IntraDayTickResponse:
+            {
+                QSet<qint64> recievedIDs;
+                QSet<qint64> recievedErrorsIDs;
+                for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                    Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(m_Requests.request(*SingleReq)));
+                    const QBbgIntradayTickRequest* const FoundRequ = static_cast<const QBbgIntradayTickRequest*>(m_Requests.request(*SingleReq));
+                    if (!message.getElement("tickData").hasElement("tickData")) {
+                        recievedErrorsIDs.insert(*SingleReq);
+                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "No tick data available");
+                    }
+                    const BloombergLP::blpapi::Element tickDataArray = message.getElement("tickData").getElement("tickData"); //tickData[]
+                    if (tickDataArray.numValues() <= 0 && !recievedErrorsIDs.contains(*SingleReq)) {
+                        recievedErrorsIDs.insert(*SingleReq);
+                        SetError(*SingleReq, QBbgAbstractResponse::NoData, "No tick data available");
+                    }
+                    for (size_t fieldDataIter = 0; fieldDataIter < tickDataArray.numValues(); ++fieldDataIter) {
+                        const BloombergLP::blpapi::Element tickDataValue = tickDataArray.getValueAsElement(fieldDataIter);
+                        Q_ASSERT_X(tickDataValue.hasElement("time"), "QBbgRequestResponseWorker::handleResponseEvent", "tick data has no time element");
+                        Q_ASSERT_X(tickDataValue.hasElement("type"), "QBbgRequestResponseWorker::handleResponseEvent", "tick data has no type element");
+                        if (!recievedErrorsIDs.contains(*SingleReq) && !tickDataValue.hasElement("time")) {
+                            recievedErrorsIDs.insert(*SingleReq);
+                            SetError(*SingleReq, QBbgAbstractResponse::NoData, "No historical data available");
+                        }
+                        else if (!recievedErrorsIDs.contains(*SingleReq) && FoundRequ->eventType() == QBbgAbstractIntradayRequest::stringEventType(tickDataValue.getElement("type").getValueAsString())) {
+                            recievedIDs.insert(*SingleReq);
+                            TickDataRecieved(
+                                *SingleReq
+                                , elementToVariant(tickDataValue.getElement("time")).toDateTime()
+                                , elementToVariant(tickDataValue.getElement("value")).toDouble()
+                                , tickDataValue.hasElement("size") ? elementToVariant(tickDataValue.getElement("size")).toDouble() : 0.0
+                                , tickDataValue.hasElement("conditionCode") ? elementToVariant(tickDataValue.getElement("conditionCode")).toString() : QString()
+                                , tickDataValue.hasElement("exchangeCode") ? elementToVariant(tickDataValue.getElement("exchangeCode")).toString() : QString()
+                                , tickDataValue.hasElement("micCode") ? elementToVariant(tickDataValue.getElement("micCode")).toString() : QString()
+                                , tickDataValue.hasElement("brokerBuyCode") ? elementToVariant(tickDataValue.getElement("brokerBuyCode")).toString() : QString()
+                                , tickDataValue.hasElement("brokerSellCode") ? elementToVariant(tickDataValue.getElement("brokerSellCode")).toString() : QString()
+                                , tickDataValue.hasElement("rpsCode") ? elementToVariant(tickDataValue.getElement("rpsCode")).toString() : QString()
+                                );
+                        }
+                    }
+                }
+                for (QSet<qint64>::const_iterator recId = recievedIDs.constBegin(); recId != recievedIDs.constEnd(); ++recId) {
+                    if (!recievedErrorsIDs.contains(*recId))
+                        DataRecieved(*recId);
+                }
+            }
+            break;
             case QBbgAbstractResponse::ResponseType::PortfolioDataResponse:
             {
                 BloombergLP::blpapi::Element secDataArray = message.getElement("securityData"); //securityData[]
@@ -391,6 +440,9 @@ namespace QBbgLib {
         case QBbgAbstractRequest::RequestType::HistoricalData:
             TempRes = new QBbgHistoricalDataResponse();
             break;
+        case QBbgAbstractRequest::RequestType::IntraDayTick:
+            TempRes = new QBbgIntradayTickResponse();
+            break;
         default:
             Q_UNREACHABLE(); //Unhandled request type
             break;
@@ -456,7 +508,7 @@ namespace QBbgLib {
             static_cast<QBbgReferenceDataResponse*>(TempIter.value())->addValueRow(Value, Header);
             return;
         }
-        Q_UNREACHABLE(); //Only ReferenceData can recieve Data Rows
+        Q_UNREACHABLE(); //Only ReferenceData can receive Data Rows
     }
     void QBbgRequestResponseWorker::HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period /*= QString()*/, const QString& Header /*= QString()*/)
     {
@@ -470,6 +522,23 @@ namespace QBbgLib {
         }
         Q_UNREACHABLE(); //Only HistoricalData requests can receive Hist Data
     }
+
+    void QBbgRequestResponseWorker::TickDataRecieved(qint64 RequestID, const QDateTime& dt, double val, double siz, const QString& cC, const QString& eC, const QString& mC, const QString& bbC, const QString& bsC, const QString& rC)
+    {
+        QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
+        if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::IntraDayTick) {
+            if (TempIter == m_Results.end()) {
+                TempIter = m_Results.insert(RequestID, new QBbgIntradayTickResponse());
+            }
+            Q_ASSERT(dynamic_cast<QBbgIntradayTickResponse*>(TempIter.value()));
+            static_cast<QBbgIntradayTickResponse*>(TempIter.value())->addValue(dt, val, siz, cC, eC, mC, bbC, bsC, rC);
+            Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(m_Requests.request(RequestID)));
+            static_cast<QBbgIntradayTickResponse*>(TempIter.value())->setType(static_cast<const QBbgIntradayTickRequest*>(m_Requests.request(RequestID))->eventType());
+            return;
+        }
+        Q_UNREACHABLE(); //Only IntraDayTick requests can receive Tick Data
+    }
+
     void QBbgRequestResponseWorker::PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei)
     {
         QHash<qint64, QBbgAbstractResponse* >::iterator TempIter = m_Results.find(RequestID);
@@ -500,7 +569,6 @@ namespace QBbgLib {
     {
         QSet<QBbgSecurity> UsedSecur;
         QSet<QString> UsedFields;
-        QSet<QBbgAbstractIntradayRequest::EventType> UsedEvents;
         BloombergLP::blpapi::Service refDataSvc = session()->getService(QBbgAbstractRequest::serviceTypeToString(serv).toLatin1().data());
         for (QHash<qint64, QList<qint64>* >::const_iterator ReqIter = Groups.constBegin(); ReqIter != Groups.constEnd(); ++ReqIter) {
             QBbgAbstractRequest::RequestType reqType = m_Requests.request(ReqIter.value()->first())->requestType();
@@ -509,18 +577,17 @@ namespace QBbgLib {
             BloombergLP::blpapi::Request request = refDataSvc.createRequest(QBbgAbstractRequest::requestTypeToString(reqType).toLatin1().data());
             UsedSecur.clear();
             UsedFields.clear();
-            UsedEvents.clear();
             for (QList<qint64>::const_iterator GroupIter = ReqIter.value()->constBegin(); GroupIter != ReqIter.value()->constEnd(); ++GroupIter) {
                 const QBbgAbstractRequest* CurrentSingle = m_Requests.request(*GroupIter);
                 Q_ASSERT_X(CurrentSingle, "QBbgRequestResponseWorker::SendRequ", "trying to send NULL request");
                 if (!CurrentSingle->isValidReq()) {
                     SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, "Invalid Request");
                 }
-                if (!UsedSecur.contains(CurrentSingle->security())) {
-                    request.append("securities", CurrentSingle->security().fullName().toLatin1().data());
-                    UsedSecur.insert(CurrentSingle->security());
-                }
                 if (static_cast<qint32>(reqType) & QBbgAbstractRequest::FirstFielded) {
+                    if (!UsedSecur.contains(CurrentSingle->security())) {
+                        request.append("securities", CurrentSingle->security().fullName().toLatin1().data());
+                        UsedSecur.insert(CurrentSingle->security());
+                    }
                     Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest*>(CurrentSingle));
                     const QBbgAbstractFieldRequest* CurrentSingleFielded = static_cast<const QBbgAbstractFieldRequest*>(CurrentSingle);
                     if (!UsedFields.contains(CurrentSingleFielded->field())) {
@@ -610,13 +677,11 @@ namespace QBbgLib {
                     Q_ASSERT(dynamic_cast<const QBbgAbstractIntradayRequest*>(CurrentSingle));
                     const QBbgAbstractIntradayRequest* CurrentSingleIntra = static_cast<const QBbgAbstractIntradayRequest*>(CurrentSingle);
                     if (GroupIter == ReqIter.value()->constBegin()) {
+                        request.set("security", CurrentSingle->security().fullName().toLatin1().data());
                         request.set("startDateTime", CurrentSingleIntra->startDateTime().toString("yyyy-MM-ddThh:mm:ss").toLatin1().data());
                         request.set("endDateTime", CurrentSingleIntra->endDateTime().toString("yyyy-MM-ddThh:mm:ss").toLatin1().data());
                     }
-                    if (!UsedEvents.contains(CurrentSingleIntra->eventType())) {
-                        request.append("eventType", QBbgAbstractIntradayRequest::EventTypeString(CurrentSingleIntra->eventType()).toLatin1().data());
-                        UsedEvents.insert(CurrentSingleIntra->eventType());
-                    }
+                    request.append("eventTypes", QBbgAbstractIntradayRequest::eventTypeString(CurrentSingleIntra->eventType()).toLatin1().data());
                     if (reqType == QBbgAbstractRequest::RequestType::IntraDayTick) {
                         if (GroupIter == ReqIter.value()->constBegin()) {
                             Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest*>(CurrentSingle));
@@ -636,6 +701,14 @@ namespace QBbgLib {
                     Q_UNREACHABLE(); //Invalid type
                 }
             }
+#ifdef PRINT_RESPONSE_MESSAGE
+            {
+                std::ofstream myfile;
+                myfile.open("C:/Temp/PreparedRequestLog.txt", std::ios::out | std::ios::app);
+                request.print(myfile);
+                myfile.close();
+            }
+#endif // PRINT_RESPONSE_MESSAGE
             session()->sendRequest(request, requestId);
         }
     }

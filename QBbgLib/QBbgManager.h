@@ -35,6 +35,8 @@ namespace QBbgLib {
     class QBbgReferenceDataResponse;
     class QBbgHistoricalDataResponse;
     class QBbgPortfolioDataResponse;
+    class QBbgIntradayTickRequest;
+    class QBbgIntradayTickResponse;
     /*!
     \brief The central Bloomberg manager
     \details This is the main class of the library.<br/>
@@ -106,6 +108,11 @@ namespace QBbgLib {
         \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
         */
         const QBbgPortfolioDataResponse* const processRequest(const QBbgPortfolioDataRequest& rq);
+        /*!
+        \brief Starts the request synchronously
+        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        */
+        const QBbgIntradayTickResponse* const processRequest(const QBbgIntradayTickRequest& rq);
         /*!
         \brief Starts the request synchronously
         \details This function will start a request and return its result.<br/>The program will wait until the process is finished.

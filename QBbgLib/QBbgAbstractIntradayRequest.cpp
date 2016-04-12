@@ -42,6 +42,7 @@ namespace QBbgLib {
         m_eventType = a.m_eventType;
         return *this;
     }
+
     QBbgAbstractIntradayRequest::QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate* d)
         : QBbgAbstractRequest(d)
     {}
@@ -59,6 +60,7 @@ namespace QBbgLib {
         return 
             d->m_startDate.isValid()
             && d->m_endDate.isValid()
+            && d->m_endDate >= d->m_startDate
             && d->m_eventType != QBbgAbstractIntradayRequest::EventType::Invalid
             && QBbgAbstractRequest::isValidReq();
     }
@@ -73,6 +75,15 @@ namespace QBbgLib {
     {
         Q_D(QBbgAbstractIntradayRequest);
         d->m_eventType = val;
+    }
+
+    void QBbgAbstractIntradayRequest::setDateTimeRange(QDateTime startDt, QDateTime endDt)
+    {
+        if (startDt > endDt)
+            std::swap(startDt, endDt);
+        setStartDateTime(startDt); 
+        setEndDateTime(endDt);
+
     }
 
     bool QBbgAbstractIntradayRequest::operator==(const QBbgAbstractIntradayRequest& other) const
@@ -120,7 +131,7 @@ namespace QBbgLib {
         }
     }
 
-    QString QBbgAbstractIntradayRequest::EventTypeString(const EventType& val)
+    QString QBbgAbstractIntradayRequest::eventTypeString(const EventType& val)
     {
         switch (val) {
         case EventType::Invalid:
@@ -147,6 +158,23 @@ namespace QBbgLib {
             Q_UNREACHABLE();
         }
     }
+
+    QBbgAbstractIntradayRequest::EventType QBbgAbstractIntradayRequest::stringEventType(QString val)
+    {
+        val = val.simplified().toUpper();
+        val.replace(' ', '_');
+        if (val.compare("TRADE") == 0) return EventType::TRADE;
+        else if (val.compare("BID") == 0) return EventType::BID;
+        else if (val.compare("ASK") == 0) return EventType::ASK;
+        else if (val.compare("BID_BEST") == 0) return EventType::BID_BEST;
+        else if (val.compare("ASK_BEST") == 0) return EventType::ASK_BEST;
+        else if (val.compare("MID_PRICE") == 0) return EventType::MID_PRICE;
+        else if (val.compare("AT_TRADE") == 0) return EventType::AT_TRADE;
+        else if (val.compare("BEST_BID") == 0) return EventType::BEST_BID;
+        else if (val.compare("BEST_ASK") == 0) return EventType::BEST_ASK;
+        else return EventType::Invalid;
+    }
+
 }
 
 uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed)

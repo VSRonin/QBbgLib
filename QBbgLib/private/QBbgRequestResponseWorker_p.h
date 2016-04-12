@@ -54,6 +54,7 @@ namespace QBbgLib {
         virtual void DataRecieved(qint64 RequestID);
         virtual void DataRowRecieved(qint64 RequestID, const QList<QVariant>&  Value, const QList<QString>&  Header);
         virtual void HistDataRecieved(qint64 RequestID, const QDate& dt, const QVariant& val, const QString& period = QString(), const QString& Header = QString());
+        virtual void TickDataRecieved(qint64 RequestID, const QDateTime& dt, double val, double siz, const QString& cC, const QString& eC, const QString& mC, const QString& bbC, const QString& bsC, const QString& rC);
         virtual qint64 CorrelationForService(const QString& a) const;
         virtual void SendRequ(QBbgAbstractRequest::ServiceType serv);
         virtual void PortfolioDataRecieved(qint64 RequestID, const QString& Sec, const double* pos, const double* mkVal, const double* cst, const QDate* cstDt, const double* cstFx, const double* wei);

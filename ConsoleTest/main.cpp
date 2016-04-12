@@ -10,6 +10,8 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
+#include "QBbgIntradayTickRequest.h"
+#include "QBbgIntradayTickResponse.h"
 #include <QSaveFile>
 #include <QTextStream>
 #include <QVariant>
@@ -25,8 +27,18 @@ void PrintToTempFile(const QString& TempFileName, const QString& Message, bool P
 
 int main(int argc, char *argv[])
 {
+
     QCoreApplication a(argc, argv);
     QBbgLib::QBbgRequestGroup req;
+    QBbgLib::QBbgManager mainManager;
+
+    QBbgLib::QBbgIntradayTickRequest itRq;
+    itRq.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::Equity));
+    itRq.setEventType(QBbgLib::QBbgAbstractIntradayRequest::EventType::TRADE);
+    itRq.setDateTimeRange(QDateTime::currentDateTime().addDays(-5), QDateTime::currentDateTime().addSecs(-60));
+    const auto itRs = mainManager.processRequest(itRq);
+    auto resSize = itRs->size();
+
     const QString fieldsRe[] = { "RTG_FITCH", "RTG_SP", "RTG_MOODY", "MTG_CASH_FLOW"};
     QList<QBbgLib::QBbgSecurity> securList;
     securList 
@@ -69,7 +81,7 @@ int main(int argc, char *argv[])
     
    
     //a_req.clearOverrides();
-    QBbgLib::QBbgManager mainManager;
+    
     
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::recieved, [&mainManager, &req](quint32 gr, qint64 id)
     {

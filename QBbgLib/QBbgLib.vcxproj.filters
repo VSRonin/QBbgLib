@@ -409,5 +409,8 @@
     <None Include="Includes\QBbgRequestGroup">
       <Filter>Includes</Filter>
     </None>
+    <None Include="Includes\QBbgIntradayTick">
+      <Filter>Includes</Filter>
+    </None>
   </ItemGroup>
 </Project>

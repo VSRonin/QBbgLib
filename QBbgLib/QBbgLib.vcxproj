@@ -613,6 +613,7 @@
     <None Include="..\LICENSE" />
     <None Include="..\README.markdown" />
     <None Include="Includes\QBbgHistoricalData" />
+    <None Include="Includes\QBbgIntradayTick" />
     <None Include="Includes\QBbgLib" />
     <None Include="Includes\QBbgManager" />
     <None Include="Includes\QBbgPortfolioData" />

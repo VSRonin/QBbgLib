@@ -64,7 +64,9 @@ namespace QBbgLib {
         };
         Q_ENUM(EventType)
         //! Converts EventType to its string representation
-        static QString EventTypeString(const EventType& val);
+        static QString eventTypeString(const EventType& val);
+        //! Converts a string to the corresponding EventType
+        static EventType stringEventType(QString val);
         //! Destructor
         virtual ~QBbgAbstractIntradayRequest() =0;
         //! Copies another tick data request
@@ -87,6 +89,11 @@ namespace QBbgLib {
         virtual void setEventType(EventType val);
         //! Checks if two requests are identical
         virtual bool operator==(const QBbgAbstractIntradayRequest& other) const;
+        /*!
+        \brief Set the period range to retrieve
+        \details Equivalent to setStartDateTime(startDt); setEndDateTime(endDt); but automatically swaps the dates if endDt is earlier than startDt
+        */
+        virtual void setDateTimeRange(QDateTime startDt, QDateTime endDt);
     protected:
         QBbgAbstractIntradayRequest() = delete;
         QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate* d);

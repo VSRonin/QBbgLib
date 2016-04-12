@@ -29,6 +29,8 @@
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataResponse.h"
+#include "QBbgIntradayTickRequest.h"
+#include "QBbgIntradayTickResponse.h"
 #include "private/QBbgWorkerThread_p.h"
 namespace QBbgLib {
 
@@ -108,7 +110,8 @@ namespace QBbgLib {
     const QBbgAbstractResponse* const QBbgManager::processRequest(const QBbgAbstractRequest& rq)
     {
         QBbgRequestGroup rg;
-        rg.addRequest(rq);
+        if(rg.addRequest(rq) == QBbgAbstractRequest::InvalidID)
+            return nullptr;
         const QHash<qint64, QBbgAbstractResponse* >& resHash= processRequest(rg);
         Q_ASSERT(resHash.count() == 1);
         return resHash.begin().value();
@@ -127,6 +130,11 @@ namespace QBbgLib {
     const QBbgHistoricalDataResponse* const QBbgManager::processRequest(const QBbgHistoricalDataRequest& rq)
     {
         return static_cast<const QBbgHistoricalDataResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
+    }
+
+    const QBbgIntradayTickResponse* const QBbgManager::processRequest(const QBbgIntradayTickRequest& rq)
+    {
+        return static_cast<const QBbgIntradayTickResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
     }
 
     void QBbgManager::handleResponse(qint64 reID, QBbgAbstractResponse* res)
