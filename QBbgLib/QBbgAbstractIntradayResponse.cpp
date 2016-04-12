@@ -43,7 +43,7 @@ namespace QBbgLib {
         return *this;
     }
 
-    void QBbgAbstractIntradayResponse::addValue(const QDateTime& dt, const QVariant& val)
+    void QBbgAbstractIntradayResponse::addValue(const QDateTime& dt, double val)
     {
         Q_D(QBbgAbstractIntradayResponse);
         d->m_time.append(dt);
@@ -67,7 +67,7 @@ namespace QBbgLib {
         return *this;
     }
 
-    QVariant QBbgAbstractIntradayResponse::value(int period) const
+    double QBbgAbstractIntradayResponse::value(int period) const
     {
         Q_D(const QBbgAbstractIntradayResponse);
         return d->m_value.value(period);
@@ -85,10 +85,16 @@ namespace QBbgLib {
         return d->m_time.indexOf(val);
     }
 
-    int QBbgAbstractIntradayResponse::findValue(const QVariant& val) const
+    int QBbgAbstractIntradayResponse::findValue(const double& val) const
     {
         Q_D(const QBbgAbstractIntradayResponse);
         return d->m_value.indexOf(val);
+    }
+
+    int QBbgAbstractIntradayResponse::size() const
+    {
+        Q_D(const QBbgAbstractIntradayResponse);
+        return d->m_time.size();
     }
 
 }

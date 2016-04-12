@@ -20,7 +20,6 @@
 #define QBbgAbstractIntradayResponse_h__
 
 #include "QBbgAbstractResponse.h"
-#include <QVariant>
 #include <QDateTime>
 namespace QBbgLib {
     class QBbgAbstractIntradayResponsePrivate;
@@ -29,22 +28,26 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgAbstractIntradayResponse : public QBbgAbstractResponse
     {
         Q_GADGET
+        /*!
+        \brief Number of values in the series
+        \getter size()
+        */
+        Q_PROPERTY(int size READ size)
         Q_DECLARE_PRIVATE(QBbgAbstractIntradayResponse)
     public:
         //! Destructor
         virtual ~QBbgAbstractIntradayResponse() = 0;
         //! Copies another intraday response
         virtual QBbgAbstractIntradayResponse& operator=(const QBbgAbstractIntradayResponse& a);
-        Q_INVOKABLE virtual QVariant value(int period) const;
+        Q_INVOKABLE virtual double value(int period) const;
         Q_INVOKABLE virtual QDateTime dateTime(int period) const;
-        Q_INVOKABLE virtual int findDate(const QDateTime& val) const;
-        Q_INVOKABLE virtual int findValue(const QVariant& val) const;
+        //! Number of values in the series
+        virtual int size() const;
     protected:
-        virtual void addValue(const QDateTime& dt, const QVariant& val);
+        virtual void addValue(const QDateTime& dt, double val);
         virtual void clear();
         QBbgAbstractIntradayResponse() = delete;
         QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d);
-        friend class QBbgRequestResponseWorker;
     };
 }
 #endif // QBbgAbstractIntradayResponse_h__

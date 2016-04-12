@@ -245,6 +245,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractIntradayResponse.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgIntradayTickResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgIntradayTickResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgIntradayTickResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
@@ -299,6 +308,9 @@
       <Filter>Private\Response</Filter>
     </ClInclude>
     <ClInclude Include="private\QBbgAbstractIntradayResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgIntradayTickResponse_p.h">
       <Filter>Private\Response</Filter>
     </ClInclude>
   </ItemGroup>
@@ -361,6 +373,9 @@
       <Filter>Header Files\RequestResponse\Requests</Filter>
     </CustomBuild>
     <CustomBuild Include="QBbgAbstractIntradayResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgIntradayTickResponse.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
     </CustomBuild>
   </ItemGroup>

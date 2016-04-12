@@ -23,7 +23,6 @@
 #include "QBbgAbstractIntradayResponse.h"
 #include "private/QBbgAbstractResponse_p.h"
 #include <QDateTime>
-#include <QVariant>
 #include <QList>
 namespace QBbgLib {
     class QBbgAbstractIntradayResponsePrivate : public QBbgAbstractResponsePrivate
@@ -37,6 +36,6 @@ namespace QBbgLib {
         QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, const QBbgAbstractIntradayResponsePrivate& other);
         virtual QBbgAbstractIntradayResponsePrivate& operator=(const QBbgAbstractIntradayResponsePrivate& other);
         QList<QDateTime> m_time;
-        QList<QVariant> m_value;
+        QList<double> m_value;
     };
 }

@@ -20,24 +20,33 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
-#ifndef QBbgAbstractFieldResponse_p_h__
-#define QBbgAbstractFieldResponse_p_h__
+#ifndef QBbgIntradayTickResponse_p_h__
+#define QBbgIntradayTickResponse_p_h__
 
-#include "QBbgAbstractFieldResponse.h"
-#include "private/QBbgAbstractResponse_p.h"
-#include <QString>
+#include "QBbgIntradayTickResponse.h"
+#include "QBbgAbstractIntradayRequest.h"
+#include "private/QBbgAbstractIntradayResponse_p.h"
+#include <QList>
+#include <QStringList>
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate : public QBbgAbstractResponsePrivate
+    class QBbgIntradayTickResponsePrivate : public QBbgAbstractIntradayResponsePrivate
     {
     private:
-        Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
-        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other)=delete;
+        Q_DECLARE_PUBLIC(QBbgIntradayTickResponse)
+        QBbgIntradayTickResponsePrivate(const QBbgIntradayTickResponsePrivate& other) = delete;
     public:
-        virtual ~QBbgAbstractFieldResponsePrivate()=0;
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ);
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other);
-        virtual QBbgAbstractFieldResponsePrivate& operator=(const QBbgAbstractFieldResponsePrivate& other);
-        QString m_Header;
+        virtual ~QBbgIntradayTickResponsePrivate();
+        QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q, const QBbgIntradayTickResponsePrivate& other);
+        QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q);
+        virtual QBbgIntradayTickResponsePrivate& operator=(const QBbgIntradayTickResponsePrivate& other);
+        QBbgAbstractIntradayRequest::EventType m_type;
+        QList<double> m_size;
+        QStringList m_conditionCode;
+        QStringList m_exchangeCode;
+        QStringList m_micCode;
+        QStringList m_brokerBuyCode;
+        QStringList m_brokerSellCode;
+        QStringList m_rpsCode;
     };
 }
-#endif // QBbgAbstractFieldResponse_p_h__
+#endif // QBbgIntradayTickResponse_p_h__
