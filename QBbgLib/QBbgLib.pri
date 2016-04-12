@@ -12,29 +12,28 @@
 # GNU Lesser General Public License for more details.                           #
 #                                                                               #
 # You should have received a copy of the GNU Lesser General Public License      #
-# along with QBbgLib.  If not, see <http://www.gnu.org/licenses/>.              #
+# along with QBbgLib.  If not, see < http://www.gnu.org/licenses/ >.            #
 #################################################################################
 
-HEADERS += ./private/QBbgAbstractWorker_p.h \
-    ./QBbgOverride.h \
-    ./QBbgProjectGlobals.h \
+HEADERS += ./QBbgProjectGlobals.h \
     ./QBbgSecurity.h \
     ./QBbgManager.h \
+    ./QBbgOverride.h \
+    ./QBbgRequestGroup.h \
+    ./QBbgAbstractFieldRequest.h \
     ./QBbgAbstractRequest.h \
     ./QBbgHistoricalDataRequest.h \
     ./QBbgPortfolioDataRequest.h \
+    ./QBbgAbstractIntradayRequest.h \
     ./QbbgReferenceDataRequest.h \
-    ./QBbgRequestGroup.h \
-    ./QBbgAbstractFieldRequest.h \
     ./QBbgAbstractFieldResponse.h \
     ./QBbgAbstractResponse.h \
     ./QBbgHistoricalDataResponse.h \
     ./QBbgPortfolioDataResponse.h \
     ./QBbgReferenceDataResponse.h \
-    ./private/QBbgWorkerThread_p.h \
-    ./private/QBbgRequestResponseWorker_p.h \
     ./private/QBbgAbstractFieldRequest_p.h \
     ./private/QBbgAbstractFieldResponse_p.h \
+    ./private/QBbgAbstractIntradayRequest_p.h \
     ./private/QBbgAbstractRequest_p.h \
     ./private/QBbgAbstractResponse_p.h \
     ./private/QBbgHistoricalDataRequest_p.h \
@@ -43,24 +42,37 @@ HEADERS += ./private/QBbgAbstractWorker_p.h \
     ./private/QBbgOverride_p.h \
     ./private/QBbgPortfolioDataRequest_p.h \
     ./private/QBbgPortfolioDataResponse_p.h \
-    ./private/QbbgReferenceDataRequest_p.h \
+    ./private/QBbgReferenceDataRequest_p.h \
     ./private/QBbgReferenceDataResponse_p.h \
     ./private/QBbgRequestGroup_p.h \
-    ./private/QBbgSecurity_p.h
+    ./private/QBbgSecurity_p.h \
+    ./private/QBbgWorkerThread_p.h \
+    ./private/QBbgAbstractWorker_p.h \
+    ./private/QBbgRequestResponseWorker_p.h \
+    ./QBbgIntradayTickRequest.h \
+    ./private/QBbgIntradayTickRequest_p.h \
+    ./private/QBbgAbstractIntradayResponse_p.h \
+    ./QBbgAbstractIntradayResponse.h \
+    ./QBbgIntradayTickResponse.h \
+    ./private/QBbgIntradayTickResponse_p.h
 SOURCES += ./QBbgManager.cpp \
     ./QBbgOverride.cpp \
-    ./QBbgRequestGroup.cpp \
     ./QBbgSecurity.cpp \
-    ./private/QBbgAbstractWorker.cpp \
     ./QBbgAbstractRequest.cpp \
     ./QBbgHistoricalDataRequest.cpp \
+    ./QBbgAbstractIntradayRequest.cpp \
     ./QBbgPortfolioDataRequest.cpp \
-    ./QbbgReferenceDataRequest.cpp \
+    ./QBbgReferenceDataRequest.cpp \
+    ./QBbgRequestGroup.cpp \
     ./QBbgAbstractFieldRequest.cpp \
     ./QBbgAbstractFieldResponse.cpp \
     ./QBbgAbstractResponse.cpp \
     ./QBbgHistoricalDataResponse.cpp \
     ./QBbgPortfolioDataResponse.cpp \
     ./QBbgReferenceDataResponse.cpp \
+    ./private/QBbgWorkerThread.cpp \
+    ./private/QBbgAbstractWorker.cpp \
     ./private/QBbgRequestResponseWorker.cpp \
-    ./private/QBbgWorkerThread.cpp
+    ./QBbgIntradayTickRequest.cpp \
+    ./QBbgAbstractIntradayResponse.cpp \
+    ./QBbgIntradayTickResponse.cpp

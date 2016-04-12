@@ -94,9 +94,10 @@ namespace QBbgLib {
             return QStringLiteral("PortfolioDataRequest");
         case RequestType::IntraDayTick: 
             return QStringLiteral("IntradayTickRequest");
-            //return QStringLiteral("IntraDayTickRequest");
+            //return QStringLiteral("IntraDayTickRequest");  Wrong in documentation
         case RequestType::IntraDayBar:
-            return QStringLiteral("IntraDayBarRequest");
+            return QStringLiteral("IntradayBarRequest");
+            //return QStringLiteral("IntraDayBarRequest");  Wrong in documentation
         case RequestType::Invalid:
             return QString();
         default: 
