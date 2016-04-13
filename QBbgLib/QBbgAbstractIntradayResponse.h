@@ -16,39 +16,48 @@
 *                                                                               *
 \*******************************************************************************/
 
-#ifndef QBbgAbstractFieldResponse_h__
-#define QBbgAbstractFieldResponse_h__
+#ifndef QBbgAbstractIntradayResponse_h__
+#define QBbgAbstractIntradayResponse_h__
+
 #include "QBbgAbstractResponse.h"
+#include <QDateTime>
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate;
+    class QBbgAbstractIntradayResponsePrivate;
     class QBbgRequestResponseWorker;
-    //! Base class for Bloomberg Responses based on field request
-    class QBBG_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
+    //! Base class for Bloomberg Responses based on intraday requests
+    class QBBG_EXPORT QBbgAbstractIntradayResponse : public QBbgAbstractResponse
     {
         Q_GADGET
         /*!
-        \brief Header for the response
-        \getter header()
-        \setter setHeader()
+        \brief Number of values in the series
+        \getter size()
         */
-        Q_PROPERTY(QString header READ header)
-        Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
+        Q_PROPERTY(int size READ size)
+        Q_DECLARE_PRIVATE(QBbgAbstractIntradayResponse)
     public:
         //! Destructor
-        virtual ~QBbgAbstractFieldResponse() = 0;
-        //! Copies another field response
-        virtual QBbgAbstractFieldResponse& operator=(const QBbgAbstractFieldResponse& a);
+        virtual ~QBbgAbstractIntradayResponse() = 0;
+        //! Copies another intraday response
+        virtual QBbgAbstractIntradayResponse& operator=(const QBbgAbstractIntradayResponse& a);
         /*!
-        \brief Header for the response
-        \details This will contain the field name or the column header for tabular results
+        \brief The value related to the event
+        \arg index The index of the object in the series
+        \return 0 if index is out of range
         */
-        virtual const QString& header() const;
+        Q_INVOKABLE virtual double value(int index) const;
+        /*!
+        \brief Date and time related to the event
+        \arg index The index of the object in the series
+        \return A null QDateTime if index is out of range
+        */
+        Q_INVOKABLE virtual QDateTime dateTime(int index) const;
+        //! Number of values in the series
+        virtual int size() const;
     protected:
-        QBbgAbstractFieldResponse() = delete;
-        QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);
-        virtual void setHeader(const QString& Header = QString());
-
-        friend class QBbgRequestResponseWorker;
+        virtual void addValue(const QDateTime& dt, double val);
+        virtual void clear();
+        QBbgAbstractIntradayResponse() = delete;
+        QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d);
     };
 }
-#endif // QBbgAbstractFieldResponse_h__
+#endif // QBbgAbstractIntradayResponse_h__

@@ -23,7 +23,7 @@
 #ifndef QbbgReferenceDataRequest_p_h__
 #define QbbgReferenceDataRequest_p_h__
 #include "QBbgReferenceDataRequest.h"
-#include "QBbgAbstractFieldRequest_p.h"
+#include "private/QBbgAbstractFieldRequest_p.h"
 namespace QBbgLib {
     class QBbgReferenceDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
     {
@@ -33,9 +33,8 @@ namespace QBbgLib {
         QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q);
         QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q, const QBbgReferenceDataRequestPrivate& other);
         virtual QBbgReferenceDataRequestPrivate& operator=(const QBbgReferenceDataRequestPrivate& other);
-        virtual bool operator==(const QBbgReferenceDataRequestPrivate& a) const;
     private:
-        QBbgReferenceDataRequestPrivate(const QBbgReferenceDataRequestPrivate& other);
+        QBbgReferenceDataRequestPrivate(const QBbgReferenceDataRequestPrivate& other) = delete;
         bool m_UseUTCTime;
     };
 }

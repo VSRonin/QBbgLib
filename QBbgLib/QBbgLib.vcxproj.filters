@@ -57,6 +57,12 @@
     <Filter Include="Includes">
       <UniqueIdentifier>{6500cee6-dfe0-43bd-8950-9766d0a1ddd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Private\Request">
+      <UniqueIdentifier>{fd254046-22ae-455b-9564-c0c3931e9613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Response">
+      <UniqueIdentifier>{e9436542-6646-4224-ae68-f31d65ab7a33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QBbgSecurity.cpp">
@@ -212,28 +218,46 @@
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgReferenceDataResponse.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="QBbgAbstractIntradayRequest.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractIntradayRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractIntradayRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgIntradayTickRequest.cpp">
+      <Filter>Source Files\RequestResponse\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgIntradayTickRequest.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgIntradayTickRequest.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgAbstractIntradayResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractIntradayResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgAbstractIntradayResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="QBbgIntradayTickResponse.cpp">
+      <Filter>Source Files\RequestResponse\Response</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgIntradayTickResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QBbgIntradayTickResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="QBbgProjectGlobals.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgAbstractFieldRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgAbstractFieldResponse_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgAbstractRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgAbstractResponse_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgHistoricalDataRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgHistoricalDataResponse_p.h">
-      <Filter>Private</Filter>
     </ClInclude>
     <ClInclude Include="private\QBbgManager_p.h">
       <Filter>Private</Filter>
@@ -241,23 +265,53 @@
     <ClInclude Include="private\QBbgOverride_p.h">
       <Filter>Private</Filter>
     </ClInclude>
-    <ClInclude Include="private\QBbgPortfolioDataRequest_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgPortfolioDataResponse_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgReferenceDataResponse_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
-    <ClInclude Include="private\QBbgRequestGroup_p.h">
-      <Filter>Private</Filter>
-    </ClInclude>
     <ClInclude Include="private\QBbgSecurity_p.h">
       <Filter>Private</Filter>
     </ClInclude>
+    <ClInclude Include="private\QBbgAbstractFieldRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgAbstractIntradayRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgAbstractRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgHistoricalDataRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgIntradayTickRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgPortfolioDataRequest_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
     <ClInclude Include="private\QBbgReferenceDataRequest_p.h">
-      <Filter>Private</Filter>
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgRequestGroup_p.h">
+      <Filter>Private\Request</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgAbstractFieldResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgAbstractResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgHistoricalDataResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgPortfolioDataResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgReferenceDataResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgAbstractIntradayResponse_p.h">
+      <Filter>Private\Response</Filter>
+    </ClInclude>
+    <ClInclude Include="private\QBbgIntradayTickResponse_p.h">
+      <Filter>Private\Response</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -312,6 +366,18 @@
     <CustomBuild Include="QBbgReferenceDataResponse.h">
       <Filter>Header Files\RequestResponse\Response</Filter>
     </CustomBuild>
+    <CustomBuild Include="QBbgAbstractIntradayRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgIntradayTickRequest.h">
+      <Filter>Header Files\RequestResponse\Requests</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgAbstractIntradayResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
+    <CustomBuild Include="QBbgIntradayTickResponse.h">
+      <Filter>Header Files\RequestResponse\Response</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Documentation\DoxygenConfig.doxyfile">
@@ -341,6 +407,9 @@
       <Filter>Includes</Filter>
     </None>
     <None Include="Includes\QBbgRequestGroup">
+      <Filter>Includes</Filter>
+    </None>
+    <None Include="Includes\QBbgIntradayTick">
       <Filter>Includes</Filter>
     </None>
   </ItemGroup>

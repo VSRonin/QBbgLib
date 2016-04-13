@@ -65,26 +65,27 @@ namespace QBbgLib {
         }
     }
 
-    bool QBbgHistoricalDataRequestPrivate::operator==(const QBbgHistoricalDataRequestPrivate& a) const
+    bool QBbgHistoricalDataRequest::operator==(const QBbgHistoricalDataRequest& a) const
     {
+        Q_D(const QBbgHistoricalDataRequest);
         return 
-            QBbgAbstractFieldRequestPrivate::operator==(a) &&
-            m_startDate == a.m_startDate &&
-            m_endDate == a.m_endDate &&
-            m_periodicityAdjustment == a.m_periodicityAdjustment &&
-            m_periodicitySelection == a.m_periodicitySelection &&
-            m_useClosePrice == a.m_useClosePrice &&
-            m_usePriceForPricing == a.m_usePriceForPricing &&
-            m_nonTradingDayFill == a.m_nonTradingDayFill &&
-            m_fillWithNull == a.m_fillWithNull &&
-            m_maxDataPoints == a.m_maxDataPoints &&
-            m_useRelativeDate == a.m_useRelativeDate &&
-            m_adjustmentNormal == a.m_adjustmentNormal &&
-            m_adjustmentAbnormal == a.m_adjustmentAbnormal &&
-            m_adjustmentSplit == a.m_adjustmentSplit &&
-            m_adjustmentFollowDPDF == a.m_adjustmentFollowDPDF &&
-            strcmp(m_currency, a.m_currency)==0 && 
-            strcmp(m_calendarCode, a.m_calendarCode) == 0
+            QBbgAbstractFieldRequest::operator==(a) &&
+            d->m_startDate == a.d_func()->m_startDate &&
+            d->m_endDate == a.d_func()->m_endDate &&
+            d->m_periodicityAdjustment == a.d_func()->m_periodicityAdjustment &&
+            d->m_periodicitySelection == a.d_func()->m_periodicitySelection &&
+            d->m_useClosePrice == a.d_func()->m_useClosePrice &&
+            d->m_usePriceForPricing == a.d_func()->m_usePriceForPricing &&
+            d->m_nonTradingDayFill == a.d_func()->m_nonTradingDayFill &&
+            d->m_fillWithNull == a.d_func()->m_fillWithNull &&
+            d->m_maxDataPoints == a.d_func()->m_maxDataPoints &&
+            d->m_useRelativeDate == a.d_func()->m_useRelativeDate &&
+            d->m_adjustmentNormal == a.d_func()->m_adjustmentNormal &&
+            d->m_adjustmentAbnormal == a.d_func()->m_adjustmentAbnormal &&
+            d->m_adjustmentSplit == a.d_func()->m_adjustmentSplit &&
+            d->m_adjustmentFollowDPDF == a.d_func()->m_adjustmentFollowDPDF &&
+            strcmp(d->m_currency, a.d_func()->m_currency) == 0 &&
+            strcmp(d->m_calendarCode, a.d_func()->m_calendarCode) == 0
         ;
     }
     bool QBbgHistoricalDataRequest::equalHistoricalFields(const QBbgHistoricalDataRequest& a) const
@@ -133,11 +134,6 @@ namespace QBbgLib {
             m_calendarCode[i] = other.m_calendarCode[i];
         }
         return *this;
-    }
-    bool QBbgHistoricalDataRequest::operator==(const QBbgHistoricalDataRequest& a) const
-    {
-        Q_D(const QBbgHistoricalDataRequest);
-        return d->operator==(*(a.d_func()));
     }
 
     QString QBbgHistoricalDataRequest::calendarCode() const
@@ -303,6 +299,9 @@ namespace QBbgLib {
     {
         if (val.extension() != QBbgSecurity::Client) {
             QBbgAbstractFieldRequest::setSecurity(val);
+        }
+        else {
+            QBbgAbstractRequest::setSecurity(QBbgSecurity());
         }
     }
 

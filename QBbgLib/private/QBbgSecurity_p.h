@@ -47,7 +47,7 @@ namespace QBbgLib {
     private:
         Q_DECLARE_PUBLIC(QBbgSecurity)
         QBbgSecurity* q_ptr;
-        QBbgSecurityPrivate(const QBbgSecurityPrivate& other);
+        QBbgSecurityPrivate(const QBbgSecurityPrivate& other) = delete;
     public:
         virtual ~QBbgSecurityPrivate();
         QBbgSecurityPrivate(QBbgSecurity* q);

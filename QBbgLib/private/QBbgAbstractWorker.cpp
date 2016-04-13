@@ -65,7 +65,7 @@ namespace QBbgLib {
     {
         res->setID(corrID);
     }
-    QVariant QBbgAbstractWorker::elementToVariant(BloombergLP::blpapi::Element& val)
+    QVariant QBbgAbstractWorker::elementToVariant(const BloombergLP::blpapi::Element& val)
     {
         if (val.isNull()) return QVariant();
         //if (val.isNullValue()) return QVariant();

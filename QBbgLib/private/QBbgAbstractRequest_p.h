@@ -32,7 +32,7 @@ namespace QBbgLib {
     protected:
         QBbgAbstractRequest* q_ptr;
     private:
-        QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other);
+        QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other) = delete;
     public:
         virtual ~QBbgAbstractRequestPrivate()=0;
         QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);

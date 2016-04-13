@@ -23,7 +23,7 @@
 #ifndef QBbgHistoricalDataResponse_p_h__
 #define QBbgHistoricalDataResponse_p_h__
 #include "QBbgHistoricalDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 #include "QBbgSecurity.h"
 #include <QList>
 #include <QDate>
@@ -32,7 +32,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgHistoricalDataResponse)
-        QBbgHistoricalDataResponsePrivate(const QBbgHistoricalDataResponsePrivate& other);
+        QBbgHistoricalDataResponsePrivate(const QBbgHistoricalDataResponsePrivate& other)=delete;
     public:
         virtual ~QBbgHistoricalDataResponsePrivate();
         QBbgHistoricalDataResponsePrivate(QBbgHistoricalDataResponse* q, const QBbgHistoricalDataResponsePrivate& other);

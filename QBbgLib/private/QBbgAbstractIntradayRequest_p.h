@@ -12,51 +12,36 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.              *
 *                                                                               *
 \*******************************************************************************/
+
 
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
-#ifndef QBbgHistoricalDataRequest_p_h__
-#define QBbgHistoricalDataRequest_p_h__
 
-#include "QBbgHistoricalDataRequest.h"
-#include "Private/QBbgAbstractFieldRequest_p.h"
-#include <QDate>
+#ifndef QBbgAbstractIntradayRequest_p_h__
+#define QBbgAbstractIntradayRequest_p_h__
+
+#include "QBbgAbstractIntradayRequest.h"
+#include "Private/QBbgAbstractRequest_p.h"
+#include <QDateTime>
 namespace QBbgLib {
-    class QBbgHistoricalDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
+    class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractRequestPrivate
     {
-        Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
-    private:
-        QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate& other);
+        Q_DECLARE_PUBLIC(QBbgAbstractIntradayRequest)
     public:
-        virtual ~QBbgHistoricalDataRequestPrivate();
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q);
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other);
-        virtual QBbgHistoricalDataRequestPrivate& operator=(const QBbgHistoricalDataRequestPrivate& other);
-        QDate m_startDate;
-        QDate m_endDate;
-        QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
-        QBbgHistoricalDataRequest::PeriodSelection m_periodicitySelection;
-        char m_currency[3 + 1];
-        bool m_useClosePrice;
-        bool m_usePriceForPricing;
-        QBbgHistoricalDataRequest::NonTradingDayFill m_nonTradingDayFill;
-        bool m_fillWithNull;
-        qint32 m_maxDataPoints;
-        bool m_useRelativeDate;
-        bool m_adjustmentNormal;
-        bool m_adjustmentAbnormal;
-        bool m_adjustmentSplit;
-        bool m_adjustmentFollowDPDF;
-        char m_calendarCode[2 + 1];
+        virtual ~QBbgAbstractIntradayRequestPrivate() = 0;
+        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, const QBbgAbstractIntradayRequestPrivate& a);
+        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, QBbgAbstractRequest::RequestType typ);
+        QBbgAbstractIntradayRequestPrivate& operator=(const QBbgAbstractIntradayRequestPrivate& a);
+        QDateTime m_startDate;
+        QDateTime m_endDate;
+        QBbgAbstractIntradayRequest::EventType m_eventType;
+    private:
+        QBbgAbstractIntradayRequestPrivate(const QBbgAbstractIntradayRequestPrivate& other) = delete;
     };
-
-    
-
 }
-#endif // QBbgHistoricalDataRequest_p_h__
-
+#endif // QBbgAbstractIntradayRequest_p_h__

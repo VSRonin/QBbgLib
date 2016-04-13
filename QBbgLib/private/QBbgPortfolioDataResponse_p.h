@@ -23,7 +23,7 @@
 #ifndef QBbgPortfolioDataResponse_p_h__
 #define QBbgPortfolioDataResponse_p_h__
 #include "QBbgPortfolioDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 #include "QBbgSecurity.h"
 #include <QList>
 #include <QDate>
@@ -32,7 +32,7 @@ namespace QBbgLib {
     {
     private:
         Q_DECLARE_PUBLIC(QBbgPortfolioDataResponse)
-        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other);
+        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other)=delete;
     public:
         virtual ~QBbgPortfolioDataResponsePrivate();
         QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other);

@@ -29,6 +29,8 @@
 #include "QBbgReferenceDataResponse.h"
 #include "QBbgPortfolioDataResponse.h"
 #include "QBbgHistoricalDataResponse.h"
+#include "QBbgIntradayTickRequest.h"
+#include "QBbgIntradayTickResponse.h"
 #include "private/QBbgWorkerThread_p.h"
 namespace QBbgLib {
 
@@ -54,7 +56,7 @@ namespace QBbgLib {
     {
         Q_ASSERT_X(QCoreApplication::instance(), "QBbgManager", "A QCoreApplication must be created to process requests");
         Q_D(QBbgManager);
-        quint32 newID = 0;
+        quint32 newID = 1;
         while (d->m_ResultTable.contains(newID) || d->m_ThreadPool.contains(newID)) {
             Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
@@ -68,6 +70,8 @@ namespace QBbgLib {
     }
     quint32 QBbgManager::startRequest(const QBbgRequestGroup& rq)
     {
+        if (!rq.isValidReq() || rq.size() == 0)
+            return 0;
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
         newTh.value()->start();
         return newTh.key();
@@ -76,12 +80,15 @@ namespace QBbgLib {
     quint32 QBbgManager::startRequest(const QBbgAbstractRequest& rq)
     {
         QBbgRequestGroup rg;
-        rg.addRequest(rq);
+        if (rg.addRequest(rq) == QBbgAbstractRequest::InvalidID)
+            return 0;
         return startRequest(rg);
     }
 
     quint32 QBbgManager::processRequestID(const QBbgRequestGroup& rq)
     {
+        if (!rq.isValidReq() || rq.size() == 0)
+            return 0;
         QHash<quint32, QBbgWorkerThread* >::iterator newTh = createThread(rq);
         const quint32 threadKey = newTh.key();
         QEventLoop waitLoop;
@@ -95,12 +102,14 @@ namespace QBbgLib {
     quint32 QBbgManager::processRequestID(const QBbgAbstractRequest& rq)
     {
         QBbgRequestGroup rg;
-        rg.addRequest(rq);
+        if (rg.addRequest(rq) == QBbgAbstractRequest::InvalidID)
+            return 0;
         return processRequestID(rg);
     }
 
     const QHash<qint64, QBbgAbstractResponse* >& QBbgManager::processRequest(const QBbgRequestGroup& rq)
     {
+        Q_ASSERT_X(rq.isValidReq() && rq.size() > 0,"QBbgManager::processRequest","Invalid request sent");
         Q_D(QBbgManager);
         return *(d->m_ResultTable.value(processRequestID(rq)));
     }
@@ -108,7 +117,8 @@ namespace QBbgLib {
     const QBbgAbstractResponse* const QBbgManager::processRequest(const QBbgAbstractRequest& rq)
     {
         QBbgRequestGroup rg;
-        rg.addRequest(rq);
+        if(rg.addRequest(rq) == QBbgAbstractRequest::InvalidID)
+            return nullptr;
         const QHash<qint64, QBbgAbstractResponse* >& resHash= processRequest(rg);
         Q_ASSERT(resHash.count() == 1);
         return resHash.begin().value();
@@ -127,6 +137,11 @@ namespace QBbgLib {
     const QBbgHistoricalDataResponse* const QBbgManager::processRequest(const QBbgHistoricalDataRequest& rq)
     {
         return static_cast<const QBbgHistoricalDataResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
+    }
+
+    const QBbgIntradayTickResponse* const QBbgManager::processRequest(const QBbgIntradayTickRequest& rq)
+    {
+        return static_cast<const QBbgIntradayTickResponse*>(processRequest(static_cast<const QBbgAbstractRequest&>(rq)));
     }
 
     void QBbgManager::handleResponse(qint64 reID, QBbgAbstractResponse* res)

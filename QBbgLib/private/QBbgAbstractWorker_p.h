@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -44,7 +44,7 @@ namespace QBbgLib {
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal) = 0;
         virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const;
         virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
-        virtual QVariant elementToVariant(BloombergLP::blpapi::Element& val);
+        virtual QVariant elementToVariant(const BloombergLP::blpapi::Element& val);
         std::unique_ptr<BloombergLP::blpapi::Session>& session();
     private:
         bool m_SessionRunning;

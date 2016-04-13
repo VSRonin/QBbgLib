@@ -23,14 +23,14 @@
 #ifndef QBbgReferenceDataResponse_p_h__
 #define QBbgReferenceDataResponse_p_h__
 #include "QBbgReferenceDataResponse.h"
-#include "QBbgAbstractFieldResponse_p.h"
+#include "private/QBbgAbstractFieldResponse_p.h"
 #include <QList>
 namespace QBbgLib {
     class QBbgReferenceDataResponsePrivate : public QBbgAbstractFieldResponsePrivate
     {
     private:
         Q_DECLARE_PUBLIC(QBbgReferenceDataResponse)
-        QBbgReferenceDataResponsePrivate(const QBbgReferenceDataResponsePrivate& other);
+        QBbgReferenceDataResponsePrivate(const QBbgReferenceDataResponsePrivate& other)=delete;
     public:
         virtual ~QBbgReferenceDataResponsePrivate();
         QBbgReferenceDataResponsePrivate(QBbgReferenceDataResponse* q, const QBbgReferenceDataResponsePrivate& other);

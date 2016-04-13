@@ -30,7 +30,7 @@ namespace QBbgLib {
     private:
         Q_DECLARE_PUBLIC(QBbgRequestGroup)
         QBbgRequestGroup* q_ptr;
-        QBbgRequestGroupPrivate(const QBbgRequestGroupPrivate& a);
+        QBbgRequestGroupPrivate(const QBbgRequestGroupPrivate& a) = delete;
         QBbgAbstractRequest* createRequest(const QBbgAbstractRequest& a) const;
         qint64 increaseMaxID();
     public:

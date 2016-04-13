@@ -10,6 +10,8 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
+#include "QBbgIntradayTickRequest.h"
+#include "QBbgIntradayTickResponse.h"
 #include <QSaveFile>
 #include <QTextStream>
 #include <QVariant>
@@ -25,8 +27,11 @@ void PrintToTempFile(const QString& TempFileName, const QString& Message, bool P
 
 int main(int argc, char *argv[])
 {
+
     QCoreApplication a(argc, argv);
     QBbgLib::QBbgRequestGroup req;
+    QBbgLib::QBbgManager mainManager;
+
     const QString fieldsRe[] = { "RTG_FITCH", "RTG_SP", "RTG_MOODY", "MTG_CASH_FLOW"};
     QList<QBbgLib::QBbgSecurity> securList;
     securList 
@@ -69,7 +74,7 @@ int main(int argc, char *argv[])
     
    
     //a_req.clearOverrides();
-    QBbgLib::QBbgManager mainManager;
+    
     
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::recieved, [&mainManager, &req](quint32 gr, qint64 id)
     {

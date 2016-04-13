@@ -55,7 +55,7 @@ namespace QBbgLib {
         enum : qint32
         {
             FirstFielded=0x10
-            , FirstRealTime = 0x20
+            , FirstIntraday = 0x20
         };
         enum class ServiceType
         {
@@ -83,7 +83,7 @@ namespace QBbgLib {
             , HistoricalData = FirstFielded /*!< Request for historical data */
             , ReferenceData /*!< Request for static data */
             , PortfolioData /*!< Request for portfolio data */
-            , IntraDayTick = FirstRealTime /*!< Currently Unavailable */
+            , IntraDayTick = FirstIntraday /*!< Tick-by-tick historical data */
             , IntraDayBar /*!< Currently Unavailable */
         };
         Q_ENUM(RequestType)
@@ -128,6 +128,8 @@ namespace QBbgLib {
         virtual bool isValidReq() const;
         //! Returns the type of request
         virtual RequestType requestType() const;
+        //! Checks if two requests are identical
+        virtual bool operator==(const QBbgAbstractRequest& other) const;
         friend class QBbgRequestGroup;
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;
