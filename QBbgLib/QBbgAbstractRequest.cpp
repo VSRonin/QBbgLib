@@ -196,6 +196,6 @@ namespace QBbgLib {
 
 uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed)
 {
-    return qHash(static_cast<qint32>(key), seed);
+    return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }
 

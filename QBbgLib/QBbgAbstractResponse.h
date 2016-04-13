@@ -97,7 +97,7 @@ namespace QBbgLib {
             , HistoricalDataResponse = FirstFielded /*!< Response associated with an historical data request */
             , ReferenceDataResponse /*!< Response associated with a reference data request */
             , PortfolioDataResponse  /*!< Response associated with a portfolio request */
-            , IntraDayTickResponse = FirstRealTime /*!< Currently Unavailable */
+            , IntraDayTickResponse = FirstRealTime /*!< Response associated with tick-by-tick historical data request */
             , IntraDayBarResponse  /*!< Currently Unavailable */
         };
         Q_ENUM(ResponseType)

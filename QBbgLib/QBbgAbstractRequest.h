@@ -83,7 +83,7 @@ namespace QBbgLib {
             , HistoricalData = FirstFielded /*!< Request for historical data */
             , ReferenceData /*!< Request for static data */
             , PortfolioData /*!< Request for portfolio data */
-            , IntraDayTick = FirstIntraday /*!< Currently Unavailable */
+            , IntraDayTick = FirstIntraday /*!< Tick-by-tick historical data */
             , IntraDayBar /*!< Currently Unavailable */
         };
         Q_ENUM(RequestType)

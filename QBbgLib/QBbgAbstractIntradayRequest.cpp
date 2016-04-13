@@ -186,7 +186,7 @@ namespace QBbgLib {
 
 }
 
-uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed)
+uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed)
 {
-    return qHash(static_cast<std::underlying_type<QBbgLib::QBbgAbstractIntradayRequest::EventType>::type>(key), seed);
+    return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }

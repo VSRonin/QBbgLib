@@ -103,6 +103,6 @@ namespace QBbgLib {
 \brief Allows EventType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractIntradayRequest
 */
-QBBG_EXPORT uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed);
+QBBG_EXPORT uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed);
 #endif // QBbgAbstractIntradayRequest_h__
 
