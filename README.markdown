@@ -22,7 +22,8 @@ Now run
 Replacing InstallDirectory with the destination where the library will be installed and nmake with your build tool name (mingw-32-make for MinGW, etc.).
 
 ## Documentation
-Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it using the included doxyfile config.  
+Documentation in Qt Assistant format is packed with the repository, it is also available online at [lbeldi.bitbucket.org/QBbgLib](http://lbeldi.bitbucket.org/QBbgLib/).  
+To build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it using the included doxyfile config.  
 The conceptual schema of how this library work is represented in the image
 
 ![Schema](http://i278.photobucket.com/albums/kk113/V-Ronin/Schema.png)
