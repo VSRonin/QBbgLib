@@ -221,19 +221,41 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
             refData_req.setField(referenceFields[j]);
 
             // Add the request to the container and store its ID
+            const QPair<size_t, size_t> dictionaryKey(i, j);
             referenceDictionary.insert(
-                QPair<size_t, size_t>(i, j)
+                dictionaryKey
                 , allRequests.addRequest(refData_req)
             );
+            // Assert if the added request was invalid
+            Q_ASSERT(referenceDictionary.value(dictionaryKey) != QBbgAbstractRequest::InvalidID);
         }
     }
 
     // You can add historical and portfolio requests to the same group too if you want
+    //In this case we'll get the 3m EURIBOR rate as of 05/05/2015
+    QBbgHistoricalDataRequest histRq;
+    histRq.setSecurity(QBbgSecurity("EUR003M", QBbgSecurity::Index));
+    histRq.setField("PX_LAST");
+    histRq.setStartDate(QDate(2015, 5, 5));
+    histRq.setEndDate(QDate(2015, 5, 5));
+    const qint64 euriborID = allRequests.addRequest(histRq);
+    // Assert if the added request was invalid
+    Q_ASSERT(euriborID != QBbgAbstractRequest::InvalidID);
+
 
     // Send the request and wait for the response
     const quint32 resultGroupID = bbgManager.processRequestID(allRequests);
    
     // Print The result
+
+    // Historical Result
+    const QBbgHistoricalDataResponse* const euriborResult = bbgManager.getResult<QBbgHistoricalDataResponse>(resultGroupID, euriborID);
+    if (euriborResult->hasErrors())
+        std::cout << std::endl << qPrintable(QStringLiteral("Unable to download historical 3m EURIBOR. Error %1: %2").arg(euriborResult->errorString()).arg(euriborResult->errorMessage()));
+    else
+        std::cout << std::endl << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2").arg(euriborResult->date(0).toString(Qt::DefaultLocaleShortDate)).arg(euriborResult->value(0).toDouble()));
+
+    // Reference data results
     for (size_t i = 0; i < std::extent<decltype(referenceSecurities)>::value; ++i) {
         for (size_t j = 0; j < std::extent<decltype(referenceFields)>::value; ++j) {
             // The key in the ID dictionary
