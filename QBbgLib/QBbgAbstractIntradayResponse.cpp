@@ -67,16 +67,16 @@ namespace QBbgLib {
         return *this;
     }
 
-    double QBbgAbstractIntradayResponse::value(int period) const
+    double QBbgAbstractIntradayResponse::value(int index) const
     {
         Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_value.value(period);
+        return d->m_value.value(index,0.0);
     }
 
-    QDateTime QBbgAbstractIntradayResponse::dateTime(int period) const
+    QDateTime QBbgAbstractIntradayResponse::dateTime(int index) const
     {
         Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_time.value(period);
+        return d->m_time.value(index);
     }
 
     int QBbgAbstractIntradayResponse::size() const

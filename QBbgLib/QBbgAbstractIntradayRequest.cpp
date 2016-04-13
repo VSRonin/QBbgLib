@@ -163,15 +163,24 @@ namespace QBbgLib {
     {
         val = val.simplified().toUpper();
         val.replace(' ', '_');
-        if (val.compare("TRADE") == 0) return EventType::TRADE;
-        else if (val.compare("BID") == 0) return EventType::BID;
-        else if (val.compare("ASK") == 0) return EventType::ASK;
-        else if (val.compare("BID_BEST") == 0) return EventType::BID_BEST;
-        else if (val.compare("ASK_BEST") == 0) return EventType::ASK_BEST;
-        else if (val.compare("MID_PRICE") == 0) return EventType::MID_PRICE;
-        else if (val.compare("AT_TRADE") == 0) return EventType::AT_TRADE;
-        else if (val.compare("BEST_BID") == 0) return EventType::BEST_BID;
-        else if (val.compare("BEST_ASK") == 0) return EventType::BEST_ASK;
+        if (val.compare("TRADE") == 0) 
+            return EventType::TRADE;
+        else if (val.compare("BID") == 0) 
+            return EventType::BID;
+        else if (val.compare("ASK") == 0) 
+            return EventType::ASK;
+        else if (val.compare("BID_BEST") == 0) 
+            return EventType::BID_BEST;
+        else if (val.compare("ASK_BEST") == 0) 
+            return EventType::ASK_BEST;
+        else if (val.compare("MID_PRICE") == 0)
+            return EventType::MID_PRICE;
+        else if (val.compare("AT_TRADE") == 0) 
+            return EventType::AT_TRADE;
+        else if (val.compare("BEST_BID") == 0) 
+            return EventType::BEST_BID;
+        else if (val.compare("BEST_ASK") == 0) 
+            return EventType::BEST_ASK;
         else return EventType::Invalid;
     }
 
@@ -179,6 +188,5 @@ namespace QBbgLib {
 
 uint qHash(const QBbgLib::QBbgAbstractIntradayRequest::EventType&key, uint seed)
 {
-    static_assert(std::is_same<qint8, typename std::underlying_type<QBbgLib::QBbgAbstractIntradayRequest::EventType>::type>::value, "qint8 EventType is not base for");
-    return qHash(static_cast<qint8>(key), seed);
+    return qHash(static_cast<std::underlying_type<QBbgLib::QBbgAbstractIntradayRequest::EventType>::type>(key), seed);
 }

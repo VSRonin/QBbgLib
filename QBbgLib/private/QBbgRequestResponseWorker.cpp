@@ -491,6 +491,10 @@ namespace QBbgLib {
     {
         QHash<qint64, QBbgAbstractResponse*>::iterator i = m_Results.find(RequestID);
         Q_ASSERT(i != m_Results.end());
+        if (i.value()->responseType() == QBbgAbstractResponse::ResponseType::IntraDayTickResponse){
+            Q_ASSERT(dynamic_cast<QBbgIntradayTickResponse* const>(i.value()));
+            static_cast<QBbgIntradayTickResponse* const>(i.value())->removeEmptyLists();
+        }
         emit dataRecieved(RequestID, i.value());
         emit progress((100 * ++m_ResurnedResults) / m_Requests.size());
         Q_ASSERT_X(m_ResurnedResults <= m_Requests.size(), "QBbgRequestResponseWorker::HeaderRecieved", "Too many results returned");

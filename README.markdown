@@ -12,7 +12,7 @@ Licensing adheres to LGPL v3. Please see the included LICENSE file
 To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API.
 For example, in Windows
 
-    SET BLPPATH=C:\\blp\\API\\APIv3\\C++API\\v3.8.18.1
+    SET BLPPATH=C:\blp\API\APIv3\C++API\v3.8.18.1
 
 Now run
 
@@ -48,9 +48,11 @@ This library is still under development. This is a list of what has been done, w
 * Missing and Undocumented Functionalities ( these are available on the API but there is no mention of them in the docs )
     * Download forward curves ![0% ready](http://progressed.io/bar/0)
 * Whishlist
+    * Use [CMake](https://cmake.org/) instead of qmake as build tool
     * Make the library depend only on STL and possibly [Boost](http://www.boost.org/) and make Qt only optional
     * Make library usable from [QML](http://doc.qt.io/qt-5/qtqml-index.html)
     * C++/CLI overlay of the API to make it available to .Net programming languages (C#, VB.Net, etc.)
+    * Find a way to build reliable unit tests that do not break in time
 
 ## Reference
 The documentation on the Bloomberg API running underneath this library can be found on the [Bloomberg Open API website](http://www.bloomberglabs.com/api/documentation/)

@@ -64,58 +64,78 @@ namespace QBbgLib {
         virtual ~QBbgManager();
         /*!
         \brief Starts the group of requests asynchronously 
-        \details This function will start a group of requests and return its ID.<br/>When the process is completed it will emit finished with the same ID as the returned one.
+        \details This function will start a group of requests and return its ID.<br/>
+        When the process is completed it will emit finished with the same ID as the returned one.<br/>
+        If the request is invalid 0 will be returned.
         \note The returned ID does not depend from the one set in any single request
         */
         Q_INVOKABLE quint32 startRequest(const QBbgRequestGroup& rq);
         /*!
         \brief Starts the request asynchronously
-        \details This function will start a request and return its ID.<br/>When the process is completed it will emit finished with the same ID as the returned one.
+        \details This function will start a request and return its ID.<br/>
+        When the process is completed it will emit finished with the same ID as the returned one.<br/>
+        If the request is invalid 0 will be returned.
         \note The returned ID does not depend from the one set in the single request
         */
         Q_INVOKABLE quint32 startRequest(const QBbgAbstractRequest& rq);
         /*!
         \brief Starts the group of requests synchronously
-        \details This function will start a group of requests and return its ID.<br/>The program will wait until the process is finished.
+        \details This function will start a group of requests and return its ID.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid 0 will be returned.
         \note The returned ID does not depend from the one set in any single request
         */
         Q_INVOKABLE quint32 processRequestID(const QBbgRequestGroup& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its ID.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its ID.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid 0 will be returned.
         \note The returned ID does not depend from the one set in the single request
         */
         Q_INVOKABLE quint32 processRequestID(const QBbgAbstractRequest& rq);
         /*!
         \brief Starts the group of requests synchronously
-        \details This function will start a group of requests and return the individual results.<br/>The program will wait until the process is finished.
+        \details This function will start a group of requests and return the individual results.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid the program will crash.
         \return A hash table with key the ID of the request and value a pointer to the response that has then to be dynamic_casted into the appropriate type
         \deprecated Use processRequestID(const QBbgRequestGroup&) and getResult() instead
         */
         const QHash<qint64, QBbgAbstractResponse* >& processRequest(const QBbgRequestGroup& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its result.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid a null pointer will be returned.
         */
         const QBbgReferenceDataResponse* const processRequest(const QBbgReferenceDataRequest& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its result.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid a null pointer will be returned.
         */
         const QBbgHistoricalDataResponse* const processRequest(const QBbgHistoricalDataRequest& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its result.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid a null pointer will be returned.
         */
         const QBbgPortfolioDataResponse* const processRequest(const QBbgPortfolioDataRequest& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its result.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid a null pointer will be returned.
         */
         const QBbgIntradayTickResponse* const processRequest(const QBbgIntradayTickRequest& rq);
         /*!
         \brief Starts the request synchronously
-        \details This function will start a request and return its result.<br/>The program will wait until the process is finished.
+        \details This function will start a request and return its result.<br/>
+        The program will wait until the process is finished.<br/>
+        If the request is invalid a null pointer will be returned.
         */
         const QBbgAbstractResponse* const processRequest(const QBbgAbstractRequest& rq);
         /*!
@@ -146,10 +166,15 @@ namespace QBbgLib {
                     if (!std::is_same<QBbgPortfolioDataResponse, T>::value)
                         return nullptr;
                     break;
+                case QBbgAbstractResponse::ResponseType::IntraDayTickResponse:
+                    if (!std::is_same<QBbgIntradayTickResponse, T>::value)
+                        return nullptr;
+                    break;
                 default:
                     Q_UNREACHABLE(); //Unhandled response type
                 }
             }
+            Q_ASSERT(dynamic_cast<const T* const>(genericRes));
             return static_cast<const T* const>(genericRes);
         }
         //! Returns a list of all available result group IDs

@@ -29,7 +29,41 @@ namespace QBbgLib {
     class QBBG_EXPORT QBbgIntradayTickResponse : public QBbgAbstractIntradayResponse
     {
         Q_GADGET
-    private:
+        /*!
+        \brief Checks if the series contains any condition code
+        \getter hasConditionCode
+        */
+        Q_PROPERTY(bool hasConditionCode READ hasConditionCode);
+        /*!
+        \brief Checks if the series contains any exchange code
+        \getter hasExchangeCode
+        */
+        Q_PROPERTY(bool hasExchangeCode READ hasExchangeCode);
+        /*!
+        \brief Checks if the series contains any bank identifier code or market identifier code
+        \getter hasBicMicCode
+        */
+        Q_PROPERTY(bool hasBicMicCode READ hasBicMicCode);
+        /*!
+        \brief Checks if the series contains any buy side broker code
+        \getter hasBrokerBuyCode
+        */
+        Q_PROPERTY(bool hasBrokerBuyCode READ hasBrokerBuyCode);
+        /*!
+        \brief Checks if the series contains any sell side broker code
+        \getter hasBrokerSellCode
+        */
+        Q_PROPERTY(bool hasBrokerSellCode READ hasBrokerSellCode);
+        /*!
+        \brief Checks if the series contains any reporting party side code
+        \getter hasRpsCode
+        */
+        Q_PROPERTY(bool hasRpsCode READ hasRpsCode);
+        /*!
+        \brief Type of events in the series
+        \getter type
+        */
+        Q_PROPERTY(QBbgAbstractIntradayRequest::EventType type READ type);
         Q_DECLARE_PRIVATE(QBbgIntradayTickResponse)
     public:
         //! Destructor
@@ -42,19 +76,79 @@ namespace QBbgLib {
         virtual QBbgIntradayTickResponse& operator=(const QBbgIntradayTickResponse& other);
         //! Reimplemented from QBbgAbstractResponse::isEmpty()
         virtual bool isEmpty() const;
-        const QBbgAbstractIntradayRequest::EventType& Type() const;
-        Q_INVOKABLE virtual double tickSize(int period) const;
-        Q_INVOKABLE virtual QString conditionCode(int period) const;
-        Q_INVOKABLE virtual QString exchangeCode(int period) const;
-        Q_INVOKABLE virtual QString micCode(int period) const;
-        Q_INVOKABLE virtual QString brokerBuyCode(int period) const;
-        Q_INVOKABLE virtual QString brokerSellCode(int period) const;
-        Q_INVOKABLE virtual QString rpsCode(int period) const;
+        //! Type of events in the series
+        QBbgAbstractIntradayRequest::EventType type() const;
+        /*!
+        \brief The size related to the event
+        \arg index The index of the object in the series
+        \return 0 if index is out of range
+        */
+        Q_INVOKABLE virtual double tickSize(int index) const;
+        /*!
+        \brief The condition code related to the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeConditionCodes
+        */
+        Q_INVOKABLE virtual QString conditionCode(int index) const;
+        /*!
+        \brief The exchange code related to the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeExchangeCodes
+        */
+        Q_INVOKABLE virtual QString exchangeCode(int index) const;
+        /*!
+        \brief The bank identifier code or market identifier code related to the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeBicMicCodes
+        */
+        Q_INVOKABLE virtual QString bicMicCode(int index) const;
+        /*!
+        \brief The broker code related to the buy side of the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeBrokerCodes
+        */
+        Q_INVOKABLE virtual QString brokerBuyCode(int index) const;
+        /*!
+        \brief The broker code related to the sell side of the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeBrokerCodes
+        */
+        Q_INVOKABLE virtual QString brokerSellCode(int index) const;
+        /*!
+        \brief The reporting party side code related to the event
+        \arg index The index of the object in the series
+        \return A null string if index is out of range
+        \sa QBbgIntradayTickRequest::includeRpsCodes
+        */
+        Q_INVOKABLE virtual QString rpsCode(int index) const;
+        /*!
+        \sa hasConditionCode
+        */
         bool hasConditionCode() const;
+        /*!
+        \sa hasExchangeCode
+        */
         bool hasExchangeCode() const;
-        bool hasMicCode() const;
+        /*!
+        \sa hasBicMicCode
+        */
+        bool hasBicMicCode() const;
+        /*!
+        \sa hasBrokerBuyCode
+        */
         bool hasBrokerBuyCode() const;
+        /*!
+        \sa hasBrokerSellCode
+        */
         bool hasBrokerSellCode() const;
+        /*!
+        \sa hasRpsCode
+        */
         bool hasRpsCode() const;
     protected:
         QBbgIntradayTickResponse(QBbgIntradayTickResponsePrivate* dp);

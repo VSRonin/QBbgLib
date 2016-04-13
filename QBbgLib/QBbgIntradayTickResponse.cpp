@@ -43,7 +43,7 @@ namespace QBbgLib {
         return *this;
     }
     QBbgIntradayTickResponsePrivate::QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q)
-        :QBbgAbstractIntradayResponsePrivate(q, QBbgAbstractResponse::ResponseType::HistoricalDataResponse)
+        :QBbgAbstractIntradayResponsePrivate(q, QBbgAbstractResponse::ResponseType::IntraDayTickResponse)
     {}
 
     QBbgIntradayTickResponsePrivate::QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q, const QBbgIntradayTickResponsePrivate& other)
@@ -103,7 +103,7 @@ namespace QBbgLib {
             d->m_conditionCode.clear();
         if (!hasExchangeCode())
             d->m_exchangeCode.clear();
-        if (!hasMicCode())
+        if (!hasBicMicCode())
             d->m_micCode.clear();
         if (!hasBrokerBuyCode())
             d->m_brokerBuyCode.clear();
@@ -119,7 +119,7 @@ namespace QBbgLib {
         return d->m_time.isEmpty();
     }
 
-    const QBbgAbstractIntradayRequest::EventType& QBbgIntradayTickResponse::Type() const
+    QBbgAbstractIntradayRequest::EventType QBbgIntradayTickResponse::type() const
     {
         Q_D(const QBbgIntradayTickResponse);
         return d->m_type;
@@ -140,7 +140,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasConditionCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_conditionCode.constBegin(), d->m_conditionCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_conditionCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::exchangeCode(int period) const
@@ -152,19 +152,19 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasExchangeCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_exchangeCode.constBegin(), d->m_exchangeCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_exchangeCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
-    QString QBbgIntradayTickResponse::micCode(int period) const
+    QString QBbgIntradayTickResponse::bicMicCode(int period) const
     {
         Q_D(const QBbgIntradayTickResponse);
         return d->m_micCode.value(period);
     }
 
-    bool QBbgIntradayTickResponse::hasMicCode() const
+    bool QBbgIntradayTickResponse::hasBicMicCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_micCode.constBegin(), d->m_micCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_micCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::brokerBuyCode(int period) const
@@ -176,7 +176,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasBrokerBuyCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_brokerBuyCode.constBegin(), d->m_brokerBuyCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_brokerBuyCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::brokerSellCode(int period) const
@@ -188,7 +188,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasBrokerSellCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_brokerSellCode.constBegin(), d->m_brokerSellCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_brokerSellCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
     QString QBbgIntradayTickResponse::rpsCode(int period) const
@@ -200,7 +200,7 @@ namespace QBbgLib {
     bool QBbgIntradayTickResponse::hasRpsCode() const
     {
         Q_D(const QBbgIntradayTickResponse);
-        return std::any_of(d->m_rpsCode.constBegin(), d->m_rpsCode.constEnd(), [](const QString& val) {return !val.isEmpty(); });
+        return d->genericHas(d->m_rpsCode, [](const QString& val)->bool {return !val.isEmpty(); });
     }
 
     void QBbgIntradayTickResponse::setType(const QBbgAbstractIntradayRequest::EventType& val)

@@ -39,8 +39,18 @@ namespace QBbgLib {
         virtual ~QBbgAbstractIntradayResponse() = 0;
         //! Copies another intraday response
         virtual QBbgAbstractIntradayResponse& operator=(const QBbgAbstractIntradayResponse& a);
-        Q_INVOKABLE virtual double value(int period) const;
-        Q_INVOKABLE virtual QDateTime dateTime(int period) const;
+        /*!
+        \brief The value related to the event
+        \arg index The index of the object in the series
+        \return 0 if index is out of range
+        */
+        Q_INVOKABLE virtual double value(int index) const;
+        /*!
+        \brief Date and time related to the event
+        \arg index The index of the object in the series
+        \return A null QDateTime if index is out of range
+        */
+        Q_INVOKABLE virtual QDateTime dateTime(int index) const;
         //! Number of values in the series
         virtual int size() const;
     protected:
