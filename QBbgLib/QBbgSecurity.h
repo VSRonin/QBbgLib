@@ -83,32 +83,32 @@ namespace QBbgLib {
         {
             Invalid = -1
             //Proper yellow keys
-            , Govt
-            , Corp
-            , Mtge
-            , MMkt
-            , Muni
-            , Pfd
-            , Equity
-            , Comdty
-            , Index
-            , Curncy
-            , Client
+            , Govt  /*!< Government Bond */
+            , Corp /*!< Corporate Bond */
+            , Mtge /*!< Asset Backed Security */
+            , MMkt  /*!< Money Market */
+            , Muni /*!< Municipal Bond */
+            , Pfd /*!< Preferred */
+            , Equity /*!< Equity */
+            , Comdty /*!< Commodity */
+            , Index /*!< Index */
+            , Curncy /*!< Currency */
+            , Client /*!< Portfolio */
             //Prefixes
             //, ticker // still needs another yellow key
-            , cusip = FirstPrefix
-            , wpk
-            , isin
-            , buid
-            , sedol1
-            , sedol2
-            , sicovam
-            , common
-            , bsid
-            , svm
-            , cins
-            , cats
-            , bbgid
+            , cusip = FirstPrefix /*!< CUSIP code */
+            , wpk /*!< Wertpapier Kenn-Nummer */
+            , isin /*!< ISIN code */
+            , buid /*!< Unique Bloomberg identifier */
+            , sedol1 /*!< SEDOL code */
+            , sedol2 /*!< SEDOL code */
+            , sicovam /*!< SICOVAM code */
+            , common /*!< EUROCLEAR common code */
+            , bsid /*!< Bloomberg identifier */
+            , svm /*!< SVM number */
+            , cins /*!< CINS number */
+            , cats /*!< Certificates Of Accrual On Treasury Securities */
+            , bbgid /*!< unique global Bloomberg identifies */
         };
         Q_ENUM(YellowKeys)
     private:
