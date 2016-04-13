@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yellowkeytostring',['yellowKeyToString',['../class_q_bbg_lib_1_1_q_bbg_security.html#a94c263acfb65caa7f1329274b7bb4151',1,'QBbgLib::QBbgSecurity']]]
+  ['weight',['weight',['../class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a7e7f0bbf0b29caf1a9255a6a3261b2dd',1,'QBbgLib::QBbgPortfolioDataResponse']]]
 ];

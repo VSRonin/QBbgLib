@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -101,6 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
+      <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_u"><span>u</span></a></li>
       <li class="current"><a href="#index_v"><span>v</span></a></li>
     </ul>
@@ -163,6 +164,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>endDate
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#add3892d977f8b8abf5c1675ea2260830">QBbgLib::QBbgHistoricalDataRequest</a>
 </li>
+<li>endDateTime
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#ac55dd78447c531e5d908e6c35d9f340c">QBbgLib::QBbgAbstractIntradayRequest</a>
+</li>
 <li>errorCode
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a113eb734579ac115bfb62d9b8f015083">QBbgLib::QBbgAbstractResponse</a>
 </li>
@@ -171,6 +175,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>errorString
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a376cf6ea0e9eaf38d684f5b22c23894a">QBbgLib::QBbgAbstractResponse</a>
+</li>
+<li>eventType
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#a44a1136540b24ec09f707c9568068dde">QBbgLib::QBbgAbstractIntradayRequest</a>
 </li>
 <li>exchange
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_security.html#accc2b73163166e13871c4255317458ef">QBbgLib::QBbgSecurity</a>
@@ -195,6 +202,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_h"></a>- h -</h3><ul>
+<li>hasBicMicCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#aa815a5bbe692075d7ed2e9cedc40c3e1">QBbgLib::QBbgIntradayTickResponse</a>
+</li>
+<li>hasBrokerBuyCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a75a79970b42bd2645efbc06e098c25da">QBbgLib::QBbgIntradayTickResponse</a>
+</li>
+<li>hasBrokerSellCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a366ccb992282581d2b76d12afbf507a9">QBbgLib::QBbgIntradayTickResponse</a>
+</li>
+<li>hasConditionCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a5f4caa3db1c7842bd8672e74a218b5aa">QBbgLib::QBbgIntradayTickResponse</a>
+</li>
 <li>hasCost
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a0de8c32540444b0bc149421e4b71470d">QBbgLib::QBbgPortfolioDataResponse</a>
 </li>
@@ -207,11 +226,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>hasErrors
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a796dfb0e7d3fd40087be0c1b599efdb8">QBbgLib::QBbgAbstractResponse</a>
 </li>
+<li>hasExchangeCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a87a672216983b991c1877b3656defb42">QBbgLib::QBbgIntradayTickResponse</a>
+</li>
 <li>hasMarketValue
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#a4f7cd277cb5987e5c989defc8547dafd">QBbgLib::QBbgPortfolioDataResponse</a>
 </li>
 <li>hasPosition
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab72f4c97cf32bb4e5fd1aaaaa57a066b">QBbgLib::QBbgPortfolioDataResponse</a>
+</li>
+<li>hasRpsCode
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#aa5af657cff0d9241f069a0153d3d8a29">QBbgLib::QBbgIntradayTickResponse</a>
 </li>
 <li>hasTable
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_reference_data_response.html#aacb0e02205a7ef20c32e36d0e78cd904">QBbgLib::QBbgReferenceDataResponse</a>
@@ -226,6 +251,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>includeBicMicCodes
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#a34713b77dca05550eaf047d9134aea33">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
+<li>includeBrokerCodes
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#a542eb3b7945f21dd6edf05b5d3c91a90">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
+<li>includeConditionCodes
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#a9b9db09aa0bf8a195d5a837956b1af99">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
+<li>includeExchangeCodes
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#a162b2bbd61e36b77142c87872d3fc29f">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
+<li>includeNonPlottable
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#acbdf1345c40002c4f8471cf339eba52d">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
+<li>includeRpsCodes
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html#ad284e4b75c08a72b00390b310fb40bb4">QBbgLib::QBbgIntradayTickRequest</a>
+</li>
 <li>isEmpty
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a191fa8388a390decb958b429cc8ea150">QBbgLib::QBbgAbstractResponse</a>
 , <a class="el" href="class_q_bbg_lib_1_1_q_bbg_override.html#aa5f6f294d7631cf86b160deb19e499b4">QBbgLib::QBbgOverride</a>
@@ -310,13 +353,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a20ec69d617657c71be08aad98e58fa98">QBbgLib::QBbgAbstractRequest</a>
 </li>
 <li>size
-: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af530b28b8533259737bd1d7672498c15">QBbgLib::QBbgHistoricalDataResponse</a>
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_response.html#a51ba8d1de9b15ae015493e0a168a2168">QBbgLib::QBbgAbstractIntradayResponse</a>
+, <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_response.html#af530b28b8533259737bd1d7672498c15">QBbgLib::QBbgHistoricalDataResponse</a>
 , <a class="el" href="class_q_bbg_lib_1_1_q_bbg_override.html#ab6ee333416190a5b10aaeea909962e10">QBbgLib::QBbgOverride</a>
 , <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_response.html#ab6d418b8afb0cd3f449ee21a6b362bf2">QBbgLib::QBbgPortfolioDataResponse</a>
 , <a class="el" href="class_q_bbg_lib_1_1_q_bbg_request_group.html#a4febfe81eb1ea7d800179168d45be810">QBbgLib::QBbgRequestGroup</a>
 </li>
 <li>startDate
 : <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae06832bb4763ec3d8655c1bce28fb1ce">QBbgLib::QBbgHistoricalDataRequest</a>
+</li>
+<li>startDateTime
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#ade158a7bb88f423ec4626846ef4b1402">QBbgLib::QBbgAbstractIntradayRequest</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>type
+: <a class="el" href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a24c307f5cee9f2ab9d9fb79d1e154b16">QBbgLib::QBbgIntradayTickResponse</a>
 </li>
 </ul>
 
@@ -345,7 +399,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:19 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:48:02 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

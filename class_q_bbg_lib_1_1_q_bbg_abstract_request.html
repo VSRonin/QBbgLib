@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -117,10 +117,12 @@ Inheritance diagram for QBbgLib::QBbgAbstractRequest:</div>
  <div class="center">
   <img src="class_q_bbg_lib_1_1_q_bbg_abstract_request.png" usemap="#QBbgLib::QBbgAbstractRequest_map" alt=""/>
   <map id="QBbgLib::QBbgAbstractRequest_map" name="QBbgLib::QBbgAbstractRequest_map">
-<area href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html" title="Request with fields and overrides. " alt="QBbgLib::QBbgAbstractFieldRequest" shape="rect" coords="238,56,466,80"/>
-<area href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html" title="An historical request. " alt="QBbgLib::QBbgHistoricalDataRequest" shape="rect" coords="0,112,228,136"/>
-<area href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html" title="A portfolio request. " alt="QBbgLib::QBbgPortfolioDataRequest" shape="rect" coords="238,112,466,136"/>
-<area href="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html" title="A reference data request. " alt="QBbgLib::QBbgReferenceDataRequest" shape="rect" coords="476,112,704,136"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html" title="Request with fields and overrides. " alt="QBbgLib::QBbgAbstractFieldRequest" shape="rect" coords="246,56,482,80"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html" title="Base class for intraday requests. " alt="QBbgLib::QBbgAbstractIntradayRequest" shape="rect" coords="738,56,974,80"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html" title="An historical request. " alt="QBbgLib::QBbgHistoricalDataRequest" shape="rect" coords="0,112,236,136"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html" title="A portfolio request. " alt="QBbgLib::QBbgPortfolioDataRequest" shape="rect" coords="246,112,482,136"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html" title="A reference data request. " alt="QBbgLib::QBbgReferenceDataRequest" shape="rect" coords="492,112,728,136"/>
+<area href="class_q_bbg_lib_1_1_q_bbg_intraday_tick_request.html" title="Enables retrieval of tick-by-tick history. " alt="QBbgLib::QBbgIntradayTickRequest" shape="rect" coords="738,112,974,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -133,7 +135,7 @@ Public Types</h2></td></tr>
 <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdae229f3fb7af13c9a0d50f787ae7d5430">RequestType::ReferenceData</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdaa0de9f3e84ce68480e8919febdeacd71">RequestType::PortfolioData</a>, 
-<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654">RequestType::IntraDayTick</a> = FirstRealTime, 
+<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654">RequestType::IntraDayTick</a> = FirstIntraday, 
 <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdad8cee52a76e258e617f0dd74aef08836">RequestType::IntraDayBar</a>
 <br />
  }</td></tr>
@@ -158,6 +160,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a78e6804f88bad6ef0f9470e30ad0aee7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7">operator=</a> (const <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;other)</td></tr>
 <tr class="memdesc:a78e6804f88bad6ef0f9470e30ad0aee7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies another request.  <a href="#a78e6804f88bad6ef0f9470e30ad0aee7">More...</a><br /></td></tr>
 <tr class="separator:a78e6804f88bad6ef0f9470e30ad0aee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6382a999332ee500f6ba8996a5a1f72a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6382a999332ee500f6ba8996a5a1f72a">operator==</a> (const <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;other) const </td></tr>
+<tr class="memdesc:a6382a999332ee500f6ba8996a5a1f72a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if two requests are identical.  <a href="#a6382a999332ee500f6ba8996a5a1f72a">More...</a><br /></td></tr>
+<tr class="separator:a6382a999332ee500f6ba8996a5a1f72a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacc050d917d9d892e38ba2b906f650a9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbd">RequestType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9">requestType</a> () const </td></tr>
 <tr class="memdesc:aacc050d917d9d892e38ba2b906f650a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of request.  <a href="#aacc050d917d9d892e38ba2b906f650a9">More...</a><br /></td></tr>
 <tr class="separator:aacc050d917d9d892e38ba2b906f650a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -340,7 +345,7 @@ Related Functions</h2></td></tr>
 
 <p>Checks if the request is valid. </p>
 
-<p>Reimplemented in <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8dc188774daa43d253db5d8ae560f8ee">QBbgLib::QBbgHistoricalDataRequest</a>, and <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0">QBbgLib::QBbgAbstractFieldRequest</a>.</p>
+<p>Reimplemented in <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a8dc188774daa43d253db5d8ae560f8ee">QBbgLib::QBbgHistoricalDataRequest</a>, <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#aa08f0a9d01cb3e5abe7e05fb067052b5">QBbgLib::QBbgAbstractIntradayRequest</a>, and <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html#ad3f38ca35b96595b46970f7b4d2875d0">QBbgLib::QBbgAbstractFieldRequest</a>.</p>
 
 </div>
 </div>
@@ -367,6 +372,32 @@ Related Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Copies another request. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6382a999332ee500f6ba8996a5a1f72a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool QBbgLib::QBbgAbstractRequest::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if two requests are identical. </p>
 
 </div>
 </div>
@@ -471,7 +502,7 @@ Related Functions</h2></td></tr>
 
 <p>Sets the security for the current request to the specified one. </p>
 
-<p>Reimplemented in <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a33d3b33f5e5b1eaaa8da22afa432708a">QBbgLib::QBbgHistoricalDataRequest</a>, <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#af7e544cc2cda1d66b5ab21514a792783">QBbgLib::QBbgPortfolioDataRequest</a>, and <a class="el" href="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa7cec6a7ca91fb0a4fad8843782f102a">QBbgLib::QBbgReferenceDataRequest</a>.</p>
+<p>Reimplemented in <a class="el" href="class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a33d3b33f5e5b1eaaa8da22afa432708a">QBbgLib::QBbgHistoricalDataRequest</a>, <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#ae47ac97e8310df41752d03653d71d3ba">QBbgLib::QBbgAbstractIntradayRequest</a>, <a class="el" href="class_q_bbg_lib_1_1_q_bbg_portfolio_data_request.html#af7e544cc2cda1d66b5ab21514a792783">QBbgLib::QBbgPortfolioDataRequest</a>, and <a class="el" href="class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#aa7cec6a7ca91fb0a4fad8843782f102a">QBbgLib::QBbgReferenceDataRequest</a>.</p>
 
 </div>
 </div>
@@ -654,7 +685,7 @@ Related Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:16 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:47:59 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -144,12 +144,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    protected:</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        virtual <span class="keywordtype">bool</span> sameOverrides(const QBbgAbstractFieldRequest&amp; a)const;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        friend class QBbgRequestGroupPrivate;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        friend class <a class="code" href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgRequestGroup</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    };</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif // SingleBbgRequest_h__</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        QBbgAbstractFieldRequest() = delete;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        friend class QBbgRequestGroupPrivate;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        friend class <a class="code" href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgRequestGroup</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#endif // SingleBbgRequest_h__</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_override_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_override.html">QBbgLib::QBbgOverride</a></div><div class="ttdoc">A set of overrides. </div><div class="ttdef"><b>Definition:</b> QBbgOverride.h:39</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_request_group_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_request_group.html">QBbgLib::QBbgRequestGroup</a></div><div class="ttdoc">A list of requests. </div><div class="ttdef"><b>Definition:</b> QBbgRequestGroup.h:35</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_field_request_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_field_request.html">QBbgLib::QBbgAbstractFieldRequest</a></div><div class="ttdoc">Request with fields and overrides. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractFieldRequest.h:33</div></div>
@@ -158,7 +159,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:15 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:47:57 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

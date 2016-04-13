@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -155,7 +155,7 @@ Public Types</h2></td></tr>
 <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdae229f3fb7af13c9a0d50f787ae7d5430">RequestType::ReferenceData</a>, 
 <br />
 &#160;&#160;<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdaa0de9f3e84ce68480e8919febdeacd71">RequestType::PortfolioData</a>, 
-<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654">RequestType::IntraDayTick</a> = FirstRealTime, 
+<a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbda6f747454ab3c231b767ffb665e8da654">RequestType::IntraDayTick</a> = FirstIntraday, 
 <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbdad8cee52a76e258e617f0dd74aef08836">RequestType::IntraDayBar</a>
 <br />
  }</td></tr>
@@ -292,6 +292,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a78e6804f88bad6ef0f9470e30ad0aee7 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a78e6804f88bad6ef0f9470e30ad0aee7">operator=</a> (const <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;other)</td></tr>
 <tr class="memdesc:a78e6804f88bad6ef0f9470e30ad0aee7 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies another request.  <a href="#a78e6804f88bad6ef0f9470e30ad0aee7">More...</a><br /></td></tr>
 <tr class="separator:a78e6804f88bad6ef0f9470e30ad0aee7 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6382a999332ee500f6ba8996a5a1f72a inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a6382a999332ee500f6ba8996a5a1f72a">operator==</a> (const <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html">QBbgAbstractRequest</a> &amp;other) const </td></tr>
+<tr class="memdesc:a6382a999332ee500f6ba8996a5a1f72a inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if two requests are identical.  <a href="#a6382a999332ee500f6ba8996a5a1f72a">More...</a><br /></td></tr>
+<tr class="separator:a6382a999332ee500f6ba8996a5a1f72a inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacc050d917d9d892e38ba2b906f650a9 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#a2bb57c81884f27a4f7d5e894b6e35dbd">RequestType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_bbg_lib_1_1_q_bbg_abstract_request.html#aacc050d917d9d892e38ba2b906f650a9">requestType</a> () const </td></tr>
 <tr class="memdesc:aacc050d917d9d892e38ba2b906f650a9 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of request.  <a href="#aacc050d917d9d892e38ba2b906f650a9">More...</a><br /></td></tr>
 <tr class="separator:aacc050d917d9d892e38ba2b906f650a9 inherit pub_methods_class_q_bbg_lib_1_1_q_bbg_abstract_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1871,7 +1874,7 @@ Prorated </li>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:17 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:47:59 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

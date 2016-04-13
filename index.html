@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -93,12 +93,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The library supports all operating systems and both 32 and 64 bits configurations.</p>
 <p>Licensing adheres to LGPL v3. Please see the included LICENSE file</p>
 <h2>Building the library</h2>
-<p>To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API. For example, in Windows </p><pre><code>
-SET BLPPATH=C:\blp\API\APIv3\C++API\v3.8.18.1
-</code></pre><p> Now run </p><pre><code>
-qmake "PREFIX=InstallDirectory"
+<p>To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API. For example, in Windows </p><pre class="fragment">SET BLPPATH=C:\blp\API\APIv3\C++API\v3.8.18.1
+</pre><p>Now run </p><pre class="fragment">qmake "PREFIX=InstallDirectory"
 nmake
-</code></pre><p> Replacing InstallDirectory with the destination where the library will be installed and nmake with your build tool name (mingw-32-make for MinGW, etc.).</p>
+</pre><p>Replacing InstallDirectory with the destination where the library will be installed and nmake with your build tool name (mingw-32-make for MinGW, etc.).</p>
 <h2>Documentation</h2>
 <p>Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need <a href="http://www.doxygen.org">Doxygen</a>. Just run it using the included doxyfile config.<br />
  The conceptual schema of how this library work is represented in the image<br />
@@ -106,11 +104,82 @@ nmake
 <img src="http://i278.photobucket.com/albums/kk113/V-Ronin/Schema.png"  alt="Schema"/>
 </div>
 <h2>Example Usage</h2>
-<p>Please refer to the example folder for code snippets that illustarte the library in action. </p>
+<p>Please refer to the example folder for code snippets that illustarte the library in action.</p>
+<h2>Current Development</h2>
+<p>This library is still under development. This is a list of what has been done, what needs to be done and what could be done.</p>
+<ul>
+<li>Implemented Functionalities<ul>
+<li>Reference Data ( BDP() and BDS() in excel ) <div class="image">
+<img src="http://progressed.io/bar/100?title=done"  alt="100% ready"/>
+</div>
+</li>
+<li>Historical Data ( BDH() in excel ) <div class="image">
+<img src="http://progressed.io/bar/100?title=done"  alt="100% ready"/>
+</div>
+</li>
+<li>Portfolio Data ( BDS() in excel using a Client security ) <div class="image">
+<img src="http://progressed.io/bar/100?title=done"  alt="100% ready"/>
+</div>
+</li>
+<li>Intraday Tick Data ( BDH() in excel using IntrRw=true ) <div class="image">
+<img src="http://progressed.io/bar/100?title=done"  alt="100% ready"/>
+</div>
+</li>
+</ul>
+</li>
+<li>Missing Functionalities<ul>
+<li>Intraday Bar Data ( BDH() in excel specifying BarType ) <div class="image">
+<img src="http://progressed.io/bar/50"  alt="50% ready"/>
+</div>
+</li>
+<li>EQS ( BEQS() in excel ) <div class="image">
+<img src="http://progressed.io/bar/10"  alt="10% ready"/>
+</div>
+</li>
+<li>Field Info ( BFieldInfo() in excel ) <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+<li>Field Search ( FLDS on the terminal ) <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+<li>Categorized Field Search <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+<li>Real Time Data <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+<li>API Authorisation <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+</ul>
+</li>
+<li>Missing and Undocumented Functionalities ( these are available on the API but there is no mention of them in the docs )<ul>
+<li>Download forward curves <div class="image">
+<img src="http://progressed.io/bar/0"  alt="0% ready"/>
+</div>
+</li>
+</ul>
+</li>
+<li>Whishlist<ul>
+<li>Use <a href="https://cmake.org/">CMake</a> instead of qmake as build tool</li>
+<li>Make the library depend only on STL and possibly <a href="http://www.boost.org/">Boost</a> and make Qt only optional</li>
+<li>Make library usable from <a href="http://doc.qt.io/qt-5/qtqml-index.html">QML</a></li>
+<li>C++/CLI overlay of the API to make it available to .Net programming languages (C#, VB.Net, etc.)</li>
+<li>Find a way to build reliable unit tests that do not break in time</li>
+</ul>
+</li>
+</ul>
+<h2>Reference</h2>
+<p>The documentation on the Bloomberg API running underneath this library can be found on the <a href="http://www.bloomberglabs.com/api/documentation/">Bloomberg Open API website</a> </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:19 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:48:02 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

@@ -30,7 +30,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">QBbgLib
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">0.4</span>
    </div>
    <div id="projectbrief">Qt wrapper for the Bloomberg API</div>
   </td>
@@ -111,7 +111,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">* GNU Lesser General Public License for more details.                           *</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">*                                                                               *</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">* You should have received a copy of the GNU Lesser General Public License      *</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">* along with QBbgLib. If not, see &lt; http://www.gnu.org/licenses/&gt;.               *</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">* along with QBbgLib. If not, see &lt; http://www.gnu.org/licenses/ &gt;.             *</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">*                                                                               *</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">\*******************************************************************************/</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
@@ -131,20 +131,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        virtual QBbgAbstractFieldResponse&amp; operator=(const QBbgAbstractFieldResponse&amp; a);</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        virtual const QString&amp; header() const;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    protected:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        virtual <span class="keywordtype">void</span> setHeader(const QString&amp; Header = QString());</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        friend class QBbgRequestResponseWorker;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    };</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif // QBbgAbstractFieldResponse_h__</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        QBbgAbstractFieldResponse() = delete;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        virtual <span class="keywordtype">void</span> setHeader(const QString&amp; Header = QString());</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        friend class QBbgRequestResponseWorker;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    };</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif // QBbgAbstractFieldResponse_h__</span></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_field_response_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_field_response.html">QBbgLib::QBbgAbstractFieldResponse</a></div><div class="ttdoc">Base class for Bloomberg Responses based on field request. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractFieldResponse.h:26</div></div>
 <div class="ttc" id="class_q_bbg_lib_1_1_q_bbg_abstract_response_html"><div class="ttname"><a href="class_q_bbg_lib_1_1_q_bbg_abstract_response.html">QBbgLib::QBbgAbstractResponse</a></div><div class="ttdoc">Base Class for Bloomberg Responses. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractResponse.h:29</div></div>
 <div class="ttc" id="namespace_q_bbg_lib_html"><div class="ttname"><a href="namespace_q_bbg_lib.html">QBbgLib</a></div><div class="ttdoc">Namespace containing all classes of the QBbgLib. </div><div class="ttdef"><b>Definition:</b> QBbgAbstractFieldRequest.h:25</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 8 2016 12:50:15 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 13 2016 09:47:57 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

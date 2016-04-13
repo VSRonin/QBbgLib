@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['unknownerror',['UnknownError',['../class_q_bbg_lib_1_1_q_bbg_abstract_response.html#a23e7a29a156e8c024f0cba5921333831a556e62298f94436c683c3fb541735a52',1,'QBbgLib::QBbgAbstractResponse']]],
-  ['usecloseprice',['useClosePrice',['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ae31da5fc4eeac02ecf0c562de6dfdedd',1,'QBbgLib::QBbgHistoricalDataRequest::useClosePrice()'],['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#aa1f6dce69025d14c359fe2049fb8d7f5',1,'QBbgLib::QBbgHistoricalDataRequest::useClosePrice() const ']]],
-  ['usepriceforpricing',['usePriceForPricing',['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#ab975a63d9e63a2f191d9b6175c65af31',1,'QBbgLib::QBbgHistoricalDataRequest::usePriceForPricing()'],['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#a97df4341d8299c09bf9f0944bcb771b0',1,'QBbgLib::QBbgHistoricalDataRequest::usePriceForPricing() const ']]],
-  ['userelativedate',['useRelativeDate',['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#af46ea8cca4f49efa9295c9b8f6f12ca2',1,'QBbgLib::QBbgHistoricalDataRequest::useRelativeDate()'],['../class_q_bbg_lib_1_1_q_bbg_historical_data_request.html#abf1a7e4083e491af50bf809479a36494',1,'QBbgLib::QBbgHistoricalDataRequest::useRelativeDate() const ']]],
-  ['useutctime',['useUTCtime',['../class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ac69feac9e36fc417bb9feb0812f37880',1,'QBbgLib::QBbgReferenceDataRequest::useUTCtime()'],['../class_q_bbg_lib_1_1_q_bbg_reference_data_request.html#ab0e0fa2676e429f9651a8a51f12ba265',1,'QBbgLib::QBbgReferenceDataRequest::useUTCtime() const ']]]
+  ['ticksize',['tickSize',['../class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a35f67039c4c8bce32ca86edff2dd391c',1,'QBbgLib::QBbgIntradayTickResponse']]],
+  ['trade',['TRADE',['../class_q_bbg_lib_1_1_q_bbg_abstract_intraday_request.html#a39d3ad2e8a394b7408d1263664744b56a3a5373f7c1598b9e251273833f5bca21',1,'QBbgLib::QBbgAbstractIntradayRequest']]],
+  ['type',['type',['../class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a24c307f5cee9f2ab9d9fb79d1e154b16',1,'QBbgLib::QBbgIntradayTickResponse::type()'],['../class_q_bbg_lib_1_1_q_bbg_intraday_tick_response.html#a0f83fad44817a94dc85d4ab57a5a128e',1,'QBbgLib::QBbgIntradayTickResponse::type() const ']]]
 ];
