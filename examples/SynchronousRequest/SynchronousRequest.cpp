@@ -3,14 +3,16 @@
 #include <Includes/QBbgHistoricalData>
 #include <Includes/QBbgPortfolioData>
 #include <Includes/QBbgRequestGroup>
+#include <Includes/QBbgIntradayTick>
 #include <Includes/QBbgManager>
 #include <QVariant>
 
-#include <QDebug> // Used to print to console
+#include <iostream>
 
 void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager);
 void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager);
 void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager);
+void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager);
 void multipleRequests(QBbgLib::QBbgManager& bbgManager);
 
 
@@ -24,6 +26,7 @@ int main(int argc, char *argv[])
     singleReferenceDataRequest(bbgManager);
     singleHistoricalDataRequest(bbgManager);
     singlePortfolioDataRequest(bbgManager);
+    singleIntradayTickRequest(bbgManager);
     multipleRequests(bbgManager);
 
     return 0;
@@ -47,7 +50,7 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Check if we recieved an error
     if (resp->hasErrors()) {
-        qDebug() << QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString());
+        std::cout << std::endl <<  qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
         // Check if the value requested was a table
@@ -63,7 +66,7 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
                     headerString += tableValue->header();
                 headerString += '\t';
             }
-            qDebug() << headerString;
+            std::cout << std::endl << qPrintable(headerString);
 
             // Print the actual values
             // Iterate over the rows
@@ -80,13 +83,13 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
                         valueString += tableValue->value().toString();
                     valueString += '\t';
                 }
-                qDebug() << valueString;
+                std::cout << std::endl << qPrintable(valueString);
             }
 
         }
         else {
             // Print single value
-            qDebug() << QStringLiteral("%1 for %2 is %3").arg(resp->header()).arg(req.security().fullName()).arg(resp->value().toString());
+            std::cout << std::endl << qPrintable(QStringLiteral("%1 for %2 is %3").arg(resp->header()).arg(req.security().fullName()).arg(resp->value().toString()));
         }
     }
 }
@@ -113,13 +116,13 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Check if we recieved an error
     if (resp->hasErrors()) {
-        qDebug() << QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString());
+        std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
         // Print all the values in the series
-        qDebug() << "Date\t" << resp->header();
+        std::cout << std::endl << "Date\t" << qPrintable(resp->header());
         for (int i = 0; i < resp->size(); ++i) {
-            qDebug() << resp->date(i).toString(Qt::DefaultLocaleShortDate) << '\t' << resp->value(i).toString();
+            std::cout << std::endl << qPrintable(resp->date(i).toString(Qt::DefaultLocaleShortDate)) << '\t' << qPrintable(resp->value(i).toString());
         }
     }
 }
@@ -140,13 +143,46 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Check if we recieved an error
     if (resp->hasErrors()) {
-        qDebug() << QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString());
+        std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
         // Print all the values in the series
-        qDebug() << "Security\tNominal";
+        std::cout << std::endl << "Security\tNominal";
         for (int i = 0; i < resp->size(); ++i) {
-            qDebug() << resp->security(i).fullName() << '\t' << resp->position(i);
+            std::cout << std::endl << qPrintable(resp->security(i).fullName()) << '\t' << resp->position(i);
+        }
+    }
+}
+
+void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
+{
+    // Create a tick-by-tick data request
+    QBbgLib::QBbgIntradayTickRequest req;
+
+    // Set the security to download
+    req.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::Equity)); // IBM US Equity
+
+    // Set the events to download
+    req.setEventType(QBbgLib::QBbgIntradayTickRequest::EventType::BID);
+
+    // Set the start of the series (3 days ago)
+    req.setStartDateTime(QDateTime::currentDateTime().addDays(-3));
+
+    // Set the end of the series (2 days ago)
+    req.setEndDateTime(QDateTime::currentDateTime().addDays(-2));
+
+    // Send the request and wait for the response
+    const QBbgLib::QBbgIntradayTickResponse * const resp = bbgManager.processRequest(req);
+
+    // Check if we recieved an error
+    if (resp->hasErrors()) {
+        std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
+    }
+    else {
+        // Print all the values in the series
+        std::cout << std::endl << "Date\tValue\tSize";
+        for (int i = 0; i < resp->size(); ++i) {
+            std::cout << std::endl << qPrintable(resp->dateTime(i).toString(Qt::DefaultLocaleShortDate)) << '\t' << resp->value(i) << '\t' << resp->tickSize(i);
         }
     }
 }
@@ -211,16 +247,16 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
             Q_ASSERT(currentResult); // Should always pass
             if (currentResult->hasErrors()){
                 // Check for errors
-                qDebug() << referenceSecurities[i] << " - " << referenceFields[j] << ": " << QStringLiteral("Error %1 - %2").arg(currentResult->errorMessage()).arg(currentResult->errorString());
+                std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": " << qPrintable(QStringLiteral("Error %1 - %2").arg(currentResult->errorMessage()).arg(currentResult->errorString()));
             }
             else {
                 // Check if the result is a table or a single value
                 if (currentResult->hasValue()) {
                     // Print out the value
-                    qDebug() << referenceSecurities[i] << " - " << referenceFields[j] << ": " << currentResult->value();
+                    std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": " << qPrintable(currentResult->value().toString());
                 }
                 else if (currentResult->hasTable()) {
-                    qDebug() << referenceSecurities[i] << " - " << referenceFields[j];
+                    std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]);
                     // Print the table headers
                     // Iterate over the columns
                     QString headerString;
@@ -234,7 +270,7 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
                             headerString += tableValue->header();
                         headerString+= '\t';
                     }
-                    qDebug() << headerString;
+                    std::cout << std::endl << qPrintable(headerString);
 
                     // Print the actual values
                     // Iterate over the rows
@@ -251,7 +287,7 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
                                 valueString += tableValue->value().toString();
                             valueString += '\t';
                         }
-                        qDebug() << valueString;
+                        std::cout << std::endl << qPrintable(valueString);
                     }
                 }
                 else {

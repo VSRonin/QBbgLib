@@ -32,13 +32,6 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgRequestGroup req;
     QBbgLib::QBbgManager mainManager;
 
-    QBbgLib::QBbgIntradayTickRequest itRq;
-    itRq.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::Equity));
-    itRq.setEventType(QBbgLib::QBbgAbstractIntradayRequest::EventType::TRADE);
-    itRq.setDateTimeRange(QDateTime::currentDateTime().addDays(-5), QDateTime::currentDateTime().addSecs(-60));
-    const auto itRs = mainManager.processRequest(itRq);
-    auto resSize = itRs->size();
-
     const QString fieldsRe[] = { "RTG_FITCH", "RTG_SP", "RTG_MOODY", "MTG_CASH_FLOW"};
     QList<QBbgLib::QBbgSecurity> securList;
     securList 
