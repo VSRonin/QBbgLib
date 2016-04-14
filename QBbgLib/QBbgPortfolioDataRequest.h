@@ -63,6 +63,7 @@ namespace QBbgLib {
         \arg tradingSystem The trading system code (e.g. TS)
         \arg firmID the firm id shown in all AIM/TOMS pages in the command bar, without # or spaces
         \arg portfolioID The id of the portfolio shown in the rightmost column of PRTU
+        \deprecated Not general, will be removed
         */
         virtual void setPortfolio(const QString& tradingSystem, const QString& firmID, const QString& portfolioID);
         //! Reimplemented from QBbgAbstractFieldRequest::setField

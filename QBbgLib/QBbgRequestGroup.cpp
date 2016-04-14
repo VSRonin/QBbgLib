@@ -260,6 +260,9 @@ namespace QBbgLib {
             if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::HistoricalData) {
                 return false; // Can't send multiple securities with hist data
             }
+            else if (request(a.first())->requestType() == QBbgAbstractRequest::RequestType::PortfolioData) {
+                return false; // #TODO apparently worker has problems. disable until fixed
+            }
             QSet<QString> FiledsA;
             QSet<QString> FiledsB;
             if (a.empty()) return false;
