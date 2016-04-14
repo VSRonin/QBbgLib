@@ -88,19 +88,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">QBbgLib Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This library is a <a href="http://www.qt.io">Qt</a> wrapper for the <a href="http://www.bloomberglabs.com/api/">Bloomberg open API</a></p>
-<p>A C++11 compatible compiler will be necessary.</p>
+<div class="textblock"><p>This library is a <a href="http://www.qt.io">Qt</a> wrapper for the <a href="http://www.bloomberglabs.com/api/">Bloomberg open API</a>. This layer removes the need for magic strings that are often poorly documented, takes care of handling services for you and give a unique correlation (using a pair of integers) between requests and responses.</p>
 <p>The library supports all operating systems and both 32 and 64 bits configurations.</p>
 <p>Licensing adheres to LGPL v3. Please see the included LICENSE file</p>
 <h2>Building the library</h2>
+<p>A C++11 compatible compiler will be necessary.</p>
 <p>To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API. For example, in Windows </p><pre class="fragment">SET BLPPATH=C:\blp\API\APIv3\C++API\v3.8.18.1
 </pre><p>Now run </p><pre class="fragment">qmake "PREFIX=InstallDirectory"
 nmake
 </pre><p>Replacing InstallDirectory with the destination where the library will be installed and nmake with your build tool name (mingw-32-make for MinGW, etc.).</p>
 <h2>Documentation</h2>
-<p>Documentation in Qt Assistant format is packed with the repository, to build the documentation in other formats you'll need <a href="http://www.doxygen.org">Doxygen</a>. Just run it using the included doxyfile config.<br />
- The conceptual schema of how this library work is represented in the image<br />
- </p><div class="image">
+<p>Documentation in Qt Assistant format is packed with the repository, it is also available online at <a href="http://lbeldi.bitbucket.org/QBbgLib/">lbeldi.bitbucket.org/QBbgLib</a>. To build the documentation in other formats you'll need <a href="http://www.doxygen.org">Doxygen</a>. Just run it using the included doxyfile config. The conceptual schema of how this library work is represented in the image</p>
+<div class="image">
 <img src="http://i278.photobucket.com/albums/kk113/V-Ronin/Schema.png"  alt="Schema"/>
 </div>
 <h2>Example Usage</h2>
@@ -179,7 +178,7 @@ nmake
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 13 2016 10:27:33 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Apr 14 2016 11:08:21 for QBbgLib by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

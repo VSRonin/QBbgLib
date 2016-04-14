@@ -1286,6 +1286,30 @@
       <keyword name="operator&lt;&lt;" id="QBbgLib::QBbgSecurity::operator&lt;&lt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a63c189cd6508e065fb3cb12591d9407d" />
       <keyword name="operator&gt;&gt;" id="QBbgLib::QBbgSecurity::operator&gt;&gt;" ref="class_q_bbg_lib_1_1_q_bbg_security.html#a66e00855900330855852489bd6afb4f6" />
       <keyword name="qHash" id="QBbgLib::QBbgSecurity::qHash" ref="class_q_bbg_lib_1_1_q_bbg_security.html#ac3e95896a691904dcad244aa115dd6ae" />
+      <keyword name="Govt" id="QBbgLib::QBbgSecurity::Govt" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aaa322e5e8d3fbf06614a4d7b56ab32af" />
+      <keyword name="Corp" id="QBbgLib::QBbgSecurity::Corp" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af5c269b2490a6cb34adb510c00ae3a6a" />
+      <keyword name="Mtge" id="QBbgLib::QBbgSecurity::Mtge" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa734c5125b2aa6f82e14e2c79c5208b2" />
+      <keyword name="MMkt" id="QBbgLib::QBbgSecurity::MMkt" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa08c92ab19c93f107f8523dabb0266f2" />
+      <keyword name="Muni" id="QBbgLib::QBbgSecurity::Muni" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a3e1c08e8d08cde68d7eb6fe5e7aebd09" />
+      <keyword name="Pfd" id="QBbgLib::QBbgSecurity::Pfd" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aeb4ae379cceaca6c494cba07d39675c8" />
+      <keyword name="Equity" id="QBbgLib::QBbgSecurity::Equity" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac3b7a27ab377177148a7bfa01ce9483a" />
+      <keyword name="Comdty" id="QBbgLib::QBbgSecurity::Comdty" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a16683e77abc433a199f4382d360440de" />
+      <keyword name="Index" id="QBbgLib::QBbgSecurity::Index" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aa67188a36f0fecb1f94e8cc742c0376a" />
+      <keyword name="Curncy" id="QBbgLib::QBbgSecurity::Curncy" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a1f747a9b4f3fdcd0fa0b20bf7aed465d" />
+      <keyword name="Client" id="QBbgLib::QBbgSecurity::Client" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af1c63f7827c433d99bb2a06d0e73f9a6" />
+      <keyword name="cusip" id="QBbgLib::QBbgSecurity::cusip" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246af75c3d9054c765b6952b828e32a1c4b1" />
+      <keyword name="wpk" id="QBbgLib::QBbgSecurity::wpk" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2805af53e3e5db55b725b0756f5ce5ac" />
+      <keyword name="isin" id="QBbgLib::QBbgSecurity::isin" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac1a36fc8505be509b16757c261dd0b76" />
+      <keyword name="buid" id="QBbgLib::QBbgSecurity::buid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac25ecbd0680fe50c54cadfbbc0e40b52" />
+      <keyword name="sedol1" id="QBbgLib::QBbgSecurity::sedol1" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a12a9ca46d48bdd5ff18e656288c0f56d" />
+      <keyword name="sedol2" id="QBbgLib::QBbgSecurity::sedol2" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2b4b57bf0259ada0f99ec08b90847c6c" />
+      <keyword name="sicovam" id="QBbgLib::QBbgSecurity::sicovam" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a2a4eccb2f38060b9fa047f2452748012" />
+      <keyword name="common" id="QBbgLib::QBbgSecurity::common" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ae60cfca168c7027da9af98b8bf3a2976" />
+      <keyword name="bsid" id="QBbgLib::QBbgSecurity::bsid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ae9f549632a0bce357d8be4c3cd6648c2" />
+      <keyword name="svm" id="QBbgLib::QBbgSecurity::svm" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246aadb7ce3ca5c185e28855d5f3624d0bb7" />
+      <keyword name="cins" id="QBbgLib::QBbgSecurity::cins" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246ac547f9a671004bd4830362bfc2db5fdc" />
+      <keyword name="cats" id="QBbgLib::QBbgSecurity::cats" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a50b31fb7a31af207de586269c4c48b31" />
+      <keyword name="bbgid" id="QBbgLib::QBbgSecurity::bbgid" ref="class_q_bbg_lib_1_1_q_bbg_security.html#acc275c1fe791c4c9526a8f77d4552246a3b26112a27b6f33743c8865c3d368255" />
     </keywords>
     <files>
       <file>tabs.css</file>
@@ -1446,6 +1470,10 @@
       <file>functions_enum.html</file>
       <file>functions_enum.html</file>
       <file>functions_enum.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
+      <file>functions_eval.html</file>
       <file>functions_eval.html</file>
       <file>functions_eval.html</file>
       <file>functions_eval.html</file>
