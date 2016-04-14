@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -67,16 +67,22 @@ namespace QBbgLib {
         */
         virtual void setPortfolio(const QString& tradingSystem, const QString& firmID, const QString& portfolioID);
         //! Reimplemented from QBbgAbstractFieldRequest::setField
-        virtual void setField(const QString& val);
+        virtual void setField(const QString& val) override;
         //! Sets the field to one of the 4 allowed ones for portfolio requests
         Q_INVOKABLE virtual void setField(PortfolioFields val);
         //! Reimplemented from QBbgAbstractRequest::setSecurity
-        virtual void setSecurity(const QBbgSecurity& val);
+        virtual void setSecurity(const QBbgSecurity& val) override;
+        /*!
+        \brief Overloaded from setSecurity
+        \arg SecName Name of the security to add
+        \details Sets the security for the current request to the specified one using QBbgSecurity::Client as extension
+        */
+        virtual void setSecurity(const QString& SecName);
         /*!
         \brief Reimplemented from QBbgAbstractFieldRequest::setOverrides
         \note The only allowed override is for this request is REFERENCE_DATE
         */
-        virtual void setOverrides(const QBbgOverride& Overr);
+        virtual void setOverrides(const QBbgOverride& Overr) override;
         /*!
         \brief Sets the date for which to retrieve the portfolio
         \details a null QDate will retrieve the current live portfolio

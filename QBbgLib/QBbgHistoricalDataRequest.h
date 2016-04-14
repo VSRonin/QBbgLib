@@ -321,9 +321,10 @@ namespace QBbgLib {
         //! Set the first date of the period to retrieve data
         virtual void setStartDate(const QDate& val);
         //! Reimplemented from QBbgAbstractRequest::setSecurity()
-        virtual void setSecurity(const QBbgSecurity& val);
+        virtual void setSecurity(const QBbgSecurity& val) override;
+        using QBbgAbstractFieldRequest::setSecurity;
         //! Reimplemented from QBbgAbstractRequest::isValidReq()
-        virtual bool isValidReq() const;
+        virtual bool isValidReq() const override;
     protected:
         virtual bool equalHistoricalFields(const QBbgHistoricalDataRequest& a) const;
         QBbgHistoricalDataRequest(QBbgHistoricalDataRequestPrivate* d);

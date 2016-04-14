@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.              *
 *                                                                               *
 \*******************************************************************************/
 
@@ -56,7 +56,8 @@ namespace QBbgLib {
         //! Set whether all date and times should be referenced as UTC (Greenwich Time)
         void setUseUTCtime(bool a);
         //! Reimplemented from QBbgAbstractRequest
-        virtual void setSecurity(const QBbgSecurity& val);
+        virtual void setSecurity(const QBbgSecurity& val) override;
+        using QBbgAbstractFieldRequest::setSecurity;
     protected:
         QBbgReferenceDataRequest(QBbgReferenceDataRequestPrivate* d);
     };
