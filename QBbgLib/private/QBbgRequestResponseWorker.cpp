@@ -160,7 +160,7 @@ namespace QBbgLib {
                                 else if (fieldDataValue.getValueAsElement(0).numElements() == 0) {
                                     SetError(*SingleReq, QBbgAbstractResponse::NoData, "Table response with 0 columns");
                                 }
-                                else {
+                                else if (FoundRequ->security().fullName() == CurrentSecurity) {
                                     QString tempSec;
                                     double tmpPos, tmpMkVal, tmpCst, tmpCstFx, tmpWei;
                                     QDate tmpCstDt;
@@ -333,13 +333,6 @@ namespace QBbgLib {
                                     }
                                 }
                                 else{
-                                    /*if (fieldDataValue.getValueAsFloat64()>1000.0){
-                                        std::ofstream myfile;
-                                        myfile.open("C:/Temp/WrongResponse.txt", std::ios::out | std::ios::app);
-                                        myfile << *SingleReq << std::endl;
-                                        message.print(myfile);
-                                        myfile.close();
-                                    }*/
                                     DataPointRecieved(*SingleReq, elementToVariant(fieldDataValue), FoundRequ->field());
                                 }
                             }
