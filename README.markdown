@@ -1,14 +1,15 @@
 # QBbgLib
 
-This library is a [Qt](http://www.qt.io) wrapper for the [Bloomberg open API](http://www.bloomberglabs.com/api/)
-
-A C++11 compatible compiler will be necessary.
+This library is a [Qt](http://www.qt.io) wrapper for the [Bloomberg open API](http://www.bloomberglabs.com/api/).  
+This layer removes the need for magic strings that are often poorly documented, takes care of handling services for you and give a unique correlation (using a pair of integers) between requests and responses.
 
 The library supports all operating systems and both 32 and 64 bits configurations.
 
 Licensing adheres to LGPL v3. Please see the included LICENSE file
 
 ## Building the library
+A C++11 compatible compiler will be necessary.
+
 To build open the Qt developer console, set the BLPPATH environmental variable to the path of the Bloomberg API.
 For example, in Windows
 
