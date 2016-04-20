@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -31,6 +31,12 @@ namespace QBbgLib {
             QBbgAbstractRequest::setSecurity(QBbgSecurity());
         }
     }
+
+    void QBbgPortfolioDataRequest::setSecurity(const QString& SecName)
+    {
+        QBbgAbstractFieldRequest::setSecurity(SecName, QBbgSecurity::Client);
+    }
+
     void QBbgPortfolioDataRequest::setOverrides(const QBbgOverride& Overr)
     {
         if (Overr.contains("REFERENCE_DATE")) {

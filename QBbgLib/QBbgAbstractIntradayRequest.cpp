@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.              *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -22,6 +22,7 @@
 
 #include "QBbgAbstractIntradayRequest.h"
 #include "Private/QBbgAbstractIntradayRequest_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgAbstractIntradayRequest::~QBbgAbstractIntradayRequest() = default;
     QBbgAbstractIntradayRequestPrivate::~QBbgAbstractIntradayRequestPrivate() = default;
@@ -53,7 +54,21 @@ namespace QBbgLib {
         d->operator=(*(a.d_func()));
         return *this;
     }
+    void QBbgAbstractIntradayRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractIntradayRequest);
+        QBbgAbstractRequest::saveToStream(stream);
+        stream << d->m_startDate << d->m_endDate << static_cast<std::underlying_type<EventType>::type>(d->m_eventType);
+    }
 
+    void QBbgAbstractIntradayRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractIntradayRequest);
+        QBbgAbstractRequest::loadFromStream(stream);
+        std::underlying_type<EventType>::type tempTyp;
+        stream >> d->m_startDate >> d->m_endDate >> tempTyp;
+        d->m_eventType = static_cast<EventType>(tempTyp);
+    }
     bool QBbgAbstractIntradayRequest::isValidReq() const
     {
         Q_D(const QBbgAbstractIntradayRequest);

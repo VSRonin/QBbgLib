@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -273,7 +273,7 @@ QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgSecurity& obj)
     return stream;
 }
 
-QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj)
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj)
 {
     obj.loadFromStream(stream);
     return stream;

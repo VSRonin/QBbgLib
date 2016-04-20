@@ -81,6 +81,7 @@ namespace QBbgLib {
         virtual void setStartDateTime(const QDateTime& val);
         //! Reimplemented from QBbgAbstractRequest::setSecurity()
         virtual void setSecurity(const QBbgSecurity& val) override;
+        using QBbgAbstractRequest::setSecurity;
         //! Reimplemented from QBbgAbstractRequest::isValidReq()
         virtual bool isValidReq() const override;
         //! Returns the type of event to retrieve
@@ -97,6 +98,8 @@ namespace QBbgLib {
     protected:
         QBbgAbstractIntradayRequest() = delete;
         QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate* d);
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream)override;
     };
 }
 /*!

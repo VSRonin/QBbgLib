@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -21,7 +21,10 @@
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>
+#ifndef QBbg_OFFLINE
 #include "private/QBbgRequestResponseWorker_p.h"
+#include <blpapi_sessionoptions.h>
+#endif
 #include <QCoreApplication>
 #include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
@@ -37,11 +40,15 @@ namespace QBbgLib {
 
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
         :q_ptr(qp)
+        , m_options(nullptr)
     {
-        m_options.setServerHost("localhost");
-        m_options.setServerPort(8194);
-        m_options.setMaxPendingRequests(std::numeric_limits<qint32>::max() - 2);
-        m_options.setAutoRestartOnDisconnection(false);
+        #ifndef QBbg_OFFLINE
+        m_options = new BloombergLP::blpapi::SessionOptions;
+        m_options->setServerHost("localhost");
+        m_options->setServerPort(8194);
+        m_options->setMaxPendingRequests(std::numeric_limits<qint32>::max() - 2);
+        m_options->setAutoRestartOnDisconnection(false);
+        #endif
     }
     QBbgManager::~QBbgManager()
     {
@@ -61,9 +68,14 @@ namespace QBbgLib {
             Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
         }
-        QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options,this);
+        QBbgWorkerThread* newThread = nullptr;
+        #ifndef QBbg_OFFLINE
+        QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(*(d->m_options), this);
         newWorker->setRequest(rq);
-        QBbgWorkerThread* newThread = new QBbgWorkerThread(newWorker, this);
+        newThread = new QBbgWorkerThread(newWorker, this);
+        #else
+        newThread = new QBbgWorkerThread(nullptr, this);
+        #endif
         connect(newThread, &QBbgWorkerThread::dataRecieved, this, &QBbgManager::handleResponse);
         connect(newThread, &QBbgWorkerThread::finished, this, &QBbgManager::handleThreadFinished);
         return d->m_ThreadPool.insert(newID, newThread);
@@ -210,6 +222,11 @@ namespace QBbgLib {
 
     QBbgManagerPrivate::~QBbgManagerPrivate()
     {
+        if (m_options) {
+            #ifndef QBbg_OFFLINE
+            delete m_options;
+            #endif
+        }
         for (QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator i = m_ResultTable.begin(); i != m_ResultTable.end(); ++i) {
             Q_ASSERT(i.value());
             for (QHash<qint64, QBbgAbstractResponse* >::iterator j = i.value()->begin(); j != i.value()->end(); ++j) {

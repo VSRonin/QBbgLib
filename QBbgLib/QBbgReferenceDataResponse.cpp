@@ -12,12 +12,13 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 #include "QBbgReferenceDataResponse.h"
 #include "private/QBbgReferenceDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
 
     QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate() = default;
@@ -148,5 +149,40 @@ namespace QBbgLib {
             m_TableResultRows.append(newRow);
         }
         return *this;
+    }
+    void QBbgReferenceDataResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgReferenceDataResponse);
+        QBbgAbstractFieldResponse::saveToStream(stream);
+        stream
+            << d->m_Value
+            << d->m_TableCols
+            << static_cast<qint32>(d->m_TableResultRows.size());
+            ;
+            for (auto i = d->m_TableResultRows.constBegin(); i != d->m_TableResultRows.constEnd();++i){
+                for (int j = 0; j < d->m_TableCols;++j){
+                    stream << *((*i)+j);
+                }
+            }
+    }
+
+    void QBbgReferenceDataResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgReferenceDataResponse);
+        clear();
+        QBbgAbstractFieldResponse::loadFromStream(stream);
+        qint32 tempSize;
+        stream
+            >> d->m_Value
+            >> d->m_TableCols
+            >> tempSize
+            ;
+        for (; tempSize > 0; --tempSize){
+            d->m_TableResultRows.append(new QBbgReferenceDataResponse[d->m_TableCols]);
+            for (int j = 0; j < d->m_TableCols; ++j) {
+                stream >> d->m_TableResultRows.last()[j];
+            }
+        }
+
     }
 }

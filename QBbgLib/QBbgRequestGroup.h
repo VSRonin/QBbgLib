@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -24,9 +24,17 @@
 #include <QList> 
 #include <QHash>
 #include <QString>
+class QDataStream;
 namespace QBbgLib {
     class QBbgRequestGroupPrivate;
     class QBbgRequestResponseWorker;
+    class QBbgRequestGroup;
+}
+//! Write a request into a QDataStream
+QBBG_EXPORT QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgRequestGroup& obj);
+//! Read a request from a QDataStream
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgRequestGroup& obj);
+namespace QBbgLib {
     /*!
     \brief A list of requests
     \details This class stores a list of requests to be sent to Bloomberg, the requests will be automatically arranged so that the least ammount of transactions will be sent to the Bloomberg server<br/>
@@ -126,8 +134,11 @@ namespace QBbgLib {
         QBbgAbstractRequest* FindEditRequest(qint64 ID);
 		void RequestGroups(QHash<qint64, QList<qint64>* >& Result, qint64 StartingID = 1i64)const;
         QList<QString> differentServices() const;
-
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
         friend class QBbgRequestResponseWorker;
+        friend QDataStream& ::operator<<(QDataStream& stream, const QBbgRequestGroup& obj);
+        friend QDataStream& ::operator>>(QDataStream& stream, QBbgRequestGroup& obj);
 	};
 }
 Q_DECLARE_METATYPE(QBbgLib::QBbgRequestGroup);

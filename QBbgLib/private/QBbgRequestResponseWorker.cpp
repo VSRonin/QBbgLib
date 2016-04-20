@@ -12,13 +12,15 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
+
+#ifndef QBbg_OFFLINE
 
 #include "private/QBbgRequestResponseWorker_p.h"
 #include "QBbgReferenceDataResponse.h"
@@ -756,3 +758,5 @@ namespace QBbgLib {
         m_Results.clear();
     }
 }
+
+#endif // QBbg_OFFLINE

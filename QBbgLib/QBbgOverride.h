@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -26,9 +26,17 @@ class QDate;
 class QTime;
 class QVariant;
 namespace BloombergLP { namespace blpapi { class Request; } }
-namespace QBbgLib {
+class QDataStream;
+namespace QBbgLib { 
+    class QBbgOverride;
     class QBbgOverridePrivate;
     class QBbgRequestResponseWorker;
+}
+//! Write an override into a QDataStream
+QBBG_EXPORT QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgOverride& obj);
+//! Read an override from a QDataStream
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgOverride& obj);
+namespace QBbgLib {
     /*!
     \brief A set of overrides
     \details This class is used to describe a series of overrides to attach to a security.<br/>
@@ -116,11 +124,16 @@ namespace QBbgLib {
         //! Same as overrideValue
         virtual QString operator[](const QString& Name) const;
     protected:
+    protected:
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
         void addOverrideToRequest(BloombergLP::blpapi::Request& rq) const;
         QBbgOverride(QBbgOverridePrivate* d);
         QBbgOverridePrivate* d_ptr;
 
         friend class QBbgRequestResponseWorker;
+        friend QDataStream& ::operator<<(QDataStream& stream, const QBbgOverride& obj);
+        friend QDataStream& ::operator>>(QDataStream& stream, QBbgOverride& obj);
     };
 }
 Q_DECLARE_METATYPE(QBbgLib::QBbgOverride);

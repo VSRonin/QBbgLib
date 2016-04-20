@@ -12,12 +12,13 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 #include "QBbgPortfolioDataResponse.h"
 #include "private/QBbgPortfolioDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse() = default;
     QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate() = default;
@@ -251,5 +252,33 @@ namespace QBbgLib {
        Q_D(const QBbgPortfolioDataResponse);
        return d->m_Security.isEmpty();
    }
+   void QBbgPortfolioDataResponse::saveToStream(QDataStream& stream) const
+   {
+       Q_D(const QBbgPortfolioDataResponse);
+       QBbgAbstractFieldResponse::saveToStream(stream);
+       stream
+           << d->m_Security
+           << d->m_Position
+           << d->m_MarketValue
+           << d->m_Cost
+           << d->m_CostDate
+           << d->m_CostFx
+           << d->m_Weight
+           ;
+   }
 
+   void QBbgPortfolioDataResponse::loadFromStream(QDataStream& stream)
+   {
+       Q_D(QBbgPortfolioDataResponse);
+       QBbgAbstractFieldResponse::loadFromStream(stream);
+       stream
+           >> d->m_Security
+           >> d->m_Position
+           >> d->m_MarketValue
+           >> d->m_Cost
+           >> d->m_CostDate
+           >> d->m_CostFx
+           >> d->m_Weight
+           ;
+   }
 }

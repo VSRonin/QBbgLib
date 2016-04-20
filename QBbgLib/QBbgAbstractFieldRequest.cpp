@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -20,6 +20,7 @@
 #include "private/QBbgAbstractFieldRequest_p.h"
 #include "QBbgOverride.h"
 #include <QList> 
+#include <QDataStream>
 #include <QHash>
 namespace QBbgLib {
     QBbgAbstractFieldRequest::~QBbgAbstractFieldRequest() = default;
@@ -44,6 +45,19 @@ namespace QBbgLib {
         m_Field = a.m_Field;
         m_Overrides = a.m_Overrides;
         return *this;
+    }
+    void QBbgAbstractFieldRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractFieldRequest);
+        QBbgAbstractRequest::saveToStream(stream);
+        stream << d->m_Field << d->m_Overrides;
+    }
+
+    void QBbgAbstractFieldRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractFieldRequest);
+        QBbgAbstractRequest::loadFromStream(stream);
+        stream >> d->m_Field >> d->m_Overrides;
     }
     void QBbgAbstractFieldRequest::setOverrides(const QBbgOverride& Overr)
     {

@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -21,10 +21,19 @@
 #include <QObject>
 #include "QBbgSecurity.h"
 #include "QBbgProjectGlobals.h"
+class QDataStream;
 namespace QBbgLib {
+    class QBbgAbstractRequest;
     class QBbgAbstractRequestPrivate;
     class QBbgRequestGroup;
     class QBbgRequestResponseWorker;
+}
+//! Write a request into a QDataStream
+QBBG_EXPORT QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgAbstractRequest& obj);
+//! Read a request from a QDataStream
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgAbstractRequest& obj);
+namespace QBbgLib {
+    
     //! Base class for all requests sent to Bloomberg
     class QBBG_EXPORT QBbgAbstractRequest
     {
@@ -98,6 +107,8 @@ namespace QBbgLib {
         static ServiceType stringToServiceType(const QString& a);
         static QString requestTypeToString(RequestType a);
         static RequestType stringToRequestType(QString a);
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
     public:
         //! Destructor
         virtual ~QBbgAbstractRequest() =0;
@@ -134,6 +145,8 @@ namespace QBbgLib {
         friend class QBbgRequestGroupPrivate;
         friend class QBbgRequestResponseWorkerPrivate;
         friend class QBbgRequestResponseWorker;
+        friend QDataStream& ::operator<<(QDataStream& stream, const QBbgAbstractRequest& obj);
+        friend QDataStream& ::operator>>(QDataStream& stream, QBbgAbstractRequest& obj);
     };
 }
 /*!

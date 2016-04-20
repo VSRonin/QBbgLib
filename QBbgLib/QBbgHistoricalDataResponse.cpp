@@ -12,12 +12,13 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgHistoricalDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse() = default;
     QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate() = default;
@@ -150,6 +151,25 @@ namespace QBbgLib {
         m_values = other.m_values;
         m_relDates = other.m_relDates;
         return *this;
+    }
+    void QBbgHistoricalDataResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgHistoricalDataResponse);
+        QBbgAbstractFieldResponse::saveToStream(stream);
+        stream
+            << d->m_values
+            << d->m_relDates
+            ;
+    }
+
+    void QBbgHistoricalDataResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgHistoricalDataResponse);
+        QBbgAbstractFieldResponse::loadFromStream(stream);
+        stream
+            >> d->m_values
+            >> d->m_relDates
+            ;
     }
 }
 

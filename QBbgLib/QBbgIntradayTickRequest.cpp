@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.              *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -22,6 +22,7 @@
 
 #include "QBbgIntradayTickRequest.h"
 #include "private/QBbgIntradayTickRequest_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgIntradayTickRequest::~QBbgIntradayTickRequest() = default;
     QBbgIntradayTickRequestPrivate::~QBbgIntradayTickRequestPrivate() = default;
@@ -98,7 +99,33 @@ namespace QBbgLib {
             && d->m_includeBicMicCodes == a.d_func()->m_includeBicMicCodes
             ;
     }
+    void QBbgIntradayTickRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgIntradayTickRequest);
+        QBbgAbstractIntradayRequest::saveToStream(stream);
+        stream 
+            << d->m_includeConditionCodes 
+            << d->m_includeNonPlottable 
+            << d->m_includeExchangeCodes
+            << d->m_includeBrokerCodes
+            << d->m_includeRpsCodes
+            << d->m_includeBicMicCodes
+            ;
+    }
 
+    void QBbgIntradayTickRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgIntradayTickRequest);
+        QBbgAbstractIntradayRequest::loadFromStream(stream);
+        stream
+            >> d->m_includeConditionCodes
+            >> d->m_includeNonPlottable
+            >> d->m_includeExchangeCodes
+            >> d->m_includeBrokerCodes
+            >> d->m_includeRpsCodes
+            >> d->m_includeBicMicCodes
+            ;
+    }
     bool QBbgIntradayTickRequest::includeBicMicCodes() const
     {
         Q_D(const QBbgIntradayTickRequest);

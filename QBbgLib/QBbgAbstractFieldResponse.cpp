@@ -12,12 +12,13 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 #include "QBbgAbstractFieldResponse.h"
 #include "private/QBbgAbstractFieldResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse() = default;
     QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate() = default;
@@ -55,5 +56,18 @@ namespace QBbgLib {
     {
         Q_D(QBbgAbstractFieldResponse);
         d->m_Header=Header;
+    }
+    void QBbgAbstractFieldResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractFieldResponse);
+        QBbgAbstractResponse::saveToStream(stream);
+        stream << d->m_Header;
+    }
+
+    void QBbgAbstractFieldResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractFieldResponse);
+        QBbgAbstractResponse::loadFromStream(stream);
+        stream << d->m_Header;
     }
 }

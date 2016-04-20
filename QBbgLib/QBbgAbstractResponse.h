@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -25,6 +25,13 @@ namespace QBbgLib {
     class QBbgAbstractResponsePrivate;
     class QBbgAbstractWorker;
     class QBbgRequestResponseWorker;
+    class QBbgAbstractResponse;
+}
+//! Write a response into a QDataStream
+QBBG_EXPORT QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgAbstractResponse& obj);
+//! Read a response from a QDataStream
+QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgAbstractResponse& obj);
+namespace QBbgLib {
     //! Base Class for Bloomberg Responses
     class QBBG_EXPORT QBbgAbstractResponse
     {
@@ -74,7 +81,7 @@ namespace QBbgLib {
         };
     public:
         //! Flags representing possible errors
-        enum BbgErrorCodesF
+        enum BbgErrorCodesF : quint32
         {
             NoErrors = 0 /*!< No error occurred*/
             , ResponseError = 0x1 /*!< Response error */
@@ -141,9 +148,13 @@ namespace QBbgLib {
         virtual void setID(qint64 val);
         static QString responseTypeToString(ResponseType a);
         static ResponseType stringToResponseType(QString a);
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
 
         friend class QBbgAbstractWorker;
         friend class QBbgRequestResponseWorker;
+        friend QDataStream& ::operator<<(QDataStream& stream, const QBbgAbstractResponse& obj);
+        friend QDataStream& ::operator>>(QDataStream& stream, QBbgAbstractResponse& obj);
     };
 }
 /*!

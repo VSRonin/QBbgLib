@@ -47,7 +47,8 @@ namespace QBbgLib {
         QBbgAbstractFieldResponse() = delete;
         QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);
         virtual void setHeader(const QString& Header = QString());
-
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream) override;
         friend class QBbgRequestResponseWorker;
     };
 }

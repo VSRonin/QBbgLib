@@ -12,13 +12,14 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 #include "QBbgRequestGroup.h"
 #include "private/QBbgRequestGroup_p.h"
 #include <QSet>
+#include <QDataStream>
 #include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
@@ -46,6 +47,77 @@ namespace QBbgLib {
     QBbgRequestGroupPrivate::QBbgRequestGroupPrivate(QBbgRequestGroup* q)
         : q_ptr(q)
     {}
+    void QBbgRequestGroup::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgRequestGroup);
+        stream << d->MaxID << static_cast<qint32>(d->RequestTable.size());
+        for (auto i = d->RequestTable.constBegin();i!= d->RequestTable.constEnd();++i){
+            stream 
+                << i.key() 
+                << static_cast<std::underlying_type<QBbgAbstractRequest::RequestType>::type>(i.value()->requestType())
+                ;
+            switch (i.value()->requestType()) {
+            case QBbgAbstractRequest::RequestType::ReferenceData:
+                stream << *(static_cast<const QBbgReferenceDataRequest* const>(i.value()));
+                break;
+            case QBbgAbstractRequest::RequestType::PortfolioData:
+                stream << *(static_cast<const QBbgPortfolioDataRequest* const>(i.value()));
+                break;
+            case QBbgAbstractRequest::RequestType::HistoricalData:
+                stream << *(static_cast<const QBbgHistoricalDataRequest* const>(i.value()));
+                break;
+            case QBbgAbstractRequest::RequestType::IntraDayTick:
+                stream << *(static_cast<const QBbgIntradayTickRequest* const>(i.value()));
+                break;
+            default:
+                Q_UNREACHABLE(); //Unhandled request type
+            }
+        }
+    }
+
+    void QBbgRequestGroup::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgRequestGroup);
+        qint64 newMax, tempKey;
+        std::underlying_type<QBbgAbstractRequest::RequestType>::type tempType;
+        qint32 tableSize;
+        clear();
+        stream >> newMax >> tableSize;
+        if (newMax > d->MaxID)
+            d->MaxID = newMax;
+        for (; tableSize>0; --tableSize) {
+            stream >> tempKey >> tempType;
+            switch (static_cast<QBbgAbstractRequest::RequestType>(tempType)) {
+            case QBbgAbstractRequest::RequestType::ReferenceData:{
+                QBbgReferenceDataRequest* tempRq=new QBbgReferenceDataRequest;
+                stream >> *tempRq;
+                d->RequestTable.insert(tempKey, tempRq);
+            }
+            break;
+            case QBbgAbstractRequest::RequestType::PortfolioData:{
+                QBbgPortfolioDataRequest* tempRq = new QBbgPortfolioDataRequest;
+                stream >> *tempRq;
+                d->RequestTable.insert(tempKey, tempRq);
+            }
+                break;
+            case QBbgAbstractRequest::RequestType::HistoricalData:{
+                QBbgHistoricalDataRequest* tempRq = new QBbgHistoricalDataRequest;
+                stream >> *tempRq;
+                d->RequestTable.insert(tempKey, tempRq);
+            }
+                break;
+            case QBbgAbstractRequest::RequestType::IntraDayTick:{
+                QBbgIntradayTickRequest* tempRq = new QBbgIntradayTickRequest;
+                stream >> *tempRq;
+                d->RequestTable.insert(tempKey, tempRq);
+            }
+                break;
+            default:
+                Q_UNREACHABLE(); //Unhandled request type
+            }
+        }
+        
+    }
     QBbgAbstractRequest* QBbgRequestGroupPrivate::createRequest(const QBbgAbstractRequest& a) const
     {
         switch (a.requestType()) {
@@ -326,3 +398,14 @@ namespace QBbgLib {
 }
 
 
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgRequestGroup& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgRequestGroup& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
+}

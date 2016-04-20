@@ -164,7 +164,7 @@ namespace QBbgLib {
         Q_DECLARE_PRIVATE(QBbgHistoricalDataRequest)
     public:
         //! Determine the frequency and calendar type of the output.
-        enum PeriodAdjustment
+        enum PeriodAdjustment : qint8
         {
             ACTUAL /*!< These revert to the actual date from today (if the end date is left blank) or from the End Date */
             , CALENDAR /*!< For pricing fields, these revert to the last business day of the specified calendar period. */
@@ -172,7 +172,7 @@ namespace QBbgLib {
         };
         Q_ENUM(PeriodAdjustment)
         //! Frequency of historical data
-        enum PeriodSelection
+        enum PeriodSelection : qint8
         {
             DAILY /*!< Daily frequency */
             , WEEKLY /*!< Weekly frequency */
@@ -183,7 +183,7 @@ namespace QBbgLib {
         };
         Q_ENUM(PeriodSelection)
         //! Policy to handle non-trading days
-        enum NonTradingDayFill
+        enum NonTradingDayFill : qint8
         {
             NON_TRADING_WEEKDAYS /*!< Show only weekdays */
             , ALL_CALENDAR_DAYS /*!< Show all days */
@@ -321,12 +321,15 @@ namespace QBbgLib {
         //! Set the first date of the period to retrieve data
         virtual void setStartDate(const QDate& val);
         //! Reimplemented from QBbgAbstractRequest::setSecurity()
-        virtual void setSecurity(const QBbgSecurity& val);
+        virtual void setSecurity(const QBbgSecurity& val) override;
+        using QBbgAbstractFieldRequest::setSecurity;
         //! Reimplemented from QBbgAbstractRequest::isValidReq()
-        virtual bool isValidReq() const;
+        virtual bool isValidReq() const override;
     protected:
         virtual bool equalHistoricalFields(const QBbgHistoricalDataRequest& a) const;
         QBbgHistoricalDataRequest(QBbgHistoricalDataRequestPrivate* d);
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream)override;
         friend class QBbgRequestGroupPrivate;
     };
 }

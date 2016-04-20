@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -38,7 +38,7 @@ namespace QBbgLib {
         QBbgRequestGroupPrivate(QBbgRequestGroup* q);
         QBbgRequestGroupPrivate& operator=(const QBbgRequestGroupPrivate& a);
         virtual ~QBbgRequestGroupPrivate();
-        static qint64 MaxID;
+        static qint64 MaxID; // #TODO needs to be static?
         QHash<qint64, QBbgAbstractRequest*>  RequestTable;
         void clear();
         qint64 addRequest(const QBbgAbstractRequest& a);

@@ -156,6 +156,8 @@ namespace QBbgLib {
         void setType(const QBbgAbstractIntradayRequest::EventType& val);
         virtual void clear() override;
         void removeEmptyLists();
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream) override;
         friend class QBbgRequestResponseWorker;
     };
 }

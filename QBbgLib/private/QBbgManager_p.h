@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -24,7 +24,8 @@
 #define QBbgManager_p_h__
 #include "QBbgManager.h"
 #include <QHash>
-#include <blpapi_sessionoptions.h>
+#include <memory>
+namespace BloombergLP { namespace blpapi { class SessionOptions; } }
 namespace QBbgLib {
     class QBbgAbstractResponse;
     class QBbgWorkerThread;
@@ -38,7 +39,7 @@ namespace QBbgLib {
         virtual ~QBbgManagerPrivate();
         QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* > m_ResultTable;
         QHash<quint32, QBbgWorkerThread* > m_ThreadPool;
-        BloombergLP::blpapi::SessionOptions m_options;
+        BloombergLP::blpapi::SessionOptions* m_options;
     protected:
         QBbgManager* q_ptr;
         

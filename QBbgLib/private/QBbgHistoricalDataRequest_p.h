@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -41,7 +41,7 @@ namespace QBbgLib {
         QDate m_endDate;
         QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
         QBbgHistoricalDataRequest::PeriodSelection m_periodicitySelection;
-        char m_currency[3 + 1];
+        QString m_currency;
         bool m_useClosePrice;
         bool m_usePriceForPricing;
         QBbgHistoricalDataRequest::NonTradingDayFill m_nonTradingDayFill;
@@ -52,7 +52,7 @@ namespace QBbgLib {
         bool m_adjustmentAbnormal;
         bool m_adjustmentSplit;
         bool m_adjustmentFollowDPDF;
-        char m_calendarCode[2 + 1];
+        QString m_calendarCode;
     };
 
     

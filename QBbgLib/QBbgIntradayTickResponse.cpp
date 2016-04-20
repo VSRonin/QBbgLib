@@ -21,6 +21,7 @@
 \*******************************************************************************/
 #include "QBbgIntradayTickResponse.h"
 #include "private/QBbgIntradayTickResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgIntradayTickResponse::~QBbgIntradayTickResponse() = default;
     QBbgIntradayTickResponsePrivate::~QBbgIntradayTickResponsePrivate() = default;
@@ -207,5 +208,38 @@ namespace QBbgLib {
     {
         Q_D(QBbgIntradayTickResponse);
         d->m_type = val;
+    }
+    void QBbgIntradayTickResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgIntradayTickResponse);
+        QBbgAbstractIntradayResponse::saveToStream(stream);
+        stream
+            << d->m_size
+            << d->m_conditionCode
+            << d->m_exchangeCode
+            << d->m_micCode
+            << d->m_brokerBuyCode
+            << d->m_brokerSellCode
+            << d->m_rpsCode
+            << static_cast<std::underlying_type<QBbgAbstractIntradayRequest::EventType>::type>(d->m_type)
+            ;
+    }
+
+    void QBbgIntradayTickResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgIntradayTickResponse);
+        std::underlying_type<QBbgAbstractIntradayRequest::EventType>::type tempTyp;
+        QBbgAbstractIntradayResponse::loadFromStream(stream);
+        stream
+            >> d->m_size
+            >> d->m_conditionCode
+            >> d->m_exchangeCode
+            >> d->m_micCode
+            >> d->m_brokerBuyCode
+            >> d->m_brokerSellCode
+            >> d->m_rpsCode
+            >> tempTyp
+            ;
+        d->m_type = static_cast<QBbgAbstractIntradayRequest::EventType>(tempTyp);
     }
 }

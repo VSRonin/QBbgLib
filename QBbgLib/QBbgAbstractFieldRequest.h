@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -67,8 +67,10 @@ namespace QBbgLib {
         //! Remove all overrides from a request
         Q_INVOKABLE virtual void clearOverrides();
         //! Reimplemented from QBbgAbstractRequest::isValidReq
-		virtual bool isValidReq() const;
+		virtual bool isValidReq() const override;
 	protected:
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream) override;
         virtual bool sameOverrides(const QBbgAbstractFieldRequest& a)const;
         QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);
         QBbgAbstractFieldRequest() = delete;

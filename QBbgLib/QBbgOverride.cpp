@@ -12,7 +12,7 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
@@ -21,7 +21,10 @@
 #include <QDate>
 #include <QTime>
 #include <QVariant>
+#include <QDataStream>
+#ifndef QBbg_OFFLINE
 #include <blpapi_session.h>
+#endif
 namespace QBbgLib {
 
     QBbgOverridePrivate::~QBbgOverridePrivate() = default;
@@ -55,6 +58,17 @@ namespace QBbgLib {
     QBbgOverride::~QBbgOverride()
     {
         delete d_ptr;
+    }
+    void QBbgOverride::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgOverride);
+        stream << d->m_Overrides;
+    }
+
+    void QBbgOverride::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgOverride);
+        stream >> d->m_Overrides;
     }
     void QBbgOverride::clear()
     {
@@ -198,14 +212,26 @@ namespace QBbgLib {
         }
     }
 
-void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
+    void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
     {
+        #ifndef QBbg_OFFLINE
         Q_D(const QBbgOverride);
         for (QHash<QString, QString>::const_iterator i = d->m_Overrides.constBegin(); i != d->m_Overrides.constEnd(); ++i) {
             BloombergLP::blpapi::Element CurrentOverrides = rq.getElement("overrides").appendElement();
             CurrentOverrides.setElement("fieldId", i.key().toLatin1().data());
             CurrentOverrides.setElement("value", i.value().toLatin1().data());
         }
+        #endif
     }
+}
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgOverride& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
 
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgOverride& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
 }

@@ -12,13 +12,15 @@
 * GNU Lesser General Public License for more details.                           *
 *                                                                               *
 * You should have received a copy of the GNU Lesser General Public License      *
-* along with QBbgLib. If not, see < http://www.gnu.org/licenses/>.               *
+* along with QBbgLib. If not, see < http://www.gnu.org/licenses/ >.             *
 *                                                                               *
 \*******************************************************************************/
 
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
+namespace QBbgLib { class QBbgRequestResponseWorker; }
+#ifndef QBbg_OFFLINE
 
 #ifndef QBbgRequestResponseWorker_h__
 #define QBbgRequestResponseWorker_h__
@@ -68,3 +70,5 @@ namespace QBbgLib {
 
 }
 #endif // QBbgRequestResponseWorker_h__
+
+#endif // QBbg_OFFLINE
