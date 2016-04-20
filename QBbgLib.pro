@@ -16,7 +16,10 @@
 #################################################################################
 
 TEMPLATE = subdirs
-SUBDIRS += QBbgLib 
-Examples.file =	examples/examples.pro
-Examples.depends = QBbgLib
-SUBDIRS += Examples
+SUBDIRS = QBbgLib 
+!contains(DEFINES, QBbg_OFFLINE){
+    Examples.file =	examples/examples.pro
+    Examples.depends = QBbgLib
+    SUBDIRS += Examples
+}
+

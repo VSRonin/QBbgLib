@@ -58,9 +58,6 @@ DEFINES += QBBG_LIB_BUILD QT_DLL QBBGLIB_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
-contains(DEFINES, QBbg_OFFLINE){
-    TARGET = $$join(TARGET,,,_offline) 
-}
 !contains(DEFINES, QBbg_OFFLINE) {
     INCLUDEPATH += $(BLPPATH)/include 
     LIBS += -L"$(BLPPATH)/lib"
