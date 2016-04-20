@@ -242,14 +242,4 @@ namespace QBbgLib {
             ;
         d->m_type = static_cast<QBbgAbstractIntradayRequest::EventType>(tempTyp);
     }
-
-
-    void QBbgAbstractIntradayRequest::loadFromStream(QDataStream& stream)
-    {
-        Q_D(QBbgAbstractIntradayRequest);
-        QBbgAbstractRequest::loadFromStream(stream);
-        std::underlying_type<EventType>::type tempTyp;
-        stream >> d->m_startDate >> d->m_endDate >> tempTyp;
-        d->m_eventType = static_cast<EventType>(tempTyp);
-    }
 }
