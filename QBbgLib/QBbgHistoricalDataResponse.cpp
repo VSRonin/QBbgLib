@@ -152,5 +152,24 @@ namespace QBbgLib {
         m_relDates = other.m_relDates;
         return *this;
     }
+    void QBbgHistoricalDataResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgHistoricalDataResponse);
+        QBbgAbstractFieldResponse::saveToStream(stream);
+        stream
+            << d->m_values
+            << d->m_relDates
+            ;
+    }
+
+    void QBbgHistoricalDataResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgHistoricalDataResponse);
+        QBbgAbstractFieldResponse::loadFromStream(stream);
+        stream
+            >> d->m_values
+            >> d->m_relDates
+            ;
+    }
 }
 

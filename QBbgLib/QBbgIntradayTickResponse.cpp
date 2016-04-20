@@ -212,7 +212,7 @@ namespace QBbgLib {
     void QBbgIntradayTickResponse::saveToStream(QDataStream& stream) const
     {
         Q_D(const QBbgIntradayTickResponse);
-        QBbgAbstractResponse::saveToStream(stream);
+        QBbgAbstractIntradayResponse::saveToStream(stream);
         stream
             << d->m_size
             << d->m_conditionCode
@@ -229,7 +229,7 @@ namespace QBbgLib {
     {
         Q_D(QBbgIntradayTickResponse);
         std::underlying_type<QBbgAbstractIntradayRequest::EventType>::type tempTyp;
-        QBbgAbstractResponse::loadFromStream(stream);
+        QBbgAbstractIntradayResponse::loadFromStream(stream);
         stream
             >> d->m_size
             >> d->m_conditionCode
