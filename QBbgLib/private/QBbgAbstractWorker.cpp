@@ -20,6 +20,8 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
+#ifndef QBbg_OFFLINE
+
 #include "private/QBbgAbstractWorker_p.h"
 #include <blpapi_session.h>
 #include <QDate>
@@ -123,3 +125,5 @@ namespace QBbgLib {
     }
 
 }
+
+#endif // QBbg_OFFLINE

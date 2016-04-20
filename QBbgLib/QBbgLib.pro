@@ -37,31 +37,39 @@ if(COMPILING64){
 else{
     message("Compiling 32 bit")
 }
+TARGET = QBbgLib
+contains(DEFINES, QBbg_OFFLINE){
+    TARGET = $$join(TARGET,,,Off) 
+}
 CONFIG(debug, debug|release) {
-    mac: TARGET = QBbgLib_debug
-    win32: TARGET = QBbgLibd
+    mac: TARGET = $$join(TARGET,,,_debug) 
+    win32: TARGET = $$join(TARGET,,,d)
     DESTDIR = ../bin/Debug
     MOC_DIR += ./GeneratedFiles/debug
     OBJECTS_DIR += debug
 }
 CONFIG(release, debug|release) {
-    TARGET = QBbgLib
     DESTDIR = ../bin/Release
     MOC_DIR += ./GeneratedFiles/release
     OBJECTS_DIR += release
 }
 QT += core
 DEFINES += QBBG_LIB_BUILD QT_DLL QBBGLIB_LIB
-INCLUDEPATH += $(BLPPATH)/include \
-    ./GeneratedFiles \
+INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
-LIBS += -L"$(BLPPATH)/lib"
-if (COMPILING64){
-    LIBS += -lblpapi3_64
+contains(DEFINES, QBbg_OFFLINE){
+    TARGET = $$join(TARGET,,,_offline) 
 }
-else{
-    LIBS += -lblpapi3_32
+!contains(DEFINES, QBbg_OFFLINE) {
+    INCLUDEPATH += $(BLPPATH)/include 
+    LIBS += -L"$(BLPPATH)/lib"
+    if (COMPILING64){
+        LIBS += -lblpapi3_64
+    }
+    else{
+        LIBS += -lblpapi3_32
+    }
 }
 DEPENDPATH += .
 UI_DIR += ./GeneratedFiles

@@ -20,6 +20,8 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
+#ifndef QBbg_OFFLINE
+
 #ifndef QBbgRequestResponseWorker_h__
 #define QBbgRequestResponseWorker_h__
 #include <QHash>
@@ -68,3 +70,5 @@ namespace QBbgLib {
 
 }
 #endif // QBbgRequestResponseWorker_h__
+
+#endif // QBbg_OFFLINE

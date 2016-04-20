@@ -20,6 +20,8 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
+#ifndef QBbg_OFFLINE
+
 #include "private/QBbgRequestResponseWorker_p.h"
 #include "QBbgReferenceDataResponse.h"
 #include <QSet>
@@ -756,3 +758,5 @@ namespace QBbgLib {
         m_Results.clear();
     }
 }
+
+#endif // QBbg_OFFLINE

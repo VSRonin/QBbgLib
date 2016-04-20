@@ -21,14 +21,18 @@
 \*******************************************************************************/
 
 #include "private/QBbgWorkerThread_p.h"
+#ifndef QBbg_OFFLINE
 #include "private/QBbgAbstractWorker_p.h"
+#endif
 namespace QBbgLib {
 
     QBbgWorkerThread::QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent)
         :QThread(parent)
         , m_worker(wrk)
     {
+        #ifndef QBbg_OFFLINE
         m_worker->setParent(this);
+        #endif
         createConnections();
     }
     void QBbgWorkerThread::run()
@@ -46,19 +50,23 @@ namespace QBbgLib {
     }
     void QBbgWorkerThread::createConnections()
     {
+        connect(this, &QBbgWorkerThread::finished, this, &QBbgWorkerThread::deleteLater);
+        #ifndef QBbg_OFFLINE
         connect(m_worker, &QBbgAbstractWorker::started, this, &QBbgWorkerThread::started);
         connect(m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::stopped);
         connect(m_worker, &QBbgAbstractWorker::dataRecieved, this, &QBbgWorkerThread::dataRecieved);
         connect(m_worker, &QBbgAbstractWorker::progress, this, &QBbgWorkerThread::progress);
         connect(m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::finished);
-        connect(this, &QBbgWorkerThread::finished, this, &QBbgWorkerThread::deleteLater);
         connect(m_worker, &QBbgAbstractWorker::finished, this, &QBbgWorkerThread::quit);
         connect(m_worker, &QBbgAbstractWorker::stopped, this, &QBbgWorkerThread::quit);
+        #endif
     }
 
     void QBbgWorkerThread::stop()
     {
+        #ifndef QBbg_OFFLINE
         m_worker->stop();
+        #endif
     }
 
 

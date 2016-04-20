@@ -21,7 +21,9 @@
 #include "QBbgRequestGroup.h"
 #include <limits>
 #include <QEventLoop>
+#ifndef QBbg_OFFLINE
 #include "private/QBbgRequestResponseWorker_p.h"
+#endif
 #include <QCoreApplication>
 #include "QBbgReferenceDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
@@ -61,8 +63,11 @@ namespace QBbgLib {
             Q_ASSERT_X(newID < std::numeric_limits<quint32>::max(),"Adding Bloomberg Request","Overflow. Too many request sent");
             ++newID;
         }
+        QBbgRequestResponseWorker* newWorker = nullptr;
+        #ifndef QBbg_OFFLINE
         QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(d->m_options,this);
         newWorker->setRequest(rq);
+        #endif
         QBbgWorkerThread* newThread = new QBbgWorkerThread(newWorker, this);
         connect(newThread, &QBbgWorkerThread::dataRecieved, this, &QBbgManager::handleResponse);
         connect(newThread, &QBbgWorkerThread::finished, this, &QBbgManager::handleThreadFinished);

@@ -20,6 +20,8 @@
 * This file does not form part of the public API                                *
 \*******************************************************************************/
 
+#ifndef QBbg_OFFLINE
+
 #ifndef QBbgAbstractWorker_h__
 #define QBbgAbstractWorker_h__
 #include <QObject>
@@ -61,3 +63,5 @@ namespace QBbgLib {
     };
 }
 #endif // QBbgAbstractWorker_h__
+
+#endif //QBbg_OFFLINE
