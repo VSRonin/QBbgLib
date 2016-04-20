@@ -273,7 +273,7 @@ QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgSecurity& obj)
     return stream;
 }
 
-QBBG_EXPORT QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj)
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgSecurity& obj)
 {
     obj.loadFromStream(stream);
     return stream;

@@ -21,6 +21,7 @@
 #include <QDate>
 #include <QTime>
 #include <QVariant>
+#include <QDataStream>
 #include <blpapi_session.h>
 namespace QBbgLib {
 
@@ -55,6 +56,17 @@ namespace QBbgLib {
     QBbgOverride::~QBbgOverride()
     {
         delete d_ptr;
+    }
+    void QBbgOverride::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgOverride);
+        stream << d->m_Overrides;
+    }
+
+    void QBbgOverride::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgOverride);
+        stream >> d->m_Overrides;
     }
     void QBbgOverride::clear()
     {
@@ -198,7 +210,7 @@ namespace QBbgLib {
         }
     }
 
-void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
+    void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
     {
         Q_D(const QBbgOverride);
         for (QHash<QString, QString>::const_iterator i = d->m_Overrides.constBegin(); i != d->m_Overrides.constEnd(); ++i) {
@@ -207,5 +219,15 @@ void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
             CurrentOverrides.setElement("value", i.value().toLatin1().data());
         }
     }
+}
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgOverride& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
 
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgOverride& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
 }
