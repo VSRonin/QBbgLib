@@ -31,6 +31,19 @@ namespace QBbgLib {
     QBbgAbstractResponse::QBbgAbstractResponse(QBbgAbstractResponsePrivate* d)
         : d_ptr(d)
     {}
+    void QBbgAbstractResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractResponse);
+        stream << d->m_ID << d->m_ErrorMessage << static_cast<std::underlying_type<BbgErrorCodesF>::type>(d->m_ErrorCode.operator int());
+    }
+
+    void QBbgAbstractResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractResponse);
+        std::underlying_type<BbgErrorCodesF>::type errInt;
+        stream >> d->m_ID >> d->m_ErrorMessage >> errInt;
+        d->m_ErrorCode = static_cast<BbgErrorCodesF>(errInt);
+    }
     void QBbgAbstractResponse::setErrorCode(BbgErrorCodes ErrCd, const QString& errMsg)
     {
         Q_D(QBbgAbstractResponse);

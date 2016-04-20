@@ -96,6 +96,8 @@ namespace QBbgLib {
         virtual void setValue(const QVariant& val, const QString& Header = QString());
         virtual void addValueRow(const QList<QVariant>& val, const QList<QString>& Headers = QList<QString>());
         virtual void clear();
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
 
         friend class QBbgRequestResponseWorker;
     };

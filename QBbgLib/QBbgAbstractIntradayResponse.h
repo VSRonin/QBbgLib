@@ -56,6 +56,8 @@ namespace QBbgLib {
     protected:
         virtual void addValue(const QDateTime& dt, double val);
         virtual void clear();
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
         QBbgAbstractIntradayResponse() = delete;
         QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d);
     };

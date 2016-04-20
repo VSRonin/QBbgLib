@@ -81,7 +81,7 @@ namespace QBbgLib {
         };
     public:
         //! Flags representing possible errors
-        enum BbgErrorCodesF
+        enum BbgErrorCodesF : quint32
         {
             NoErrors = 0 /*!< No error occurred*/
             , ResponseError = 0x1 /*!< Response error */

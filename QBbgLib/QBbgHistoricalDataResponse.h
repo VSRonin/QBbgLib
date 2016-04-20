@@ -103,6 +103,8 @@ namespace QBbgLib {
         QBbgHistoricalDataResponse(QBbgHistoricalDataResponsePrivate* dp);
         virtual void setValue(const QDate& dt, const QVariant& val, const QString& period = QString(), const QString& Header = QString());
         virtual void clear();
+        virtual void saveToStream(QDataStream& stream) const;
+        virtual void loadFromStream(QDataStream& stream);
         friend class QBbgRequestResponseWorker;
     };
 }
