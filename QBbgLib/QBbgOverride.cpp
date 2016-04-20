@@ -22,7 +22,9 @@
 #include <QTime>
 #include <QVariant>
 #include <QDataStream>
+#ifndef QBbg_OFFLINE
 #include <blpapi_session.h>
+#endif
 namespace QBbgLib {
 
     QBbgOverridePrivate::~QBbgOverridePrivate() = default;
@@ -212,12 +214,14 @@ namespace QBbgLib {
 
     void QBbgOverride::addOverrideToRequest(BloombergLP::blpapi::Request& rq) const
     {
+        #ifndef QBbg_OFFLINE
         Q_D(const QBbgOverride);
         for (QHash<QString, QString>::const_iterator i = d->m_Overrides.constBegin(); i != d->m_Overrides.constEnd(); ++i) {
             BloombergLP::blpapi::Element CurrentOverrides = rq.getElement("overrides").appendElement();
             CurrentOverrides.setElement("fieldId", i.key().toLatin1().data());
             CurrentOverrides.setElement("value", i.value().toLatin1().data());
         }
+        #endif
     }
 }
 QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgOverride& obj)

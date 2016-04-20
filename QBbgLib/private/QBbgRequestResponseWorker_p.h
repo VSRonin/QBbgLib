@@ -19,7 +19,7 @@
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
-
+namespace QBbgLib { class QBbgRequestResponseWorker; }
 #ifndef QBbg_OFFLINE
 
 #ifndef QBbgRequestResponseWorker_h__

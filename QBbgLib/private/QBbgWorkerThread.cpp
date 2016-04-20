@@ -21,9 +21,7 @@
 \*******************************************************************************/
 
 #include "private/QBbgWorkerThread_p.h"
-#ifndef QBbg_OFFLINE
 #include "private/QBbgAbstractWorker_p.h"
-#endif
 namespace QBbgLib {
 
     QBbgWorkerThread::QBbgWorkerThread(QBbgAbstractWorker* wrk, QObject* parent)
@@ -37,8 +35,10 @@ namespace QBbgLib {
     }
     void QBbgWorkerThread::run()
     {
+        #ifndef QBbg_OFFLINE
         if(m_worker->start())
             exec();
+        #endif
     }
     QBbgWorkerThread::~QBbgWorkerThread()
     {

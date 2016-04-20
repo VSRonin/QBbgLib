@@ -177,7 +177,6 @@ namespace QBbgLib {
             >> d->m_TableCols
             >> tempSize
             ;
-        QBbgReferenceDataResponse* tempTableValue = nullptr;
         for (; tempSize > 0; --tempSize){
             d->m_TableResultRows.append(new QBbgReferenceDataResponse[d->m_TableCols]);
             for (int j = 0; j < d->m_TableCols; ++j) {

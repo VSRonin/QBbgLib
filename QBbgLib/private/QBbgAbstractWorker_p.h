@@ -19,7 +19,7 @@
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
-
+namespace QBbgLib {class QBbgAbstractWorker;}
 #ifndef QBbg_OFFLINE
 
 #ifndef QBbgAbstractWorker_h__
