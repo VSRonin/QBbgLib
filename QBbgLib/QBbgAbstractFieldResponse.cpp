@@ -57,4 +57,17 @@ namespace QBbgLib {
         Q_D(QBbgAbstractFieldResponse);
         d->m_Header=Header;
     }
+    void QBbgAbstractFieldResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractFieldResponse);
+        QBbgAbstractResponse::saveToStream(stream);
+        stream << d->m_Header;
+    }
+
+    void QBbgAbstractFieldResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractFieldResponse);
+        QBbgAbstractResponse::loadFromStream(stream);
+        stream << d->m_Header;
+    }
 }

@@ -84,5 +84,23 @@ namespace QBbgLib {
         Q_D(const QBbgAbstractIntradayResponse);
         return d->m_time.size();
     }
+    void QBbgAbstractIntradayResponse::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractIntradayResponse);
+        QBbgAbstractResponse::saveToStream(stream);
+        stream 
+            << d->m_time
+            << d->m_value
+            ;
+    }
 
+    void QBbgAbstractIntradayResponse::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractIntradayResponse);
+        QBbgAbstractResponse::loadFromStream(stream);
+        stream 
+            >> d->m_time
+            >> d->m_value
+            ;
+    }
 }

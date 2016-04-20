@@ -139,8 +139,8 @@ namespace QBbgLib {
         virtual void addCostFx(double val);
         virtual void addWeight(double val);
         virtual void clear();
-        virtual void saveToStream(QDataStream& stream) const;
-        virtual void loadFromStream(QDataStream& stream);
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream) override;
 
         friend class QBbgRequestResponseWorker;
     };
