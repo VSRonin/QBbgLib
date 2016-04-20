@@ -19,6 +19,7 @@
 #include "QBbgAbstractRequest.h"
 #include "private/QBbgAbstractRequest_p.h"
 #include <QHash>
+#include <QDataStream>
 namespace QBbgLib {
 
     QBbgAbstractRequestPrivate::~QBbgAbstractRequestPrivate() = default;
@@ -47,6 +48,17 @@ namespace QBbgLib {
         m_ID = other.m_ID;
         m_Security = other.m_Security;
         return *this;
+    }
+    void QBbgAbstractRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgAbstractRequest);
+        stream << d->m_ID << d->m_Security;
+    }
+
+    void QBbgAbstractRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgAbstractRequest);
+        stream >> d->m_ID >> d->m_Security;
     }
     void QBbgAbstractRequest::setSecurity(const QBbgSecurity& val)
     {
@@ -116,6 +128,9 @@ namespace QBbgLib {
         else if (a == "intradaybarrequest") return RequestType::IntraDayBar;
         else return RequestType::Invalid;
     }
+
+   
+
     bool QBbgAbstractRequest::isValidReq() const
     {
         Q_D(const QBbgAbstractRequest);
@@ -199,3 +214,14 @@ uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed)
     return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }
 
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgAbstractRequest& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgAbstractRequest& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
+}

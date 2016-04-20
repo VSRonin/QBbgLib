@@ -38,7 +38,7 @@ namespace QBbgLib {
         QBbgRequestGroupPrivate(QBbgRequestGroup* q);
         QBbgRequestGroupPrivate& operator=(const QBbgRequestGroupPrivate& a);
         virtual ~QBbgRequestGroupPrivate();
-        static qint64 MaxID;
+        static qint64 MaxID; // #TODO needs to be static?
         QHash<qint64, QBbgAbstractRequest*>  RequestTable;
         void clear();
         qint64 addRequest(const QBbgAbstractRequest& a);

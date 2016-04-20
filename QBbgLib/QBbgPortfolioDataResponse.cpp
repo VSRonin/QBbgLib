@@ -18,6 +18,7 @@
 
 #include "QBbgPortfolioDataResponse.h"
 #include "private/QBbgPortfolioDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse() = default;
     QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate() = default;

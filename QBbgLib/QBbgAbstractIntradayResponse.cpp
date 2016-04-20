@@ -22,7 +22,7 @@
 
 #include "QBbgAbstractIntradayResponse.h"
 #include "private/QBbgAbstractIntradayResponse_p.h"
-
+#include <QDataStream>
 namespace QBbgLib {
     QBbgAbstractIntradayResponse::~QBbgAbstractIntradayResponse() = default;
     QBbgAbstractIntradayResponsePrivate::~QBbgAbstractIntradayResponsePrivate() = default;

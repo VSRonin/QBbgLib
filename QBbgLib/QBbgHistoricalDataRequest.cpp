@@ -18,6 +18,7 @@
 
 #include "QBbgHistoricalDataRequest.h"
 #include "private/QBbgHistoricalDataRequest_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgHistoricalDataRequest::~QBbgHistoricalDataRequest() = default;
     QBbgHistoricalDataRequestPrivate::~QBbgHistoricalDataRequestPrivate() = default;
@@ -36,8 +37,6 @@ namespace QBbgLib {
         , m_adjustmentSplit(false)
         , m_adjustmentFollowDPDF(false)
     {
-        m_currency[0] = '\0';
-        m_calendarCode[0] = '\0';
     }
 
     QBbgHistoricalDataRequestPrivate::QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other)
@@ -56,19 +55,15 @@ namespace QBbgLib {
         , m_adjustmentAbnormal(other.m_adjustmentAbnormal)
         , m_adjustmentSplit(other.m_adjustmentSplit)
         , m_adjustmentFollowDPDF(other.m_adjustmentFollowDPDF)
+        , m_currency(other.m_currency)
+        , m_calendarCode(other.m_calendarCode)
     {
-        for (int i = 0; i < (sizeof(m_currency) / sizeof(*m_currency)); ++i) {
-            m_currency[i] = other.m_currency[i];
-        }
-        for (int i = 0; i < (sizeof(m_calendarCode) / sizeof(*m_calendarCode)); ++i) {
-            m_calendarCode[i] = other.m_calendarCode[i];
-        }
     }
 
     bool QBbgHistoricalDataRequest::operator==(const QBbgHistoricalDataRequest& a) const
     {
         Q_D(const QBbgHistoricalDataRequest);
-        return 
+        return
             QBbgAbstractFieldRequest::operator==(a) &&
             d->m_startDate == a.d_func()->m_startDate &&
             d->m_endDate == a.d_func()->m_endDate &&
@@ -84,8 +79,8 @@ namespace QBbgLib {
             d->m_adjustmentAbnormal == a.d_func()->m_adjustmentAbnormal &&
             d->m_adjustmentSplit == a.d_func()->m_adjustmentSplit &&
             d->m_adjustmentFollowDPDF == a.d_func()->m_adjustmentFollowDPDF &&
-            strcmp(d->m_currency, a.d_func()->m_currency) == 0 &&
-            strcmp(d->m_calendarCode, a.d_func()->m_calendarCode) == 0
+            d->m_currency == a.d_func()->m_currency &&
+            d->m_calendarCode == a.d_func()->m_calendarCode
         ;
     }
     bool QBbgHistoricalDataRequest::equalHistoricalFields(const QBbgHistoricalDataRequest& a) const
@@ -106,8 +101,8 @@ namespace QBbgLib {
             d->m_adjustmentAbnormal == a.d_func()->m_adjustmentAbnormal &&
             d->m_adjustmentSplit == a.d_func()->m_adjustmentSplit &&
             d->m_adjustmentFollowDPDF == a.d_func()->m_adjustmentFollowDPDF &&
-            strcmp(d->m_currency, a.d_func()->m_currency) == 0 &&
-            strcmp(d->m_calendarCode, a.d_func()->m_calendarCode) == 0
+            d->m_currency == a.d_func()->m_currency &&
+            d->m_calendarCode == a.d_func()->m_calendarCode
             ;
     }
     QBbgHistoricalDataRequestPrivate& QBbgHistoricalDataRequestPrivate::operator=(const QBbgHistoricalDataRequestPrivate& other)
@@ -127,15 +122,63 @@ namespace QBbgLib {
         m_adjustmentAbnormal = other.m_adjustmentAbnormal;
         m_adjustmentSplit = other.m_adjustmentSplit;
         m_adjustmentFollowDPDF = other.m_adjustmentFollowDPDF;
-        for (int i = 0; i < (sizeof(m_currency) / sizeof(*m_currency)); ++i) {
-            m_currency[i] = other.m_currency[i];
-        }
-        for (int i = 0; i < (sizeof(m_calendarCode) / sizeof(*m_calendarCode)); ++i) {
-            m_calendarCode[i] = other.m_calendarCode[i];
-        }
+        m_currency = other.m_currency;
+        m_calendarCode = other.m_calendarCode;
         return *this;
     }
+    void QBbgHistoricalDataRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgHistoricalDataRequest);
+        QBbgAbstractFieldRequest::saveToStream(stream);
+        stream 
+            << d->m_startDate
+            << d->m_endDate
+            << d->m_currency
+            << d->m_useClosePrice
+            << d->m_usePriceForPricing
+            << d->m_fillWithNull
+            << d->m_maxDataPoints
+            << d->m_useRelativeDate
+            << d->m_adjustmentAbnormal
+            << d->m_adjustmentNormal
+            << d->m_adjustmentSplit
+            << d->m_adjustmentFollowDPDF
+            << d->m_calendarCode
+            << static_cast<std::underlying_type<PeriodAdjustment>::type>(d->m_periodicityAdjustment)
+            << static_cast<std::underlying_type<PeriodSelection>::type>(d->m_periodicitySelection)
+            << static_cast<std::underlying_type<NonTradingDayFill>::type>(d->m_nonTradingDayFill)
+            ;
+    }
 
+    void QBbgHistoricalDataRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgHistoricalDataRequest);
+        std::underlying_type<PeriodAdjustment>::type periodicityAdjustment;
+        std::underlying_type<PeriodSelection>::type periodicitySelection;
+        std::underlying_type<NonTradingDayFill>::type nonTradingDayFill;
+        QBbgAbstractFieldRequest::loadFromStream(stream);
+        stream
+            >> d->m_startDate
+            >> d->m_endDate
+            >> d->m_currency
+            >> d->m_useClosePrice
+            >> d->m_usePriceForPricing
+            >> d->m_fillWithNull
+            >> d->m_maxDataPoints
+            >> d->m_useRelativeDate
+            >> d->m_adjustmentAbnormal
+            >> d->m_adjustmentNormal
+            >> d->m_adjustmentSplit
+            >> d->m_adjustmentFollowDPDF
+            >> d->m_calendarCode
+            >> periodicityAdjustment
+            >> periodicitySelection
+            >> nonTradingDayFill
+            ;
+        d->m_periodicityAdjustment = static_cast<PeriodAdjustment>(periodicityAdjustment);
+        d->m_periodicitySelection = static_cast<PeriodSelection>(periodicitySelection);
+        d->m_nonTradingDayFill = static_cast<NonTradingDayFill>(nonTradingDayFill);
+    }
     QString QBbgHistoricalDataRequest::calendarCode() const
     {
         Q_D(const QBbgHistoricalDataRequest);
@@ -147,12 +190,10 @@ namespace QBbgLib {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
         if (val.size() != 2) {
-            d->m_calendarCode[0]='\0';
+            d->m_calendarCode.clear();
             return;
         }
-        d->m_calendarCode[0] = val.at(0).toLatin1();
-        d->m_calendarCode[1] = val.at(1).toLatin1();
-        d->m_calendarCode[2] = '\0';
+        d->m_calendarCode = val;
     }
 
     bool QBbgHistoricalDataRequest::adjustmentFollowDPDF() const
@@ -238,13 +279,10 @@ namespace QBbgLib {
         Q_D(QBbgHistoricalDataRequest);
         val = val.trimmed().toUpper();
         if (val.size() != 3) {
-            d->m_currency[0] = '\0';
+            d->m_currency.clear();
             return;
         }
-        d->m_currency[0] = val.at(0).toLatin1();
-        d->m_currency[1] = val.at(1).toLatin1();
-        d->m_currency[2] = val.at(2).toLatin1();
-        d->m_currency[3] = '\0';
+        d->m_currency = val;
     }
 
     QBbgHistoricalDataRequest::PeriodSelection QBbgHistoricalDataRequest::periodicitySelection() const
@@ -309,9 +347,9 @@ namespace QBbgLib {
     {
         Q_D(const QBbgHistoricalDataRequest);
         if (d->m_startDate.isNull()) return false;
-        if (d->m_currency[0] != '\0' && strlen(d->m_currency) != 3) return false;
+        if (d->m_currency.size() != 3) return false;
         if (d->m_maxDataPoints<0) return false;
-        if (d->m_calendarCode[0] != '\0' && strlen(d->m_calendarCode) != 2) return false;
+        if (d->m_calendarCode.size() != 2) return false;
         //if (d->m_calendarCode[0] != '\0' && d->m_periodicitySelection != DAILY) return false; //calendarCodeOverride only applies only to DAILY requests
         return QBbgAbstractFieldRequest::isValidReq();
     }

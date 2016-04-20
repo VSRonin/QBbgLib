@@ -18,6 +18,7 @@
 
 #include "QBbgReferenceDataResponse.h"
 #include "private/QBbgReferenceDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
 
     QBbgReferenceDataResponsePrivate::~QBbgReferenceDataResponsePrivate() = default;

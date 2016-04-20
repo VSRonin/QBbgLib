@@ -18,6 +18,7 @@
 
 #include "QBbgAbstractFieldResponse.h"
 #include "private/QBbgAbstractFieldResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse() = default;
     QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate() = default;

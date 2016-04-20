@@ -19,6 +19,7 @@
 #include "QBbgAbstractResponse.h"
 #include "private/QBbgAbstractResponse_p.h"
 #include <QHash>
+#include <QDataStream>
 namespace QBbgLib {
 
     QBbgAbstractResponsePrivate::~QBbgAbstractResponsePrivate() = default;
@@ -152,4 +153,16 @@ namespace QBbgLib {
 uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed)
 {
     return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+}
+
+QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgAbstractResponse& obj)
+{
+    obj.saveToStream(stream);
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, QBbgLib::QBbgAbstractResponse& obj)
+{
+    obj.loadFromStream(stream);
+    return stream;
 }

@@ -18,6 +18,7 @@
 
 #include "QBbgReferenceDataRequest.h"
 #include "private/QBbgReferenceDataRequest_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgReferenceDataRequest::~QBbgReferenceDataRequest() = default;
     QBbgReferenceDataRequestPrivate::~QBbgReferenceDataRequestPrivate() = default;
@@ -60,6 +61,19 @@ namespace QBbgLib {
             d->m_UseUTCTime == a.d_func()->m_UseUTCTime 
             && QBbgAbstractFieldRequest::operator==(a)
             ;
+    }
+    void QBbgReferenceDataRequest::saveToStream(QDataStream& stream) const
+    {
+        Q_D(const QBbgReferenceDataRequest);
+        QBbgAbstractFieldRequest::saveToStream(stream);
+        stream << d->m_UseUTCTime;
+    }
+
+    void QBbgReferenceDataRequest::loadFromStream(QDataStream& stream)
+    {
+        Q_D(QBbgReferenceDataRequest);
+        QBbgAbstractFieldRequest::loadFromStream(stream);
+        stream >> d->m_UseUTCTime;
     }
     void QBbgReferenceDataRequest::setUseUTCtime(bool a)
     {

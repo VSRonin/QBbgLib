@@ -69,6 +69,8 @@ namespace QBbgLib {
         //! Reimplemented from QBbgAbstractRequest::isValidReq
 		virtual bool isValidReq() const override;
 	protected:
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream) override;
         virtual bool sameOverrides(const QBbgAbstractFieldRequest& a)const;
         QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);
         QBbgAbstractFieldRequest() = delete;

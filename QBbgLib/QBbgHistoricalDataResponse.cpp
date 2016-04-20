@@ -18,6 +18,7 @@
 
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgHistoricalDataResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgHistoricalDataResponse::~QBbgHistoricalDataResponse() = default;
     QBbgHistoricalDataResponsePrivate::~QBbgHistoricalDataResponsePrivate() = default;

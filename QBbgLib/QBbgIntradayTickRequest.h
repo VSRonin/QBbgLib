@@ -140,6 +140,8 @@ namespace QBbgLib {
     protected:
         QBbgIntradayTickRequest(QBbgIntradayTickRequestPrivate* d);
         bool sameOptions(const QBbgIntradayTickRequest& other) const;
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream)override;
         friend class QBbgRequestGroupPrivate;
     };
 }

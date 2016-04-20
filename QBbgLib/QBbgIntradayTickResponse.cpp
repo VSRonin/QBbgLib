@@ -21,6 +21,7 @@
 \*******************************************************************************/
 #include "QBbgIntradayTickResponse.h"
 #include "private/QBbgIntradayTickResponse_p.h"
+#include <QDataStream>
 namespace QBbgLib {
     QBbgIntradayTickResponse::~QBbgIntradayTickResponse() = default;
     QBbgIntradayTickResponsePrivate::~QBbgIntradayTickResponsePrivate() = default;

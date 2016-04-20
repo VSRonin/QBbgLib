@@ -98,6 +98,8 @@ namespace QBbgLib {
     protected:
         QBbgAbstractIntradayRequest() = delete;
         QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate* d);
+        virtual void saveToStream(QDataStream& stream) const override;
+        virtual void loadFromStream(QDataStream& stream)override;
     };
 }
 /*!
