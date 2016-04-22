@@ -68,6 +68,6 @@ namespace QBbgLib {
     {
         Q_D(QBbgAbstractFieldResponse);
         QBbgAbstractResponse::loadFromStream(stream);
-        stream << d->m_Header;
+        stream >> d->m_Header;
     }
 }
