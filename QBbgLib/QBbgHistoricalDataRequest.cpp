@@ -347,9 +347,9 @@ namespace QBbgLib {
     {
         Q_D(const QBbgHistoricalDataRequest);
         if (d->m_startDate.isNull()) return false;
-        if (d->m_currency.size() != 3) return false;
+        if (!d->m_currency.isEmpty() && d->m_currency.size() != 3) return false;
         if (d->m_maxDataPoints<0) return false;
-        if (d->m_calendarCode.size() != 2) return false;
+        if (!d->m_calendarCode.isEmpty() && d->m_calendarCode.size() != 2) return false;
         //if (d->m_calendarCode[0] != '\0' && d->m_periodicitySelection != DAILY) return false; //calendarCodeOverride only applies only to DAILY requests
         return QBbgAbstractFieldRequest::isValidReq();
     }
