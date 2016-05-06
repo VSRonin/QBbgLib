@@ -75,13 +75,13 @@ namespace QBbgLib {
         case BloombergLP::blpapi::DataType::BOOL:
             return val.getValueAsBool();
         case BloombergLP::blpapi::DataType::CHAR:
-            return val.getValueAsChar();
+            return QChar(val.getValueAsChar());
         case BloombergLP::blpapi::DataType::INT32:
             return qint32(val.getValueAsInt32());
         case BloombergLP::blpapi::DataType::INT64:
             return qint64(val.getValueAsInt64());
         case BloombergLP::blpapi::DataType::FLOAT32:
-            return double(val.getValueAsFloat32());
+            return float(val.getValueAsFloat32());
         case BloombergLP::blpapi::DataType::FLOAT64:
             return double(val.getValueAsFloat64());
         case BloombergLP::blpapi::DataType::STRING:
