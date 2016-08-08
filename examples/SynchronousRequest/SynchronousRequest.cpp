@@ -47,9 +47,12 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Send the request and wait for the response
     const QBbgLib::QBbgReferenceDataResponse * const resp = bbgManager.processRequest(req);
-
+    // Check if we recieved anything
+    if(!resp){
+        std::cout << std::endl << "Error! Unable to process Request";
+    }
     // Check if we recieved an error
-    if (resp->hasErrors()) {
+    else if (resp->hasErrors()) {
         std::cout << std::endl <<  qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
@@ -113,9 +116,11 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Send the request and wait for the response
     const QBbgLib::QBbgHistoricalDataResponse * const resp = bbgManager.processRequest(req);
-
+    if (!resp) {
+        std::cout << std::endl << "Error! Unable to process Request";
+    }
     // Check if we recieved an error
-    if (resp->hasErrors()) {
+    else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
@@ -140,9 +145,11 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Send the request and wait for the response
     const QBbgLib::QBbgPortfolioDataResponse * const resp = bbgManager.processRequest(req);
-
+    if (!resp) {
+        std::cout << std::endl << "Error! Unable to process Request";
+    }
     // Check if we recieved an error
-    if (resp->hasErrors()) {
+    else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
@@ -173,9 +180,11 @@ void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
 
     // Send the request and wait for the response
     const QBbgLib::QBbgIntradayTickResponse * const resp = bbgManager.processRequest(req);
-
+    if (!resp) {
+        std::cout << std::endl << "Error! Unable to process Request";
+    }
     // Check if we recieved an error
-    if (resp->hasErrors()) {
+    else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
     }
     else {
@@ -250,7 +259,9 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
 
     // Historical Result
     const QBbgHistoricalDataResponse* const euriborResult = bbgManager.getResult<QBbgHistoricalDataResponse>(resultGroupID, euriborID);
-    if (euriborResult->hasErrors())
+    if (!euriborResult)
+        std::cout << std::endl << "Error! Unable to process Request";
+    else if (euriborResult->hasErrors())
         std::cout << std::endl << qPrintable(QStringLiteral("Unable to download historical 3m EURIBOR. Error %1: %2").arg(euriborResult->errorString()).arg(euriborResult->errorMessage()));
     else
         std::cout << std::endl << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2").arg(euriborResult->date(0).toString(Qt::DefaultLocaleShortDate)).arg(euriborResult->value(0).toDouble()));
@@ -266,8 +277,10 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
                     resultGroupID
                     , referenceDictionary.value(resultKey, QBbgAbstractRequest::InvalidID)
                 );
-            Q_ASSERT(currentResult); // Should always pass
-            if (currentResult->hasErrors()){
+            if(!currentResult){
+                std::cout << std::endl << "Error! Unable to process Request";
+            }
+            else if (currentResult->hasErrors()){
                 // Check for errors
                 std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": " << qPrintable(QStringLiteral("Error %1 - %2").arg(currentResult->errorMessage()).arg(currentResult->errorString()));
             }

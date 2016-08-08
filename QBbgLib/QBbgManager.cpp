@@ -72,25 +72,30 @@ namespace QBbgLib {
         #ifndef QBbg_OFFLINE
         QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(*(d->m_options));
         newWorker->setRequest(rq);
-        newThread = new QThread;
+        newThread = new QThread(this);
+        connect(newThread, &QThread::finished, newThread, &QThread::deleteLater);
         newWorker->moveToThread(newThread);
         connect(newWorker, &QBbgAbstractWorker::dataRecieved, this, &QBbgManager::handleResponse);
         connect(newWorker, &QBbgAbstractWorker::finished, this, &QBbgManager::handleThreadFinished);
         connect(newThread, &QThread::started, newWorker, &QBbgAbstractWorker::start);
         connect(newWorker, &QBbgAbstractWorker::finished, newThread, &QThread::quit);
         connect(newWorker, &QBbgAbstractWorker::finished, newWorker, &QBbgAbstractWorker::deleteLater);
-        #else
-        newThread = new QThread(nullptr, this);
-        #endif
-        connect(newThread, &QThread::finished, newThread, &QThread::deleteLater);
         return d->m_ThreadPool.insert(newID, std::make_pair(newThread, newWorker));
+        #else
+        Q_UNUSED(rq)
+        return d->m_ThreadPool.insert(newID, std::make_pair(newThread, nullptr));
+        #endif
+        
+        
     }
     quint32 QBbgManager::startRequest(const QBbgRequestGroup& rq)
     {
         if (!rq.isValidReq() || rq.size() == 0)
             return 0;
         QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator newTh = createThread(rq);
+        #ifndef QBbg_OFFLINE
         newTh.value().first->start();
+        #endif
         return newTh.key();
     }
 
@@ -108,11 +113,16 @@ namespace QBbgLib {
             return 0;
         QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator newTh = createThread(rq);
         const quint32 threadKey = newTh.key();
+        #ifndef QBbg_OFFLINE
         QEventLoop waitLoop;
         connect(newTh.value().first, &QThread::finished, &waitLoop, &QEventLoop::quit);
         newTh.value().first->start();
         waitLoop.exec();
         Q_ASSERT(d_func()->m_ResultTable.contains(threadKey));
+        #else
+        Q_ASSERT(!d_func()->m_ResultTable.contains(threadKey));
+        d_func()->m_ResultTable.insert(threadKey, new QHash<qint64, QBbgAbstractResponse* >);
+        #endif // !QBbg_OFFLINE
         return threadKey;
     }
 
@@ -137,6 +147,8 @@ namespace QBbgLib {
         if(rg.addRequest(rq) == QBbgAbstractRequest::InvalidID)
             return nullptr;
         const QHash<qint64, QBbgAbstractResponse* >& resHash= processRequest(rg);
+        if (resHash.isEmpty())
+            return nullptr;
         Q_ASSERT(resHash.count() == 1);
         return resHash.begin().value();
     }
@@ -167,10 +179,12 @@ namespace QBbgLib {
         Q_D(QBbgManager);
         quint32 foundRes=0;
         for (QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator resIter = d->m_ThreadPool.begin(); resIter != d->m_ThreadPool.end(); ++resIter) {
+        #ifndef QBbg_OFFLINE
             if (resIter.value().second == sender()) {
                 foundRes = resIter.key();
                 break;
-            }
+        }
+        #endif // !QBbg_OFFLINE 
         }
         QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* >::iterator resIter = d->m_ResultTable.find(foundRes);
         if (resIter == d->m_ResultTable.end()) {
@@ -192,6 +206,7 @@ namespace QBbgLib {
         Q_ASSERT(sender());
         Q_D(QBbgManager);
         for (QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator resIter = d->m_ThreadPool.begin(); resIter != d->m_ThreadPool.end(); ++resIter) {
+            #ifndef QBbg_OFFLINE
             if (resIter.value().second == sender()) {
                 emit finished(resIter.key());
                 d->m_ThreadPool.erase(resIter);
@@ -199,6 +214,7 @@ namespace QBbgLib {
                     emit allFinished();
                 return;
             }
+            #endif
         }
         Q_UNREACHABLE(); //Could not find sender()
     }
@@ -241,9 +257,10 @@ namespace QBbgLib {
             delete i.value();
         }
         for (QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator i = m_ThreadPool.begin(); i != m_ThreadPool.end(); ++i) {
-            Q_ASSERT(i.value().first);
-            if (i.value().first->isRunning()) {
-                i.value().first->quit();
+            if (i.value().first) {
+                if (i.value().first->isRunning()) {
+                    i.value().first->quit();
+                }
             }
         }
     }
