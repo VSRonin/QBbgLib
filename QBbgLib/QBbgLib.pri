@@ -46,7 +46,6 @@ HEADERS += ./QBbgProjectGlobals.h \
     ./private/QBbgReferenceDataResponse_p.h \
     ./private/QBbgRequestGroup_p.h \
     ./private/QBbgSecurity_p.h \
-    ./private/QBbgWorkerThread_p.h \
     ./private/QBbgAbstractWorker_p.h \
     ./private/QBbgRequestResponseWorker_p.h \
     ./QBbgIntradayTickRequest.h \
@@ -70,7 +69,6 @@ SOURCES += ./QBbgManager.cpp \
     ./QBbgHistoricalDataResponse.cpp \
     ./QBbgPortfolioDataResponse.cpp \
     ./QBbgReferenceDataResponse.cpp \
-    ./private/QBbgWorkerThread.cpp \
     ./private/QBbgAbstractWorker.cpp \
     ./private/QBbgRequestResponseWorker.cpp \
     ./QBbgIntradayTickRequest.cpp \

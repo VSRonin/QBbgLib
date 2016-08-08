@@ -25,10 +25,11 @@
 #include "QBbgManager.h"
 #include <QHash>
 #include <memory>
+class QThread;
 namespace BloombergLP { namespace blpapi { class SessionOptions; } }
 namespace QBbgLib {
     class QBbgAbstractResponse;
-    class QBbgWorkerThread;
+    class QBbgAbstractWorker;
     class QBbgManagerPrivate
     {
     private:
@@ -38,7 +39,7 @@ namespace QBbgLib {
         QBbgManagerPrivate(QBbgManager* qp);
         virtual ~QBbgManagerPrivate();
         QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* > m_ResultTable;
-        QHash<quint32, QBbgWorkerThread* > m_ThreadPool;
+        QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> > m_ThreadPool;
         BloombergLP::blpapi::SessionOptions* m_options;
     protected:
         QBbgManager* q_ptr;

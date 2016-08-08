@@ -48,9 +48,6 @@
     <Filter Include="Private">
       <UniqueIdentifier>{6449eb06-0a70-44dc-9db7-ac51baa9abb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Private\Threads">
-      <UniqueIdentifier>{747b186d-9dd3-4308-8818-03a8726d3eb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Private\Workers">
       <UniqueIdentifier>{0132162a-640b-4a39-9f5b-99366a4174ff}</UniqueIdentifier>
     </Filter>
@@ -113,9 +110,6 @@
     <ClCompile Include="private\QBbgRequestResponseWorker.cpp">
       <Filter>Private\Workers</Filter>
     </ClCompile>
-    <ClCompile Include="private\QBbgWorkerThread.cpp">
-      <Filter>Private\Threads</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_QBbgAbstractWorker_p.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -126,12 +120,6 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_QBbgRequestResponseWorker_p.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_QBbgWorkerThread_p.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_QBbgWorkerThread_p.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="QBbgRequestGroup.cpp">
@@ -323,9 +311,6 @@
     </CustomBuild>
     <CustomBuild Include="private\QBbgRequestResponseWorker_p.h">
       <Filter>Private\Workers</Filter>
-    </CustomBuild>
-    <CustomBuild Include="private\QBbgWorkerThread_p.h">
-      <Filter>Private\Threads</Filter>
     </CustomBuild>
     <CustomBuild Include="QBbgSecurity.h">
       <Filter>Header Files</Filter>
