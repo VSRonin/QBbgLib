@@ -20,17 +20,13 @@ isEmpty(PREFIX) {
  warning("PREFIX not specified")
  PREFIX = ../QBbgLib
 }
-win32{
-    win64{
-        COMPILING64 = true
-    }
-    else{
-        COMPILING64 = false
-    }
+contains(QMAKE_HOST.arch, x86_64){
+   COMPILING64 = true
 }
-else {
-    COMPILING64 = contains($$system(getconf LONG_BIT), 64)
+else{
+    COMPILING64 = false
 }
+
 if(COMPILING64){
     message("Compiling 64 bit")
 }
