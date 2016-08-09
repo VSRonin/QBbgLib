@@ -73,13 +73,13 @@ namespace QBbgLib {
         QBbgRequestResponseWorker* newWorker = new QBbgRequestResponseWorker(*(d->m_options));
         newWorker->setRequest(rq);
         newThread = new QThread(this);
-        connect(newThread, &QThread::finished, newThread, &QThread::deleteLater);
         newWorker->moveToThread(newThread);
         connect(newWorker, &QBbgAbstractWorker::dataRecieved, this, &QBbgManager::handleResponse);
         connect(newWorker, &QBbgAbstractWorker::finished, this, &QBbgManager::handleThreadFinished);
         connect(newThread, &QThread::started, newWorker, &QBbgAbstractWorker::start);
         connect(newWorker, &QBbgAbstractWorker::finished, newThread, &QThread::quit);
         connect(newWorker, &QBbgAbstractWorker::finished, newWorker, &QBbgAbstractWorker::deleteLater);
+        connect(newThread, &QThread::finished, newThread, &QThread::deleteLater);
         return d->m_ThreadPool.insert(newID, std::make_pair(newThread, newWorker));
         #else
         Q_UNUSED(rq)
