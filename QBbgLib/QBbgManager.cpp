@@ -78,7 +78,7 @@ namespace QBbgLib {
         connect(newWorker, &QBbgAbstractWorker::finished, this, &QBbgManager::handleThreadFinished);
         connect(newThread, &QThread::started, newWorker, &QBbgAbstractWorker::start);
         connect(newWorker, &QBbgAbstractWorker::finished, newThread, &QThread::quit);
-        connect(newWorker, &QBbgAbstractWorker::finished, newWorker, &QBbgAbstractWorker::deleteLater);
+        //connect(newWorker, &QBbgAbstractWorker::finished, newWorker, &QBbgAbstractWorker::deleteLater);
         connect(newThread, &QThread::finished, newThread, &QThread::deleteLater);
         return d->m_ThreadPool.insert(newID, std::make_pair(newThread, newWorker));
         #else
@@ -213,6 +213,7 @@ namespace QBbgLib {
             #ifndef QBbg_OFFLINE
             if (resIter.value().second == sender()) {
                 emit finished(resIter.key());
+                delete resIter.value().second;
                 d->m_ThreadPool.erase(resIter);
                 if (d->m_ThreadPool.isEmpty()) {
                     Q_ASSERT(d->m_queuedThreads.isEmpty()); // There should be no queue active at this point
@@ -272,6 +273,9 @@ namespace QBbgLib {
                 if (i.value().first->isRunning()) {
                     i.value().first->quit();
                 }
+            }
+            if (i.value().second) {
+                i.value().second->deleteLater();
             }
         }
     }
