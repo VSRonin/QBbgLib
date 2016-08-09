@@ -92,9 +92,9 @@ namespace QBbgLib {
     {
         if (!rq.isValidReq() || rq.size() == 0)
             return 0;
-        Q_D(QBbgManager);
         QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator newTh = createThread(rq);
         #ifndef QBbg_OFFLINE
+        Q_D(QBbgManager);
         if (d->m_ThreadPool.size() < qMax(1,QThread::idealThreadCount()))
             newTh.value().first->start();
         else
@@ -274,9 +274,12 @@ namespace QBbgLib {
                     i.value().first->quit();
                 }
             }
+            #ifndef QBbg_OFFLINE
             if (i.value().second) {
+                i.value().second->stop();
                 i.value().second->deleteLater();
             }
+            #endif
         }
     }
 }
