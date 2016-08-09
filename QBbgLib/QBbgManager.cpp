@@ -92,9 +92,13 @@ namespace QBbgLib {
     {
         if (!rq.isValidReq() || rq.size() == 0)
             return 0;
+        Q_D(QBbgManager);
         QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator newTh = createThread(rq);
         #ifndef QBbg_OFFLINE
-        newTh.value().first->start();
+        if (d->m_ThreadPool.size() < qMax(1,QThread::idealThreadCount()))
+            newTh.value().first->start();
+        else
+            d->m_queuedThreads.append(newTh.key());
         #endif
         return newTh.key();
     }
@@ -210,8 +214,15 @@ namespace QBbgLib {
             if (resIter.value().second == sender()) {
                 emit finished(resIter.key());
                 d->m_ThreadPool.erase(resIter);
-                if (d->m_ThreadPool.isEmpty())
+                if (d->m_ThreadPool.isEmpty()) {
+                    Q_ASSERT(d->m_queuedThreads.isEmpty()); // There should be no queue active at this point
                     emit allFinished();
+                }
+                else if (!d->m_queuedThreads.isEmpty()) {
+                    QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator queuedThread = d->m_ThreadPool.find(d->m_queuedThreads.dequeue());
+                    Q_ASSERT(queuedThread != d->m_ThreadPool.end()); // A queued thread does not exist
+                    queuedThread.value().first->start();
+                }
                 return;
             }
             #endif
