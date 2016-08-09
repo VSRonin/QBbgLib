@@ -24,21 +24,23 @@
 #define QBbgManager_p_h__
 #include "QBbgManager.h"
 #include <QHash>
-#include <memory>
+#include <QQueue>
+class QThread;
 namespace BloombergLP { namespace blpapi { class SessionOptions; } }
 namespace QBbgLib {
     class QBbgAbstractResponse;
-    class QBbgWorkerThread;
+    class QBbgAbstractWorker;
     class QBbgManagerPrivate
     {
     private:
         Q_DECLARE_PUBLIC(QBbgManager)
-        QBbgManagerPrivate(const QBbgManagerPrivate&)=delete;
+        QBbgManagerPrivate(const QBbgManagerPrivate&) = delete;
     public:
         QBbgManagerPrivate(QBbgManager* qp);
         virtual ~QBbgManagerPrivate();
         QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* > m_ResultTable;
-        QHash<quint32, QBbgWorkerThread* > m_ThreadPool;
+        QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> > m_ThreadPool;
+        QQueue<quint32> m_queuedThreads;
         BloombergLP::blpapi::SessionOptions* m_options;
     protected:
         QBbgManager* q_ptr;

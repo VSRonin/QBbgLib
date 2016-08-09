@@ -12,17 +12,17 @@
 #include "QBbgOverride.h"
 #include "QBbgIntradayTickRequest.h"
 #include "QBbgIntradayTickResponse.h"
-#include <QSaveFile>
+#include <QFile>
 #include <QTextStream>
 #include <QVariant>
 void PrintToTempFile(const QString& TempFileName, const QString& Message, bool PrintTime)
 {
-    QSaveFile TempFile("C:/Temp/" + TempFileName + ".log");
+    QFile TempFile("C:/Temp/" + TempFileName + ".log");
     if (!TempFile.open(QIODevice::Append | QIODevice::Text)) 
         return;
     QTextStream TempWrite(&TempFile);
     TempWrite << (PrintTime ? QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm ") : QString()) + Message + '\n';
-    TempFile.commit();
+    TempFile.close();
 }
 
 int main(int argc, char *argv[])
