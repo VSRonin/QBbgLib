@@ -20,19 +20,7 @@ isEmpty(PREFIX) {
  warning("PREFIX not specified")
  PREFIX = ../QBbgLib
 }
-contains(QMAKE_HOST.arch, x86_64){
-   COMPILING64 = true
-}
-else{
-    COMPILING64 = false
-}
 
-if(COMPILING64){
-    message("Compiling 64 bit")
-}
-else{
-    message("Compiling 32 bit")
-}
 TARGET = QBbgLib
 contains(DEFINES, QBbg_OFFLINE){
     TARGET = $$join(TARGET,,,Off) 
@@ -57,7 +45,7 @@ INCLUDEPATH += ./GeneratedFiles \
 !contains(DEFINES, QBbg_OFFLINE) {
     INCLUDEPATH += $(BLPPATH)/include 
     LIBS += -L"$(BLPPATH)/lib"
-    if (COMPILING64){
+    contains(QMAKE_TARGET.arch, x86_64){
         LIBS += -lblpapi3_64
     }
     else{
@@ -68,7 +56,7 @@ DEPENDPATH += .
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 CONFIG += build_all
-if (COMPILING64){
+contains(QMAKE_TARGET.arch, x86_64){
     target.path = $$PREFIX/lib64
 }
 else{
