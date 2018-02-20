@@ -27,7 +27,7 @@ Documentation in Qt Assistant format is packed with the repository, it is also a
 To build the documentation in other formats you'll need [Doxygen](http://www.doxygen.org). Just run it using the included doxyfile config.  
 The conceptual schema of how this library work is represented in the image
 
-![Schema](http://i278.photobucket.com/albums/kk113/V-Ronin/Schema.png)
+![Schema](https://preview.ibb.co/b9QbyH/Schema.png)
 
 ## Example Usage
 Please refer to the example folder for code snippets that illustarte the library in action.
