@@ -372,8 +372,7 @@ namespace QBbgLib {
                     emit started(); // Emit signal
                 }
                 else if (MessageType == QStringLiteral("SessionConnectionUp")) continue;
-                else if (MessageType == QStringLiteral("SessionConnectionDown")) continue;
-                else if (MessageType == QStringLiteral("SessionTerminated")) {
+                else if (MessageType == QStringLiteral("SessionTerminated") || MessageType == QStringLiteral("SessionConnectionDown") || MessageType == QStringLiteral("SessionStartupFailure")) {
                     setSessionRunning(false);
                     emit finished();
                 }

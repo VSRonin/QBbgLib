@@ -39,6 +39,7 @@ namespace QBbgLib {
         , m_SessionRunning(false)
         , QObject(parent)
     {}
+
     bool QBbgAbstractWorker::isAvailable() const
     {
         return !m_SessionRunning;
@@ -119,9 +120,9 @@ namespace QBbgLib {
         }
     }
 
-    std::unique_ptr<BloombergLP::blpapi::Session>& QBbgAbstractWorker::session()
+    BloombergLP::blpapi::Session* QBbgAbstractWorker::session()
     {
-        return m_session;
+        return m_session.get();
     }
 
 }

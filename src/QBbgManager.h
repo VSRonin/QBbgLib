@@ -180,6 +180,11 @@ namespace QBbgLib {
         QList<quint32> getResultGroups() const;
         //! Returns a list of all request IDs associated with the given group ID
         Q_INVOKABLE QList<qint64> getResultIDs(quint32 group) const;
+    public slots:
+        //! Starts monitoring a connection with the bloomberg API
+        void startConnectionMonitor();
+        //! Stops monitoring a connection with the bloomberg API
+        void endConnectionMonitor();
     protected slots:
         void handleResponse(qint64 reID, QBbgAbstractResponse* res);
         void handleThreadFinished();
@@ -190,6 +195,14 @@ namespace QBbgLib {
         void finished(quint32);
         //! This will emitted when no more request are running
         void allFinished();
+        //! This is emitted when a connection with bloomberg was succesfully enstablished after invoking startConnectionMonitor
+        void connected();
+        /*!
+        \brief Emitted when connection with bloomberg was interrupted
+        \details This signal will fire only after startConnectionMonitor is invoked as a result of a failure to connect, a loss of connection or a manual disconnection via endConnectionMonitor.
+        Once this signal is emitted the monitoring will stop and can be restarted by calling startConnectionMonitor again
+        */
+        void disconnected();
     };
 }
 #endif // QBbgManager_h__

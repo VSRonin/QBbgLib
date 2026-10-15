@@ -23,6 +23,7 @@
 #include <QEventLoop>
 #ifndef QBbg_OFFLINE
 #include "private/QBbgRequestResponseWorker_p.h"
+#include "private/QBbgSessionMonitorWorker_p.h"
 #include <blpapi_sessionoptions.h>
 #endif
 #include <QCoreApplication>
@@ -41,6 +42,7 @@ namespace QBbgLib {
     QBbgManagerPrivate::QBbgManagerPrivate(QBbgManager* qp)
         :q_ptr(qp)
         , m_options(nullptr)
+        , m_sessionMonitor(nullptr)
     {
         #ifndef QBbg_OFFLINE
         m_options = new BloombergLP::blpapi::SessionOptions;
@@ -60,7 +62,7 @@ namespace QBbgLib {
         , d_ptr(new QBbgManagerPrivate(this))
     {}
     QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> >::iterator QBbgManager::createThread(const QBbgRequestGroup& rq)
-{
+    {
         Q_ASSERT_X(QCoreApplication::instance(), "QBbgManager", "A QCoreApplication must be created to process requests");
         Q_D(QBbgManager);
         quint32 newID = 1;
@@ -85,9 +87,26 @@ namespace QBbgLib {
         Q_UNUSED(rq)
         return d->m_ThreadPool.insert(newID, std::make_pair(newThread, nullptr));
         #endif
-        
-        
     }
+    void QBbgManager::startConnectionMonitor(){
+    #ifndef QBbg_OFFLINE
+        Q_D(QBbgManager);
+        if(!d->m_sessionMonitor){
+            d->m_sessionMonitor=new QBbgSessionMonitorWorker(*(d->m_options),this);
+            connect(d->m_sessionMonitor,&QBbgSessionMonitorWorker::started,this,&QBbgManager::connected);
+            connect(d->m_sessionMonitor,&QBbgSessionMonitorWorker::started,this,&QBbgManager::disconnected);
+        }
+        d->m_sessionMonitor->start();
+    #endif
+    }
+    void QBbgManager::endConnectionMonitor(){
+    #ifndef QBbg_OFFLINE
+        Q_D(QBbgManager);
+        if(d->m_sessionMonitor)
+            d->m_sessionMonitor->stop();
+    #endif
+    }
+
     quint32 QBbgManager::startRequest(const QBbgRequestGroup& rq)
     {
         if (!rq.isValidReq() || rq.size() == 0)

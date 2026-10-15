@@ -19,25 +19,27 @@
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
+#ifndef QBbgAbstractWorker_h__
+#define QBbgAbstractWorker_h__
+
 namespace QBbgLib {class QBbgAbstractWorker;}
 #ifndef QBbg_OFFLINE
 
-#ifndef QBbgAbstractWorker_h__
-#define QBbgAbstractWorker_h__
+
 #include <QObject>
 #include <QVariant>
 #include <memory>
 #include "QBbgAbstractResponse.h"
+#include "QBbgRequestGroup.h"
 #include <blpapi_session.h>
 namespace QBbgLib {
     class QBbgAbstractResponse;
-    class QBbgRequestGroup;
     class QBbgAbstractWorker : public QObject, public BloombergLP::blpapi::EventHandler
     {
         Q_OBJECT
     public:
         QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = NULL);
-        virtual ~QBbgAbstractWorker() = 0;
+        virtual ~QBbgAbstractWorker();
         virtual bool isAvailable() const;
         virtual void stop();
     protected:
@@ -47,7 +49,7 @@ namespace QBbgLib {
         virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const;
         virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
         virtual QVariant elementToVariant(const BloombergLP::blpapi::Element& val);
-        std::unique_ptr<BloombergLP::blpapi::Session>& session();
+        BloombergLP::blpapi::Session* session();
     private:
         bool m_SessionRunning;
         std::unique_ptr<BloombergLP::blpapi::Session> m_session;
@@ -62,6 +64,7 @@ namespace QBbgLib {
         void finished();
     };
 }
+#endif //QBbg_OFFLINE
 #endif // QBbgAbstractWorker_h__
 
-#endif //QBbg_OFFLINE
+

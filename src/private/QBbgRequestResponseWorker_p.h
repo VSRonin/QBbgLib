@@ -34,7 +34,6 @@ namespace BloombergLP {
     }
 }
 namespace QBbgLib {
-    class QBbgRequestGroup;
     class QBbgRequestResponseWorker : public QBbgAbstractWorker
     {
         Q_OBJECT
@@ -45,11 +44,11 @@ namespace QBbgLib {
     public slots:
         virtual bool start() override;
         virtual bool start(const QBbgRequestGroup& req);
-        virtual void setRequest(const QBbgRequestGroup& req);     
+        virtual void setRequest(const QBbgRequestGroup& req) override;
         virtual void ClearResults();
     protected:
         virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal) override;
-        virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession);
+        virtual bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession) override;
         virtual void SetError(qint64 RequestID, QBbgAbstractResponse::BbgErrorCodes Err, const QString& errMsg);
         virtual void DataPointRecieved(qint64 RequestID, const QVariant& Value, const QString& Header);
         virtual void HeaderRecieved(qint64 RequestID, const QString& Header);

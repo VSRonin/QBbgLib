@@ -61,6 +61,7 @@ set(qbbglib_PRIVATE_HEADERS
     private/QBbgIntradayTickRequest_p.h 
     private/QBbgAbstractIntradayResponse_p.h 
     private/QBbgIntradayTickResponse_p.h
+    private/QBbgSessionMonitorWorker_p.h
 )
 set(qbbglib_SRCS
     QBbgManager.cpp 
@@ -78,11 +79,12 @@ set(qbbglib_SRCS
     QBbgHistoricalDataResponse.cpp 
     QBbgPortfolioDataResponse.cpp 
     QBbgReferenceDataResponse.cpp 
-    private/QBbgAbstractWorker.cpp 
-    private/QBbgRequestResponseWorker.cpp 
+    QBbgAbstractWorker.cpp
+    QBbgRequestResponseWorker.cpp
     QBbgIntradayTickRequest.cpp 
     QBbgAbstractIntradayResponse.cpp 
     QBbgIntradayTickResponse.cpp
+    QBbgSessionMonitorWorker.cpp
 )
 
 if(BUILD_DOCS)
