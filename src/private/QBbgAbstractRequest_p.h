@@ -26,21 +26,23 @@
 #include <QString>
 #include "QBbgSecurity.h"
 namespace QBbgLib {
-    class QBbgAbstractRequestPrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgAbstractRequest)
-    protected:
-        QBbgAbstractRequest* q_ptr;
-    private:
-        QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate& other) = delete;
-    public:
-        virtual ~QBbgAbstractRequestPrivate()=0;
-        QBbgAbstractRequestPrivate(QBbgAbstractRequest* q, QBbgAbstractRequest::RequestType typ/*=QBbgAbstractRequest::Invalid*/);
-        QBbgAbstractRequestPrivate(QBbgAbstractRequest* q,const QBbgAbstractRequestPrivate& other);
-        virtual QBbgAbstractRequestPrivate& operator=(const QBbgAbstractRequestPrivate& other);
-        qint64 m_ID;
-        QBbgSecurity m_Security;
-        const QBbgAbstractRequest::RequestType m_RqType;
-    };
+class QBbgAbstractRequestPrivate
+{
+    Q_DECLARE_PUBLIC(QBbgAbstractRequest)
+protected:
+    QBbgAbstractRequest *q_ptr;
+
+private:
+    QBbgAbstractRequestPrivate(const QBbgAbstractRequestPrivate &other) = delete;
+
+public:
+    virtual ~QBbgAbstractRequestPrivate() = 0;
+    QBbgAbstractRequestPrivate(QBbgAbstractRequest *q, QBbgAbstractRequest::RequestType typ /*=QBbgAbstractRequest::Invalid*/);
+    QBbgAbstractRequestPrivate(QBbgAbstractRequest *q, const QBbgAbstractRequestPrivate &other);
+    virtual QBbgAbstractRequestPrivate &operator=(const QBbgAbstractRequestPrivate &other);
+    qint64 m_ID;
+    QBbgSecurity m_Security;
+    const QBbgAbstractRequest::RequestType m_RqType;
+};
 }
 #endif // QBbgAbstractRequest_p_h__

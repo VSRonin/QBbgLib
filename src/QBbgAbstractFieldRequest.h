@@ -24,60 +24,60 @@
 #include <QObject>
 #include <QBbgOverride.h>
 namespace QBbgLib {
-    class QBbgAbstractFieldRequestPrivate;
-    class QBbgRequestGroupPrivate;
-    class QBbgRequestGroup;
+class QBbgAbstractFieldRequestPrivate;
+class QBbgRequestGroupPrivate;
+class QBbgRequestGroup;
+/*!
+\brief Request with fields and overrides
+\details This class represents all requests that can supply a field and a set of overrides
+*/
+class QBBGLIB_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
+{
+    Q_GADGET
     /*!
-    \brief Request with fields and overrides
-    \details This class represents all requests that can supply a field and a set of overrides
+    \brief The field associated with the request
+    \getter field()
+    \setter setField()
     */
-    class QBBGLIB_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
-	{
-        Q_GADGET
-        /*!
-        \brief The field associated with the request
-        \getter field()
-        \setter setField()
-        */
-        Q_PROPERTY(QString field READ field WRITE setField)
-        /*!
-        \brief The overrides applied to the request
-        \getter overrides()
-        \setter setOverrides()
-        */
-        Q_PROPERTY(QBbgOverride overrides READ overrides WRITE setOverrides)
-        Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
-	public:
-        //! Destructor
-        virtual ~QBbgAbstractFieldRequest() = 0;
-        //! Checks if two requests are identical
-        virtual bool operator==(const QBbgAbstractFieldRequest& a) const;
-        //! Copies another request
-        virtual QBbgAbstractFieldRequest& operator=(const QBbgAbstractFieldRequest& a);
-        //! The field related to the request
-        virtual const QString& field() const;
-        /*! 
-        \brief Sets the field for the request
-        \details The input will be normalized. Spaces will be replaced by _ and the string will be capitalised
-        */
-        virtual void setField(const QString& val);
-        //! Returns the set of overrides applied to the request
-        virtual const QBbgOverride& overrides() const;
-        //! Sets the overrides to apply to the request
-        virtual void setOverrides(const QBbgOverride& Overr);
-        //! Remove all overrides from a request
-        Q_INVOKABLE virtual void clearOverrides();
-        //! Reimplemented from QBbgAbstractRequest::isValidReq
-		virtual bool isValidReq() const override;
-	protected:
-        virtual void saveToStream(QDataStream& stream) const override;
-        virtual void loadFromStream(QDataStream& stream) override;
-        virtual bool sameOverrides(const QBbgAbstractFieldRequest& a)const;
-        QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate* d);
-        QBbgAbstractFieldRequest() = delete;
-        friend class QBbgRequestGroupPrivate;
-        friend class QBbgRequestGroup;
-	};
+    Q_PROPERTY(QString field READ field WRITE setField)
+    /*!
+    \brief The overrides applied to the request
+    \getter overrides()
+    \setter setOverrides()
+    */
+    Q_PROPERTY(QBbgOverride overrides READ overrides WRITE setOverrides)
+    Q_DECLARE_PRIVATE(QBbgAbstractFieldRequest)
+public:
+    //! Destructor
+    virtual ~QBbgAbstractFieldRequest() = 0;
+    //! Checks if two requests are identical
+    virtual bool operator==(const QBbgAbstractFieldRequest &a) const;
+    //! Copies another request
+    virtual QBbgAbstractFieldRequest &operator=(const QBbgAbstractFieldRequest &a);
+    //! The field related to the request
+    virtual const QString &field() const;
+    /*!
+    \brief Sets the field for the request
+    \details The input will be normalized. Spaces will be replaced by _ and the string will be capitalised
+    */
+    virtual void setField(const QString &val);
+    //! Returns the set of overrides applied to the request
+    virtual const QBbgOverride &overrides() const;
+    //! Sets the overrides to apply to the request
+    virtual void setOverrides(const QBbgOverride &Overr);
+    //! Remove all overrides from a request
+    Q_INVOKABLE virtual void clearOverrides();
+    //! Reimplemented from QBbgAbstractRequest::isValidReq
+    virtual bool isValidReq() const override;
+
+protected:
+    virtual void saveToStream(QDataStream &stream) const override;
+    virtual void loadFromStream(QDataStream &stream) override;
+    virtual bool sameOverrides(const QBbgAbstractFieldRequest &a) const;
+    QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate *d);
+    QBbgAbstractFieldRequest() = delete;
+    friend class QBbgRequestGroupPrivate;
+    friend class QBbgRequestGroup;
+};
 }
 #endif // SingleBbgRequest_h__
-

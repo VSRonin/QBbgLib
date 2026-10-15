@@ -20,54 +20,53 @@
 #include "private/QBbgAbstractFieldResponse_p.h"
 #include <QDataStream>
 namespace QBbgLib {
-    QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse() = default;
-    QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate() = default;
-    QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ)
-        :QBbgAbstractResponsePrivate(q,typ)
-    {}
+QBbgAbstractFieldResponse::~QBbgAbstractFieldResponse() = default;
+QBbgAbstractFieldResponsePrivate::~QBbgAbstractFieldResponsePrivate() = default;
+QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse *q, QBbgAbstractResponse::ResponseType typ)
+    : QBbgAbstractResponsePrivate(q, typ)
+{ }
 
-    QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other)
-        : QBbgAbstractResponsePrivate(q, other)
-        , m_Header(other.m_Header)
-    {}
-    QBbgAbstractFieldResponsePrivate& QBbgAbstractFieldResponsePrivate::operator=(const QBbgAbstractFieldResponsePrivate& other)
-    {
-        QBbgAbstractResponsePrivate::operator=(other);
-        m_Header = other.m_Header;
-        return *this;
-    }
- 
+QBbgAbstractFieldResponsePrivate::QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse *q, const QBbgAbstractFieldResponsePrivate &other)
+    : QBbgAbstractResponsePrivate(q, other)
+    , m_Header(other.m_Header)
+{ }
+QBbgAbstractFieldResponsePrivate &QBbgAbstractFieldResponsePrivate::operator=(const QBbgAbstractFieldResponsePrivate &other)
+{
+    QBbgAbstractResponsePrivate::operator=(other);
+    m_Header = other.m_Header;
+    return *this;
+}
 
-    QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d)
-        : QBbgAbstractResponse(d)
-    {}
-    QBbgAbstractFieldResponse& QBbgAbstractFieldResponse::operator=(const QBbgAbstractFieldResponse& a)
-    {
-        Q_D(QBbgAbstractFieldResponse);
-        d->operator=(*(a.d_func()));
-        return *this;
-    }
-    const QString& QBbgAbstractFieldResponse::header() const
-    {
-        Q_D(const QBbgAbstractFieldResponse);
-        return d->m_Header;
-    }
-    void QBbgAbstractFieldResponse::setHeader(const QString& Header)
-    {
-        Q_D(QBbgAbstractFieldResponse);
-        d->m_Header=Header;
-    }
-    void QBbgAbstractFieldResponse::saveToStream(QDataStream& stream) const
-    {
-        Q_D(const QBbgAbstractFieldResponse);
-        QBbgAbstractResponse::saveToStream(stream);
-        stream << d->m_Header;
-    }
+QBbgAbstractFieldResponse::QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate *d)
+    : QBbgAbstractResponse(d)
+{ }
+QBbgAbstractFieldResponse &QBbgAbstractFieldResponse::operator=(const QBbgAbstractFieldResponse &a)
+{
+    Q_D(QBbgAbstractFieldResponse);
+    d->operator=(*(a.d_func()));
+    return *this;
+}
+const QString &QBbgAbstractFieldResponse::header() const
+{
+    Q_D(const QBbgAbstractFieldResponse);
+    return d->m_Header;
+}
+void QBbgAbstractFieldResponse::setHeader(const QString &Header)
+{
+    Q_D(QBbgAbstractFieldResponse);
+    d->m_Header = Header;
+}
+void QBbgAbstractFieldResponse::saveToStream(QDataStream &stream) const
+{
+    Q_D(const QBbgAbstractFieldResponse);
+    QBbgAbstractResponse::saveToStream(stream);
+    stream << d->m_Header;
+}
 
-    void QBbgAbstractFieldResponse::loadFromStream(QDataStream& stream)
-    {
-        Q_D(QBbgAbstractFieldResponse);
-        QBbgAbstractResponse::loadFromStream(stream);
-        stream >> d->m_Header;
-    }
+void QBbgAbstractFieldResponse::loadFromStream(QDataStream &stream)
+{
+    Q_D(QBbgAbstractFieldResponse);
+    QBbgAbstractResponse::loadFromStream(stream);
+    stream >> d->m_Header;
+}
 }

@@ -21,28 +21,28 @@
 \*******************************************************************************/
 #ifndef QBbgSessionMonitorWorker_h__
 #define QBbgSessionMonitorWorker_h__
-namespace QBbgLib {class QBbgSessionMonitorWorker;}
+namespace QBbgLib {
+class QBbgSessionMonitorWorker;
+}
 #ifndef QBbg_OFFLINE
 
-
-#include "private/QBbgAbstractWorker_p.h"
-#include "QBbgRequestGroup.h"
+#    include "private/QBbgAbstractWorker_p.h"
+#    include "QBbgRequestGroup.h"
 namespace QBbgLib {
-    class QBbgSessionMonitorWorker : public QBbgAbstractWorker
-    {
-        Q_OBJECT
-    public:
-        QBbgSessionMonitorWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = nullptr);
-        virtual ~QBbgSessionMonitorWorker() = default;
-    protected:
-        void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal) override;
-        bool processEvent(const BloombergLP::blpapi::Event& event, BloombergLP::blpapi::Session *CurrentSession) override;
-    public slots:
-        bool start() override;
-        void setRequest(const QBbgRequestGroup& req) override;
-    };
+class QBbgSessionMonitorWorker : public QBbgAbstractWorker
+{
+    Q_OBJECT
+public:
+    QBbgSessionMonitorWorker(const BloombergLP::blpapi::SessionOptions &option, QObject *parent = nullptr);
+    virtual ~QBbgSessionMonitorWorker() = default;
+
+protected:
+    void handleResponseEvent(const BloombergLP::blpapi::Event &event, bool isFinal) override;
+    bool processEvent(const BloombergLP::blpapi::Event &event, BloombergLP::blpapi::Session *CurrentSession) override;
+public slots:
+    bool start() override;
+    void setRequest(const QBbgRequestGroup &req) override;
+};
 }
-    #endif //QBbg_OFFLINE
+#endif // QBbg_OFFLINE
 #endif // QBbgSessionMonitorWorker_h__
-
-

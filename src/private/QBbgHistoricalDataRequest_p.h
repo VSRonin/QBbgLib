@@ -27,36 +27,34 @@
 #include "Private/QBbgAbstractFieldRequest_p.h"
 #include <QDate>
 namespace QBbgLib {
-    class QBbgHistoricalDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
-    private:
-        QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate& other);
-    public:
-        virtual ~QBbgHistoricalDataRequestPrivate();
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q);
-        QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest* q, const QBbgHistoricalDataRequestPrivate& other);
-        virtual QBbgHistoricalDataRequestPrivate& operator=(const QBbgHistoricalDataRequestPrivate& other);
-        QDate m_startDate;
-        QDate m_endDate;
-        QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
-        QBbgHistoricalDataRequest::PeriodSelection m_periodicitySelection;
-        QString m_currency;
-        bool m_useClosePrice;
-        bool m_usePriceForPricing;
-        QBbgHistoricalDataRequest::NonTradingDayFill m_nonTradingDayFill;
-        bool m_fillWithNull;
-        qint32 m_maxDataPoints;
-        bool m_useRelativeDate;
-        bool m_adjustmentNormal;
-        bool m_adjustmentAbnormal;
-        bool m_adjustmentSplit;
-        bool m_adjustmentFollowDPDF;
-        QString m_calendarCode;
-    };
+class QBbgHistoricalDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
+{
+    Q_DECLARE_PUBLIC(QBbgHistoricalDataRequest)
+private:
+    QBbgHistoricalDataRequestPrivate(const QBbgHistoricalDataRequestPrivate &other);
 
-    
+public:
+    virtual ~QBbgHistoricalDataRequestPrivate();
+    QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest *q);
+    QBbgHistoricalDataRequestPrivate(QBbgHistoricalDataRequest *q, const QBbgHistoricalDataRequestPrivate &other);
+    virtual QBbgHistoricalDataRequestPrivate &operator=(const QBbgHistoricalDataRequestPrivate &other);
+    QDate m_startDate;
+    QDate m_endDate;
+    QBbgHistoricalDataRequest::PeriodAdjustment m_periodicityAdjustment;
+    QBbgHistoricalDataRequest::PeriodSelection m_periodicitySelection;
+    QString m_currency;
+    bool m_useClosePrice;
+    bool m_usePriceForPricing;
+    QBbgHistoricalDataRequest::NonTradingDayFill m_nonTradingDayFill;
+    bool m_fillWithNull;
+    qint32 m_maxDataPoints;
+    bool m_useRelativeDate;
+    bool m_adjustmentNormal;
+    bool m_adjustmentAbnormal;
+    bool m_adjustmentSplit;
+    bool m_adjustmentFollowDPDF;
+    QString m_calendarCode;
+};
 
 }
 #endif // QBbgHistoricalDataRequest_p_h__
-

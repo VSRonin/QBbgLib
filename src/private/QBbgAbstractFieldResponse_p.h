@@ -27,17 +27,18 @@
 #include "private/QBbgAbstractResponse_p.h"
 #include <QString>
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate : public QBbgAbstractResponsePrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
-        QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate& other)=delete;
-    public:
-        virtual ~QBbgAbstractFieldResponsePrivate()=0;
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, QBbgAbstractResponse::ResponseType typ);
-        QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse* q, const QBbgAbstractFieldResponsePrivate& other);
-        virtual QBbgAbstractFieldResponsePrivate& operator=(const QBbgAbstractFieldResponsePrivate& other);
-        QString m_Header;
-    };
+class QBbgAbstractFieldResponsePrivate : public QBbgAbstractResponsePrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgAbstractFieldResponse)
+    QBbgAbstractFieldResponsePrivate(const QBbgAbstractFieldResponsePrivate &other) = delete;
+
+public:
+    virtual ~QBbgAbstractFieldResponsePrivate() = 0;
+    QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse *q, QBbgAbstractResponse::ResponseType typ);
+    QBbgAbstractFieldResponsePrivate(QBbgAbstractFieldResponse *q, const QBbgAbstractFieldResponsePrivate &other);
+    virtual QBbgAbstractFieldResponsePrivate &operator=(const QBbgAbstractFieldResponsePrivate &other);
+    QString m_Header;
+};
 }
 #endif // QBbgAbstractFieldResponse_p_h__

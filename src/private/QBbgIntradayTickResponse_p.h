@@ -29,29 +29,30 @@
 #include <QList>
 #include <QStringList>
 namespace QBbgLib {
-    class QBbgIntradayTickResponsePrivate : public QBbgAbstractIntradayResponsePrivate
+class QBbgIntradayTickResponsePrivate : public QBbgAbstractIntradayResponsePrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgIntradayTickResponse)
+    QBbgIntradayTickResponsePrivate(const QBbgIntradayTickResponsePrivate &other) = delete;
+
+public:
+    virtual ~QBbgIntradayTickResponsePrivate();
+    QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse *q, const QBbgIntradayTickResponsePrivate &other);
+    QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse *q);
+    virtual QBbgIntradayTickResponsePrivate &operator=(const QBbgIntradayTickResponsePrivate &other);
+    QBbgAbstractIntradayRequest::EventType m_type;
+    QList<double> m_size;
+    QStringList m_conditionCode;
+    QStringList m_exchangeCode;
+    QStringList m_micCode;
+    QStringList m_brokerBuyCode;
+    QStringList m_brokerSellCode;
+    QStringList m_rpsCode;
+    template<class T, class S>
+    bool genericHas(T container, S predicate) const
     {
-    private:
-        Q_DECLARE_PUBLIC(QBbgIntradayTickResponse)
-        QBbgIntradayTickResponsePrivate(const QBbgIntradayTickResponsePrivate& other) = delete;
-    public:
-        virtual ~QBbgIntradayTickResponsePrivate();
-        QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q, const QBbgIntradayTickResponsePrivate& other);
-        QBbgIntradayTickResponsePrivate(QBbgIntradayTickResponse* q);
-        virtual QBbgIntradayTickResponsePrivate& operator=(const QBbgIntradayTickResponsePrivate& other);
-        QBbgAbstractIntradayRequest::EventType m_type;
-        QList<double> m_size;
-        QStringList m_conditionCode;
-        QStringList m_exchangeCode;
-        QStringList m_micCode;
-        QStringList m_brokerBuyCode;
-        QStringList m_brokerSellCode;
-        QStringList m_rpsCode;
-        template<class T, class S>
-        bool genericHas(T container, S predicate) const
-        {
-            return std::any_of(container.constBegin(), container.constEnd(), predicate);
-        }
-    };
+        return std::any_of(container.constBegin(), container.constEnd(), predicate);
+    }
+};
 }
 #endif // QBbgIntradayTickResponse_p_h__

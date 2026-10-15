@@ -25,25 +25,25 @@
 #include "QBbgAbstractResponse.h"
 #include <QString>
 namespace QBbgLib {
-    class QBbgAbstractResponsePrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgAbstractResponse)
-        QBbgAbstractResponsePrivate(const QBbgAbstractResponsePrivate& other)=delete;
-    public:
-        virtual ~QBbgAbstractResponsePrivate()=0;
-        QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, QBbgAbstractResponse::ResponseType typ/*=QBbgAbstractResponse::Invalid*/);
-        QBbgAbstractResponsePrivate(QBbgAbstractResponse* q, const QBbgAbstractResponsePrivate& other);
-        virtual QBbgAbstractResponsePrivate& operator=(const QBbgAbstractResponsePrivate& other);
-        QBbgAbstractResponse::BbgErrorCodes m_ErrorCode;
-        QString m_ErrorMessage;
-        const QBbgAbstractResponse::ResponseType m_ResType;
-        qint64 m_ID;
-    protected:
-        QBbgAbstractResponse* q_ptr;
-    };
+class QBbgAbstractResponsePrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgAbstractResponse)
+    QBbgAbstractResponsePrivate(const QBbgAbstractResponsePrivate &other) = delete;
 
-    
+public:
+    virtual ~QBbgAbstractResponsePrivate() = 0;
+    QBbgAbstractResponsePrivate(QBbgAbstractResponse *q, QBbgAbstractResponse::ResponseType typ /*=QBbgAbstractResponse::Invalid*/);
+    QBbgAbstractResponsePrivate(QBbgAbstractResponse *q, const QBbgAbstractResponsePrivate &other);
+    virtual QBbgAbstractResponsePrivate &operator=(const QBbgAbstractResponsePrivate &other);
+    QBbgAbstractResponse::BbgErrorCodes m_ErrorCode;
+    QString m_ErrorMessage;
+    const QBbgAbstractResponse::ResponseType m_ResType;
+    qint64 m_ID;
+
+protected:
+    QBbgAbstractResponse *q_ptr;
+};
 
 }
 #endif // QBbgAbstractResponse_p_h__

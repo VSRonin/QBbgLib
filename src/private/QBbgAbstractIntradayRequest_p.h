@@ -16,11 +16,9 @@
 *                                                                               *
 \*******************************************************************************/
 
-
 /*******************************************************************************\
 * This file does not form part of the public API                                *
 \*******************************************************************************/
-
 
 #ifndef QBbgAbstractIntradayRequest_p_h__
 #define QBbgAbstractIntradayRequest_p_h__
@@ -29,19 +27,20 @@
 #include "Private/QBbgAbstractRequest_p.h"
 #include <QDateTime>
 namespace QBbgLib {
-    class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractRequestPrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgAbstractIntradayRequest)
-    public:
-        virtual ~QBbgAbstractIntradayRequestPrivate() = 0;
-        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, const QBbgAbstractIntradayRequestPrivate& a);
-        QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest* q, QBbgAbstractRequest::RequestType typ);
-        QBbgAbstractIntradayRequestPrivate& operator=(const QBbgAbstractIntradayRequestPrivate& a);
-        QDateTime m_startDate;
-        QDateTime m_endDate;
-        QBbgAbstractIntradayRequest::EventType m_eventType;
-    private:
-        QBbgAbstractIntradayRequestPrivate(const QBbgAbstractIntradayRequestPrivate& other) = delete;
-    };
+class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractRequestPrivate
+{
+    Q_DECLARE_PUBLIC(QBbgAbstractIntradayRequest)
+public:
+    virtual ~QBbgAbstractIntradayRequestPrivate() = 0;
+    QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest *q, const QBbgAbstractIntradayRequestPrivate &a);
+    QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest *q, QBbgAbstractRequest::RequestType typ);
+    QBbgAbstractIntradayRequestPrivate &operator=(const QBbgAbstractIntradayRequestPrivate &a);
+    QDateTime m_startDate;
+    QDateTime m_endDate;
+    QBbgAbstractIntradayRequest::EventType m_eventType;
+
+private:
+    QBbgAbstractIntradayRequestPrivate(const QBbgAbstractIntradayRequestPrivate &other) = delete;
+};
 }
 #endif // QBbgAbstractIntradayRequest_p_h__

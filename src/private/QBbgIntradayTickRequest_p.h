@@ -26,22 +26,23 @@
 #include "QBbgIntradayTickRequest.h"
 #include "private/QBbgAbstractIntradayRequest_p.h"
 namespace QBbgLib {
-    class QBbgIntradayTickRequestPrivate : public QBbgAbstractIntradayRequestPrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgIntradayTickRequest)
-    public:
-        virtual ~QBbgIntradayTickRequestPrivate();
-        QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q);
-        QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q, const QBbgIntradayTickRequestPrivate& other);
-        virtual QBbgIntradayTickRequestPrivate& operator=(const QBbgIntradayTickRequestPrivate& other);
-        bool m_includeConditionCodes;
-        bool m_includeNonPlottable;
-        bool m_includeExchangeCodes;
-        bool m_includeBrokerCodes;
-        bool m_includeRpsCodes;
-        bool m_includeBicMicCodes;
-    private:
-        QBbgIntradayTickRequestPrivate(const QBbgIntradayTickRequestPrivate& other) = delete;
-    };
+class QBbgIntradayTickRequestPrivate : public QBbgAbstractIntradayRequestPrivate
+{
+    Q_DECLARE_PUBLIC(QBbgIntradayTickRequest)
+public:
+    virtual ~QBbgIntradayTickRequestPrivate();
+    QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest *q);
+    QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest *q, const QBbgIntradayTickRequestPrivate &other);
+    virtual QBbgIntradayTickRequestPrivate &operator=(const QBbgIntradayTickRequestPrivate &other);
+    bool m_includeConditionCodes;
+    bool m_includeNonPlottable;
+    bool m_includeExchangeCodes;
+    bool m_includeBrokerCodes;
+    bool m_includeRpsCodes;
+    bool m_includeBicMicCodes;
+
+private:
+    QBbgIntradayTickRequestPrivate(const QBbgIntradayTickRequestPrivate &other) = delete;
+};
 }
 #endif // QBbgIntradayTickRequest_p_h__

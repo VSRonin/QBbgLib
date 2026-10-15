@@ -22,49 +22,50 @@
 #ifndef QBbgAbstractWorker_h__
 #define QBbgAbstractWorker_h__
 
-namespace QBbgLib {class QBbgAbstractWorker;}
+namespace QBbgLib {
+class QBbgAbstractWorker;
+}
 #ifndef QBbg_OFFLINE
 
-
-#include <QObject>
-#include <QVariant>
-#include <memory>
-#include "QBbgAbstractResponse.h"
-#include "QBbgRequestGroup.h"
-#include <blpapi_session.h>
+#    include <QObject>
+#    include <QVariant>
+#    include <memory>
+#    include "QBbgAbstractResponse.h"
+#    include "QBbgRequestGroup.h"
+#    include <blpapi_session.h>
 namespace QBbgLib {
-    class QBbgAbstractResponse;
-    class QBbgAbstractWorker : public QObject, public BloombergLP::blpapi::EventHandler
-    {
-        Q_OBJECT
-    public:
-        QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions& option, QObject* parent = NULL);
-        virtual ~QBbgAbstractWorker();
-        virtual bool isAvailable() const;
-        virtual void stop();
-    protected:
-        bool sessionRunning() const;
-        void setSessionRunning(bool val);
-        virtual void handleResponseEvent(const BloombergLP::blpapi::Event& event, bool isFinal) = 0;
-        virtual void setResponseError(QBbgAbstractResponse* res, QBbgAbstractResponse::BbgErrorCodes err, const QString& errMsg) const;
-        virtual void setResponseID(QBbgAbstractResponse* res, qint64 corrID) const;
-        virtual QVariant elementToVariant(const BloombergLP::blpapi::Element& val);
-        BloombergLP::blpapi::Session* session();
-    private:
-        bool m_SessionRunning;
-        std::unique_ptr<BloombergLP::blpapi::Session> m_session;
-    public slots:
-        virtual bool start() = 0;
-        virtual void setRequest(const QBbgRequestGroup& req)=0;
-    signals:
-        void started();
-        void stopped();
-        void dataRecieved(qint64 reID, QBbgAbstractResponse* res);
-        void progress(qint32 pct);
-        void finished();
-    };
+class QBbgAbstractResponse;
+class QBbgAbstractWorker : public QObject, public BloombergLP::blpapi::EventHandler
+{
+    Q_OBJECT
+public:
+    QBbgAbstractWorker(const BloombergLP::blpapi::SessionOptions &option, QObject *parent = NULL);
+    virtual ~QBbgAbstractWorker();
+    virtual bool isAvailable() const;
+    virtual void stop();
+
+protected:
+    bool sessionRunning() const;
+    void setSessionRunning(bool val);
+    virtual void handleResponseEvent(const BloombergLP::blpapi::Event &event, bool isFinal) = 0;
+    virtual void setResponseError(QBbgAbstractResponse *res, QBbgAbstractResponse::BbgErrorCodes err, const QString &errMsg) const;
+    virtual void setResponseID(QBbgAbstractResponse *res, qint64 corrID) const;
+    virtual QVariant elementToVariant(const BloombergLP::blpapi::Element &val);
+    BloombergLP::blpapi::Session *session();
+
+private:
+    bool m_SessionRunning;
+    std::unique_ptr<BloombergLP::blpapi::Session> m_session;
+public slots:
+    virtual bool start() = 0;
+    virtual void setRequest(const QBbgRequestGroup &req) = 0;
+signals:
+    void started();
+    void stopped();
+    void dataRecieved(qint64 reID, QBbgAbstractResponse *res);
+    void progress(qint32 pct);
+    void finished();
+};
 }
-#endif //QBbg_OFFLINE
+#endif // QBbg_OFFLINE
 #endif // QBbgAbstractWorker_h__
-
-

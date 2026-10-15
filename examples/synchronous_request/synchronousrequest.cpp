@@ -9,12 +9,11 @@
 
 #include <iostream>
 
-void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager);
-void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager);
-void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager);
-void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager);
-void multipleRequests(QBbgLib::QBbgManager& bbgManager);
-
+void singleReferenceDataRequest(QBbgLib::QBbgManager &bbgManager);
+void singleHistoricalDataRequest(QBbgLib::QBbgManager &bbgManager);
+void singlePortfolioDataRequest(QBbgLib::QBbgManager &bbgManager);
+void singleIntradayTickRequest(QBbgLib::QBbgManager &bbgManager);
+void multipleRequests(QBbgLib::QBbgManager &bbgManager);
 
 int main(int argc, char *argv[])
 {
@@ -22,7 +21,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     // Create the main manager
     QBbgLib::QBbgManager bbgManager;
-   
+
     singleReferenceDataRequest(bbgManager);
     singleHistoricalDataRequest(bbgManager);
     singlePortfolioDataRequest(bbgManager);
@@ -32,8 +31,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
+void singleReferenceDataRequest(QBbgLib::QBbgManager &bbgManager)
 {
     // Create a reference data request
     QBbgLib::QBbgReferenceDataRequest req;
@@ -46,22 +44,21 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
     // req.setField("DES_CASH_FLOW"); // Table, uncomment to demonstrate
 
     // Send the request and wait for the response
-    const QBbgLib::QBbgReferenceDataResponse * const resp = bbgManager.processRequest(req);
+    const QBbgLib::QBbgReferenceDataResponse *const resp = bbgManager.processRequest(req);
     // Check if we recieved anything
-    if(!resp){
+    if (!resp) {
         std::cout << std::endl << "Error! Unable to process Request";
     }
     // Check if we recieved an error
     else if (resp->hasErrors()) {
-        std::cout << std::endl <<  qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
-    }
-    else {
+        std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
+    } else {
         // Check if the value requested was a table
         if (resp->hasTable()) {
             QString headerString;
             for (int i = 0; i < resp->columns(); ++i) {
                 // Get the first row element
-                const QBbgLib::QBbgReferenceDataResponse * const tableValue = resp->getTableValue(0, i);
+                const QBbgLib::QBbgReferenceDataResponse *const tableValue = resp->getTableValue(0, i);
                 if (tableValue->hasErrors())
                     headerString += "N/A";
                 else
@@ -78,7 +75,7 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
                 QString valueString;
                 for (int i = 0; i < resp->columns(); ++i) {
                     // Get the relevant result
-                    const QBbgLib::QBbgReferenceDataResponse * const tableValue = resp->getTableValue(j, i);
+                    const QBbgLib::QBbgReferenceDataResponse *const tableValue = resp->getTableValue(j, i);
                     if (tableValue->hasErrors())
                         valueString += "N/A";
                     else
@@ -89,15 +86,16 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager& bbgManager)
                 std::cout << std::endl << qPrintable(valueString);
             }
 
-        }
-        else {
+        } else {
             // Print single value
-            std::cout << std::endl << qPrintable(QStringLiteral("%1 for %2 is %3").arg(resp->header()).arg(req.security().fullName()).arg(resp->value().toString()));
+            std::cout << std::endl
+                      << qPrintable(
+                                 QStringLiteral("%1 for %2 is %3").arg(resp->header()).arg(req.security().fullName()).arg(resp->value().toString()));
         }
     }
 }
 
-void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
+void singleHistoricalDataRequest(QBbgLib::QBbgManager &bbgManager)
 {
     // Create an historical data request
     QBbgLib::QBbgHistoricalDataRequest req;
@@ -115,15 +113,14 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
     req.setEndDate(QDate::currentDate());
 
     // Send the request and wait for the response
-    const QBbgLib::QBbgHistoricalDataResponse * const resp = bbgManager.processRequest(req);
+    const QBbgLib::QBbgHistoricalDataResponse *const resp = bbgManager.processRequest(req);
     if (!resp) {
         std::cout << std::endl << "Error! Unable to process Request";
     }
     // Check if we recieved an error
     else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
-    }
-    else {
+    } else {
         // Print all the values in the series
         std::cout << std::endl << "Date\t" << qPrintable(resp->header());
         for (int i = 0; i < resp->size(); ++i) {
@@ -132,7 +129,7 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
     }
 }
 
-void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager)
+void singlePortfolioDataRequest(QBbgLib::QBbgManager &bbgManager)
 {
     // Create an historical data request
     QBbgLib::QBbgPortfolioDataRequest req;
@@ -144,15 +141,14 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager)
     req.setField(QBbgLib::QBbgPortfolioDataRequest::PortfolioFields::PORTFOLIO_MPOSITION);
 
     // Send the request and wait for the response
-    const QBbgLib::QBbgPortfolioDataResponse * const resp = bbgManager.processRequest(req);
+    const QBbgLib::QBbgPortfolioDataResponse *const resp = bbgManager.processRequest(req);
     if (!resp) {
         std::cout << std::endl << "Error! Unable to process Request";
     }
     // Check if we recieved an error
     else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
-    }
-    else {
+    } else {
         // Print all the values in the series
         std::cout << std::endl << "Security\tNominal";
         for (int i = 0; i < resp->size(); ++i) {
@@ -161,7 +157,7 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager& bbgManager)
     }
 }
 
-void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
+void singleIntradayTickRequest(QBbgLib::QBbgManager &bbgManager)
 {
     // Create a tick-by-tick data request
     QBbgLib::QBbgIntradayTickRequest req;
@@ -179,15 +175,14 @@ void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
     req.setEndDateTime(QDateTime::currentDateTime().addDays(-2));
 
     // Send the request and wait for the response
-    const QBbgLib::QBbgIntradayTickResponse * const resp = bbgManager.processRequest(req);
+    const QBbgLib::QBbgIntradayTickResponse *const resp = bbgManager.processRequest(req);
     if (!resp) {
         std::cout << std::endl << "Error! Unable to process Request";
     }
     // Check if we recieved an error
     else if (resp->hasErrors()) {
         std::cout << std::endl << qPrintable(QStringLiteral("Error %1 - %2").arg(resp->errorMessage()).arg(resp->errorString()));
-    }
-    else {
+    } else {
         // Print all the values in the series
         std::cout << std::endl << "Date\tValue\tSize";
         for (int i = 0; i < resp->size(); ++i) {
@@ -196,17 +191,16 @@ void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
     }
 }
 
-void multipleRequests(QBbgLib::QBbgManager& bbgManager)
+void multipleRequests(QBbgLib::QBbgManager &bbgManager)
 {
     using namespace QBbgLib;
     // This will collect all requests
     QBbgRequestGroup allRequests;
 
-
     QBbgReferenceDataRequest refData_req;
 
-    const QString referenceSecurities[] = { "US92857WBD11", "US88579YAH45", "XS0911388832" };
-    const QString referenceFields[] = { "RTG_FITCH", "RTG_SP", "RTG_MOODY", "DES_CASH_FLOW" };
+    const QString referenceSecurities[] = {"US92857WBD11", "US88579YAH45", "XS0911388832"};
+    const QString referenceFields[] = {"RTG_FITCH", "RTG_SP", "RTG_MOODY", "DES_CASH_FLOW"};
 
     QBbgSecurity tempSecurity;
     // All securities will have a Corp extension
@@ -218,30 +212,27 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
     QHash<QPair<size_t, size_t>, qint64> referenceDictionary;
 
     for (size_t i = 0; i < std::extent<decltype(referenceSecurities)>::value; ++i) {
-        //Iterate over the securities
+        // Iterate over the securities
         for (size_t j = 0; j < std::extent<decltype(referenceFields)>::value; ++j) {
             // Iterate over the fields
 
             // Set the security name
             tempSecurity.setName(referenceSecurities[i]);
 
-            //Assign the security to the request
+            // Assign the security to the request
             refData_req.setSecurity(tempSecurity);
             refData_req.setField(referenceFields[j]);
 
             // Add the request to the container and store its ID
             const QPair<size_t, size_t> dictionaryKey(i, j);
-            referenceDictionary.insert(
-                dictionaryKey
-                , allRequests.addRequest(refData_req)
-            );
+            referenceDictionary.insert(dictionaryKey, allRequests.addRequest(refData_req));
             // Assert if the added request was invalid
             Q_ASSERT(referenceDictionary.value(dictionaryKey) != QBbgAbstractRequest::InvalidID);
         }
     }
 
     // You can add historical and portfolio requests to the same group too if you want
-    //In this case we'll get the 3m EURIBOR rate as of 05/05/2015
+    // In this case we'll get the 3m EURIBOR rate as of 05/05/2015
     QBbgHistoricalDataRequest histRq;
     histRq.setSecurity(QBbgSecurity("EUR003M", QBbgSecurity::Index));
     histRq.setField("PX_LAST");
@@ -251,20 +242,25 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
     // Assert if the added request was invalid
     Q_ASSERT(euriborID != QBbgAbstractRequest::InvalidID);
 
-
     // Send the request and wait for the response
     const quint32 resultGroupID = bbgManager.processRequestID(allRequests);
-   
+
     // Print The result
 
     // Historical Result
-    const QBbgHistoricalDataResponse* const euriborResult = bbgManager.getResult<QBbgHistoricalDataResponse>(resultGroupID, euriborID);
+    const QBbgHistoricalDataResponse *const euriborResult = bbgManager.getResult<QBbgHistoricalDataResponse>(resultGroupID, euriborID);
     if (!euriborResult)
         std::cout << std::endl << "Error! Unable to process Request";
     else if (euriborResult->hasErrors())
-        std::cout << std::endl << qPrintable(QStringLiteral("Unable to download historical 3m EURIBOR. Error %1: %2").arg(euriborResult->errorString()).arg(euriborResult->errorMessage()));
+        std::cout << std::endl
+                  << qPrintable(QStringLiteral("Unable to download historical 3m EURIBOR. Error %1: %2")
+                                        .arg(euriborResult->errorString())
+                                        .arg(euriborResult->errorMessage()));
     else
-        std::cout << std::endl << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2").arg(euriborResult->date(0).toString(Qt::ISODate)).arg(euriborResult->value(0).toDouble()));
+        std::cout << std::endl
+                  << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2")
+                                        .arg(euriborResult->date(0).toString(Qt::ISODate))
+                                        .arg(euriborResult->value(0).toDouble()));
 
     // Reference data results
     for (size_t i = 0; i < std::extent<decltype(referenceSecurities)>::value; ++i) {
@@ -272,38 +268,36 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
             // The key in the ID dictionary
             const QPair<size_t, size_t> resultKey(i, j);
             // We retrieve the result with ID referenceDictionary.value(resultKey) in the group resultGroupID as a QBbgReferenceDataResponse
-            const QBbgReferenceDataResponse* const currentResult =
-                bbgManager.getResult<QBbgReferenceDataResponse>(
-                    resultGroupID
-                    , referenceDictionary.value(resultKey, QBbgAbstractRequest::InvalidID)
-                );
-            if(!currentResult){
+            const QBbgReferenceDataResponse *const currentResult = bbgManager.getResult<QBbgReferenceDataResponse>(
+                    resultGroupID, referenceDictionary.value(resultKey, QBbgAbstractRequest::InvalidID));
+            if (!currentResult) {
                 std::cout << std::endl << "Error! Unable to process Request";
-            }
-            else if (currentResult->hasErrors()){
+            } else if (currentResult->hasErrors()) {
                 // Check for errors
-                std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": " << qPrintable(QStringLiteral("Error %1 - %2").arg(currentResult->errorMessage()).arg(currentResult->errorString()));
-            }
-            else {
+                std::cout << std::endl
+                          << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": "
+                          << qPrintable(QStringLiteral("Error %1 - %2").arg(currentResult->errorMessage()).arg(currentResult->errorString()));
+            } else {
                 // Check if the result is a table or a single value
                 if (currentResult->hasValue()) {
                     // Print out the value
-                    std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": " << qPrintable(currentResult->value().toString());
-                }
-                else if (currentResult->hasTable()) {
+                    std::cout << std::endl
+                              << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]) << ": "
+                              << qPrintable(currentResult->value().toString());
+                } else if (currentResult->hasTable()) {
                     std::cout << std::endl << qPrintable(referenceSecurities[i]) << " - " << qPrintable(referenceFields[j]);
                     // Print the table headers
                     // Iterate over the columns
                     QString headerString;
                     for (int i = 0; i < currentResult->columns(); ++i) {
                         // Get the first row element
-                        const QBbgLib::QBbgReferenceDataResponse * const tableValue = currentResult->getTableValue(0, i);
+                        const QBbgLib::QBbgReferenceDataResponse *const tableValue = currentResult->getTableValue(0, i);
                         if (tableValue->hasErrors())
                             headerString += "N/A";
                         else
                             // Print the header for the current value
                             headerString += tableValue->header();
-                        headerString+= '\t';
+                        headerString += '\t';
                     }
                     std::cout << std::endl << qPrintable(headerString);
 
@@ -314,7 +308,7 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
                         QString valueString;
                         for (int i = 0; i < currentResult->columns(); ++i) {
                             // Get the relevant result
-                            const QBbgLib::QBbgReferenceDataResponse * const tableValue = currentResult->getTableValue(j, i);
+                            const QBbgLib::QBbgReferenceDataResponse *const tableValue = currentResult->getTableValue(j, i);
                             if (tableValue->hasErrors())
                                 valueString += "N/A";
                             else
@@ -324,10 +318,9 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
                         }
                         std::cout << std::endl << qPrintable(valueString);
                     }
-                }
-                else {
+                } else {
                     Q_UNREACHABLE();
-                    //If currentResult->hasErrors() is false, either currentResult->hasValue() or currentResult->hasTable() will be true
+                    // If currentResult->hasErrors() is false, either currentResult->hasValue() or currentResult->hasTable() will be true
                 }
             }
         }

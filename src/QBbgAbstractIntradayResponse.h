@@ -22,44 +22,45 @@
 #include "QBbgAbstractResponse.h"
 #include <QDateTime>
 namespace QBbgLib {
-    class QBbgAbstractIntradayResponsePrivate;
-    class QBbgRequestResponseWorker;
-    //! Base class for Bloomberg Responses based on intraday requests
-    class QBBGLIB_EXPORT QBbgAbstractIntradayResponse : public QBbgAbstractResponse
-    {
-        Q_GADGET
-        /*!
-        \brief Number of values in the series
-        \getter size()
-        */
-        Q_PROPERTY(int size READ size)
-        Q_DECLARE_PRIVATE(QBbgAbstractIntradayResponse)
-    public:
-        //! Destructor
-        virtual ~QBbgAbstractIntradayResponse() = 0;
-        //! Copies another intraday response
-        virtual QBbgAbstractIntradayResponse& operator=(const QBbgAbstractIntradayResponse& a);
-        /*!
-        \brief The value related to the event
-        \arg index The index of the object in the series
-        \return 0 if index is out of range
-        */
-        Q_INVOKABLE virtual double value(int index) const;
-        /*!
-        \brief Date and time related to the event
-        \arg index The index of the object in the series
-        \return A null QDateTime if index is out of range
-        */
-        Q_INVOKABLE virtual QDateTime dateTime(int index) const;
-        //! Number of values in the series
-        virtual int size() const;
-    protected:
-        virtual void addValue(const QDateTime& dt, double val);
-        virtual void clear();
-        virtual void saveToStream(QDataStream& stream) const override;
-        virtual void loadFromStream(QDataStream& stream) override;
-        QBbgAbstractIntradayResponse() = delete;
-        QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d);
-    };
+class QBbgAbstractIntradayResponsePrivate;
+class QBbgRequestResponseWorker;
+//! Base class for Bloomberg Responses based on intraday requests
+class QBBGLIB_EXPORT QBbgAbstractIntradayResponse : public QBbgAbstractResponse
+{
+    Q_GADGET
+    /*!
+    \brief Number of values in the series
+    \getter size()
+    */
+    Q_PROPERTY(int size READ size)
+    Q_DECLARE_PRIVATE(QBbgAbstractIntradayResponse)
+public:
+    //! Destructor
+    virtual ~QBbgAbstractIntradayResponse() = 0;
+    //! Copies another intraday response
+    virtual QBbgAbstractIntradayResponse &operator=(const QBbgAbstractIntradayResponse &a);
+    /*!
+    \brief The value related to the event
+    \arg index The index of the object in the series
+    \return 0 if index is out of range
+    */
+    Q_INVOKABLE virtual double value(int index) const;
+    /*!
+    \brief Date and time related to the event
+    \arg index The index of the object in the series
+    \return A null QDateTime if index is out of range
+    */
+    Q_INVOKABLE virtual QDateTime dateTime(int index) const;
+    //! Number of values in the series
+    virtual int size() const;
+
+protected:
+    virtual void addValue(const QDateTime &dt, double val);
+    virtual void clear();
+    virtual void saveToStream(QDataStream &stream) const override;
+    virtual void loadFromStream(QDataStream &stream) override;
+    QBbgAbstractIntradayResponse() = delete;
+    QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate *d);
+};
 }
 #endif // QBbgAbstractIntradayResponse_h__

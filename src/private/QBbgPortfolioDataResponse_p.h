@@ -28,26 +28,26 @@
 #include <QList>
 #include <QDate>
 namespace QBbgLib {
-    class QBbgPortfolioDataResponsePrivate : public QBbgAbstractFieldResponsePrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgPortfolioDataResponse)
-        QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate& other)=delete;
-    public:
-        virtual ~QBbgPortfolioDataResponsePrivate();
-        QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q, const QBbgPortfolioDataResponsePrivate& other);
-        QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse* q);
-        virtual QBbgPortfolioDataResponsePrivate& operator=(const QBbgPortfolioDataResponsePrivate& other);
-        QList<QBbgSecurity> m_Security;
-        QList<double> m_Position;
-        QList<double> m_MarketValue;
-        QList<double> m_Cost;
-        QList<QDate> m_CostDate;
-        QList<double> m_CostFx;
-        QList<double> m_Weight;
-        double positionMultiplier(QBbgLib::QBbgSecurity::YellowKeys val) const;
+class QBbgPortfolioDataResponsePrivate : public QBbgAbstractFieldResponsePrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgPortfolioDataResponse)
+    QBbgPortfolioDataResponsePrivate(const QBbgPortfolioDataResponsePrivate &other) = delete;
 
-    };
-    
+public:
+    virtual ~QBbgPortfolioDataResponsePrivate();
+    QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse *q, const QBbgPortfolioDataResponsePrivate &other);
+    QBbgPortfolioDataResponsePrivate(QBbgPortfolioDataResponse *q);
+    virtual QBbgPortfolioDataResponsePrivate &operator=(const QBbgPortfolioDataResponsePrivate &other);
+    QList<QBbgSecurity> m_Security;
+    QList<double> m_Position;
+    QList<double> m_MarketValue;
+    QList<double> m_Cost;
+    QList<QDate> m_CostDate;
+    QList<double> m_CostFx;
+    QList<double> m_Weight;
+    double positionMultiplier(QBbgLib::QBbgSecurity::YellowKeys val) const;
+};
+
 }
 #endif // QBbgPortfolioDataResponse_p_h__

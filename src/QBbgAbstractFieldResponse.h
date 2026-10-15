@@ -21,36 +21,37 @@
 #include <qbbglib_global.h>
 #include "QBbgAbstractResponse.h"
 namespace QBbgLib {
-    class QBbgAbstractFieldResponsePrivate;
-    class QBbgRequestResponseWorker;
-    //! Base class for Bloomberg Responses based on field request
-    class QBBGLIB_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
-    {
-        Q_GADGET
-        /*!
-        \brief Header for the response
-        \getter header()
-        \setter setHeader()
-        */
-        Q_PROPERTY(QString header READ header)
-        Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
-    public:
-        //! Destructor
-        virtual ~QBbgAbstractFieldResponse() = 0;
-        //! Copies another field response
-        virtual QBbgAbstractFieldResponse& operator=(const QBbgAbstractFieldResponse& a);
-        /*!
-        \brief Header for the response
-        \details This will contain the field name or the column header for tabular results
-        */
-        virtual const QString& header() const;
-    protected:
-        QBbgAbstractFieldResponse() = delete;
-        QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate* d);
-        virtual void setHeader(const QString& Header = QString());
-        virtual void saveToStream(QDataStream& stream) const override;
-        virtual void loadFromStream(QDataStream& stream) override;
-        friend class QBbgRequestResponseWorker;
-    };
+class QBbgAbstractFieldResponsePrivate;
+class QBbgRequestResponseWorker;
+//! Base class for Bloomberg Responses based on field request
+class QBBGLIB_EXPORT QBbgAbstractFieldResponse : public QBbgAbstractResponse
+{
+    Q_GADGET
+    /*!
+    \brief Header for the response
+    \getter header()
+    \setter setHeader()
+    */
+    Q_PROPERTY(QString header READ header)
+    Q_DECLARE_PRIVATE(QBbgAbstractFieldResponse)
+public:
+    //! Destructor
+    virtual ~QBbgAbstractFieldResponse() = 0;
+    //! Copies another field response
+    virtual QBbgAbstractFieldResponse &operator=(const QBbgAbstractFieldResponse &a);
+    /*!
+    \brief Header for the response
+    \details This will contain the field name or the column header for tabular results
+    */
+    virtual const QString &header() const;
+
+protected:
+    QBbgAbstractFieldResponse() = delete;
+    QBbgAbstractFieldResponse(QBbgAbstractFieldResponsePrivate *d);
+    virtual void setHeader(const QString &Header = QString());
+    virtual void saveToStream(QDataStream &stream) const override;
+    virtual void loadFromStream(QDataStream &stream) override;
+    friend class QBbgRequestResponseWorker;
+};
 }
 #endif // QBbgAbstractFieldResponse_h__

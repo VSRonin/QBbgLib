@@ -26,27 +26,32 @@
 #include <QHash>
 #include <QQueue>
 class QThread;
-namespace BloombergLP { namespace blpapi { class SessionOptions; } }
+namespace BloombergLP {
+namespace blpapi {
+class SessionOptions;
+}
+}
 namespace QBbgLib {
-    class QBbgAbstractResponse;
-    class QBbgAbstractWorker;
-    class QBbgSessionMonitorWorker;
-    class QBbgManagerPrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgManager)
-        QBbgManagerPrivate(const QBbgManagerPrivate&) = delete;
-    public:
-        QBbgManagerPrivate(QBbgManager* qp);
-        virtual ~QBbgManagerPrivate();
-        QHash<quint32, QHash<qint64, QBbgAbstractResponse* >* > m_ResultTable;
-        QHash<quint32, std::pair<QThread*, QBbgAbstractWorker*> > m_ThreadPool;
-        QQueue<quint32> m_queuedThreads;
-        BloombergLP::blpapi::SessionOptions* m_options;
-        QBbgSessionMonitorWorker* m_sessionMonitor;
-    protected:
-        QBbgManager* q_ptr;
-        
-    };
+class QBbgAbstractResponse;
+class QBbgAbstractWorker;
+class QBbgSessionMonitorWorker;
+class QBbgManagerPrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgManager)
+    QBbgManagerPrivate(const QBbgManagerPrivate &) = delete;
+
+public:
+    QBbgManagerPrivate(QBbgManager *qp);
+    virtual ~QBbgManagerPrivate();
+    QHash<quint32, QHash<qint64, QBbgAbstractResponse *> *> m_ResultTable;
+    QHash<quint32, std::pair<QThread *, QBbgAbstractWorker *>> m_ThreadPool;
+    QQueue<quint32> m_queuedThreads;
+    BloombergLP::blpapi::SessionOptions *m_options;
+    QBbgSessionMonitorWorker *m_sessionMonitor;
+
+protected:
+    QBbgManager *q_ptr;
+};
 }
 #endif // QBbgManager_p_h__

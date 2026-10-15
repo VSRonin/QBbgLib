@@ -24,83 +24,78 @@
 #include "private/QBbgAbstractIntradayResponse_p.h"
 #include <QDataStream>
 namespace QBbgLib {
-    QBbgAbstractIntradayResponse::~QBbgAbstractIntradayResponse() = default;
-    QBbgAbstractIntradayResponsePrivate::~QBbgAbstractIntradayResponsePrivate() = default;
-    QBbgAbstractIntradayResponsePrivate::QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, QBbgAbstractResponse::ResponseType typ)
-        :QBbgAbstractResponsePrivate(q, typ)
-    {}
+QBbgAbstractIntradayResponse::~QBbgAbstractIntradayResponse() = default;
+QBbgAbstractIntradayResponsePrivate::~QBbgAbstractIntradayResponsePrivate() = default;
+QBbgAbstractIntradayResponsePrivate::QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse *q, QBbgAbstractResponse::ResponseType typ)
+    : QBbgAbstractResponsePrivate(q, typ)
+{ }
 
-    QBbgAbstractIntradayResponsePrivate::QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, const QBbgAbstractIntradayResponsePrivate& other)
-        : QBbgAbstractResponsePrivate(q, other)
-        , m_time(other.m_time)
-        , m_value(other.m_value)
-    {}
-    QBbgAbstractIntradayResponsePrivate& QBbgAbstractIntradayResponsePrivate::operator=(const QBbgAbstractIntradayResponsePrivate& other)
-    {
-        QBbgAbstractResponsePrivate::operator=(other);
-        m_time = other.m_time;
-        m_value = other.m_value;
-        return *this;
-    }
+QBbgAbstractIntradayResponsePrivate::QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse *q,
+                                                                         const QBbgAbstractIntradayResponsePrivate &other)
+    : QBbgAbstractResponsePrivate(q, other)
+    , m_time(other.m_time)
+    , m_value(other.m_value)
+{ }
+QBbgAbstractIntradayResponsePrivate &QBbgAbstractIntradayResponsePrivate::operator=(const QBbgAbstractIntradayResponsePrivate &other)
+{
+    QBbgAbstractResponsePrivate::operator=(other);
+    m_time = other.m_time;
+    m_value = other.m_value;
+    return *this;
+}
 
-    void QBbgAbstractIntradayResponse::addValue(const QDateTime& dt, double val)
-    {
-        Q_D(QBbgAbstractIntradayResponse);
-        d->m_time.append(dt);
-        d->m_value.append(val);
-    }
+void QBbgAbstractIntradayResponse::addValue(const QDateTime &dt, double val)
+{
+    Q_D(QBbgAbstractIntradayResponse);
+    d->m_time.append(dt);
+    d->m_value.append(val);
+}
 
-    void QBbgAbstractIntradayResponse::clear()
-    {
-        Q_D(QBbgAbstractIntradayResponse);
-        d->m_time.clear();
-        d->m_value.clear();
-    }
+void QBbgAbstractIntradayResponse::clear()
+{
+    Q_D(QBbgAbstractIntradayResponse);
+    d->m_time.clear();
+    d->m_value.clear();
+}
 
-    QBbgAbstractIntradayResponse::QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate* d)
-        : QBbgAbstractResponse(d)
-    {}
-    QBbgAbstractIntradayResponse& QBbgAbstractIntradayResponse::operator=(const QBbgAbstractIntradayResponse& a)
-    {
-        Q_D(QBbgAbstractIntradayResponse);
-        d->operator=(*(a.d_func()));
-        return *this;
-    }
+QBbgAbstractIntradayResponse::QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate *d)
+    : QBbgAbstractResponse(d)
+{ }
+QBbgAbstractIntradayResponse &QBbgAbstractIntradayResponse::operator=(const QBbgAbstractIntradayResponse &a)
+{
+    Q_D(QBbgAbstractIntradayResponse);
+    d->operator=(*(a.d_func()));
+    return *this;
+}
 
-    double QBbgAbstractIntradayResponse::value(int index) const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_value.value(index,0.0);
-    }
+double QBbgAbstractIntradayResponse::value(int index) const
+{
+    Q_D(const QBbgAbstractIntradayResponse);
+    return d->m_value.value(index, 0.0);
+}
 
-    QDateTime QBbgAbstractIntradayResponse::dateTime(int index) const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_time.value(index);
-    }
+QDateTime QBbgAbstractIntradayResponse::dateTime(int index) const
+{
+    Q_D(const QBbgAbstractIntradayResponse);
+    return d->m_time.value(index);
+}
 
-    int QBbgAbstractIntradayResponse::size() const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        return d->m_time.size();
-    }
-    void QBbgAbstractIntradayResponse::saveToStream(QDataStream& stream) const
-    {
-        Q_D(const QBbgAbstractIntradayResponse);
-        QBbgAbstractResponse::saveToStream(stream);
-        stream 
-            << d->m_time
-            << d->m_value
-            ;
-    }
+int QBbgAbstractIntradayResponse::size() const
+{
+    Q_D(const QBbgAbstractIntradayResponse);
+    return d->m_time.size();
+}
+void QBbgAbstractIntradayResponse::saveToStream(QDataStream &stream) const
+{
+    Q_D(const QBbgAbstractIntradayResponse);
+    QBbgAbstractResponse::saveToStream(stream);
+    stream << d->m_time << d->m_value;
+}
 
-    void QBbgAbstractIntradayResponse::loadFromStream(QDataStream& stream)
-    {
-        Q_D(QBbgAbstractIntradayResponse);
-        QBbgAbstractResponse::loadFromStream(stream);
-        stream 
-            >> d->m_time
-            >> d->m_value
-            ;
-    }
+void QBbgAbstractIntradayResponse::loadFromStream(QDataStream &stream)
+{
+    Q_D(QBbgAbstractIntradayResponse);
+    QBbgAbstractResponse::loadFromStream(stream);
+    stream >> d->m_time >> d->m_value;
+}
 }

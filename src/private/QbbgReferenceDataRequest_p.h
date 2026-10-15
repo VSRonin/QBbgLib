@@ -25,17 +25,18 @@
 #include "QBbgReferenceDataRequest.h"
 #include "private/QBbgAbstractFieldRequest_p.h"
 namespace QBbgLib {
-    class QBbgReferenceDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgReferenceDataRequest)
-    public:
-        virtual ~QBbgReferenceDataRequestPrivate();
-        QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q);
-        QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest* q, const QBbgReferenceDataRequestPrivate& other);
-        virtual QBbgReferenceDataRequestPrivate& operator=(const QBbgReferenceDataRequestPrivate& other);
-    private:
-        QBbgReferenceDataRequestPrivate(const QBbgReferenceDataRequestPrivate& other) = delete;
-        bool m_UseUTCTime;
-    };
+class QBbgReferenceDataRequestPrivate : public QBbgAbstractFieldRequestPrivate
+{
+    Q_DECLARE_PUBLIC(QBbgReferenceDataRequest)
+public:
+    virtual ~QBbgReferenceDataRequestPrivate();
+    QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest *q);
+    QBbgReferenceDataRequestPrivate(QBbgReferenceDataRequest *q, const QBbgReferenceDataRequestPrivate &other);
+    virtual QBbgReferenceDataRequestPrivate &operator=(const QBbgReferenceDataRequestPrivate &other);
+
+private:
+    QBbgReferenceDataRequestPrivate(const QBbgReferenceDataRequestPrivate &other) = delete;
+    bool m_UseUTCTime;
+};
 }
 #endif // QbbgReferenceDataRequest_p_h__

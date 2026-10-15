@@ -25,17 +25,18 @@
 #include <QDateTime>
 #include <QList>
 namespace QBbgLib {
-    class QBbgAbstractIntradayResponsePrivate : public QBbgAbstractResponsePrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgAbstractIntradayResponse)
-        QBbgAbstractIntradayResponsePrivate(const QBbgAbstractIntradayResponsePrivate& other) = delete;
-    public:
-        virtual ~QBbgAbstractIntradayResponsePrivate() = 0;
-        QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, QBbgAbstractResponse::ResponseType typ);
-        QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse* q, const QBbgAbstractIntradayResponsePrivate& other);
-        virtual QBbgAbstractIntradayResponsePrivate& operator=(const QBbgAbstractIntradayResponsePrivate& other);
-        QList<QDateTime> m_time;
-        QList<double> m_value;
-    };
+class QBbgAbstractIntradayResponsePrivate : public QBbgAbstractResponsePrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgAbstractIntradayResponse)
+    QBbgAbstractIntradayResponsePrivate(const QBbgAbstractIntradayResponsePrivate &other) = delete;
+
+public:
+    virtual ~QBbgAbstractIntradayResponsePrivate() = 0;
+    QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse *q, QBbgAbstractResponse::ResponseType typ);
+    QBbgAbstractIntradayResponsePrivate(QBbgAbstractIntradayResponse *q, const QBbgAbstractIntradayResponsePrivate &other);
+    virtual QBbgAbstractIntradayResponsePrivate &operator=(const QBbgAbstractIntradayResponsePrivate &other);
+    QList<QDateTime> m_time;
+    QList<double> m_value;
+};
 }

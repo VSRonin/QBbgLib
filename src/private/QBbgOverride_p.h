@@ -26,18 +26,20 @@
 #include <QHash>
 #include <QString>
 namespace QBbgLib {
-    class QBbgOverridePrivate
-    {
-        Q_DECLARE_PUBLIC(QBbgOverride)
-        QBbgOverridePrivate(const QBbgOverridePrivate& other)=delete;
-    public:
-        virtual ~QBbgOverridePrivate();
-        QBbgOverridePrivate(QBbgOverride* q);
-        QBbgOverridePrivate(QBbgOverride* q, const QBbgOverridePrivate& other);
-        QBbgOverridePrivate& operator=(const QBbgOverridePrivate& other);
-    protected:
-        QBbgOverride* q_ptr;
-        QHash<QString, QString> m_Overrides;
-    };
+class QBbgOverridePrivate
+{
+    Q_DECLARE_PUBLIC(QBbgOverride)
+    QBbgOverridePrivate(const QBbgOverridePrivate &other) = delete;
+
+public:
+    virtual ~QBbgOverridePrivate();
+    QBbgOverridePrivate(QBbgOverride *q);
+    QBbgOverridePrivate(QBbgOverride *q, const QBbgOverridePrivate &other);
+    QBbgOverridePrivate &operator=(const QBbgOverridePrivate &other);
+
+protected:
+    QBbgOverride *q_ptr;
+    QHash<QString, QString> m_Overrides;
+};
 }
 #endif // QBbgOverride_p_h__

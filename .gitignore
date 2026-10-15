@@ -68,3 +68,4 @@ Makefile*
 *.psess
 *vsp
 *.*.orig
+RunClangFormat.bat

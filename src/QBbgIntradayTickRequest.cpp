@@ -24,177 +24,154 @@
 #include "private/QBbgIntradayTickRequest_p.h"
 #include <QDataStream>
 namespace QBbgLib {
-    QBbgIntradayTickRequest::~QBbgIntradayTickRequest() = default;
-    QBbgIntradayTickRequestPrivate::~QBbgIntradayTickRequestPrivate() = default;
-    QBbgIntradayTickRequestPrivate::QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q)
-        : QBbgAbstractIntradayRequestPrivate(q, QBbgAbstractRequest::RequestType::IntraDayTick)
-        , m_includeConditionCodes(false)
-        , m_includeNonPlottable(false)
-        , m_includeExchangeCodes(false)
-        , m_includeBrokerCodes(false)
-        , m_includeRpsCodes(false)
-        , m_includeBicMicCodes(false)
-    {}
-    QBbgIntradayTickRequestPrivate::QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest* q, const QBbgIntradayTickRequestPrivate& other)
-        : QBbgAbstractIntradayRequestPrivate(q, other)
-        , m_includeConditionCodes(other.m_includeConditionCodes)
-        , m_includeNonPlottable(other.m_includeNonPlottable)
-        , m_includeExchangeCodes(other.m_includeExchangeCodes)
-        , m_includeBrokerCodes(other.m_includeBrokerCodes)
-        , m_includeRpsCodes(other.m_includeRpsCodes)
-        , m_includeBicMicCodes(other.m_includeBicMicCodes)
-    {}
-    QBbgIntradayTickRequestPrivate& QBbgIntradayTickRequestPrivate::operator=(const QBbgIntradayTickRequestPrivate& other)
-    {
-        QBbgAbstractIntradayRequestPrivate::operator=(other);
-        m_includeConditionCodes = other.m_includeConditionCodes;
-        m_includeNonPlottable = other.m_includeNonPlottable;
-        m_includeExchangeCodes = other.m_includeExchangeCodes;
-        m_includeBrokerCodes = other.m_includeBrokerCodes;
-        m_includeRpsCodes = other.m_includeRpsCodes;
-        m_includeBicMicCodes = other.m_includeBicMicCodes;
-        return *this;
-    }
-    QBbgIntradayTickRequest::QBbgIntradayTickRequest()
-        :QBbgAbstractIntradayRequest(new QBbgIntradayTickRequestPrivate(this))
-    {}
-    QBbgIntradayTickRequest::QBbgIntradayTickRequest(QBbgIntradayTickRequestPrivate* d)
-        : QBbgAbstractIntradayRequest(d)
-    {}
-    QBbgIntradayTickRequest::QBbgIntradayTickRequest(const QBbgIntradayTickRequest& a)
-        : QBbgAbstractIntradayRequest(new QBbgIntradayTickRequestPrivate(this, *(a.d_func())))
-    {}
+QBbgIntradayTickRequest::~QBbgIntradayTickRequest() = default;
+QBbgIntradayTickRequestPrivate::~QBbgIntradayTickRequestPrivate() = default;
+QBbgIntradayTickRequestPrivate::QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest *q)
+    : QBbgAbstractIntradayRequestPrivate(q, QBbgAbstractRequest::RequestType::IntraDayTick)
+    , m_includeConditionCodes(false)
+    , m_includeNonPlottable(false)
+    , m_includeExchangeCodes(false)
+    , m_includeBrokerCodes(false)
+    , m_includeRpsCodes(false)
+    , m_includeBicMicCodes(false)
+{ }
+QBbgIntradayTickRequestPrivate::QBbgIntradayTickRequestPrivate(QBbgIntradayTickRequest *q, const QBbgIntradayTickRequestPrivate &other)
+    : QBbgAbstractIntradayRequestPrivate(q, other)
+    , m_includeConditionCodes(other.m_includeConditionCodes)
+    , m_includeNonPlottable(other.m_includeNonPlottable)
+    , m_includeExchangeCodes(other.m_includeExchangeCodes)
+    , m_includeBrokerCodes(other.m_includeBrokerCodes)
+    , m_includeRpsCodes(other.m_includeRpsCodes)
+    , m_includeBicMicCodes(other.m_includeBicMicCodes)
+{ }
+QBbgIntradayTickRequestPrivate &QBbgIntradayTickRequestPrivate::operator=(const QBbgIntradayTickRequestPrivate &other)
+{
+    QBbgAbstractIntradayRequestPrivate::operator=(other);
+    m_includeConditionCodes = other.m_includeConditionCodes;
+    m_includeNonPlottable = other.m_includeNonPlottable;
+    m_includeExchangeCodes = other.m_includeExchangeCodes;
+    m_includeBrokerCodes = other.m_includeBrokerCodes;
+    m_includeRpsCodes = other.m_includeRpsCodes;
+    m_includeBicMicCodes = other.m_includeBicMicCodes;
+    return *this;
+}
+QBbgIntradayTickRequest::QBbgIntradayTickRequest()
+    : QBbgAbstractIntradayRequest(new QBbgIntradayTickRequestPrivate(this))
+{ }
+QBbgIntradayTickRequest::QBbgIntradayTickRequest(QBbgIntradayTickRequestPrivate *d)
+    : QBbgAbstractIntradayRequest(d)
+{ }
+QBbgIntradayTickRequest::QBbgIntradayTickRequest(const QBbgIntradayTickRequest &a)
+    : QBbgAbstractIntradayRequest(new QBbgIntradayTickRequestPrivate(this, *(a.d_func())))
+{ }
 
-    bool QBbgIntradayTickRequest::sameOptions(const QBbgIntradayTickRequest& other) const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return
-            d->m_includeConditionCodes == other.d_func()->m_includeConditionCodes
-            && d->m_includeNonPlottable == other.d_func()->m_includeNonPlottable
-            && d->m_includeExchangeCodes == other.d_func()->m_includeExchangeCodes
-            && d->m_includeBrokerCodes == other.d_func()->m_includeBrokerCodes
-            && d->m_includeRpsCodes == other.d_func()->m_includeRpsCodes
-            && d->m_includeBicMicCodes == other.d_func()->m_includeBicMicCodes
-            && d->m_startDate == other.d_func()->m_startDate
-            && d->m_endDate == other.d_func()->m_endDate
-            ;
-    }
+bool QBbgIntradayTickRequest::sameOptions(const QBbgIntradayTickRequest &other) const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeConditionCodes == other.d_func()->m_includeConditionCodes && d->m_includeNonPlottable == other.d_func()->m_includeNonPlottable
+            && d->m_includeExchangeCodes == other.d_func()->m_includeExchangeCodes && d->m_includeBrokerCodes == other.d_func()->m_includeBrokerCodes
+            && d->m_includeRpsCodes == other.d_func()->m_includeRpsCodes && d->m_includeBicMicCodes == other.d_func()->m_includeBicMicCodes
+            && d->m_startDate == other.d_func()->m_startDate && d->m_endDate == other.d_func()->m_endDate;
+}
 
-    QBbgIntradayTickRequest& QBbgIntradayTickRequest::operator=(const QBbgIntradayTickRequest& a)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->operator=(*(a.d_func()));
-        return *this;
-    }
-    bool QBbgIntradayTickRequest::operator==(const QBbgIntradayTickRequest& a) const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return
-            QBbgAbstractIntradayRequest::operator==(a)
-            && d->m_includeConditionCodes == a.d_func()->m_includeConditionCodes
-            && d->m_includeNonPlottable == a.d_func()->m_includeNonPlottable
-            && d->m_includeExchangeCodes == a.d_func()->m_includeExchangeCodes
-            && d->m_includeBrokerCodes == a.d_func()->m_includeBrokerCodes
-            && d->m_includeRpsCodes == a.d_func()->m_includeRpsCodes
-            && d->m_includeBicMicCodes == a.d_func()->m_includeBicMicCodes
-            ;
-    }
-    void QBbgIntradayTickRequest::saveToStream(QDataStream& stream) const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        QBbgAbstractIntradayRequest::saveToStream(stream);
-        stream 
-            << d->m_includeConditionCodes 
-            << d->m_includeNonPlottable 
-            << d->m_includeExchangeCodes
-            << d->m_includeBrokerCodes
-            << d->m_includeRpsCodes
-            << d->m_includeBicMicCodes
-            ;
-    }
+QBbgIntradayTickRequest &QBbgIntradayTickRequest::operator=(const QBbgIntradayTickRequest &a)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->operator=(*(a.d_func()));
+    return *this;
+}
+bool QBbgIntradayTickRequest::operator==(const QBbgIntradayTickRequest &a) const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return QBbgAbstractIntradayRequest::operator==(a) && d->m_includeConditionCodes == a.d_func()->m_includeConditionCodes
+            && d->m_includeNonPlottable == a.d_func()->m_includeNonPlottable && d->m_includeExchangeCodes == a.d_func()->m_includeExchangeCodes
+            && d->m_includeBrokerCodes == a.d_func()->m_includeBrokerCodes && d->m_includeRpsCodes == a.d_func()->m_includeRpsCodes
+            && d->m_includeBicMicCodes == a.d_func()->m_includeBicMicCodes;
+}
+void QBbgIntradayTickRequest::saveToStream(QDataStream &stream) const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    QBbgAbstractIntradayRequest::saveToStream(stream);
+    stream << d->m_includeConditionCodes << d->m_includeNonPlottable << d->m_includeExchangeCodes << d->m_includeBrokerCodes << d->m_includeRpsCodes
+           << d->m_includeBicMicCodes;
+}
 
-    void QBbgIntradayTickRequest::loadFromStream(QDataStream& stream)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        QBbgAbstractIntradayRequest::loadFromStream(stream);
-        stream
-            >> d->m_includeConditionCodes
-            >> d->m_includeNonPlottable
-            >> d->m_includeExchangeCodes
-            >> d->m_includeBrokerCodes
-            >> d->m_includeRpsCodes
-            >> d->m_includeBicMicCodes
-            ;
-    }
-    bool QBbgIntradayTickRequest::includeBicMicCodes() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeBicMicCodes;
-    }
+void QBbgIntradayTickRequest::loadFromStream(QDataStream &stream)
+{
+    Q_D(QBbgIntradayTickRequest);
+    QBbgAbstractIntradayRequest::loadFromStream(stream);
+    stream >> d->m_includeConditionCodes >> d->m_includeNonPlottable >> d->m_includeExchangeCodes >> d->m_includeBrokerCodes >> d->m_includeRpsCodes
+            >> d->m_includeBicMicCodes;
+}
+bool QBbgIntradayTickRequest::includeBicMicCodes() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeBicMicCodes;
+}
 
-    void QBbgIntradayTickRequest::setIncludeBicMicCodes(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeBicMicCodes = val;
-    }
+void QBbgIntradayTickRequest::setIncludeBicMicCodes(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeBicMicCodes = val;
+}
 
-    bool QBbgIntradayTickRequest::includeRpsCodes() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeRpsCodes;
-    }
+bool QBbgIntradayTickRequest::includeRpsCodes() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeRpsCodes;
+}
 
-    void QBbgIntradayTickRequest::setIncludeRpsCodes(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeRpsCodes = val;
-    }
+void QBbgIntradayTickRequest::setIncludeRpsCodes(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeRpsCodes = val;
+}
 
-    bool QBbgIntradayTickRequest::includeBrokerCodes() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeBrokerCodes;
-    }
+bool QBbgIntradayTickRequest::includeBrokerCodes() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeBrokerCodes;
+}
 
-    void QBbgIntradayTickRequest::setIncludeBrokerCodes(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeBrokerCodes = val;
-    }
+void QBbgIntradayTickRequest::setIncludeBrokerCodes(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeBrokerCodes = val;
+}
 
-    bool QBbgIntradayTickRequest::includeExchangeCodes() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeExchangeCodes;
-    }
+bool QBbgIntradayTickRequest::includeExchangeCodes() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeExchangeCodes;
+}
 
-    void QBbgIntradayTickRequest::setIncludeExchangeCodes(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeExchangeCodes = val;
-    }
+void QBbgIntradayTickRequest::setIncludeExchangeCodes(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeExchangeCodes = val;
+}
 
-    bool QBbgIntradayTickRequest::includeNonPlottable() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeNonPlottable;
-    }
+bool QBbgIntradayTickRequest::includeNonPlottable() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeNonPlottable;
+}
 
-    void QBbgIntradayTickRequest::setIncludeNonPlottable(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeNonPlottable = val;
-    }
+void QBbgIntradayTickRequest::setIncludeNonPlottable(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeNonPlottable = val;
+}
 
-    bool QBbgIntradayTickRequest::includeConditionCodes() const
-    {
-        Q_D(const QBbgIntradayTickRequest);
-        return d->m_includeConditionCodes;
-    }
+bool QBbgIntradayTickRequest::includeConditionCodes() const
+{
+    Q_D(const QBbgIntradayTickRequest);
+    return d->m_includeConditionCodes;
+}
 
-    void QBbgIntradayTickRequest::setIncludeConditionCodes(bool val)
-    {
-        Q_D(QBbgIntradayTickRequest);
-        d->m_includeConditionCodes = val;
-    }
+void QBbgIntradayTickRequest::setIncludeConditionCodes(bool val)
+{
+    Q_D(QBbgIntradayTickRequest);
+    d->m_includeConditionCodes = val;
+}
 }

@@ -25,29 +25,29 @@
 #include "QBbgRequestGroup.h"
 #include <QHash>
 namespace QBbgLib {
-    class QBbgRequestGroupPrivate
-    {
-    private:
-        Q_DECLARE_PUBLIC(QBbgRequestGroup)
-        QBbgRequestGroup* q_ptr;
-        QBbgRequestGroupPrivate(const QBbgRequestGroupPrivate& a) = delete;
-        QBbgAbstractRequest* createRequest(const QBbgAbstractRequest& a) const;
-        qint64 increaseMaxID();
-    public:
-        QBbgRequestGroupPrivate(QBbgRequestGroup* q,const QBbgRequestGroupPrivate& a);
-        QBbgRequestGroupPrivate(QBbgRequestGroup* q);
-        QBbgRequestGroupPrivate& operator=(const QBbgRequestGroupPrivate& a);
-        virtual ~QBbgRequestGroupPrivate();
-        static qint64 MaxID; // #TODO needs to be static?
-        QHash<qint64, QBbgAbstractRequest*>  RequestTable;
-        void clear();
-        qint64 addRequest(const QBbgAbstractRequest& a);
-        qint64 addRequest(QBbgAbstractRequest& a, qint64 preferredID);
-        const QBbgAbstractRequest* request(qint64 ID) const;
-        bool SameRequest(const QList<qint64>& a, const QList<qint64>& b) const;
-        bool compatible(const QBbgAbstractRequest* a, const QBbgAbstractRequest* b) const; 
-    };
+class QBbgRequestGroupPrivate
+{
+private:
+    Q_DECLARE_PUBLIC(QBbgRequestGroup)
+    QBbgRequestGroup *q_ptr;
+    QBbgRequestGroupPrivate(const QBbgRequestGroupPrivate &a) = delete;
+    QBbgAbstractRequest *createRequest(const QBbgAbstractRequest &a) const;
+    qint64 increaseMaxID();
 
-    
+public:
+    QBbgRequestGroupPrivate(QBbgRequestGroup *q, const QBbgRequestGroupPrivate &a);
+    QBbgRequestGroupPrivate(QBbgRequestGroup *q);
+    QBbgRequestGroupPrivate &operator=(const QBbgRequestGroupPrivate &a);
+    virtual ~QBbgRequestGroupPrivate();
+    static qint64 MaxID; // #TODO needs to be static?
+    QHash<qint64, QBbgAbstractRequest *> RequestTable;
+    void clear();
+    qint64 addRequest(const QBbgAbstractRequest &a);
+    qint64 addRequest(QBbgAbstractRequest &a, qint64 preferredID);
+    const QBbgAbstractRequest *request(qint64 ID) const;
+    bool SameRequest(const QList<qint64> &a, const QList<qint64> &b) const;
+    bool compatible(const QBbgAbstractRequest *a, const QBbgAbstractRequest *b) const;
+};
+
 }
 #endif // QBbgRequest_p_h__
