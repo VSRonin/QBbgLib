@@ -211,11 +211,12 @@ namespace QBbgLib {
                 setExtension(stringToYellowKey(val.right(val.size() - val.lastIndexOf(QLatin1Char(' ')))));
                 val = val.left(val.lastIndexOf(QLatin1Char(' ')));
             }
-            QRegularExpression priceSourceRegExp(QStringLiteral("\\s@(\\S+)(?:\\s|$)"));
+            static QRegularExpression priceSourceRegExp(QStringLiteral("\\s@(\\S+)(?:\\s|$)"));
             QRegularExpressionMatch matchRes = priceSourceRegExp.match(val);
             if (matchRes.hasMatch()) {
                 setPricingSource(matchRes.captured(1));
-                val.replace(QRegularExpression(QStringLiteral("@\\S+")), QString());
+                static QRegularExpression tempRx(QStringLiteral("@\\S+"));
+                val.replace(tempRx, QString());
             }
             setName(val);
         }
@@ -256,20 +257,21 @@ namespace QBbgLib {
         m_PricingSource = other.m_PricingSource;
         return *this;
     }
-}
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-size_t qHash(const QBbgLib::QBbgSecurity&key, size_t seed)
+    size_t qHash(const QBbgLib::QBbgSecurity&key, size_t seed)
 #else
-uint qHash(const QBbgLib::QBbgSecurity&key, uint seed)
+    uint qHash(const QBbgLib::QBbgSecurity&key, uint seed)
 #endif
-{
-    QByteArray data;
     {
-        QDataStream stream(&data, QIODevice::WriteOnly);
-        stream << key;
+        QByteArray data;
+        {
+            QDataStream stream(&data, QIODevice::WriteOnly);
+            stream << key;
+        }
+        return qHash(data, seed);
     }
-    return qHash(data, seed);
 }
+
 
 QDataStream& operator<<(QDataStream& stream, const QBbgLib::QBbgSecurity& obj)
 {

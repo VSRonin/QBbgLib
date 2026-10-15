@@ -176,16 +176,17 @@ namespace QBbgLib {
         friend QDataStream& ::operator<<(QDataStream& stream, const QBbgSecurity& obj);
         friend QDataStream& ::operator>>(QDataStream& stream, QBbgSecurity& obj);
     };
+    /*!
+    \brief Allows QBbgSecurity to be used as a key of a QHash
+    \relates QBbgLib::QBbgSecurity
+    */
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QBBGLIB_EXPORT size_t qHash(const QBbgSecurity& key, size_t seed);
+#else
+    QBBGLIB_EXPORT uint qHash(const QBbgSecurity&key, uint seed);
+#endif
 }
 Q_DECLARE_METATYPE(QBbgLib::QBbgSecurity);
-/*! 
-\brief Allows QBbgSecurity to be used as a key of a QHash
-\relates QBbgLib::QBbgSecurity
-*/
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-QBBGLIB_EXPORT size_t qHash(const QBbgLib::QBbgSecurity& key, size_t seed);
-#else
-QBBGLIB_EXPORT uint qHash(const QBbgLib::QBbgSecurity&key, uint seed);
-#endif
+
 
 #endif // QBbgSecurity_h__

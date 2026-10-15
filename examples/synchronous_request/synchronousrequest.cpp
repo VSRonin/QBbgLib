@@ -127,7 +127,7 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager& bbgManager)
         // Print all the values in the series
         std::cout << std::endl << "Date\t" << qPrintable(resp->header());
         for (int i = 0; i < resp->size(); ++i) {
-            std::cout << std::endl << qPrintable(resp->date(i).toString(Qt::DefaultLocaleShortDate)) << '\t' << qPrintable(resp->value(i).toString());
+            std::cout << std::endl << qPrintable(resp->date(i).toString(Qt::ISODate)) << '\t' << qPrintable(resp->value(i).toString());
         }
     }
 }
@@ -191,7 +191,7 @@ void singleIntradayTickRequest(QBbgLib::QBbgManager& bbgManager)
         // Print all the values in the series
         std::cout << std::endl << "Date\tValue\tSize";
         for (int i = 0; i < resp->size(); ++i) {
-            std::cout << std::endl << qPrintable(resp->dateTime(i).toString(Qt::DefaultLocaleShortDate)) << '\t' << resp->value(i) << '\t' << resp->tickSize(i);
+            std::cout << std::endl << qPrintable(resp->dateTime(i).toString(Qt::ISODate)) << '\t' << resp->value(i) << '\t' << resp->tickSize(i);
         }
     }
 }
@@ -264,7 +264,7 @@ void multipleRequests(QBbgLib::QBbgManager& bbgManager)
     else if (euriborResult->hasErrors())
         std::cout << std::endl << qPrintable(QStringLiteral("Unable to download historical 3m EURIBOR. Error %1: %2").arg(euriborResult->errorString()).arg(euriborResult->errorMessage()));
     else
-        std::cout << std::endl << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2").arg(euriborResult->date(0).toString(Qt::DefaultLocaleShortDate)).arg(euriborResult->value(0).toDouble()));
+        std::cout << std::endl << qPrintable(QStringLiteral("3m EURIBOR as of %1 = %2").arg(euriborResult->date(0).toString(Qt::ISODate)).arg(euriborResult->value(0).toDouble()));
 
     // Reference data results
     for (size_t i = 0; i < std::extent<decltype(referenceSecurities)>::value; ++i) {
