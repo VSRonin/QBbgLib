@@ -25,6 +25,7 @@
 #include "QBbgManager.h"
 #include <QHash>
 #include <QQueue>
+#include <QPointer>
 class QThread;
 namespace BloombergLP {
 namespace blpapi {
@@ -48,7 +49,7 @@ public:
     QHash<quint32, std::pair<QThread *, QBbgAbstractWorker *>> m_ThreadPool;
     QQueue<quint32> m_queuedThreads;
     BloombergLP::blpapi::SessionOptions *m_options;
-    QBbgSessionMonitorWorker *m_sessionMonitor;
+    QPointer<QBbgSessionMonitorWorker> m_sessionMonitor;
 
 protected:
     QBbgManager *q_ptr;

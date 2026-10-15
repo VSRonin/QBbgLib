@@ -38,7 +38,6 @@ bool QBbgSessionMonitorWorker::processEvent(const BloombergLP::blpapi::Event &ev
             BloombergLP::blpapi::Message message = iter.message();
             QString MessageType = QString::fromLocal8Bit(message.messageType().string(), -1);
             if (MessageType == QStringLiteral("SessionStarted")) {
-                setSessionRunning(true);
                 emit started(); // Emit signal
             } else if (MessageType == QStringLiteral("SessionConnectionUp"))
                 continue;
@@ -59,6 +58,7 @@ bool QBbgSessionMonitorWorker::start()
 {
     if (sessionRunning())
         return false;
+    setSessionRunning(true);
     return session()->startAsync();
 }
 

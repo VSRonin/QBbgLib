@@ -94,7 +94,8 @@ void QBbgManager::startConnectionMonitor()
     if (!d->m_sessionMonitor) {
         d->m_sessionMonitor = new QBbgSessionMonitorWorker(*(d->m_options), this);
         connect(d->m_sessionMonitor, &QBbgSessionMonitorWorker::started, this, &QBbgManager::connected);
-        connect(d->m_sessionMonitor, &QBbgSessionMonitorWorker::started, this, &QBbgManager::disconnected);
+        connect(d->m_sessionMonitor, &QBbgSessionMonitorWorker::finished, this, &QBbgManager::disconnected);
+        connect(d->m_sessionMonitor, &QBbgSessionMonitorWorker::finished, d->m_sessionMonitor, &QObject::deleteLater);
     }
     d->m_sessionMonitor->start();
 #endif
