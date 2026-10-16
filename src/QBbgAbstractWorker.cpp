@@ -108,6 +108,11 @@ BloombergLP::blpapi::Session *QBbgAbstractWorker::session()
     return m_session.get();
 }
 
+bool QBbgAbstractWorker::processEvent(const BloombergLP::blpapi::Event &event, BloombergLP::blpapi::Session *CurrentSession)
+{
+    return false;
+}
+
 }
 
 #endif // QBbg_OFFLINE

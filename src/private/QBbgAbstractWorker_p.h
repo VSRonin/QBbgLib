@@ -47,6 +47,7 @@ public:
 protected:
     bool sessionRunning() const;
     void setSessionRunning(bool val);
+    bool processEvent(const BloombergLP::blpapi::Event &event, BloombergLP::blpapi::Session *CurrentSession) override;
     virtual void handleResponseEvent(const BloombergLP::blpapi::Event &event, bool isFinal) = 0;
     virtual void setResponseError(QBbgAbstractResponse *res, QBbgAbstractResponse::BbgErrorCodes err, const QString &errMsg) const;
     virtual void setResponseID(QBbgAbstractResponse *res, qint64 corrID) const;
