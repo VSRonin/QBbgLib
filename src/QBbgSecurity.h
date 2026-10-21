@@ -20,6 +20,7 @@
 #define QBbgSecurity_h__
 #include <QString>
 #include <QMetaType>
+#include <QJsonObject>
 #include <qbbglib_global.h>
 class QDataStream;
 namespace QBbgLib {
@@ -201,6 +202,10 @@ public:
     Q_INVOKABLE static QString yellowKeyToString(YellowKeys a);
     //! Converts a string representation to a security extension
     Q_INVOKABLE static YellowKeys stringToYellowKey(QString a);
+    //! Saves the security to a JSON Object
+    QJsonObject toJsonObject() const;
+    //! Retrives the security from a JSON Object
+    bool fromJsonObject(const QJsonObject &obj);
     friend QDataStream & ::operator<<(QDataStream &stream, const QBbgSecurity &obj);
     friend QDataStream & ::operator>>(QDataStream &stream, QBbgSecurity &obj);
 };

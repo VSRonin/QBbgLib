@@ -22,6 +22,7 @@
 #include <QDataStream>
 #include <QIODevice>
 #include <QHash>
+#include <QJsonValue>
 namespace QBbgLib {
 
 QBbgSecurityPrivate::~QBbgSecurityPrivate() = default;
@@ -49,6 +50,43 @@ void QBbgSecurity::loadFromStream(QDataStream &stream)
     qint32 tempExt;
     stream >> d->m_Name >> tempExt >> d->m_Exchange >> d->m_PricingSource;
     d->m_Extension = static_cast<YellowKeys>(tempExt);
+}
+
+QJsonObject QBbgSecurity::toJsonObject() const
+{
+    Q_D(const QBbgSecurity);
+    return QJsonObject{{QStringLiteral("Name"), d->m_Name},
+                       {QStringLiteral("Extension"), int(d->m_Extension)},
+                       {QStringLiteral("Exchange"), d->m_Exchange},
+                       {QStringLiteral("PricingSource"), d->m_PricingSource}};
+}
+
+bool QBbgSecurity::fromJsonObject(const QJsonObject &obj)
+{
+    Q_D(QBbgSecurity);
+    int tempExt;
+    QString tempName, tempExchange;
+    QJsonValue tempValue;
+    tempValue = obj.value(QStringLiteral("Name"));
+    if (!tempValue.isString())
+        return false;
+    tempName = tempValue.toString();
+    tempValue = obj.value(QStringLiteral("Extension"));
+    if (!tempValue.isDouble())
+        return false;
+    tempExt = tempValue.toInt();
+    tempValue = obj.value(QStringLiteral("Exchange"));
+    if (!tempValue.isString())
+        return false;
+    tempExchange = tempValue.toString();
+    tempValue = obj.value(QStringLiteral("PricingSource"));
+    if (!tempValue.isString())
+        return false;
+    d->m_Name = tempName;
+    d->m_Extension = static_cast<YellowKeys>(tempExt);
+    d->m_Exchange = tempExchange;
+    d->m_PricingSource = tempValue.toString();
+    return true;
 }
 
 QBbgSecurity::QBbgSecurity()

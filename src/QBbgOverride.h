@@ -21,6 +21,7 @@
 #include <QString>
 #include <QList>
 #include <QObject>
+#include <QJsonObject>
 #include <qbbglib_global.h>
 class QDate;
 class QTime;
@@ -128,8 +129,11 @@ public:
     virtual QString &operator[](const QString &Name);
     //! Same as overrideValue
     virtual QString operator[](const QString &Name) const;
+    //! Saves the security to a JSON Object
+    QJsonObject toJsonObject() const;
+    //! Retrives the security from a JSON Object
+    bool fromJsonObject(const QJsonObject &obj);
 
-protected:
 protected:
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);

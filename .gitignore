@@ -1,6 +1,8 @@
 /[Dd]ocs/*/*
 /[Dd]ocs/*/
 /[Bb]uild/*
+/[Bb]uilds/*
+/.vscode/*
 *.vcxproj
 *.vcxproj.filters
 *.sln

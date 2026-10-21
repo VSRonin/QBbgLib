@@ -22,6 +22,7 @@
 #include <QTime>
 #include <QVariant>
 #include <QDataStream>
+#include <QJsonArray>
 #ifndef QBbg_OFFLINE
 #    include <blpapi_session.h>
 #endif
@@ -70,6 +71,39 @@ void QBbgOverride::loadFromStream(QDataStream &stream)
     Q_D(QBbgOverride);
     stream >> d->m_Overrides;
 }
+
+QJsonObject QBbgOverride::toJsonObject() const
+{
+    Q_D(const QBbgOverride);
+    QJsonArray resultArray;
+    for (auto i = d->m_Overrides.constBegin(), iEnd = d->m_Overrides.constEnd(); i != iEnd; ++i) {
+        resultArray.append(QJsonObject{{QStringLiteral("Filed"), i.key()}, {QStringLiteral("Value"), i.value()}});
+    }
+    return QJsonObject{{QStringLiteral("Overrides"), resultArray}};
+}
+
+bool QBbgOverride::fromJsonObject(const QJsonObject &obj)
+{
+    Q_D(QBbgOverride);
+    const QJsonValue overridesValue = obj.value(QStringLiteral("Overrides"));
+    if (!overridesValue.isArray())
+        return false;
+    const QJsonArray overridesArray = overridesValue.toArray();
+    decltype(d->m_Overrides) newOverrides;
+    for (QJsonValue tempOverrideValue : overridesArray) {
+        if (!tempOverrideValue.isObject())
+            return false;
+        const QJsonObject tempObj = tempOverrideValue.toObject();
+        const QJsonValue tempKey = tempObj.value(QStringLiteral("Filed"));
+        const QJsonValue tempVal = tempObj.value(QStringLiteral("Value"));
+        if (!tempKey.isString() || !tempVal.isString())
+            return false;
+        newOverrides.insert(tempKey.toString(), tempVal.toString());
+    }
+    d->m_Overrides = newOverrides;
+    return true;
+}
+
 void QBbgOverride::clear()
 {
     Q_D(QBbgOverride);
