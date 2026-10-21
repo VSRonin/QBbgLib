@@ -19,73 +19,102 @@ if(BUILD_DOCS)
         set(BUILD_DOCS OFF)
     endif()
 endif()
-
-set(qbbglib_HEADERS 
-    QBbgSecurity.h 
-    QBbgManager.h 
-    QBbgOverride.h 
-    QBbgRequestGroup.h 
-    QBbgAbstractFieldRequest.h 
-    QBbgAbstractRequest.h 
-    QBbgHistoricalDataRequest.h 
-    QBbgPortfolioDataRequest.h 
-    QBbgAbstractIntradayRequest.h 
-    QbbgReferenceDataRequest.h 
-    QBbgAbstractFieldResponse.h 
-    QBbgAbstractResponse.h 
-    QBbgHistoricalDataResponse.h 
-    QBbgPortfolioDataResponse.h 
-    QBbgReferenceDataResponse.h 
+set(requests_HEADERS
+    QBbgRequestGroup.h
+    QBbgAbstractFieldRequest.h
+    QBbgAbstractRequest.h
+    QBbgHistoricalDataRequest.h
+    QBbgPortfolioDataRequest.h
+    QBbgAbstractIntradayRequest.h
+    QBbgReferenceDataRequest.h
     QBbgIntradayTickRequest.h
-    QBbgAbstractIntradayResponse.h 
+)
+set(responses_HEADERS
+    QBbgAbstractFieldResponse.h
+    QBbgAbstractResponse.h
+    QBbgHistoricalDataResponse.h
+    QBbgPortfolioDataResponse.h
+    QBbgReferenceDataResponse.h
+    QBbgAbstractIntradayResponse.h
     QBbgIntradayTickResponse.h
 )
-set(qbbglib_PRIVATE_HEADERS 
-    private/QBbgAbstractFieldRequest_p.h 
-    private/QBbgAbstractFieldResponse_p.h 
-    private/QBbgAbstractIntradayRequest_p.h 
-    private/QBbgAbstractRequest_p.h 
-    private/QBbgAbstractResponse_p.h 
-    private/QBbgHistoricalDataRequest_p.h 
-    private/QBbgHistoricalDataResponse_p.h 
-    private/QBbgManager_p.h 
-    private/QBbgOverride_p.h 
-    private/QBbgPortfolioDataRequest_p.h 
-    private/QBbgPortfolioDataResponse_p.h 
-    private/QBbgReferenceDataRequest_p.h 
-    private/QBbgReferenceDataResponse_p.h 
-    private/QBbgRequestGroup_p.h 
-    private/QBbgSecurity_p.h 
-    private/QBbgAbstractWorker_p.h 
-    private/QBbgRequestResponseWorker_p.h 
-    private/QBbgIntradayTickRequest_p.h 
-    private/QBbgAbstractIntradayResponse_p.h 
+
+
+set(qbbglib_HEADERS
+    ${requests_HEADERS}
+    ${responses_HEADERS}
+    QBbgSecurity.h 
+    QBbgManager.h 
+    QBbgOverride.h
+)
+
+set(requests_PRIVATE_HEADERS
+    private/QBbgRequestGroup_p.h
+    private/QBbgAbstractFieldRequest_p.h
+    private/QBbgAbstractRequest_p.h
+    private/QBbgHistoricalDataRequest_p.h
+    private/QBbgPortfolioDataRequest_p.h
+    private/QBbgAbstractIntradayRequest_p.h
+    private/QBbgReferenceDataRequest_p.h
+    private/QBbgIntradayTickRequest_p.h
+)
+set(responses_PRIVATE_HEADERS
+    private/QBbgAbstractFieldResponse_p.h
+    private/QBbgAbstractResponse_p.h
+    private/QBbgHistoricalDataResponse_p.h
+    private/QBbgPortfolioDataResponse_p.h
+    private/QBbgReferenceDataResponse_p.h
+    private/QBbgAbstractIntradayResponse_p.h
     private/QBbgIntradayTickResponse_p.h
+)
+set(workers_PRIVATE_HEADERS
+    private/QBbgAbstractWorker_p.h
+    private/QBbgRequestResponseWorker_p.h
     private/QBbgSessionMonitorWorker_p.h
 )
+set(qbbglib_PRIVATE_HEADERS 
+    ${requests_PRIVATE_HEADERS}
+    ${responses_PRIVATE_HEADERS}
+    ${workers_PRIVATE_HEADERS}
+    private/QBbgManager_p.h 
+    private/QBbgOverride_p.h 
+    private/QBbgSecurity_p.h 
+)
+set(requests_SRCS
+    QBbgAbstractRequest.cpp
+    QBbgHistoricalDataRequest.cpp
+    QBbgAbstractIntradayRequest.cpp
+    QBbgPortfolioDataRequest.cpp
+    QBbgReferenceDataRequest.cpp
+    QBbgAbstractFieldRequest.cpp
+    QBbgIntradayTickRequest.cpp
+    QBbgRequestGroup.cpp
+)
+set(responses_SRCS
+    QBbgAbstractFieldResponse.cpp
+    QBbgAbstractResponse.cpp
+    QBbgHistoricalDataResponse.cpp
+    QBbgPortfolioDataResponse.cpp
+    QBbgReferenceDataResponse.cpp
+    QBbgIntradayTickResponse.cpp
+    QBbgAbstractIntradayResponse.cpp
+)
+set(workers_SRCS
+    QBbgAbstractWorker.cpp
+    QBbgRequestResponseWorker.cpp
+    QBbgSessionMonitorWorker.cpp
+)
 set(qbbglib_SRCS
+    ${requests_SRCS}
+    ${responses_SRCS}
+    ${workers_SRCS}
     QBbgManager.cpp 
     QBbgOverride.cpp 
     QBbgSecurity.cpp 
-    QBbgAbstractRequest.cpp 
-    QBbgHistoricalDataRequest.cpp 
-    QBbgAbstractIntradayRequest.cpp 
-    QBbgPortfolioDataRequest.cpp 
-    QBbgReferenceDataRequest.cpp 
-    QBbgRequestGroup.cpp 
-    QBbgAbstractFieldRequest.cpp 
-    QBbgAbstractFieldResponse.cpp 
-    QBbgAbstractResponse.cpp 
-    QBbgHistoricalDataResponse.cpp 
-    QBbgPortfolioDataResponse.cpp 
-    QBbgReferenceDataResponse.cpp 
-    QBbgAbstractWorker.cpp
-    QBbgRequestResponseWorker.cpp
-    QBbgIntradayTickRequest.cpp 
-    QBbgAbstractIntradayResponse.cpp 
-    QBbgIntradayTickResponse.cpp
-    QBbgSessionMonitorWorker.cpp
 )
+source_group(Requests FILES ${requests_HEADERS} ${requests_PRIVATE_HEADERS} ${requests_SRCS})
+source_group(Responses FILES ${responses_HEADERS} ${responses_PRIVATE_HEADERS} ${responses_SRCS})
+source_group(Workers FILES ${workers_HEADERS} ${workers_PRIVATE_HEADERS} ${workers_SRCS})
 
 if(BUILD_DOCS)
     set(htmlDocRedirect "<!DOCTYPE html><html><head><title>Redirect</title><meta http-equiv=\"refresh\" content=\"0; url=html/index.html\" /></head><body><p><a href=\"html/index.html\">Click here if you are not redirected automatically</a></p></body></html>")
