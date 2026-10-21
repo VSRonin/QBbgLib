@@ -39,41 +39,26 @@ QBbgAbstractRequestPrivate::QBbgAbstractRequestPrivate(QBbgAbstractRequest *q, Q
 QBbgAbstractRequestPrivate::QBbgAbstractRequestPrivate(QBbgAbstractRequest *q, const QBbgAbstractRequestPrivate &other)
     : q_ptr(q)
     , m_ID(other.m_ID)
-    , m_Security(other.m_Security)
     , m_RqType(other.m_RqType)
 { }
 QBbgAbstractRequestPrivate &QBbgAbstractRequestPrivate::operator=(const QBbgAbstractRequestPrivate &other)
 {
     Q_ASSERT_X(m_RqType == other.m_RqType, "QBbgAbstractRequestPrivate::operator=", "Trying to copy between two diffrent Request types");
     m_ID = other.m_ID;
-    m_Security = other.m_Security;
     return *this;
 }
 void QBbgAbstractRequest::saveToStream(QDataStream &stream) const
 {
     Q_D(const QBbgAbstractRequest);
-    stream << d->m_ID << d->m_Security;
+    stream << d->m_ID;
 }
 
 void QBbgAbstractRequest::loadFromStream(QDataStream &stream)
 {
     Q_D(QBbgAbstractRequest);
-    stream >> d->m_ID >> d->m_Security;
+    stream >> d->m_ID;
 }
-void QBbgAbstractRequest::setSecurity(const QBbgSecurity &val)
-{
-    Q_D(QBbgAbstractRequest);
-    d->m_Security = val;
-}
-void QBbgAbstractRequest::setSecurity(const QString &SecName, QBbgSecurity::YellowKeys SecKey)
-{
-    setSecurity(QBbgSecurity(SecName, SecKey));
-}
-const QBbgSecurity &QBbgAbstractRequest::security() const
-{
-    Q_D(const QBbgAbstractRequest);
-    return d->m_Security;
-}
+
 QBbgAbstractRequest &QBbgAbstractRequest::operator=(const QBbgAbstractRequest &other)
 {
     Q_D(QBbgAbstractRequest);
@@ -139,7 +124,7 @@ QBbgAbstractRequest::RequestType QBbgAbstractRequest::stringToRequestType(QStrin
 bool QBbgAbstractRequest::isValidReq() const
 {
     Q_D(const QBbgAbstractRequest);
-    return d->m_Security.isValid() && d->m_ID > 0;
+    return d->m_ID > 0;
 }
 QBbgAbstractRequest::RequestType QBbgAbstractRequest::requestType() const
 {
@@ -150,7 +135,7 @@ QBbgAbstractRequest::RequestType QBbgAbstractRequest::requestType() const
 bool QBbgAbstractRequest::operator==(const QBbgAbstractRequest &other) const
 {
     Q_D(const QBbgAbstractRequest);
-    return d->m_RqType == other.d_func()->m_RqType && d->m_Security == other.d_func()->m_Security;
+    return d->m_RqType == other.d_func()->m_RqType;
 }
 
 QString QBbgAbstractRequest::serviceStringForRequest(RequestType a)
@@ -166,6 +151,8 @@ QBbgAbstractRequest::ServiceType QBbgAbstractRequest::serviceForRequest(RequestT
     case RequestType::IntraDayTick:
     case RequestType::IntraDayBar:
         return ServiceType::refdata;
+    case RequestType::SecurityLookup:
+        return ServiceType::instruments;
     default:
         Q_UNREACHABLE(); // Unhandled service type
         return ServiceType::NoService;
@@ -190,6 +177,8 @@ QString QBbgAbstractRequest::serviceTypeToString(ServiceType a)
         return QStringLiteral("//blp/tasvc");
     case QBbgLib::QBbgAbstractRequest::ServiceType::apiauth:
         return QStringLiteral("//blp/apiauth");
+    case QBbgLib::QBbgAbstractRequest::ServiceType::instruments:
+        return QStringLiteral("//blp/instruments");
     default:
         return QString();
     }
@@ -217,11 +206,10 @@ QBbgAbstractRequest::ServiceType QBbgAbstractRequest::stringToServiceType(const 
         return ServiceType::NoService;
 }
 
-}
-
-uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed)
+uint qHash(QBbgAbstractRequest::RequestType key, uint seed)
 {
-    return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+    return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+}
 }
 
 QDataStream &operator<<(QDataStream &stream, const QBbgLib::QBbgAbstractRequest &obj)

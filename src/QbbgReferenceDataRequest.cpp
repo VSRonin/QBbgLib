@@ -85,7 +85,7 @@ void QBbgReferenceDataRequest::setSecurity(const QBbgSecurity &val)
     if (val.extension() != QBbgSecurity::Client) {
         QBbgAbstractFieldRequest::setSecurity(val);
     } else {
-        QBbgAbstractRequest::setSecurity(QBbgSecurity());
+        QBbgAbstractFieldRequest::setSecurity(QBbgSecurity());
     }
 }
 

@@ -22,6 +22,7 @@ endif()
 set(requests_HEADERS
     QBbgRequestGroup.h
     QBbgAbstractFieldRequest.h
+    QBbgAbstractSecurityRequest.h
     QBbgAbstractRequest.h
     QBbgHistoricalDataRequest.h
     QBbgPortfolioDataRequest.h
@@ -51,6 +52,7 @@ set(qbbglib_HEADERS
 set(requests_PRIVATE_HEADERS
     private/QBbgRequestGroup_p.h
     private/QBbgAbstractFieldRequest_p.h
+    private/QBbgAbstractSecurityRequest_p.h
     private/QBbgAbstractRequest_p.h
     private/QBbgHistoricalDataRequest_p.h
     private/QBbgPortfolioDataRequest_p.h
@@ -82,6 +84,7 @@ set(qbbglib_PRIVATE_HEADERS
 )
 set(requests_SRCS
     QBbgAbstractRequest.cpp
+    QBbgAbstractSecurityRequest.cpp
     QBbgHistoricalDataRequest.cpp
     QBbgAbstractIntradayRequest.cpp
     QBbgPortfolioDataRequest.cpp

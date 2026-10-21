@@ -19,7 +19,6 @@
 #ifndef QBbgAbstractRequest_h__
 #define QBbgAbstractRequest_h__
 #include <QObject>
-#include "QBbgSecurity.h"
 #include <qbbglib_global.h>
 class QDataStream;
 namespace QBbgLib {
@@ -39,12 +38,6 @@ class QBBGLIB_EXPORT QBbgAbstractRequest
 {
     Q_GADGET
     /*!
-    \brief The security associated with the request
-    \getter security()
-    \setter setSecurity()
-    */
-    Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
-    /*!
     \brief The request unique identifier
     \getter getID()
     \setter setID()
@@ -62,7 +55,7 @@ class QBBGLIB_EXPORT QBbgAbstractRequest
     Q_PROPERTY(RequestType requestType READ requestType)
 protected:
     enum : qint32 { FirstFielded = 0x10, FirstIntraday = 0x20 };
-    enum class ServiceType { NoService = 0, refdata = 1, mktdata, mktvwap, mktbar, apiflds, pagedata, tasvc, apiauth };
+    enum class ServiceType { NoService = 0, refdata = 1, mktdata, mktvwap, mktbar, apiflds, pagedata, tasvc, apiauth, instruments };
 
 public:
     //! Special requestID codes
@@ -75,6 +68,8 @@ public:
         Invalid = -1 /*!< Invalid Type */
         ,
         Beqs /*!< Currently Unavailable */
+        ,
+        SecurityLookup /*!< Request for securities based on search term */
         ,
         HistoricalData = FirstFielded /*!< Request for historical data */
         ,
@@ -106,17 +101,6 @@ public:
     virtual ~QBbgAbstractRequest() = 0;
     //! Copies another request
     virtual QBbgAbstractRequest &operator=(const QBbgAbstractRequest &other);
-    //! Returns the security associated with the request
-    virtual const QBbgSecurity &security() const;
-    //! Sets the security for the current request to the specified one
-    virtual void setSecurity(const QBbgSecurity &val);
-    /*!
-    \brief Overloaded from setSecurity
-    \arg SecName Name of the security to add
-    \arg SecKey Yellow key or code identifier for the security
-    \details Sets the security for the current request to the specified one
-    */
-    virtual void setSecurity(const QString &SecName, QBbgSecurity::YellowKeys SecKey);
     /*!
     \brief Returns the current ID for the request
     \details If the ID is not set or invalid SpecialIDs::InvalidID will be returned
@@ -140,10 +124,11 @@ public:
     friend QDataStream & ::operator<<(QDataStream &stream, const QBbgAbstractRequest &obj);
     friend QDataStream & ::operator>>(QDataStream &stream, QBbgAbstractRequest &obj);
 };
-}
 /*!
 \brief Allows QBbgAbstractRequest::RequestType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractRequest
 */
 QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed = 0);
+}
+
 #endif // QBbgAbstractRequest_h__

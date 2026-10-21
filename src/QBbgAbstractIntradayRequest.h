@@ -20,13 +20,13 @@
 #define QBbgAbstractIntradayRequest_h__
 
 #include <qbbglib_global.h>
-#include "QBbgAbstractFieldRequest.h"
+#include "QBbgAbstractSecurityRequest.h"
 #include <QDateTime>
 #include <QObject>
 namespace QBbgLib {
 class QBbgAbstractIntradayRequestPrivate;
 //! Base class for intraday requests
-class QBBGLIB_EXPORT QBbgAbstractIntradayRequest : public QBbgAbstractRequest
+class QBBGLIB_EXPORT QBbgAbstractIntradayRequest : public QBbgAbstractSecurityRequest
 {
     Q_GADGET
     /*!
@@ -90,7 +90,7 @@ public:
     virtual void setStartDateTime(const QDateTime &val);
     //! Reimplemented from QBbgAbstractRequest::setSecurity()
     virtual void setSecurity(const QBbgSecurity &val) override;
-    using QBbgAbstractRequest::setSecurity;
+    using QBbgAbstractSecurityRequest::setSecurity;
     //! Reimplemented from QBbgAbstractRequest::isValidReq()
     virtual bool isValidReq() const override;
     //! Returns the type of event to retrieve
@@ -111,10 +111,11 @@ protected:
     virtual void saveToStream(QDataStream &stream) const override;
     virtual void loadFromStream(QDataStream &stream) override;
 };
-}
 /*!
 \brief Allows EventType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractIntradayRequest
 */
 QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed);
+}
+
 #endif // QBbgAbstractIntradayRequest_h__

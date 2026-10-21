@@ -32,16 +32,16 @@ void QBbgAbstractFieldRequest::setField(const QString &val)
     d->m_Field.replace(QLatin1Char(' '), QLatin1Char('_'));
 }
 QBbgAbstractFieldRequestPrivate::QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest *q, QBbgAbstractRequest::RequestType typ)
-    : QBbgAbstractRequestPrivate(q, typ)
+    : QBbgAbstractSecurityRequestPrivate(q, typ)
 { }
 QBbgAbstractFieldRequestPrivate::QBbgAbstractFieldRequestPrivate(QBbgAbstractFieldRequest *q, const QBbgAbstractFieldRequestPrivate &a)
-    : QBbgAbstractRequestPrivate(q, a)
+    : QBbgAbstractSecurityRequestPrivate(q, a)
     , m_Field(a.m_Field)
     , m_Overrides(a.m_Overrides)
 { }
 QBbgAbstractFieldRequestPrivate &QBbgAbstractFieldRequestPrivate::operator=(const QBbgAbstractFieldRequestPrivate &a)
 {
-    QBbgAbstractRequestPrivate::operator=(a);
+    QBbgAbstractSecurityRequestPrivate::operator=(a);
     m_Field = a.m_Field;
     m_Overrides = a.m_Overrides;
     return *this;
@@ -49,14 +49,14 @@ QBbgAbstractFieldRequestPrivate &QBbgAbstractFieldRequestPrivate::operator=(cons
 void QBbgAbstractFieldRequest::saveToStream(QDataStream &stream) const
 {
     Q_D(const QBbgAbstractFieldRequest);
-    QBbgAbstractRequest::saveToStream(stream);
+    QBbgAbstractSecurityRequest::saveToStream(stream);
     stream << d->m_Field << d->m_Overrides;
 }
 
 void QBbgAbstractFieldRequest::loadFromStream(QDataStream &stream)
 {
     Q_D(QBbgAbstractFieldRequest);
-    QBbgAbstractRequest::loadFromStream(stream);
+    QBbgAbstractSecurityRequest::loadFromStream(stream);
     stream >> d->m_Field >> d->m_Overrides;
 }
 void QBbgAbstractFieldRequest::setOverrides(const QBbgOverride &Overr)
@@ -87,7 +87,7 @@ bool QBbgAbstractFieldRequest::isValidReq() const
 bool QBbgAbstractFieldRequest::operator==(const QBbgAbstractFieldRequest &a) const
 {
     Q_D(const QBbgAbstractFieldRequest);
-    if (!QBbgAbstractRequest::operator==(a) || (d->m_Field != a.d_func()->m_Field))
+    if (!QBbgAbstractSecurityRequest::operator==(a) || (d->m_Field != a.d_func()->m_Field))
         return false;
     return d->m_Overrides == a.d_func()->m_Overrides;
 }
@@ -103,7 +103,7 @@ const QBbgOverride &QBbgAbstractFieldRequest::overrides() const
 }
 
 QBbgAbstractFieldRequest::QBbgAbstractFieldRequest(QBbgAbstractFieldRequestPrivate *d)
-    : QBbgAbstractRequest(d)
+    : QBbgAbstractSecurityRequest(d)
 { }
 
 QBbgAbstractFieldRequest &QBbgAbstractFieldRequest::operator=(const QBbgAbstractFieldRequest &a)

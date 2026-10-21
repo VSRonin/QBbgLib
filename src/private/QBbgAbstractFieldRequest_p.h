@@ -24,10 +24,10 @@
 #define QBbgAbstractFieldRequest_p_h__
 
 #include "QBbgAbstractFieldRequest.h"
-#include "private/QBbgAbstractRequest_p.h"
+#include "private/QBbgAbstractSecurityRequest_p.h"
 #include "QBbgOverride.h"
 namespace QBbgLib {
-class QBbgAbstractFieldRequestPrivate : public QBbgAbstractRequestPrivate
+class QBbgAbstractFieldRequestPrivate : public QBbgAbstractSecurityRequestPrivate
 {
     Q_DECLARE_PUBLIC(QBbgAbstractFieldRequest)
 private:

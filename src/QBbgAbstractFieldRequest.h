@@ -19,7 +19,7 @@
 #ifndef SingleBbgRequest_h__
 #define SingleBbgRequest_h__
 #include <qbbglib_global.h>
-#include "QBbgAbstractRequest.h"
+#include "QBbgAbstractSecurityRequest.h"
 #include <QString>
 #include <QObject>
 #include <QBbgOverride.h>
@@ -31,7 +31,7 @@ class QBbgRequestGroup;
 \brief Request with fields and overrides
 \details This class represents all requests that can supply a field and a set of overrides
 */
-class QBBGLIB_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractRequest
+class QBBGLIB_EXPORT QBbgAbstractFieldRequest : public QBbgAbstractSecurityRequest
 {
     Q_GADGET
     /*!

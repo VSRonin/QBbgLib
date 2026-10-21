@@ -24,10 +24,10 @@
 #define QBbgAbstractIntradayRequest_p_h__
 
 #include "QBbgAbstractIntradayRequest.h"
-#include "Private/QBbgAbstractRequest_p.h"
+#include "private/QBbgAbstractSecurityRequest_p.h"
 #include <QDateTime>
 namespace QBbgLib {
-class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractRequestPrivate
+class QBbgAbstractIntradayRequestPrivate : public QBbgAbstractSecurityRequestPrivate
 {
     Q_DECLARE_PUBLIC(QBbgAbstractIntradayRequest)
 public:

@@ -239,8 +239,11 @@ QList<qint64> QBbgRequestGroup::findSecurity(const QBbgSecurity &Secur) const
     Q_D(const QBbgRequestGroup);
     QList<qint64> Result;
     for (QHash<qint64, QBbgAbstractRequest *>::const_iterator i = d->RequestTable.constBegin(); i != d->RequestTable.constEnd(); ++i) {
-        if (i.value()->security() == Secur)
-            Result.append(i.key());
+        const auto secRequest = dynamic_cast<QBbgAbstractSecurityRequest*>(i.value());
+        if(secRequest){
+            if (secRequest->security() == Secur)
+                Result.append(i.key());
+        }
     }
     return Result;
 }
@@ -357,8 +360,20 @@ bool QBbgRequestGroupPrivate::compatible(const QBbgAbstractRequest *a, const QBb
         return false;
     if (a->requestType() != b->requestType())
         return false;
-    if (a->security() != b->security())
-        return false;
+    switch (a->requestType()) {
+    case QBbgAbstractRequest::RequestType::ReferenceData:
+    case QBbgAbstractRequest::RequestType::PortfolioData:
+    case QBbgAbstractRequest::RequestType::HistoricalData:
+    case QBbgAbstractRequest::RequestType::IntraDayTick:
+        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(a));
+        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(b));
+        if (static_cast<const QBbgAbstractSecurityRequest *>(a)->security() != static_cast<const QBbgAbstractSecurityRequest *>(b)->security())
+            return false;
+        break;
+    default:
+        Q_UNREACHABLE(); // Unhandled request type
+    }
+
     switch (a->requestType()) {
     case QBbgAbstractRequest::RequestType::ReferenceData:
     case QBbgAbstractRequest::RequestType::PortfolioData:
