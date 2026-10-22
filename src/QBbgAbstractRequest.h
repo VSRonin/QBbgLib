@@ -82,8 +82,10 @@ public:
         IntraDayBar /*!< Currently Unavailable */
         ,
         InstrumentLookup = FirstSecurityLookup /*!< Request for securities based on search term */
-        ,CurveLookup /*!< Request for curves based on search term */
-        ,GovtLookup /*!< Request for government bonds based on search term */
+        ,
+        CurveLookup /*!< Request for curves based on search term */
+        ,
+        GovtLookup /*!< Request for government bonds based on search term */
     };
     Q_ENUM(RequestType)
 protected:
@@ -99,8 +101,7 @@ protected:
     static RequestType stringToRequestType(QString a);
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);
-    virtual void applyRequest(QJsonObject& obj) const =0;
-
+    virtual void applyRequest(QJsonObject &obj) const = 0;
 
 public:
     //! Destructor

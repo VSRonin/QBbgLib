@@ -187,8 +187,6 @@ TypeForQHash qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, TypeForQHash
 }
 }
 
-
-
 QDataStream &operator<<(QDataStream &stream, const QBbgLib::QBbgAbstractResponse &obj)
 {
     obj.saveToStream(stream);

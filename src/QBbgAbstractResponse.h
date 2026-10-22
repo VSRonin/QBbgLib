@@ -118,7 +118,8 @@ public:
         IntraDayTickResponse = FirstRealTime /*!< Response associated with tick-by-tick historical data request */
         ,
         IntraDayBarResponse /*!< Currently Unavailable */
-        , InstrumentListResponse /*!< Response associated with a search for a security */
+        ,
+        InstrumentListResponse /*!< Response associated with a search for a security */
     };
     Q_ENUM(ResponseType)
     //! Destructor
@@ -164,7 +165,7 @@ protected:
     static ResponseType stringToResponseType(QString a);
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);
-    virtual bool loadFromJsonResponse(const QJsonObject& obj) =0;
+    virtual bool loadFromJsonResponse(const QJsonObject &obj) = 0;
     friend class QBbgAbstractWorker;
     friend class QBbgRequestResponseWorker;
     friend QDataStream & ::operator<<(QDataStream &stream, const QBbgAbstractResponse &obj);

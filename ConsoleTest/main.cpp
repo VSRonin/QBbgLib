@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     loadedSec.fromJsonObject(tempSec.toJsonObject());
 
     QList<QBbgLib::QBbgSecurity> securList;
-    securList << tempSec ;//<< QBbgLib::QBbgSecurity("XS3518428068", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
+    securList << tempSec; //<< QBbgLib::QBbgSecurity("XS3518428068", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
 
     QBbgLib::QBbgReferenceDataRequest a_req;
 
@@ -180,8 +180,9 @@ int main(int argc, char *argv[])
                 Q_ASSERT(dynamic_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres));
                 const QBbgLib::QBbgInstrumentLookupResponse *const res = static_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres);
                 auto reqForRes = req.getRequest<QBbgLib::QBbgInstrumentLookupRequest>(id);
-                qDebug() << reqForRes->query() + QStringLiteral(" - %1 - %2").arg(int(reqForRes->yellowKeyFilter())).arg(int(reqForRes->languageOverride()));
-                for(int i=0;i<res->size();++i){
+                qDebug() << reqForRes->query()
+                                + QStringLiteral(" - %1 - %2").arg(int(reqForRes->yellowKeyFilter())).arg(int(reqForRes->languageOverride()));
+                for (int i = 0; i < res->size(); ++i) {
                     QString tmpStr = res->secutity(i) + '\t' + res->description(i);
                     qDebug() << tmpStr;
                     PrintToTempFile("InstrumentLookup", tmpStr, false);
@@ -206,8 +207,6 @@ int main(int argc, char *argv[])
     // req.addRequest(h_req);
     // h_req.setField("Gibberish");
     // req.addRequest(h_req);
-
-
 
     mainManager.startRequest(req);
 

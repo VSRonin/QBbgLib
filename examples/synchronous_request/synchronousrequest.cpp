@@ -135,7 +135,8 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager &bbgManager)
     QBbgLib::QBbgPortfolioDataRequest req;
 
     // Set the security to download
-    req.setSecurity(QBbgLib::QBbgSecurity("UXXXXXXX-X", QBbgLib::QBbgSecurity::YellowKeys::Client)); // Change this to a portfolio ID you set up in PRTU
+    req.setSecurity(
+            QBbgLib::QBbgSecurity("UXXXXXXX-X", QBbgLib::QBbgSecurity::YellowKeys::Client)); // Change this to a portfolio ID you set up in PRTU
 
     // Set the field to download
     req.setField(QBbgLib::QBbgPortfolioDataRequest::PortfolioFields::PORTFOLIO_MPOSITION);

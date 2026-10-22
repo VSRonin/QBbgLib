@@ -34,8 +34,7 @@
 #    include "QBbgHistoricalDataResponse.h"
 #    include "QBbgIntradayTickRequest.h"
 #    include "QBbgIntradayTickResponse.h"
-#include "QBbgInstrumentLookupRequest.h"
-#include "QBbgInstrumentLookupResponse.h"
+#    include "QBbgInstrumentLookupResponse.h"
 #    include "QBbgSecurity.h"
 #    include <blpapi_session.h>
 #    ifdef PRINT_RESPONSE_MESSAGE
@@ -49,6 +48,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
 {
     for (QHash<qint64, QList<qint64> *>::iterator i = Groups.begin(); i != Groups.end(); ++i)
         delete i.value();
+    ClearResults();
 }
 qint64 QBbgRequestResponseWorker::CorrelationForService(const QString &a) const
 {
@@ -75,12 +75,12 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
 
         switch (QBbgAbstractResponse::stringToResponseType(QString::fromLocal8Bit(message.messageType().string(), -1))) {
         case QBbgAbstractResponse::ResponseType::InstrumentListResponse:
-            Q_ASSERT(CurrentGroup->size()==1);
+            Q_ASSERT(CurrentGroup->size() == 1);
             for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
                 auto resultIter = m_Results.find(*SingleReq);
-                if(resultIter==m_Results.end())
-                    resultIter = m_Results.insert(*SingleReq,new QBbgInstrumentLookupResponse());
-                if(resultIter.value()->loadFromJsonResponse(QJsonDocument::fromJson(QByteArray::fromStdString(message.toJson())).object()))
+                if (resultIter == m_Results.end())
+                    resultIter = m_Results.insert(*SingleReq, new QBbgInstrumentLookupResponse());
+                if (resultIter.value()->loadFromJsonResponse(QJsonDocument::fromJson(QByteArray::fromStdString(message.toJson())).object()))
                     DataRecieved(*SingleReq);
                 else
                     SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("No results available"));
@@ -157,8 +157,9 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
 
                 if (secDataArray.getValueAsElement(secIter).hasElement(BloombergLP::blpapi::Name("securityError"))) {
                     for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq)));
-                        const QBbgAbstractSecurityRequest *const FoundRequ = static_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq));
+                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq)));
+                        const QBbgAbstractSecurityRequest *const FoundRequ =
+                                static_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq));
                         if (FoundRequ->security().fullName() == CurrentSecurity) {
                             SetError(*SingleReq, QBbgAbstractResponse::SecurityError,
                                      QString::fromLocal8Bit(secDataArray.getValueAsElement(secIter)
@@ -271,8 +272,9 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
 
             if (message.getElement(BloombergLP::blpapi::Name("securityData")).hasElement(BloombergLP::blpapi::Name("securityError"))) {
                 for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                    Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq)));
-                    const QBbgAbstractSecurityRequest *const FoundRequ = static_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq));
+                    Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq)));
+                    const QBbgAbstractSecurityRequest *const FoundRequ =
+                            static_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq));
                     if (FoundRequ->security().fullName() == CurrentSecurity) {
                         SetError(*SingleReq, QBbgAbstractResponse::SecurityError,
                                  QString::fromLocal8Bit(message.getElement(BloombergLP::blpapi::Name("securityData"))
@@ -350,8 +352,9 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
 
                 if (secDataArray.getValueAsElement(secIter).hasElement(BloombergLP::blpapi::Name("securityError"))) {
                     for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq)));
-                        const QBbgAbstractSecurityRequest *const FoundRequ = static_cast<const QBbgAbstractSecurityRequest*>(m_Requests.request(*SingleReq));
+                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq)));
+                        const QBbgAbstractSecurityRequest *const FoundRequ =
+                                static_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq));
                         if (FoundRequ->security().fullName() == CurrentSecurity) {
                             SetError(*SingleReq, QBbgAbstractResponse::SecurityError,
                                      QString::fromLocal8Bit(secDataArray.getValueAsElement(secIter)
@@ -518,7 +521,11 @@ void QBbgRequestResponseWorker::SetError(qint64 RequestID, QBbgAbstractResponse:
     }
     setResponseID(TempRes, RequestID);
     setResponseError(TempRes, Err, errMsg);
+    auto resiter = m_Results.find(RequestID);
+    if (resiter != m_Results.end())
+        delete resiter.value();
     m_Results.insert(RequestID, TempRes);
+
     DataRecieved(RequestID);
 }
 void QBbgRequestResponseWorker::DataPointRecieved(qint64 RequestID, const QVariant &Value, const QString &Header)
@@ -602,9 +609,8 @@ void QBbgRequestResponseWorker::TickDataRecieved(qint64 RequestID, const QDateTi
 {
     QHash<qint64, QBbgAbstractResponse *>::iterator TempIter = m_Results.find(RequestID);
     if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::IntraDayTick) {
-        if (TempIter == m_Results.end()) {
+        if (TempIter == m_Results.end())
             TempIter = m_Results.insert(RequestID, new QBbgIntradayTickResponse());
-        }
         Q_ASSERT(dynamic_cast<QBbgIntradayTickResponse *>(TempIter.value()));
         static_cast<QBbgIntradayTickResponse *>(TempIter.value())->addValue(dt, val, siz, cC, eC, mC, bbC, bsC, rC);
         Q_ASSERT(dynamic_cast<const QBbgIntradayTickRequest *>(m_Requests.request(RequestID)));
@@ -789,12 +795,12 @@ void QBbgRequestResponseWorker::SendRequ(QBbgAbstractRequest::ServiceType serv)
                 } else {
                     Q_UNREACHABLE(); // Only Intraday Tick supported
                 }
-            }else if (reqType == QBbgAbstractRequest::RequestType::InstrumentLookup) {
+            } else if (reqType == QBbgAbstractRequest::RequestType::InstrumentLookup) {
                 QJsonObject requestObj;
                 CurrentSingle->applyRequest(requestObj);
-                try{
-                    request.fromJson(QJsonDocument(requestObj).toJson(QJsonDocument::Compact).constData());}
-                catch(...){
+                try {
+                    request.fromJson(QJsonDocument(requestObj).toJson(QJsonDocument::Compact).constData());
+                } catch (...) {
                     SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, QStringLiteral("Invalid Request"));
                 }
             } else {
@@ -852,6 +858,7 @@ void QBbgRequestResponseWorker::fillNoData()
 }
 void QBbgRequestResponseWorker::ClearResults()
 {
+    qDeleteAll(m_Results);
     m_Results.clear();
 }
 }

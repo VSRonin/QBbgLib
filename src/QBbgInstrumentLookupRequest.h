@@ -47,8 +47,7 @@ class QBBGLIB_EXPORT QBbgInstrumentLookupRequest : public QBbgAbstractSecurityLo
     Q_DECLARE_PRIVATE(QBbgInstrumentLookupRequest)
 public:
     enum class YellowKeyFilter : qint16 {
-        None = -1
-        ,
+        None = -1,
         Govt /*!< Government Bond */
         ,
         Corp /*!< Corporate Bond */
@@ -72,7 +71,7 @@ public:
         Client /*!< Portfolio */
     };
     Q_ENUM(YellowKeyFilter)
-    enum class LanguageOverride : qint16{
+    enum class LanguageOverride : qint16 {
         None = -1,
         English,
         Kanji,
@@ -91,7 +90,7 @@ public:
     //! Constructor
     QBbgInstrumentLookupRequest();
     //! Copy Constructor
-    QBbgInstrumentLookupRequest(const QBbgInstrumentLookupRequest& other);
+    QBbgInstrumentLookupRequest(const QBbgInstrumentLookupRequest &other);
     //! Destructor
     virtual ~QBbgInstrumentLookupRequest();
     //! Copies another request
@@ -110,13 +109,14 @@ public:
     static YellowKeyFilter yellowKeyFilterFromYellowKeys(QBbgSecurity::YellowKeys val);
     //! Converts a filter to a security yellow key
     static QBbgSecurity::YellowKeys yellowKeysFromYellowKeyFilter(YellowKeyFilter val);
+
 protected:
     QBbgInstrumentLookupRequest(QBbgInstrumentLookupRequestPrivate *d);
     static QString yellowKeyFilterString(YellowKeyFilter val);
     static QString languageOverrideString(LanguageOverride val);
     void saveToStream(QDataStream &stream) const override;
     void loadFromStream(QDataStream &stream) override;
-    void applyRequest(QJsonObject& obj) const override;
+    void applyRequest(QJsonObject &obj) const override;
 };
 }
 

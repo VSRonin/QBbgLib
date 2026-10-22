@@ -27,7 +27,8 @@ QBbgInstrumentLookupResponsePrivate::QBbgInstrumentLookupResponsePrivate(QBbgIns
     : QBbgAbstractResponsePrivate(q, QBbgAbstractResponse::ResponseType::InstrumentListResponse)
 { }
 
-QBbgInstrumentLookupResponsePrivate::QBbgInstrumentLookupResponsePrivate(QBbgInstrumentLookupResponse *q, const QBbgInstrumentLookupResponsePrivate &other)
+QBbgInstrumentLookupResponsePrivate::QBbgInstrumentLookupResponsePrivate(QBbgInstrumentLookupResponse *q,
+                                                                         const QBbgInstrumentLookupResponsePrivate &other)
     : QBbgAbstractResponsePrivate(q, other)
     , m_resultSecurity(other.m_resultSecurity)
     , m_resultDescription(other.m_resultDescription)
@@ -55,13 +56,13 @@ bool QBbgInstrumentLookupResponse::isEmpty() const
 QString QBbgInstrumentLookupResponse::secutity(int index) const
 {
     Q_D(const QBbgInstrumentLookupResponse);
-    return d->m_resultSecurity.value(index,QString());
+    return d->m_resultSecurity.value(index, QString());
 }
 
 QString QBbgInstrumentLookupResponse::description(int index) const
 {
     Q_D(const QBbgInstrumentLookupResponse);
-    return d->m_resultDescription.value(index,QString());
+    return d->m_resultDescription.value(index, QString());
 }
 
 const QStringList &QBbgInstrumentLookupResponse::secutities() const
@@ -78,7 +79,7 @@ const QStringList &QBbgInstrumentLookupResponse::descriptions() const
 
 void QBbgInstrumentLookupResponse::addValue(const QString &sec, const QString &desc)
 {
-    if(sec.isEmpty())
+    if (sec.isEmpty())
         return;
     Q_D(QBbgInstrumentLookupResponse);
     d->m_resultSecurity.append(sec);
@@ -109,20 +110,20 @@ void QBbgInstrumentLookupResponse::loadFromStream(QDataStream &stream)
 bool QBbgInstrumentLookupResponse::loadFromJsonResponse(const QJsonObject &obj)
 {
     const QJsonValue resultsValue = obj.value(QStringLiteral("results"));
-    if(!resultsValue.isArray())
+    if (!resultsValue.isArray())
         return false;
     const QJsonArray resultsArray = resultsValue.toArray();
-    if(resultsArray.isEmpty())
+    if (resultsArray.isEmpty())
         return false;
     QStringList securitiesToAppend;
     QStringList descriptionsToAppend;
-    for(const QJsonValue& resultValue : resultsArray){
-        if(!resultValue.isObject())
+    for (const QJsonValue &resultValue : resultsArray) {
+        if (!resultValue.isObject())
             return false;
         const QJsonObject resultObject = resultValue.toObject();
         const QJsonValue securityValue = resultObject.value(QStringLiteral("security"));
         const QJsonValue descriptionValue = resultObject.value(QStringLiteral("description"));
-        if(!securityValue.isString() || !descriptionValue.isString())
+        if (!securityValue.isString() || !descriptionValue.isString())
             return false;
         securitiesToAppend.append(securityValue.toString());
         descriptionsToAppend.append(descriptionValue.toString());

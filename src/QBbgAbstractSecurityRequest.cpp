@@ -29,9 +29,8 @@ QBbgAbstractSecurityRequest::QBbgAbstractSecurityRequest(QBbgAbstractSecurityReq
 { }
 QBbgAbstractSecurityRequest::~QBbgAbstractSecurityRequest() = default;
 
-
-
-QBbgAbstractSecurityRequestPrivate::QBbgAbstractSecurityRequestPrivate(QBbgAbstractSecurityRequest *q, const QBbgAbstractSecurityRequestPrivate &other)
+QBbgAbstractSecurityRequestPrivate::QBbgAbstractSecurityRequestPrivate(QBbgAbstractSecurityRequest *q,
+                                                                       const QBbgAbstractSecurityRequestPrivate &other)
     : QBbgAbstractRequestPrivate(q, other)
     , m_Security(other.m_Security)
 { }
@@ -60,9 +59,9 @@ void QBbgAbstractSecurityRequest::loadFromStream(QDataStream &stream)
     stream >> d->m_Security;
 }
 
-void QBbgAbstractSecurityRequest::applyRequest(QJsonObject& obj) const
+void QBbgAbstractSecurityRequest::applyRequest(QJsonObject &obj) const
 {
-    Q_UNREACHABLE(); //TODO Implement
+    Q_UNREACHABLE(); // TODO Implement
 }
 void QBbgAbstractSecurityRequest::setSecurity(const QBbgSecurity &val)
 {

@@ -63,9 +63,9 @@ public:
     //! Returns the description for the selected index of results
     Q_INVOKABLE virtual QString description(int index) const;
     //! Returns all secutities found
-    virtual const QStringList& secutities() const;
+    virtual const QStringList &secutities() const;
     //! Returns all descriptions found
-    virtual const QStringList& descriptions() const;
+    virtual const QStringList &descriptions() const;
 
 protected:
     QBbgInstrumentLookupResponse(QBbgInstrumentLookupResponsePrivate *dp);
@@ -73,7 +73,7 @@ protected:
     virtual void clear();
     void saveToStream(QDataStream &stream) const override;
     void loadFromStream(QDataStream &stream) override;
-    bool loadFromJsonResponse(const QJsonObject& obj) override;
+    bool loadFromJsonResponse(const QJsonObject &obj) override;
     friend class QBbgRequestResponseWorker;
 };
 }

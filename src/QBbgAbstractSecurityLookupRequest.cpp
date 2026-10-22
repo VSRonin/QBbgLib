@@ -30,15 +30,15 @@ QBbgAbstractSecurityLookupRequest::QBbgAbstractSecurityLookupRequest(QBbgAbstrac
 { }
 QBbgAbstractSecurityLookupRequest::~QBbgAbstractSecurityLookupRequest() = default;
 
-
-
-QBbgAbstractSecurityLookupRequestPrivate::QBbgAbstractSecurityLookupRequestPrivate(QBbgAbstractSecurityLookupRequest *q, const QBbgAbstractSecurityLookupRequestPrivate &other)
+QBbgAbstractSecurityLookupRequestPrivate::QBbgAbstractSecurityLookupRequestPrivate(QBbgAbstractSecurityLookupRequest *q,
+                                                                                   const QBbgAbstractSecurityLookupRequestPrivate &other)
     : QBbgAbstractRequestPrivate(q, other)
     , m_query(other.m_query)
     , m_maxResults(other.m_maxResults)
 { }
 
-QBbgAbstractSecurityLookupRequestPrivate::QBbgAbstractSecurityLookupRequestPrivate(QBbgAbstractSecurityLookupRequest *q, QBbgAbstractRequest::RequestType typ)
+QBbgAbstractSecurityLookupRequestPrivate::QBbgAbstractSecurityLookupRequestPrivate(QBbgAbstractSecurityLookupRequest *q,
+                                                                                   QBbgAbstractRequest::RequestType typ)
     : QBbgAbstractRequestPrivate(q, typ)
     , m_maxResults(100)
 { }
@@ -65,13 +65,13 @@ void QBbgAbstractSecurityLookupRequest::loadFromStream(QDataStream &stream)
     stream >> d->m_query >> d->m_maxResults;
 }
 
-void QBbgAbstractSecurityLookupRequest::applyRequest(QJsonObject& obj) const
+void QBbgAbstractSecurityLookupRequest::applyRequest(QJsonObject &obj) const
 {
     Q_D(const QBbgAbstractSecurityLookupRequest);
-    if(!obj.contains(QStringLiteral("query")))
-        obj.insert(QStringLiteral("query"),d->m_query);
-    if(!obj.contains(QStringLiteral("maxResults")))
-        obj.insert(QStringLiteral("maxResults"),d->m_maxResults);
+    if (!obj.contains(QStringLiteral("query")))
+        obj.insert(QStringLiteral("query"), d->m_query);
+    if (!obj.contains(QStringLiteral("maxResults")))
+        obj.insert(QStringLiteral("maxResults"), d->m_maxResults);
 }
 void QBbgAbstractSecurityLookupRequest::setQuery(const QString &val)
 {
@@ -85,12 +85,14 @@ const QString &QBbgAbstractSecurityLookupRequest::query() const
     return d->m_query;
 }
 
-int QBbgAbstractSecurityLookupRequest::maxResults() const{
+int QBbgAbstractSecurityLookupRequest::maxResults() const
+{
     Q_D(const QBbgAbstractSecurityLookupRequest);
     return d->m_maxResults;
 }
 
-void QBbgAbstractSecurityLookupRequest::setMaxResults(int val){
+void QBbgAbstractSecurityLookupRequest::setMaxResults(int val)
+{
     Q_D(QBbgAbstractSecurityLookupRequest);
     d->m_maxResults = val;
 }
@@ -105,7 +107,7 @@ QBbgAbstractSecurityLookupRequest &QBbgAbstractSecurityLookupRequest::operator=(
 bool QBbgAbstractSecurityLookupRequest::isValidReq() const
 {
     Q_D(const QBbgAbstractSecurityLookupRequest);
-    return d->m_maxResults>0 && !d->m_query.isEmpty() && QBbgAbstractRequest::isValidReq();
+    return d->m_maxResults > 0 && !d->m_query.isEmpty() && QBbgAbstractRequest::isValidReq();
 }
 
 bool QBbgAbstractSecurityLookupRequest::operator==(const QBbgAbstractSecurityLookupRequest &other) const

@@ -95,5 +95,5 @@ protected:
     QBbgPortfolioDataRequest(QBbgPortfolioDataRequestPrivate *d);
 };
 }
-//Q_DECLARE_METATYPE(QBbgLib::QBbgPortfolioDataRequest);
+// Q_DECLARE_METATYPE(QBbgLib::QBbgPortfolioDataRequest);
 #endif // QBbgPortfolioDataRequest_h__

@@ -21,6 +21,6 @@
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 using TypeForQHash = size_t;
 #else
-    using TypeForQHash = uint;
+using TypeForQHash = uint;
 #endif
-#endif 
+#endif

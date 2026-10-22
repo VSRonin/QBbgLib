@@ -45,7 +45,8 @@ protected:
     QBbgAbstractSecurityRequest() = delete;
     void saveToStream(QDataStream &stream) const override;
     void loadFromStream(QDataStream &stream) override;
-    void applyRequest(QJsonObject& obj) const override;
+    void applyRequest(QJsonObject &obj) const override;
+
 public:
     //! Destructor
     virtual ~QBbgAbstractSecurityRequest() = 0;
@@ -62,7 +63,6 @@ public:
     \details Sets the security for the current request to the specified one
     */
     virtual void setSecurity(const QString &SecName, QBbgSecurity::YellowKeys SecKey);
-
 
     //! Checks if the request is valid
     bool isValidReq() const override;

@@ -194,5 +194,3 @@ TypeForQHash qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, TypeForQ
     return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }
 }
-
-

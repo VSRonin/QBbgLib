@@ -245,8 +245,8 @@ QList<qint64> QBbgRequestGroup::findSecurity(const QBbgSecurity &Secur) const
     Q_D(const QBbgRequestGroup);
     QList<qint64> Result;
     for (QHash<qint64, QBbgAbstractRequest *>::const_iterator i = d->RequestTable.constBegin(); i != d->RequestTable.constEnd(); ++i) {
-        const auto secRequest = dynamic_cast<QBbgAbstractSecurityRequest*>(i.value());
-        if(secRequest){
+        const auto secRequest = dynamic_cast<QBbgAbstractSecurityRequest *>(i.value());
+        if (secRequest) {
             if (secRequest->security() == Secur)
                 Result.append(i.key());
         }
@@ -356,8 +356,7 @@ bool QBbgRequestGroupPrivate::SameRequest(const QList<qint64> &a, const QList<qi
         return true;
     } else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstIntraday) {
         return false; // Can't send multiple securities with hist intraday request
-    }
-    else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstSecurityLookup) {
+    } else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstSecurityLookup) {
         return false; // Can't aggregate lookup requests
     }
     Q_UNREACHABLE(); // Unhandled request type

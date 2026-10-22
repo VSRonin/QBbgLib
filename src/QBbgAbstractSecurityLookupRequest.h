@@ -49,7 +49,8 @@ protected:
     QBbgAbstractSecurityLookupRequest() = delete;
     void saveToStream(QDataStream &stream) const override;
     void loadFromStream(QDataStream &stream) override;
-    void applyRequest(QJsonObject& obj) const override =0;
+    void applyRequest(QJsonObject &obj) const override = 0;
+
 public:
     //! Destructor
     virtual ~QBbgAbstractSecurityLookupRequest() = 0;

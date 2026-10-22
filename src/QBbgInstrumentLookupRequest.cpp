@@ -1,7 +1,7 @@
 #include <blpapi_request.h>
 #include "QBbgInstrumentLookupRequest.h"
 #include "private/QBbgInstrumentLookupRequest_p.h"
-namespace QBbgLib{
+namespace QBbgLib {
 QBbgInstrumentLookupRequest::~QBbgInstrumentLookupRequest() = default;
 QBbgInstrumentLookupRequestPrivate::~QBbgInstrumentLookupRequestPrivate() = default;
 QBbgInstrumentLookupRequestPrivate::QBbgInstrumentLookupRequestPrivate(QBbgInstrumentLookupRequest *q)
@@ -10,12 +10,12 @@ QBbgInstrumentLookupRequestPrivate::QBbgInstrumentLookupRequestPrivate(QBbgInstr
     , m_languageOverride(QBbgInstrumentLookupRequest::LanguageOverride::None)
 { }
 
-QBbgInstrumentLookupRequestPrivate::QBbgInstrumentLookupRequestPrivate(QBbgInstrumentLookupRequest *q, const QBbgInstrumentLookupRequestPrivate &other)
+QBbgInstrumentLookupRequestPrivate::QBbgInstrumentLookupRequestPrivate(QBbgInstrumentLookupRequest *q,
+                                                                       const QBbgInstrumentLookupRequestPrivate &other)
     : QBbgAbstractSecurityLookupRequestPrivate(q, other)
     , m_yellowKeyFilter(other.m_yellowKeyFilter)
     , m_languageOverride(other.m_languageOverride)
 { }
-
 
 QBbgInstrumentLookupRequestPrivate &QBbgInstrumentLookupRequestPrivate::operator=(const QBbgInstrumentLookupRequestPrivate &other)
 {
@@ -40,7 +40,7 @@ QBbgInstrumentLookupRequest &QBbgInstrumentLookupRequest::operator=(const QBbgIn
 }
 QBbgInstrumentLookupRequest::YellowKeyFilter QBbgInstrumentLookupRequest::yellowKeyFilterFromYellowKeys(QBbgSecurity::YellowKeys val)
 {
-    switch(val){
+    switch (val) {
     case QBbgSecurity::YellowKeys::Govt:
         return QBbgInstrumentLookupRequest::YellowKeyFilter::Govt;
     case QBbgSecurity::YellowKeys::Corp:
@@ -95,12 +95,13 @@ void QBbgInstrumentLookupRequest::setLanguageOverride(LanguageOverride val)
 bool QBbgInstrumentLookupRequest::operator==(const QBbgInstrumentLookupRequest &other) const
 {
     Q_D(const QBbgInstrumentLookupRequest);
-    return QBbgAbstractSecurityLookupRequest::operator==(other) && d->m_yellowKeyFilter == other.d_func()->m_yellowKeyFilter && d->m_languageOverride == other.d_func()->m_languageOverride;
+    return QBbgAbstractSecurityLookupRequest::operator==(other) && d->m_yellowKeyFilter == other.d_func()->m_yellowKeyFilter
+            && d->m_languageOverride == other.d_func()->m_languageOverride;
 }
 
 QBbgSecurity::YellowKeys QBbgInstrumentLookupRequest::yellowKeysFromYellowKeyFilter(YellowKeyFilter val)
 {
-    switch(val){
+    switch (val) {
     case YellowKeyFilter::Govt:
         return QBbgSecurity::YellowKeys::Govt;
     case YellowKeyFilter::Corp:
@@ -130,7 +131,7 @@ QBbgSecurity::YellowKeys QBbgInstrumentLookupRequest::yellowKeysFromYellowKeyFil
 
 QString QBbgInstrumentLookupRequest::yellowKeyFilterString(YellowKeyFilter val)
 {
-    switch(val){
+    switch (val) {
     case YellowKeyFilter::None:
         return QString();
     case YellowKeyFilter::Govt:
@@ -162,7 +163,7 @@ QString QBbgInstrumentLookupRequest::yellowKeyFilterString(YellowKeyFilter val)
 
 QString QBbgInstrumentLookupRequest::languageOverrideString(LanguageOverride val)
 {
-    switch(val){
+    switch (val) {
     case LanguageOverride::None:
         return QString();
     case LanguageOverride::English:
@@ -192,21 +193,22 @@ QString QBbgInstrumentLookupRequest::languageOverrideString(LanguageOverride val
     }
 }
 
-void QBbgInstrumentLookupRequest::applyRequest(QJsonObject& obj) const
+void QBbgInstrumentLookupRequest::applyRequest(QJsonObject &obj) const
 {
     QBbgAbstractSecurityLookupRequest::applyRequest(obj);
     Q_D(const QBbgInstrumentLookupRequest);
-    if(!obj.contains(QStringLiteral("yellowKeyFilter")) && d->m_yellowKeyFilter!=YellowKeyFilter::None)
-        obj.insert(QStringLiteral("yellowKeyFilter"),yellowKeyFilterString(d->m_yellowKeyFilter));
-    if(!obj.contains(QStringLiteral("languageOverride"))&& d->m_languageOverride!=LanguageOverride::None)
-        obj.insert(QStringLiteral("languageOverride"),languageOverrideString(d->m_languageOverride));
+    if (!obj.contains(QStringLiteral("yellowKeyFilter")) && d->m_yellowKeyFilter != YellowKeyFilter::None)
+        obj.insert(QStringLiteral("yellowKeyFilter"), yellowKeyFilterString(d->m_yellowKeyFilter));
+    if (!obj.contains(QStringLiteral("languageOverride")) && d->m_languageOverride != LanguageOverride::None)
+        obj.insert(QStringLiteral("languageOverride"), languageOverrideString(d->m_languageOverride));
 }
 
 void QBbgInstrumentLookupRequest::saveToStream(QDataStream &stream) const
 {
     Q_D(const QBbgInstrumentLookupRequest);
     QBbgAbstractSecurityLookupRequest::saveToStream(stream);
-    stream << static_cast<std::underlying_type<YellowKeyFilter>::type>(d->m_yellowKeyFilter) << static_cast<std::underlying_type<LanguageOverride>::type>(d->m_languageOverride);
+    stream << static_cast<std::underlying_type<YellowKeyFilter>::type>(d->m_yellowKeyFilter)
+           << static_cast<std::underlying_type<LanguageOverride>::type>(d->m_languageOverride);
 }
 
 void QBbgInstrumentLookupRequest::loadFromStream(QDataStream &stream)
