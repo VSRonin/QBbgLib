@@ -129,7 +129,7 @@ void QBbgAbstractIntradayRequest::setStartDateTime(const QDateTime &val)
 
 void QBbgAbstractIntradayRequest::setSecurity(const QBbgSecurity &val)
 {
-    if (val.extension() != QBbgSecurity::Client) {
+    if (val.extension() != QBbgSecurity::YellowKeys::Client) {
         QBbgAbstractSecurityRequest::setSecurity(val);
     } else {
         QBbgAbstractSecurityRequest::setSecurity(QBbgSecurity());
@@ -189,7 +189,7 @@ QBbgAbstractIntradayRequest::EventType QBbgAbstractIntradayRequest::stringEventT
     else
         return EventType::Invalid;
 }
-uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed)
+TypeForQHash qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, TypeForQHash seed)
 {
     return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }

@@ -34,6 +34,8 @@
 #    include "QBbgHistoricalDataResponse.h"
 #    include "QBbgIntradayTickRequest.h"
 #    include "QBbgIntradayTickResponse.h"
+#include "QBbgInstrumentLookupRequest.h"
+#include "QBbgInstrumentLookupResponse.h"
 #    include "QBbgSecurity.h"
 #    include <blpapi_session.h>
 #    ifdef PRINT_RESPONSE_MESSAGE
@@ -58,10 +60,7 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
     while (iter.next()) {
         BloombergLP::blpapi::Message message = iter.message();
 #    ifdef PRINT_RESPONSE_MESSAGE
-        std::ofstream myfile;
-        myfile.open("C:/Temp/ResponseLog.txt", std::ios::out | std::ios::app);
-        message.print(myfile);
-        myfile.close();
+        qDebug().noquote() << message.toJson();
 #    endif // PRINT_RESPONSE_MESSAGE
         const QList<qint64> *const CurrentGroup = Groups.value(message.correlationId().asInteger(), nullptr);
         Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorker::handleResponseEvent", "Recieving response from unknown request");
@@ -75,6 +74,18 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
         }
 
         switch (QBbgAbstractResponse::stringToResponseType(QString::fromLocal8Bit(message.messageType().string(), -1))) {
+        case QBbgAbstractResponse::ResponseType::InstrumentListResponse:
+            Q_ASSERT(CurrentGroup->size()==1);
+            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
+                auto resultIter = m_Results.find(*SingleReq);
+                if(resultIter==m_Results.end())
+                    resultIter = m_Results.insert(*SingleReq,new QBbgInstrumentLookupResponse());
+                if(resultIter.value()->loadFromJsonResponse(QJsonDocument::fromJson(QByteArray::fromStdString(message.toJson())).object()))
+                    DataRecieved(*SingleReq);
+                else
+                    SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("No results available"));
+            }
+            break;
         case QBbgAbstractResponse::ResponseType::IntraDayTickResponse: {
             QSet<qint64> recievedIDs;
             QSet<qint64> recievedErrorsIDs;
@@ -188,7 +199,6 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
                             } else if (fieldDataValue.getValueAsElement(0).numElements() == 0) {
                                 SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("Table response with 0 columns"));
                             } else if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                QString tempSec;
                                 double tmpPos, tmpMkVal, tmpCst, tmpCstFx, tmpWei;
                                 QDate tmpCstDt;
                                 bool oneSent = false;
@@ -499,6 +509,9 @@ void QBbgRequestResponseWorker::SetError(qint64 RequestID, QBbgAbstractResponse:
     case QBbgAbstractRequest::RequestType::IntraDayTick:
         TempRes = new QBbgIntradayTickResponse();
         break;
+    case QBbgAbstractRequest::RequestType::InstrumentLookup:
+        TempRes = new QBbgInstrumentLookupResponse();
+        break;
     default:
         Q_UNREACHABLE(); // Unhandled request type
         break;
@@ -776,17 +789,21 @@ void QBbgRequestResponseWorker::SendRequ(QBbgAbstractRequest::ServiceType serv)
                 } else {
                     Q_UNREACHABLE(); // Only Intraday Tick supported
                 }
+            }else if (reqType == QBbgAbstractRequest::RequestType::InstrumentLookup) {
+                QJsonObject requestObj;
+                CurrentSingle->applyRequest(requestObj);
+                try{
+                    request.fromJson(QJsonDocument(requestObj).toJson(QJsonDocument::Compact).constData());}
+                catch(...){
+                    SetError(*GroupIter, QBbgAbstractResponse::InvalidInputs, QStringLiteral("Invalid Request"));
+                }
             } else {
                 Q_UNREACHABLE(); // Invalid type
             }
         }
+
 #    ifdef PRINT_RESPONSE_MESSAGE
-        {
-            std::ofstream myfile;
-            myfile.open("C:/Temp/PreparedRequestLog.txt", std::ios::out | std::ios::app);
-            request.print(myfile);
-            myfile.close();
-        }
+        qDebug().noquote() << request.asElement().toJson();
 #    endif // PRINT_RESPONSE_MESSAGE
         session()->sendRequest(request, requestId);
     }

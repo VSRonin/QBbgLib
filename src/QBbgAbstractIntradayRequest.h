@@ -115,7 +115,7 @@ protected:
 \brief Allows EventType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractIntradayRequest
 */
-QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed);
+QBBGLIB_EXPORT TypeForQHash qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, TypeForQHash seed);
 }
 
 #endif // QBbgAbstractIntradayRequest_h__

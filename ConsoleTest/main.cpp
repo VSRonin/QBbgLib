@@ -10,6 +10,8 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
+#include "QBbgInstrumentLookupRequest.h"
+#include "QBbgInstrumentLookupResponse.h"
 #include "QBbgIntradayTickRequest.h"
 #include "QBbgIntradayTickResponse.h"
 #include <QFile>
@@ -33,12 +35,12 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgManager mainManager;
 
     const QString fieldsRe[] = {"RTG_FITCH", "RTG_SP", "RTG_MOODY", "MTG_CASH_FLOW"};
-    QBbgLib::QBbgSecurity tempSec("XS3004238419", QBbgLib::QBbgSecurity::Mtge);
+    QBbgLib::QBbgSecurity tempSec("XS3004238419", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
     QBbgLib::QBbgSecurity loadedSec;
     loadedSec.fromJsonObject(tempSec.toJsonObject());
 
     QList<QBbgLib::QBbgSecurity> securList;
-    securList << tempSec;
+    securList << tempSec ;//<< QBbgLib::QBbgSecurity("XS3518428068", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
 
     QBbgLib::QBbgReferenceDataRequest a_req;
 
@@ -64,6 +66,13 @@ int main(int argc, char *argv[])
             req.addRequest(a_req);
         }
     }
+
+    QBbgLib::QBbgInstrumentLookupRequest lookUpReq;
+    lookUpReq.setQuery("STORM");
+    lookUpReq.setYellowKeyFilter(QBbgLib::QBbgInstrumentLookupRequest::YellowKeyFilter::Mtge);
+    req.addRequest(lookUpReq);
+    lookUpReq.setQuery("PARGN");
+    req.addRequest(lookUpReq);
 
     /* h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
      h_req.setField("PX_LAST");
@@ -167,6 +176,17 @@ int main(int argc, char *argv[])
                     PrintToTempFile("HistoricalData", tmpStr, false);
                 }
             } break;
+            case QBbgLib::QBbgAbstractResponse::ResponseType::InstrumentListResponse: {
+                Q_ASSERT(dynamic_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres));
+                const QBbgLib::QBbgInstrumentLookupResponse *const res = static_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres);
+                auto reqForRes = req.getRequest<QBbgLib::QBbgInstrumentLookupRequest>(id);
+                qDebug() << reqForRes->query() + QStringLiteral(" - %1 - %2").arg(int(reqForRes->yellowKeyFilter())).arg(int(reqForRes->languageOverride()));
+                for(int i=0;i<res->size();++i){
+                    QString tmpStr = res->secutity(i) + '\t' + res->description(i);
+                    qDebug() << tmpStr;
+                    PrintToTempFile("InstrumentLookup", tmpStr, false);
+                }
+            } break;
             default:
                 Q_UNREACHABLE(); // Unhanded Response
             }
@@ -187,7 +207,10 @@ int main(int argc, char *argv[])
     // h_req.setField("Gibberish");
     // req.addRequest(h_req);
 
+
+
     mainManager.startRequest(req);
+
     qDebug() << "Started";
     return a.exec();
 }

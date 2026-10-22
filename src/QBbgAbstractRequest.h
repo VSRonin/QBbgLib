@@ -20,7 +20,9 @@
 #define QBbgAbstractRequest_h__
 #include <QObject>
 #include <qbbglib_global.h>
+#include "QBbgCommons.h"
 class QDataStream;
+class QJsonObject;
 namespace QBbgLib {
 class QBbgAbstractRequest;
 class QBbgAbstractRequestPrivate;
@@ -54,7 +56,7 @@ class QBBGLIB_EXPORT QBbgAbstractRequest
     */
     Q_PROPERTY(RequestType requestType READ requestType)
 protected:
-    enum : qint32 { FirstFielded = 0x10, FirstIntraday = 0x20 };
+    enum : qint32 { FirstFielded = 0x10, FirstIntraday = 0x20, FirstSecurityLookup = 0x40 };
     enum class ServiceType { NoService = 0, refdata = 1, mktdata, mktvwap, mktbar, apiflds, pagedata, tasvc, apiauth, instruments };
 
 public:
@@ -69,8 +71,6 @@ public:
         ,
         Beqs /*!< Currently Unavailable */
         ,
-        SecurityLookup /*!< Request for securities based on search term */
-        ,
         HistoricalData = FirstFielded /*!< Request for historical data */
         ,
         ReferenceData /*!< Request for static data */
@@ -80,6 +80,10 @@ public:
         IntraDayTick = FirstIntraday /*!< Tick-by-tick historical data */
         ,
         IntraDayBar /*!< Currently Unavailable */
+        ,
+        InstrumentLookup = FirstSecurityLookup /*!< Request for securities based on search term */
+        ,CurveLookup /*!< Request for curves based on search term */
+        ,GovtLookup /*!< Request for government bonds based on search term */
     };
     Q_ENUM(RequestType)
 protected:
@@ -95,6 +99,8 @@ protected:
     static RequestType stringToRequestType(QString a);
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);
+    virtual void applyRequest(QJsonObject& obj) const =0;
+
 
 public:
     //! Destructor
@@ -128,7 +134,7 @@ public:
 \brief Allows QBbgAbstractRequest::RequestType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractRequest
 */
-QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed = 0);
+QBBGLIB_EXPORT TypeForQHash qHash(QBbgLib::QBbgAbstractRequest::RequestType key, TypeForQHash seed = 0);
 }
 
 #endif // QBbgAbstractRequest_h__

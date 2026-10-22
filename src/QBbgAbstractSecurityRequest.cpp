@@ -59,6 +59,11 @@ void QBbgAbstractSecurityRequest::loadFromStream(QDataStream &stream)
     QBbgAbstractRequest::loadFromStream(stream);
     stream >> d->m_Security;
 }
+
+void QBbgAbstractSecurityRequest::applyRequest(QJsonObject& obj) const
+{
+    Q_UNREACHABLE(); //TODO Implement
+}
 void QBbgAbstractSecurityRequest::setSecurity(const QBbgSecurity &val)
 {
     Q_D(QBbgAbstractSecurityRequest);
@@ -75,8 +80,8 @@ const QBbgSecurity &QBbgAbstractSecurityRequest::security() const
 }
 QBbgAbstractSecurityRequest &QBbgAbstractSecurityRequest::operator=(const QBbgAbstractSecurityRequest &other)
 {
-    Q_D(QBbgAbstractRequest);
-    d->operator=(*(other.d_ptr));
+    Q_D(QBbgAbstractSecurityRequest);
+    d->operator=(*(other.d_func()));
     return *this;
 }
 

@@ -28,7 +28,7 @@ namespace QBbgLib {
 QBbgSecurityPrivate::~QBbgSecurityPrivate() = default;
 QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity *q)
     : q_ptr(q)
-    , m_Extension(QBbgSecurity::Invalid)
+    , m_Extension(QBbgSecurity::YellowKeys::Invalid)
 { }
 QBbgSecurityPrivate::QBbgSecurityPrivate(QBbgSecurity *q, const QBbgSecurityPrivate &other)
     : q_ptr(q)
@@ -153,59 +153,59 @@ void QBbgSecurity::setExtension(YellowKeys val)
 bool QBbgSecurity::isValid() const
 {
     Q_D(const QBbgSecurity);
-    return d->m_Extension != Invalid && !(d->m_Name.isEmpty());
+    return d->m_Extension != YellowKeys::Invalid && !(d->m_Name.isEmpty());
 }
 QString QBbgSecurity::yellowKeyToString(QBbgSecurity::YellowKeys a)
 {
     switch (a) {
-    case Govt:
+    case YellowKeys::Govt:
         return QStringLiteral("Govt");
-    case Corp:
+    case YellowKeys::Corp:
         return QStringLiteral("Corp");
-    case Mtge:
+    case YellowKeys::Mtge:
         return QStringLiteral("Mtge");
-    case MMkt:
+    case YellowKeys::MMkt:
         return QStringLiteral("MMkt");
-    case Muni:
+    case YellowKeys::Muni:
         return QStringLiteral("Muni");
-    case Pfd:
+    case YellowKeys::Pfd:
         return QStringLiteral("Pfd");
-    case Equity:
+    case YellowKeys::Equity:
         return QStringLiteral("Equity");
-    case Comdty:
+    case YellowKeys::Comdty:
         return QStringLiteral("Comdty");
-    case Index:
+    case YellowKeys::Index:
         return QStringLiteral("Index");
-    case Curncy:
+    case YellowKeys::Curncy:
         return QStringLiteral("Curncy");
-    case Client:
+    case YellowKeys::Client:
         return QStringLiteral("Client");
     // case ticker: return "ticker";
-    case cusip:
+    case YellowKeys::cusip:
         return QStringLiteral("cusip");
-    case wpk:
+    case YellowKeys::wpk:
         return QStringLiteral("wpk");
-    case isin:
+    case YellowKeys::isin:
         return QStringLiteral("isin");
-    case buid:
+    case YellowKeys::buid:
         return QStringLiteral("buid");
-    case sedol1:
+    case YellowKeys::sedol1:
         return QStringLiteral("sedol1");
-    case sedol2:
+    case YellowKeys::sedol2:
         return QStringLiteral("sedol2");
-    case sicovam:
+    case YellowKeys::sicovam:
         return QStringLiteral("sicovam");
-    case common:
+    case YellowKeys::common:
         return QStringLiteral("common");
-    case bsid:
+    case YellowKeys::bsid:
         return QStringLiteral("bsid");
-    case svm:
+    case YellowKeys::svm:
         return QStringLiteral("svm");
-    case cins:
+    case YellowKeys::cins:
         return QStringLiteral("cins");
-    case cats:
+    case YellowKeys::cats:
         return QStringLiteral("cats");
-    case bbgid:
+    case YellowKeys::bbgid:
         return QStringLiteral("bbgid");
     default:
         return QString();
@@ -215,56 +215,56 @@ QBbgSecurity::YellowKeys QBbgSecurity::stringToYellowKey(QString a)
 {
     a = a.toLower().trimmed();
     if (a == QStringLiteral("govt"))
-        return Govt;
+        return YellowKeys::Govt;
     else if (a == QStringLiteral("corp"))
-        return Corp;
+        return YellowKeys::Corp;
     else if (a == QStringLiteral("mtge"))
-        return Mtge;
+        return YellowKeys::Mtge;
     else if (a == QStringLiteral("mmkt"))
-        return MMkt;
+        return YellowKeys::MMkt;
     else if (a == QStringLiteral("muni"))
-        return Muni;
+        return YellowKeys::Muni;
     else if (a == QStringLiteral("pfd"))
-        return Pfd;
+        return YellowKeys::Pfd;
     else if (a == QStringLiteral("equity"))
-        return Equity;
+        return YellowKeys::Equity;
     else if (a == QStringLiteral("comdty"))
-        return Comdty;
+        return YellowKeys::Comdty;
     else if (a == QStringLiteral("index"))
-        return Index;
+        return YellowKeys::Index;
     else if (a == QStringLiteral("curncy"))
-        return Curncy;
+        return YellowKeys::Curncy;
     else if (a == QStringLiteral("client"))
-        return Client;
+        return YellowKeys::Client;
     // else if (a == "ticker") return ticker;
     else if (a == QStringLiteral("cusip"))
-        return cusip;
+        return YellowKeys::cusip;
     else if (a == QStringLiteral("wpk"))
-        return wpk;
+        return YellowKeys::wpk;
     else if (a == QStringLiteral("isin"))
-        return isin;
+        return YellowKeys::isin;
     else if (a == QStringLiteral("buid"))
-        return buid;
+        return YellowKeys::buid;
     else if (a == QStringLiteral("sedol1"))
-        return sedol1;
+        return YellowKeys::sedol1;
     else if (a == QStringLiteral("sedol2"))
-        return sedol2;
+        return YellowKeys::sedol2;
     else if (a == QStringLiteral("sicovam"))
-        return sicovam;
+        return YellowKeys::sicovam;
     else if (a == QStringLiteral("common"))
-        return common;
+        return YellowKeys::common;
     else if (a == QStringLiteral("bsid"))
-        return bsid;
+        return YellowKeys::bsid;
     else if (a == QStringLiteral("svm"))
-        return svm;
+        return YellowKeys::svm;
     else if (a == QStringLiteral("cins"))
-        return cins;
+        return YellowKeys::cins;
     else if (a == QStringLiteral("cats"))
-        return cats;
+        return YellowKeys::cats;
     else if (a == QStringLiteral("bbgid"))
-        return bbgid;
+        return YellowKeys::bbgid;
     else
-        return Invalid;
+        return YellowKeys::Invalid;
 }
 
 QString QBbgSecurity::fullName() const
@@ -273,12 +273,12 @@ QString QBbgSecurity::fullName() const
     if (!isValid())
         return Result;
     Q_D(const QBbgSecurity);
-    if (d->m_Extension & FirstPrefix)
+    if (static_cast<std::underlying_type<QBbgSecurity::YellowKeys>::type>(d->m_Extension) & FirstPrefix)
         Result += QLatin1Char('/') + yellowKeyToString(d->m_Extension) + QLatin1Char('/');
     Result += d->m_Name;
     if (!(d->m_PricingSource.isEmpty()))
         Result += QLatin1Char('@') + d->m_PricingSource;
-    if (!(d->m_Extension & FirstPrefix)) {
+    if (!(static_cast<std::underlying_type<QBbgSecurity::YellowKeys>::type>(d->m_Extension) & FirstPrefix)) {
         Result += QLatin1Char(' ');
         if (!(d->m_Exchange.isEmpty()))
             Result += d->m_Exchange + QLatin1Char(' ');
@@ -339,11 +339,8 @@ QBbgSecurityPrivate &QBbgSecurityPrivate::operator=(const QBbgSecurityPrivate &o
     m_PricingSource = other.m_PricingSource;
     return *this;
 }
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-size_t qHash(const QBbgLib::QBbgSecurity &key, size_t seed)
-#else
-uint qHash(const QBbgLib::QBbgSecurity &key, uint seed)
-#endif
+
+TypeForQHash qHash(const QBbgLib::QBbgSecurity &key, TypeForQHash seed)
 {
     QByteArray data;
     {

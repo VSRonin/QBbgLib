@@ -91,10 +91,10 @@ QString QBbgAbstractRequest::requestTypeToString(RequestType a)
         return QStringLiteral("PortfolioDataRequest");
     case RequestType::IntraDayTick:
         return QStringLiteral("IntradayTickRequest");
-        // return QStringLiteral("IntraDayTickRequest");  Wrong in documentation
     case RequestType::IntraDayBar:
         return QStringLiteral("IntradayBarRequest");
-        // return QStringLiteral("IntraDayBarRequest");  Wrong in documentation
+    case RequestType::InstrumentLookup:
+        return QStringLiteral("instrumentListRequest");
     case RequestType::Invalid:
         return QString();
     default:
@@ -117,6 +117,8 @@ QBbgAbstractRequest::RequestType QBbgAbstractRequest::stringToRequestType(QStrin
         return RequestType::IntraDayTick;
     else if (a == QStringLiteral("intradaybarrequest"))
         return RequestType::IntraDayBar;
+    else if (a == QStringLiteral("instrumentlistrequest"))
+        return RequestType::InstrumentLookup;
     else
         return RequestType::Invalid;
 }
@@ -151,7 +153,9 @@ QBbgAbstractRequest::ServiceType QBbgAbstractRequest::serviceForRequest(RequestT
     case RequestType::IntraDayTick:
     case RequestType::IntraDayBar:
         return ServiceType::refdata;
-    case RequestType::SecurityLookup:
+    case RequestType::InstrumentLookup:
+    case RequestType::CurveLookup:
+    case RequestType::GovtLookup:
         return ServiceType::instruments;
     default:
         Q_UNREACHABLE(); // Unhandled service type
@@ -202,11 +206,13 @@ QBbgAbstractRequest::ServiceType QBbgAbstractRequest::stringToServiceType(const 
         return ServiceType::tasvc;
     else if (a == QStringLiteral("//blp/apiauth"))
         return ServiceType::apiauth;
+    else if (a == QStringLiteral("//blp/instruments"))
+        return ServiceType::instruments;
     else
         return ServiceType::NoService;
 }
 
-uint qHash(QBbgAbstractRequest::RequestType key, uint seed)
+TypeForQHash qHash(QBbgAbstractRequest::RequestType key, TypeForQHash seed)
 {
     return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
 }

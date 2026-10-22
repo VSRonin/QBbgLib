@@ -29,7 +29,7 @@ class QBbgAbstractSecurityRequestPrivate;
 }
 namespace QBbgLib {
 
-//! Base class for all requests sent to Bloomberg
+//! Base class for all requests sent to Bloomberg that require a security
 class QBBGLIB_EXPORT QBbgAbstractSecurityRequest : public QBbgAbstractRequest
 {
     Q_GADGET
@@ -45,6 +45,7 @@ protected:
     QBbgAbstractSecurityRequest() = delete;
     void saveToStream(QDataStream &stream) const override;
     void loadFromStream(QDataStream &stream) override;
+    void applyRequest(QJsonObject& obj) const override;
 public:
     //! Destructor
     virtual ~QBbgAbstractSecurityRequest() = 0;
@@ -70,4 +71,4 @@ public:
 };
 }
 
-#endif // QBbgAbstractRequest_h__
+#endif

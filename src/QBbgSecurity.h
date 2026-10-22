@@ -22,6 +22,8 @@
 #include <QMetaType>
 #include <QJsonObject>
 #include <qbbglib_global.h>
+#include "QBbgCommons.h"
+
 class QDataStream;
 namespace QBbgLib {
 class QBbgSecurity;
@@ -83,7 +85,7 @@ public:
     \brief Enumeration describing a security extensions
     \details Represents either a yellow key or an identifier used for the security
     */
-    enum YellowKeys {
+    enum class YellowKeys : qint32 {
         Invalid = -1
         // Proper yellow keys
         ,
@@ -213,11 +215,7 @@ public:
 \brief Allows QBbgSecurity to be used as a key of a QHash
 \relates QBbgLib::QBbgSecurity
 */
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-QBBGLIB_EXPORT size_t qHash(const QBbgSecurity &key, size_t seed);
-#else
-QBBGLIB_EXPORT uint qHash(const QBbgSecurity &key, uint seed);
-#endif
+QBBGLIB_EXPORT TypeForQHash qHash(const QBbgSecurity &key, TypeForQHash seed);
 }
 Q_DECLARE_METATYPE(QBbgLib::QBbgSecurity);
 

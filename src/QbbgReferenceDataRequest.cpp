@@ -82,7 +82,7 @@ bool QBbgReferenceDataRequest::useUTCtime() const
 }
 void QBbgReferenceDataRequest::setSecurity(const QBbgSecurity &val)
 {
-    if (val.extension() != QBbgSecurity::Client) {
+    if (val.extension() != QBbgSecurity::YellowKeys::Client) {
         QBbgAbstractFieldRequest::setSecurity(val);
     } else {
         QBbgAbstractFieldRequest::setSecurity(QBbgSecurity());

@@ -51,6 +51,7 @@ protected:
     virtual void setHeader(const QString &Header = QString());
     virtual void saveToStream(QDataStream &stream) const override;
     virtual void loadFromStream(QDataStream &stream) override;
+    bool loadFromJsonResponse(const QJsonObject& obj) override;
     friend class QBbgRequestResponseWorker;
 };
 }

@@ -69,4 +69,9 @@ void QBbgAbstractFieldResponse::loadFromStream(QDataStream &stream)
     QBbgAbstractResponse::loadFromStream(stream);
     stream >> d->m_Header;
 }
+
+bool QBbgAbstractFieldResponse::loadFromJsonResponse(const QJsonObject &obj)
+{
+    Q_UNREACHABLE(); // TODO Implement
+}
 }

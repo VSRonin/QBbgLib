@@ -24,7 +24,7 @@ QBbgPortfolioDataRequest::~QBbgPortfolioDataRequest() = default;
 QBbgPortfolioDataRequestPrivate::~QBbgPortfolioDataRequestPrivate() = default;
 void QBbgPortfolioDataRequest::setSecurity(const QBbgSecurity &val)
 {
-    if (val.extension() == QBbgSecurity::Client) {
+    if (val.extension() == QBbgSecurity::YellowKeys::Client) {
         QBbgAbstractFieldRequest::setSecurity(val);
     } else {
         QBbgAbstractFieldRequest::setSecurity(QBbgSecurity());
@@ -33,7 +33,7 @@ void QBbgPortfolioDataRequest::setSecurity(const QBbgSecurity &val)
 
 void QBbgPortfolioDataRequest::setSecurity(const QString &SecName)
 {
-    QBbgAbstractFieldRequest::setSecurity(SecName, QBbgSecurity::Client);
+    QBbgAbstractFieldRequest::setSecurity(SecName, QBbgSecurity::YellowKeys::Client);
 }
 
 void QBbgPortfolioDataRequest::setOverrides(const QBbgOverride &Overr)
@@ -78,7 +78,7 @@ QBbgPortfolioDataRequest &QBbgPortfolioDataRequest::operator=(const QBbgPortfoli
 void QBbgPortfolioDataRequest::setPortfolio(const QString &tradingSystem, const QString &firmID, const QString &portfolioID)
 {
     return setSecurity((tradingSystem.isEmpty() ? QString() : (tradingSystem + QLatin1Char('-'))) + firmID + QLatin1Char('-') + portfolioID,
-                       QBbgSecurity::Client);
+                       QBbgSecurity::YellowKeys::Client);
 }
 
 void QBbgPortfolioDataRequest::setField(const QString &val)
