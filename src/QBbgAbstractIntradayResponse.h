@@ -59,6 +59,7 @@ protected:
     virtual void clear();
     virtual void saveToStream(QDataStream &stream) const override;
     virtual void loadFromStream(QDataStream &stream) override;
+    bool loadFromJsonResponse(const QJsonObject &obj) override;
     QBbgAbstractIntradayResponse() = delete;
     QBbgAbstractIntradayResponse(QBbgAbstractIntradayResponsePrivate *d);
 };

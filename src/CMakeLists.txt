@@ -22,12 +22,15 @@ endif()
 set(requests_HEADERS
     QBbgRequestGroup.h
     QBbgAbstractFieldRequest.h
+    QBbgAbstractSecurityRequest.h
     QBbgAbstractRequest.h
     QBbgHistoricalDataRequest.h
     QBbgPortfolioDataRequest.h
     QBbgAbstractIntradayRequest.h
     QBbgReferenceDataRequest.h
     QBbgIntradayTickRequest.h
+    QBbgAbstractSecurityLookupRequest.h
+    QBbgInstrumentLookupRequest.h
 )
 set(responses_HEADERS
     QBbgAbstractFieldResponse.h
@@ -37,6 +40,7 @@ set(responses_HEADERS
     QBbgReferenceDataResponse.h
     QBbgAbstractIntradayResponse.h
     QBbgIntradayTickResponse.h
+    QBbgInstrumentLookupResponse.h
 )
 
 
@@ -46,17 +50,21 @@ set(qbbglib_HEADERS
     QBbgSecurity.h 
     QBbgManager.h 
     QBbgOverride.h
+    QBbgCommons.h
 )
 
 set(requests_PRIVATE_HEADERS
     private/QBbgRequestGroup_p.h
     private/QBbgAbstractFieldRequest_p.h
+    private/QBbgAbstractSecurityRequest_p.h
     private/QBbgAbstractRequest_p.h
     private/QBbgHistoricalDataRequest_p.h
     private/QBbgPortfolioDataRequest_p.h
     private/QBbgAbstractIntradayRequest_p.h
     private/QBbgReferenceDataRequest_p.h
     private/QBbgIntradayTickRequest_p.h
+    private/QBbgAbstractSecurityLookupRequest_p.h
+    private/QBbgInstrumentLookupRequest_p.h
 )
 set(responses_PRIVATE_HEADERS
     private/QBbgAbstractFieldResponse_p.h
@@ -66,6 +74,7 @@ set(responses_PRIVATE_HEADERS
     private/QBbgReferenceDataResponse_p.h
     private/QBbgAbstractIntradayResponse_p.h
     private/QBbgIntradayTickResponse_p.h
+    private/QBbgInstrumentLookupResponse_p.h
 )
 set(workers_PRIVATE_HEADERS
     private/QBbgAbstractWorker_p.h
@@ -82,6 +91,7 @@ set(qbbglib_PRIVATE_HEADERS
 )
 set(requests_SRCS
     QBbgAbstractRequest.cpp
+    QBbgAbstractSecurityRequest.cpp
     QBbgHistoricalDataRequest.cpp
     QBbgAbstractIntradayRequest.cpp
     QBbgPortfolioDataRequest.cpp
@@ -89,6 +99,8 @@ set(requests_SRCS
     QBbgAbstractFieldRequest.cpp
     QBbgIntradayTickRequest.cpp
     QBbgRequestGroup.cpp
+    QBbgAbstractSecurityLookupRequest.cpp
+    QBbgInstrumentLookupRequest.cpp
 )
 set(responses_SRCS
     QBbgAbstractFieldResponse.cpp
@@ -98,6 +110,7 @@ set(responses_SRCS
     QBbgReferenceDataResponse.cpp
     QBbgIntradayTickResponse.cpp
     QBbgAbstractIntradayResponse.cpp
+    QBbgInstrumentLookupResponse.cpp
 )
 set(workers_SRCS
     QBbgAbstractWorker.cpp
@@ -170,8 +183,8 @@ set_target_properties(QBbgLib PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${qbbglib_PlatformDir}/lib"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${qbbglib_PlatformDir}/bin"
 )
-if(MODEL_UTILITIES_INSTALL)
-    install(FILES ${modelutilities_INSTALL_INCLUDE} "${CMAKE_CURRENT_BINARY_DIR}/globaldefs/qbbglib_global.h"
+if(QBBGLIB_INSTALL)
+    install(FILES ${qbbglib_HEADERS} "${CMAKE_CURRENT_BINARY_DIR}/globaldefs/qbbglib_global.h"
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         COMPONENT QBbgLib_Development
     )
@@ -199,6 +212,10 @@ if(MODEL_UTILITIES_INSTALL)
                 NAMELINK_ONLY
         )
     endif()
+    install(FILES ${Blpapi_DLL}
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+        COMPONENT QBbgLib_Runtime
+    )
     include(CMakePackageConfigHelpers)
     write_basic_package_version_file("QBbgLibConfigVersion.cmake"
         VERSION ${VERSION_SHORT}

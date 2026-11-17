@@ -10,6 +10,8 @@
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgHistoricalDataResponse.h"
 #include "QBbgOverride.h"
+#include "QBbgInstrumentLookupRequest.h"
+#include "QBbgInstrumentLookupResponse.h"
 #include "QBbgIntradayTickRequest.h"
 #include "QBbgIntradayTickResponse.h"
 #include <QFile>
@@ -33,15 +35,15 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgManager mainManager;
 
     const QString fieldsRe[] = {"RTG_FITCH", "RTG_SP", "RTG_MOODY", "MTG_CASH_FLOW"};
+    QBbgLib::QBbgSecurity tempSec("XS3004238419", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
+    QBbgLib::QBbgSecurity loadedSec;
+    loadedSec.fromJsonObject(tempSec.toJsonObject());
+
     QList<QBbgLib::QBbgSecurity> securList;
-    securList << QBbgLib::QBbgSecurity("XS0743625674", QBbgLib::QBbgSecurity::Mtge);
+    securList << tempSec; //<< QBbgLib::QBbgSecurity("XS3518428068", QBbgLib::QBbgSecurity::YellowKeys::Mtge);
 
     QBbgLib::QBbgReferenceDataRequest a_req;
-    QBbgLib::QBbgPortfolioDataRequest p_req;
-    // QBbgLib::QBbgHistoricalDataRequest h_req;
-    p_req.setSecurity("TS-PX1915-32", QBbgLib::QBbgSecurity::Client);
-    // p_req.setSecurity("U10628870-2", QBbgLib::QBbgSecurity::Client);
-    // p_req.setReferenceDay(QDate(2015, 9, 3));
+
     QBbgLib::QBbgOverride overrides;
     overrides.setOverride("Allow dynamic cashflow calcs", "Y");
     overrides.setOverride("mtg prepay typ", "CPR");
@@ -54,6 +56,9 @@ int main(int argc, char *argv[])
     overrides.setOverride("Trigger_State", "S");
     overrides.setOverride("apply FWD rate", "N");
 
+    QBbgLib::QBbgOverride loadedOverrides;
+    loadedOverrides.fromJsonObject(overrides.toJsonObject());
+
     for (const QBbgLib::QBbgSecurity &sec : securList) {
         a_req.setSecurity(sec);
         for (auto &&fld : fieldsRe) {
@@ -61,6 +66,13 @@ int main(int argc, char *argv[])
             req.addRequest(a_req);
         }
     }
+
+    QBbgLib::QBbgInstrumentLookupRequest lookUpReq;
+    lookUpReq.setQuery("STORM");
+    lookUpReq.setYellowKeyFilter(QBbgLib::QBbgInstrumentLookupRequest::YellowKeyFilter::Mtge);
+    req.addRequest(lookUpReq);
+    lookUpReq.setQuery("PARGN");
+    req.addRequest(lookUpReq);
 
     /* h_req.setSecurity(QBbgLib::QBbgSecurity("EUR003M", QBbgLib::QBbgSecurity::Index));
      h_req.setField("PX_LAST");
@@ -164,16 +176,24 @@ int main(int argc, char *argv[])
                     PrintToTempFile("HistoricalData", tmpStr, false);
                 }
             } break;
+            case QBbgLib::QBbgAbstractResponse::ResponseType::InstrumentListResponse: {
+                Q_ASSERT(dynamic_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres));
+                const QBbgLib::QBbgInstrumentLookupResponse *const res = static_cast<const QBbgLib::QBbgInstrumentLookupResponse *const>(genres);
+                auto reqForRes = req.getRequest<QBbgLib::QBbgInstrumentLookupRequest>(id);
+                qDebug() << reqForRes->query()
+                                + QStringLiteral(" - %1 - %2").arg(int(reqForRes->yellowKeyFilter())).arg(int(reqForRes->languageOverride()));
+                for (int i = 0; i < res->size(); ++i) {
+                    QString tmpStr = res->secutity(i) + '\t' + res->description(i);
+                    qDebug() << tmpStr;
+                    PrintToTempFile("InstrumentLookup", tmpStr, false);
+                }
+            } break;
             default:
                 Q_UNREACHABLE(); // Unhanded Response
             }
         }
     });
     QObject::connect(&mainManager, &QBbgLib::QBbgManager::finished, []() { qDebug() << "Finished"; });
-    p_req.setField(QBbgLib::QBbgPortfolioDataRequest::PortfolioFields::PORTFOLIO_DATA);
-
-    req.addRequest(p_req);
-    p_req.setSecurity("TS-PX1915-14", QBbgLib::QBbgSecurity::Client);
     // req.addRequest(p_req);
     // a_req.setField("Gibberish");
     // req.addRequest(a_req);
@@ -189,6 +209,7 @@ int main(int argc, char *argv[])
     // req.addRequest(h_req);
 
     mainManager.startRequest(req);
+
     qDebug() << "Started";
     return a.exec();
 }

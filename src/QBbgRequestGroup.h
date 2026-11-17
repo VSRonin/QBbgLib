@@ -24,6 +24,8 @@
 #include "QBbgReferenceDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgPortfolioDataRequest.h"
+#include "QBbgInstrumentLookupRequest.h"
+#include "QBbgIntradayTickRequest.h"
 #include <QList>
 #include <QHash>
 #include <QString>
@@ -128,6 +130,14 @@ public:
                 break;
             case QBbgAbstractRequest::RequestType::PortfolioData:
                 if (!std::is_same<QBbgPortfolioDataRequest, T>::value)
+                    return nullptr;
+                break;
+            case QBbgAbstractRequest::RequestType::IntraDayTick:
+                if (!std::is_same<QBbgIntradayTickRequest, T>::value)
+                    return nullptr;
+                break;
+            case QBbgAbstractRequest::RequestType::InstrumentLookup:
+                if (!std::is_same<QBbgInstrumentLookupRequest, T>::value)
                     return nullptr;
                 break;
             default:

@@ -24,6 +24,7 @@
 #include "QBbgPortfolioDataRequest.h"
 #include "QBbgHistoricalDataRequest.h"
 #include "QBbgIntradayTickRequest.h"
+#include "QBbgInstrumentLookupRequest.h"
 // #define DISABLE_BULK_REQUESTS // Disables bulk requests in Bloomberg until a bug is fixed
 
 namespace QBbgLib {
@@ -64,6 +65,9 @@ void QBbgRequestGroup::saveToStream(QDataStream &stream) const
             break;
         case QBbgAbstractRequest::RequestType::IntraDayTick:
             stream << *(static_cast<const QBbgIntradayTickRequest *const>(i.value()));
+            break;
+        case QBbgAbstractRequest::RequestType::InstrumentLookup:
+            stream << *(static_cast<const QBbgInstrumentLookupRequest *const>(i.value()));
             break;
         default:
             Q_UNREACHABLE(); // Unhandled request type
@@ -120,6 +124,8 @@ QBbgAbstractRequest *QBbgRequestGroupPrivate::createRequest(const QBbgAbstractRe
         return new QBbgHistoricalDataRequest(static_cast<const QBbgHistoricalDataRequest &>(a));
     case QBbgAbstractRequest::RequestType::IntraDayTick:
         return new QBbgIntradayTickRequest(static_cast<const QBbgIntradayTickRequest &>(a));
+    case QBbgAbstractRequest::RequestType::InstrumentLookup:
+        return new QBbgInstrumentLookupRequest(static_cast<const QBbgInstrumentLookupRequest &>(a));
         // TODO add other types
     default:
         Q_UNREACHABLE(); // Unhandled request type
@@ -239,8 +245,11 @@ QList<qint64> QBbgRequestGroup::findSecurity(const QBbgSecurity &Secur) const
     Q_D(const QBbgRequestGroup);
     QList<qint64> Result;
     for (QHash<qint64, QBbgAbstractRequest *>::const_iterator i = d->RequestTable.constBegin(); i != d->RequestTable.constEnd(); ++i) {
-        if (i.value()->security() == Secur)
-            Result.append(i.key());
+        const auto secRequest = dynamic_cast<QBbgAbstractSecurityRequest *>(i.value());
+        if (secRequest) {
+            if (secRequest->security() == Secur)
+                Result.append(i.key());
+        }
     }
     return Result;
 }
@@ -347,6 +356,8 @@ bool QBbgRequestGroupPrivate::SameRequest(const QList<qint64> &a, const QList<qi
         return true;
     } else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstIntraday) {
         return false; // Can't send multiple securities with hist intraday request
+    } else if (static_cast<qint32>(request(a.first())->requestType()) & QBbgAbstractRequest::FirstSecurityLookup) {
+        return false; // Can't aggregate lookup requests
     }
     Q_UNREACHABLE(); // Unhandled request type
     return false;
@@ -357,8 +368,22 @@ bool QBbgRequestGroupPrivate::compatible(const QBbgAbstractRequest *a, const QBb
         return false;
     if (a->requestType() != b->requestType())
         return false;
-    if (a->security() != b->security())
-        return false;
+    switch (a->requestType()) {
+    case QBbgAbstractRequest::RequestType::ReferenceData:
+    case QBbgAbstractRequest::RequestType::PortfolioData:
+    case QBbgAbstractRequest::RequestType::HistoricalData:
+    case QBbgAbstractRequest::RequestType::IntraDayTick:
+        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(a));
+        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(b));
+        if (static_cast<const QBbgAbstractSecurityRequest *>(a)->security() != static_cast<const QBbgAbstractSecurityRequest *>(b)->security())
+            return false;
+        break;
+    case QBbgAbstractRequest::RequestType::InstrumentLookup:
+        return false; // Can't aggregate lookup requests
+    default:
+        Q_UNREACHABLE(); // Unhandled request type
+    }
+
     switch (a->requestType()) {
     case QBbgAbstractRequest::RequestType::ReferenceData:
     case QBbgAbstractRequest::RequestType::PortfolioData:

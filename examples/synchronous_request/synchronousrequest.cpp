@@ -37,7 +37,7 @@ void singleReferenceDataRequest(QBbgLib::QBbgManager &bbgManager)
     QBbgLib::QBbgReferenceDataRequest req;
 
     // Set the security to download
-    req.setSecurity(QBbgLib::QBbgSecurity("US92857WBD11", QBbgLib::QBbgSecurity::Corp)); // VOD 4 3/8 02/19/43 Corp
+    req.setSecurity(QBbgLib::QBbgSecurity("US92857WBD11", QBbgLib::QBbgSecurity::YellowKeys::Corp)); // VOD 4 3/8 02/19/43 Corp
 
     // Set the field to download
     req.setField("SECURITY_NAME"); // Single Value
@@ -101,7 +101,7 @@ void singleHistoricalDataRequest(QBbgLib::QBbgManager &bbgManager)
     QBbgLib::QBbgHistoricalDataRequest req;
 
     // Set the security to download
-    req.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::Equity)); // IBM US Equity
+    req.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::YellowKeys::Equity)); // IBM US Equity
 
     // Set the field to download
     req.setField("PX_LAST");
@@ -135,7 +135,8 @@ void singlePortfolioDataRequest(QBbgLib::QBbgManager &bbgManager)
     QBbgLib::QBbgPortfolioDataRequest req;
 
     // Set the security to download
-    req.setSecurity(QBbgLib::QBbgSecurity("UXXXXXXX-X", QBbgLib::QBbgSecurity::Client)); // Change this to a portfolio ID you set up in PRTU
+    req.setSecurity(
+            QBbgLib::QBbgSecurity("UXXXXXXX-X", QBbgLib::QBbgSecurity::YellowKeys::Client)); // Change this to a portfolio ID you set up in PRTU
 
     // Set the field to download
     req.setField(QBbgLib::QBbgPortfolioDataRequest::PortfolioFields::PORTFOLIO_MPOSITION);
@@ -163,7 +164,7 @@ void singleIntradayTickRequest(QBbgLib::QBbgManager &bbgManager)
     QBbgLib::QBbgIntradayTickRequest req;
 
     // Set the security to download
-    req.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::Equity)); // IBM US Equity
+    req.setSecurity(QBbgLib::QBbgSecurity("BBG000BLNNH6", QBbgLib::QBbgSecurity::YellowKeys::Equity)); // IBM US Equity
 
     // Set the events to download
     req.setEventType(QBbgLib::QBbgIntradayTickRequest::EventType::BID);
@@ -204,7 +205,7 @@ void multipleRequests(QBbgLib::QBbgManager &bbgManager)
 
     QBbgSecurity tempSecurity;
     // All securities will have a Corp extension
-    tempSecurity.setExtension(QBbgSecurity::Corp);
+    tempSecurity.setExtension(QBbgSecurity::YellowKeys::Corp);
 
     /*
     We will store the ID of the request using the indexes of security and field in the array as key
@@ -234,7 +235,7 @@ void multipleRequests(QBbgLib::QBbgManager &bbgManager)
     // You can add historical and portfolio requests to the same group too if you want
     // In this case we'll get the 3m EURIBOR rate as of 05/05/2015
     QBbgHistoricalDataRequest histRq;
-    histRq.setSecurity(QBbgSecurity("EUR003M", QBbgSecurity::Index));
+    histRq.setSecurity(QBbgSecurity("EUR003M", QBbgSecurity::YellowKeys::Index));
     histRq.setField("PX_LAST");
     histRq.setStartDate(QDate(2015, 5, 5));
     histRq.setEndDate(QDate(2015, 5, 5));

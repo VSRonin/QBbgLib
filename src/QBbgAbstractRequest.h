@@ -19,9 +19,10 @@
 #ifndef QBbgAbstractRequest_h__
 #define QBbgAbstractRequest_h__
 #include <QObject>
-#include "QBbgSecurity.h"
 #include <qbbglib_global.h>
+#include "QBbgCommons.h"
 class QDataStream;
+class QJsonObject;
 namespace QBbgLib {
 class QBbgAbstractRequest;
 class QBbgAbstractRequestPrivate;
@@ -39,12 +40,6 @@ class QBBGLIB_EXPORT QBbgAbstractRequest
 {
     Q_GADGET
     /*!
-    \brief The security associated with the request
-    \getter security()
-    \setter setSecurity()
-    */
-    Q_PROPERTY(QBbgSecurity security READ security WRITE setSecurity)
-    /*!
     \brief The request unique identifier
     \getter getID()
     \setter setID()
@@ -61,8 +56,8 @@ class QBBGLIB_EXPORT QBbgAbstractRequest
     */
     Q_PROPERTY(RequestType requestType READ requestType)
 protected:
-    enum : qint32 { FirstFielded = 0x10, FirstIntraday = 0x20 };
-    enum class ServiceType { NoService = 0, refdata = 1, mktdata, mktvwap, mktbar, apiflds, pagedata, tasvc, apiauth };
+    enum : qint32 { FirstFielded = 0x10, FirstIntraday = 0x20, FirstSecurityLookup = 0x40 };
+    enum class ServiceType { NoService = 0, refdata = 1, mktdata, mktvwap, mktbar, apiflds, pagedata, tasvc, apiauth, instruments };
 
 public:
     //! Special requestID codes
@@ -85,6 +80,12 @@ public:
         IntraDayTick = FirstIntraday /*!< Tick-by-tick historical data */
         ,
         IntraDayBar /*!< Currently Unavailable */
+        ,
+        InstrumentLookup = FirstSecurityLookup /*!< Request for securities based on search term */
+        ,
+        CurveLookup /*!< Request for curves based on search term */
+        ,
+        GovtLookup /*!< Request for government bonds based on search term */
     };
     Q_ENUM(RequestType)
 protected:
@@ -100,23 +101,13 @@ protected:
     static RequestType stringToRequestType(QString a);
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);
+    virtual void applyRequest(QJsonObject &obj) const = 0;
 
 public:
     //! Destructor
     virtual ~QBbgAbstractRequest() = 0;
     //! Copies another request
     virtual QBbgAbstractRequest &operator=(const QBbgAbstractRequest &other);
-    //! Returns the security associated with the request
-    virtual const QBbgSecurity &security() const;
-    //! Sets the security for the current request to the specified one
-    virtual void setSecurity(const QBbgSecurity &val);
-    /*!
-    \brief Overloaded from setSecurity
-    \arg SecName Name of the security to add
-    \arg SecKey Yellow key or code identifier for the security
-    \details Sets the security for the current request to the specified one
-    */
-    virtual void setSecurity(const QString &SecName, QBbgSecurity::YellowKeys SecKey);
     /*!
     \brief Returns the current ID for the request
     \details If the ID is not set or invalid SpecialIDs::InvalidID will be returned
@@ -140,10 +131,11 @@ public:
     friend QDataStream & ::operator<<(QDataStream &stream, const QBbgAbstractRequest &obj);
     friend QDataStream & ::operator>>(QDataStream &stream, QBbgAbstractRequest &obj);
 };
-}
 /*!
 \brief Allows QBbgAbstractRequest::RequestType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractRequest
 */
-QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractRequest::RequestType key, uint seed = 0);
+QBBGLIB_EXPORT TypeForQHash qHash(QBbgLib::QBbgAbstractRequest::RequestType key, TypeForQHash seed = 0);
+}
+
 #endif // QBbgAbstractRequest_h__

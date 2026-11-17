@@ -52,18 +52,18 @@ QBbgPortfolioDataResponsePrivate &QBbgPortfolioDataResponsePrivate::operator=(co
 double QBbgPortfolioDataResponsePrivate::positionMultiplier(QBbgLib::QBbgSecurity::YellowKeys val) const
 {
     switch (val) {
-    case QBbgLib::QBbgSecurity::Govt:
-    case QBbgLib::QBbgSecurity::Corp:
-    case QBbgLib::QBbgSecurity::Mtge:
-    case QBbgLib::QBbgSecurity::Curncy:
-    case QBbgLib::QBbgSecurity::Muni:
+    case QBbgLib::QBbgSecurity::YellowKeys::Govt:
+    case QBbgLib::QBbgSecurity::YellowKeys::Corp:
+    case QBbgLib::QBbgSecurity::YellowKeys::Mtge:
+    case QBbgLib::QBbgSecurity::YellowKeys::Curncy:
+    case QBbgLib::QBbgSecurity::YellowKeys::Muni:
         return 1000.0;
-    case QBbgLib::QBbgSecurity::Pfd:
-    case QBbgLib::QBbgSecurity::Equity:
+    case QBbgLib::QBbgSecurity::YellowKeys::Pfd:
+    case QBbgLib::QBbgSecurity::YellowKeys::Equity:
         return 1.0;
-    case QBbgLib::QBbgSecurity::MMkt:
-    case QBbgLib::QBbgSecurity::Comdty:
-    case QBbgLib::QBbgSecurity::Index:
+    case QBbgLib::QBbgSecurity::YellowKeys::MMkt:
+    case QBbgLib::QBbgSecurity::YellowKeys::Comdty:
+    case QBbgLib::QBbgSecurity::YellowKeys::Index:
         Q_ASSERT_X(false, "getMultipier()", "Unspecifed multiplier for extension");
         return 1.0;
     default:

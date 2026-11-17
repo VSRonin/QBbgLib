@@ -21,6 +21,8 @@
 #include <QString>
 #include <QObject>
 #include <qbbglib_global.h>
+#include "QBbgCommons.h"
+class QJsonObject;
 namespace QBbgLib {
 class QBbgAbstractResponsePrivate;
 class QBbgAbstractWorker;
@@ -116,6 +118,8 @@ public:
         IntraDayTickResponse = FirstRealTime /*!< Response associated with tick-by-tick historical data request */
         ,
         IntraDayBarResponse /*!< Currently Unavailable */
+        ,
+        InstrumentListResponse /*!< Response associated with a search for a security */
     };
     Q_ENUM(ResponseType)
     //! Destructor
@@ -161,17 +165,18 @@ protected:
     static ResponseType stringToResponseType(QString a);
     virtual void saveToStream(QDataStream &stream) const;
     virtual void loadFromStream(QDataStream &stream);
-
+    virtual bool loadFromJsonResponse(const QJsonObject &obj) = 0;
     friend class QBbgAbstractWorker;
     friend class QBbgRequestResponseWorker;
     friend QDataStream & ::operator<<(QDataStream &stream, const QBbgAbstractResponse &obj);
     friend QDataStream & ::operator>>(QDataStream &stream, QBbgAbstractResponse &obj);
 };
-}
 /*!
 \brief Allows QBbgAbstractResponse::ResponseType to be used as a key of a QHash
 \relates QBbgLib::QBbgAbstractResponse
 */
-QBBGLIB_EXPORT uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed = 0);
+QBBGLIB_EXPORT TypeForQHash qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, TypeForQHash seed = 0);
+}
+
 Q_DECLARE_OPERATORS_FOR_FLAGS(QBbgLib::QBbgAbstractResponse::BbgErrorCodes)
 #endif // QBbgAbstractResponse_h__

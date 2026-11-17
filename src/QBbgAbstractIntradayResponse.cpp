@@ -98,4 +98,9 @@ void QBbgAbstractIntradayResponse::loadFromStream(QDataStream &stream)
     QBbgAbstractResponse::loadFromStream(stream);
     stream >> d->m_time >> d->m_value;
 }
+
+bool QBbgAbstractIntradayResponse::loadFromJsonResponse(const QJsonObject &obj)
+{
+    Q_UNREACHABLE(); // TODO implement
+}
 }

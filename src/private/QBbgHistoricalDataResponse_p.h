@@ -24,7 +24,6 @@
 #define QBbgHistoricalDataResponse_p_h__
 #include "QBbgHistoricalDataResponse.h"
 #include "private/QBbgAbstractFieldResponse_p.h"
-#include "QBbgSecurity.h"
 #include <QList>
 #include <QDate>
 namespace QBbgLib {

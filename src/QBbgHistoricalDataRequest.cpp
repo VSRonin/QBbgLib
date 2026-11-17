@@ -284,10 +284,10 @@ void QBbgHistoricalDataRequest::setStartDate(const QDate &val)
 
 void QBbgHistoricalDataRequest::setSecurity(const QBbgSecurity &val)
 {
-    if (val.extension() != QBbgSecurity::Client) {
+    if (val.extension() != QBbgSecurity::YellowKeys::Client) {
         QBbgAbstractFieldRequest::setSecurity(val);
     } else {
-        QBbgAbstractRequest::setSecurity(QBbgSecurity());
+        QBbgAbstractFieldRequest::setSecurity(QBbgSecurity());
     }
 }
 

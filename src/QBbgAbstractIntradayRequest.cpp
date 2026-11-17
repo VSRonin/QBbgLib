@@ -21,23 +21,23 @@
 \*******************************************************************************/
 
 #include "QBbgAbstractIntradayRequest.h"
-#include "Private/QBbgAbstractIntradayRequest_p.h"
+#include "private/QBbgAbstractIntradayRequest_p.h"
 #include <QDataStream>
 namespace QBbgLib {
 QBbgAbstractIntradayRequest::~QBbgAbstractIntradayRequest() = default;
 QBbgAbstractIntradayRequestPrivate::~QBbgAbstractIntradayRequestPrivate() = default;
 QBbgAbstractIntradayRequestPrivate::QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest *q, QBbgAbstractRequest::RequestType typ)
-    : QBbgAbstractRequestPrivate(q, typ)
+    : QBbgAbstractSecurityRequestPrivate(q, typ)
 { }
 QBbgAbstractIntradayRequestPrivate::QBbgAbstractIntradayRequestPrivate(QBbgAbstractIntradayRequest *q, const QBbgAbstractIntradayRequestPrivate &a)
-    : QBbgAbstractRequestPrivate(q, a)
+    : QBbgAbstractSecurityRequestPrivate(q, a)
     , m_startDate(a.m_startDate)
     , m_endDate(a.m_endDate)
     , m_eventType(a.m_eventType)
 { }
 QBbgAbstractIntradayRequestPrivate &QBbgAbstractIntradayRequestPrivate::operator=(const QBbgAbstractIntradayRequestPrivate &a)
 {
-    QBbgAbstractRequestPrivate::operator=(a);
+    QBbgAbstractSecurityRequestPrivate::operator=(a);
     m_startDate = a.m_startDate;
     m_endDate = a.m_endDate;
     m_eventType = a.m_eventType;
@@ -45,7 +45,7 @@ QBbgAbstractIntradayRequestPrivate &QBbgAbstractIntradayRequestPrivate::operator
 }
 
 QBbgAbstractIntradayRequest::QBbgAbstractIntradayRequest(QBbgAbstractIntradayRequestPrivate *d)
-    : QBbgAbstractRequest(d)
+    : QBbgAbstractSecurityRequest(d)
 { }
 
 QBbgAbstractIntradayRequest &QBbgAbstractIntradayRequest::operator=(const QBbgAbstractIntradayRequest &a)
@@ -129,10 +129,10 @@ void QBbgAbstractIntradayRequest::setStartDateTime(const QDateTime &val)
 
 void QBbgAbstractIntradayRequest::setSecurity(const QBbgSecurity &val)
 {
-    if (val.extension() != QBbgSecurity::Client) {
-        QBbgAbstractRequest::setSecurity(val);
+    if (val.extension() != QBbgSecurity::YellowKeys::Client) {
+        QBbgAbstractSecurityRequest::setSecurity(val);
     } else {
-        QBbgAbstractRequest::setSecurity(QBbgSecurity());
+        QBbgAbstractSecurityRequest::setSecurity(QBbgSecurity());
     }
 }
 
@@ -189,10 +189,8 @@ QBbgAbstractIntradayRequest::EventType QBbgAbstractIntradayRequest::stringEventT
     else
         return EventType::Invalid;
 }
-
-}
-
-uint qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, uint seed)
+TypeForQHash qHash(QBbgLib::QBbgAbstractIntradayRequest::EventType key, TypeForQHash seed)
 {
-    return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+    return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+}
 }

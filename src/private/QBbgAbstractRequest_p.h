@@ -24,7 +24,6 @@
 #define QBbgAbstractRequest_p_h__
 #include "QBbgAbstractRequest.h"
 #include <QString>
-#include "QBbgSecurity.h"
 namespace QBbgLib {
 class QBbgAbstractRequestPrivate
 {
@@ -41,7 +40,6 @@ public:
     QBbgAbstractRequestPrivate(QBbgAbstractRequest *q, const QBbgAbstractRequestPrivate &other);
     virtual QBbgAbstractRequestPrivate &operator=(const QBbgAbstractRequestPrivate &other);
     qint64 m_ID;
-    QBbgSecurity m_Security;
     const QBbgAbstractRequest::RequestType m_RqType;
 };
 }

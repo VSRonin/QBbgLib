@@ -36,6 +36,8 @@ class QBbgHistoricalDataResponse;
 class QBbgPortfolioDataResponse;
 class QBbgIntradayTickRequest;
 class QBbgIntradayTickResponse;
+class QBbgInstrumentLookupRequest;
+class QBbgInstrumentLookupResponse;
 class QBbgAbstractWorker;
 /*!
 \brief The central Bloomberg manager
@@ -169,6 +171,10 @@ public:
                 break;
             case QBbgAbstractResponse::ResponseType::IntraDayTickResponse:
                 if (!std::is_same<QBbgIntradayTickResponse, T>::value)
+                    return nullptr;
+                break;
+            case QBbgAbstractResponse::ResponseType::InstrumentListResponse:
+                if (!std::is_same<QBbgInstrumentLookupResponse, T>::value)
                     return nullptr;
                 break;
             default:

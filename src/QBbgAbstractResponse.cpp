@@ -150,6 +150,8 @@ QBbgAbstractResponse::ResponseType QBbgAbstractResponse::stringToResponseType(QS
         return ResponseType::IntraDayTickResponse;
     else if (a == QStringLiteral("intradaybarresponse"))
         return ResponseType::IntraDayBarResponse;
+    else if (a == QStringLiteral("instrumentlistresponse"))
+        return ResponseType::InstrumentListResponse;
     else
         return ResponseType::Invalid;
 }
@@ -168,6 +170,8 @@ QString QBbgAbstractResponse::responseTypeToString(ResponseType a)
         return QStringLiteral("IntraDayTickResponse");
     case QBbgLib::QBbgAbstractResponse::ResponseType::IntraDayBarResponse:
         return QStringLiteral("IntraDayBarResponse");
+    case QBbgLib::QBbgAbstractResponse::ResponseType::InstrumentListResponse:
+        return QStringLiteral("InstrumentListResponse");
     default:
         return QString();
     }
@@ -177,11 +181,10 @@ QString QBbgAbstractResponse::errorMessage() const
     Q_D(const QBbgAbstractResponse);
     return errorString() + QLatin1String(" - ") + d->m_ErrorMessage;
 }
-}
-
-uint qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, uint seed)
+TypeForQHash qHash(QBbgLib::QBbgAbstractResponse::ResponseType key, TypeForQHash seed)
 {
-    return qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+    return ::qHash(static_cast<std::underlying_type<decltype(key)>::type>(key), seed);
+}
 }
 
 QDataStream &operator<<(QDataStream &stream, const QBbgLib::QBbgAbstractResponse &obj)
