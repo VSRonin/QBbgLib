@@ -1,4 +1,3 @@
-#include <blpapi_request.h>
 #include "QBbgInstrumentLookupRequest.h"
 #include "private/QBbgInstrumentLookupRequest_p.h"
 namespace QBbgLib {
