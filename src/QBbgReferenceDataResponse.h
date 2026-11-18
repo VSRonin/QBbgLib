@@ -84,7 +84,7 @@ public:
     //! Checks if the response has a single value
     virtual bool hasValue() const;
     //! Reimplemented from QBbgAbstractResponse::isEmpty()
-    virtual bool isEmpty() const;
+    bool isEmpty() const override;
     /*!
     \brief Returns the single value of the result
     \details If hasValue() is false this will return a null QVariant

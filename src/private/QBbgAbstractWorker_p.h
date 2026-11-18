@@ -59,11 +59,11 @@ private:
     std::unique_ptr<BloombergLP::blpapi::Session> m_session;
 public slots:
     virtual bool start() = 0;
-    virtual void setRequest(const QBbgRequestGroup &req) = 0;
+    virtual void setRequest(const QBbgLib::QBbgRequestGroup &req) = 0;
 signals:
     void started();
     void stopped();
-    void dataRecieved(qint64 reID, QBbgAbstractResponse *res);
+    void dataRecieved(qint64 reID, QBbgLib::QBbgAbstractResponse *res);
     void progress(qint32 pct);
     void finished();
 };

@@ -128,21 +128,14 @@ public:
     //! Checks if result contains the relative weight of the securities in the portfolio
     virtual bool hasWeight() const;
     //! Reimplemented from QBbgAbstractResponse::isEmpty()
-    virtual bool isEmpty() const;
+    bool isEmpty() const override;
 
 protected:
     QBbgPortfolioDataResponse(QBbgPortfolioDataResponsePrivate *dp);
-    virtual void addSecurity(const QBbgSecurity &val);
-    virtual void addPosition(double val);
-    virtual void addMarketValue(double val);
-    virtual void addCost(double val);
-    virtual void addCostDate(const QDate &val);
-    virtual void addCostFx(double val);
-    virtual void addWeight(double val);
     virtual void clear();
     virtual void saveToStream(QDataStream &stream) const override;
     virtual void loadFromStream(QDataStream &stream) override;
-
+    bool loadFromJsonResponse(const QJsonObject &obj) override;
     friend class QBbgRequestResponseWorker;
 };
 }

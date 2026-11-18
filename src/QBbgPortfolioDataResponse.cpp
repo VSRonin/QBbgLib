@@ -19,6 +19,7 @@
 #include "QBbgPortfolioDataResponse.h"
 #include "private/QBbgPortfolioDataResponse_p.h"
 #include <QDataStream>
+#include <QJsonArray>
 namespace QBbgLib {
 QBbgPortfolioDataResponse::~QBbgPortfolioDataResponse() = default;
 QBbgPortfolioDataResponsePrivate::~QBbgPortfolioDataResponsePrivate() = default;
@@ -182,52 +183,6 @@ void QBbgPortfolioDataResponse::clear()
     d->m_Weight.clear();
 }
 
-void QBbgPortfolioDataResponse::addSecurity(const QBbgSecurity &val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_Security.append(val);
-}
-
-void QBbgPortfolioDataResponse::addPosition(double val)
-{
-
-    Q_D(QBbgPortfolioDataResponse);
-    Q_ASSERT_X(d->m_Security.size() > d->m_Position.size() && d->m_Security.value(d->m_Position.size(), QBbgSecurity()).isValid(),
-               "QBbgPortfolioDataResponse::addPosition", "set up security before calling addPosition");
-    const double mutilp = d->positionMultiplier(d->m_Security.at(d->m_Position.size()).extension());
-    d->m_Position.append(val * mutilp);
-}
-
-void QBbgPortfolioDataResponse::addMarketValue(double val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_MarketValue.append(val);
-}
-
-void QBbgPortfolioDataResponse::addCost(double val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_Cost.append(val);
-}
-
-void QBbgPortfolioDataResponse::addCostDate(const QDate &val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_CostDate.append(val);
-}
-
-void QBbgPortfolioDataResponse::addCostFx(double val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_CostFx.append(val);
-}
-
-void QBbgPortfolioDataResponse::addWeight(double val)
-{
-    Q_D(QBbgPortfolioDataResponse);
-    d->m_Weight.append(val);
-}
-
 QBbgPortfolioDataResponse::QBbgPortfolioDataResponse(const QBbgPortfolioDataResponse &other)
     : QBbgAbstractFieldResponse(new QBbgPortfolioDataResponsePrivate(this, *(other.d_func())))
 { }
@@ -263,5 +218,47 @@ void QBbgPortfolioDataResponse::loadFromStream(QDataStream &stream)
     Q_D(QBbgPortfolioDataResponse);
     QBbgAbstractFieldResponse::loadFromStream(stream);
     stream >> d->m_Security >> d->m_Position >> d->m_MarketValue >> d->m_Cost >> d->m_CostDate >> d->m_CostFx >> d->m_Weight;
+}
+
+bool QBbgPortfolioDataResponse::loadFromJsonResponse(const QJsonObject &obj)
+{
+    const QJsonArray currentFieldArray = obj.value(QStringLiteral("data")).toArray();
+    bool oneSent = false;
+    for (auto currentField : currentFieldArray) {
+        const QJsonObject currentFieldObj = currentField.toObject();
+        const QString secString = currentFieldObj.value(QStringLiteral("Security")).toString();
+        if (secString.isEmpty())
+            continue;
+        const bool hasPos = currentFieldObj.contains(QStringLiteral("Position"));
+        const bool hasMkVal = currentFieldObj.contains(QStringLiteral("Market Value"));
+        const bool haspCst = currentFieldObj.contains(QStringLiteral("Cost"));
+        const bool hasCstDt = currentFieldObj.contains(QStringLiteral("Cost Date"));
+        const bool hasCstFx = currentFieldObj.contains(QStringLiteral("Cost Fx Rate"));
+        const bool hasWei = currentFieldObj.contains(QStringLiteral("Weight"));
+        Q_ASSERT((hasPos && size() > 0) == hasPosition());
+        Q_ASSERT((hasMkVal && size() > 0) == hasMarketValue());
+        Q_ASSERT((haspCst && size() > 0) == hasCost());
+        Q_ASSERT((hasCstDt && size() > 0) == hasCostDate());
+        Q_ASSERT((hasCstFx && size() > 0) == hasCostFx());
+        Q_ASSERT((hasWei && size() > 0) == hasWeight());
+        Q_D(QBbgPortfolioDataResponse);
+        d->m_Security.append(secString);
+        if (hasPos) {
+            const double mutilp = d->positionMultiplier(d->m_Security.last().extension());
+            d->m_Position.append(currentFieldObj.value(QStringLiteral("Position")).toDouble() * mutilp);
+        }
+        if (hasMkVal)
+            d->m_MarketValue.append(currentFieldObj.value(QStringLiteral("Market Value")).toDouble());
+        if (haspCst)
+            d->m_Cost.append(currentFieldObj.value(QStringLiteral("Cost")).toDouble());
+        if (hasCstDt)
+            d->m_CostDate.append(QDate::fromString(currentFieldObj.value(QStringLiteral("Cost Date")).toString(), Qt::ISODate));
+        if (hasCstFx)
+            d->m_CostFx.append(currentFieldObj.value(QStringLiteral("Cost Fx Rate")).toDouble());
+        if (hasWei)
+            d->m_Weight.append(currentFieldObj.value(QStringLiteral("Weight")).toDouble());
+        oneSent = true;
+    }
+    return oneSent;
 }
 }

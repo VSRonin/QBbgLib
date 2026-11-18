@@ -59,9 +59,9 @@ int main(int argc, char *argv[])
     QBbgLib::QBbgOverride loadedOverrides;
     loadedOverrides.fromJsonObject(overrides.toJsonObject());
 
-    for (const QBbgLib::QBbgSecurity &sec : securList) {
+    for (const QBbgLib::QBbgSecurity &sec : std::as_const(securList)) {
         a_req.setSecurity(sec);
-        for (auto &&fld : fieldsRe) {
+        for (auto &&fld : std::as_const(fieldsRe)) {
             a_req.setField(fld);
             req.addRequest(a_req);
         }

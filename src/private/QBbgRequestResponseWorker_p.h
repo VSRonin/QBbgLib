@@ -45,8 +45,8 @@ public:
     virtual const QBbgAbstractResponse *result(qint64 id) const;
 public slots:
     virtual bool start() override;
-    virtual bool start(const QBbgRequestGroup &req);
-    virtual void setRequest(const QBbgRequestGroup &req) override;
+    virtual bool start(const QBbgLib::QBbgRequestGroup &req);
+    virtual void setRequest(const QBbgLib::QBbgRequestGroup &req) override;
     virtual void ClearResults();
 
 protected:
@@ -63,8 +63,7 @@ protected:
                                   const QString &mC, const QString &bbC, const QString &bsC, const QString &rC);
     virtual qint64 CorrelationForService(const QString &a) const;
     virtual void SendRequ(QBbgAbstractRequest::ServiceType serv);
-    virtual void PortfolioDataRecieved(qint64 RequestID, const QString &Sec, const double *pos, const double *mkVal, const double *cst,
-                                       const QDate *cstDt, const double *cstFx, const double *wei);
+    virtual bool PortfolioDataRecieved(qint64 RequestID, const QJsonObject &dataObj);
     virtual void fillNoData();
 
 private:

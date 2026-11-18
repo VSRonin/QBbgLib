@@ -37,9 +37,7 @@
 #    include "QBbgInstrumentLookupResponse.h"
 #    include "QBbgSecurity.h"
 #    include <blpapi_session.h>
-#    ifdef PRINT_RESPONSE_MESSAGE
-#        include <fstream>
-#    endif // PRINT_RESPONSE_MESSAGE
+#    include <QJsonArray>
 #    include "QBbgAbstractIntradayRequest.h"
 #    include "QBbgIntradayTickRequest.h"
 namespace QBbgLib {
@@ -48,7 +46,7 @@ QBbgRequestResponseWorker::~QBbgRequestResponseWorker()
 {
     for (QHash<qint64, QList<qint64> *>::iterator i = Groups.begin(); i != Groups.end(); ++i)
         delete i.value();
-    ClearResults();
+    qDeleteAll(m_Results);
 }
 qint64 QBbgRequestResponseWorker::CorrelationForService(const QString &a) const
 {
@@ -64,12 +62,15 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
 #    endif // PRINT_RESPONSE_MESSAGE
         const QList<qint64> *const CurrentGroup = Groups.value(message.correlationId().asInteger(), nullptr);
         Q_ASSERT_X(CurrentGroup, "QBbgRequestResponseWorker::handleResponseEvent", "Recieving response from unknown request");
+        const auto setGroupAllError = [this, CurrentGroup](QBbgAbstractResponse::BbgErrorCodes Err, const QString &errMsg) {
+            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++)
+                SetError(*SingleReq, Err, errMsg);
+        };
         if (message.hasElement(BloombergLP::blpapi::Name("responseError"))) {
-            for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                SetError(*SingleReq, QBbgAbstractResponse::ResponseError,
-                         QString::fromLocal8Bit(message.getElement(BloombergLP::blpapi::Name("responseError"))
-                                                        .getElementAsString(BloombergLP::blpapi::Name("message"))));
-            }
+            setGroupAllError(
+                    QBbgAbstractResponse::ResponseError,
+                    QString::fromLocal8Bit(
+                            message.getElement(BloombergLP::blpapi::Name("responseError")).getElementAsString(BloombergLP::blpapi::Name("message"))));
             return;
         }
 
@@ -148,118 +149,55 @@ void QBbgRequestResponseWorker::handleResponseEvent(const BloombergLP::blpapi::E
             }
         } break;
         case QBbgAbstractResponse::ResponseType::PortfolioDataResponse: {
-            BloombergLP::blpapi::Element secDataArray = message.getElement(BloombergLP::blpapi::Name("securityData")); // securityData[]
-            for (size_t secIter = 0; secIter < secDataArray.numValues(); ++secIter) {
-                QString CurrentSecurity =
-                        QString::fromLocal8Bit(secDataArray.getValueAsElement(secIter).getElementAsString(BloombergLP::blpapi::Name("security")), -1);
-                BloombergLP::blpapi::Element fieldExcepArray =
-                        secDataArray.getValueAsElement(secIter).getElement(BloombergLP::blpapi::Name("fieldExceptions")); // fieldExceptions[]
-
-                if (secDataArray.getValueAsElement(secIter).hasElement(BloombergLP::blpapi::Name("securityError"))) {
-                    for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq)));
-                        const QBbgAbstractSecurityRequest *const FoundRequ =
-                                static_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(*SingleReq));
-                        if (FoundRequ->security().fullName() == CurrentSecurity) {
-                            SetError(*SingleReq, QBbgAbstractResponse::SecurityError,
-                                     QString::fromLocal8Bit(secDataArray.getValueAsElement(secIter)
-                                                                    .getElement(BloombergLP::blpapi::Name("securityError"))
-                                                                    .getElementAsString(BloombergLP::blpapi::Name("message")),
-                                                            1));
-                        }
+            const QJsonObject rootObj = QJsonDocument::fromJson(QByteArray::fromStdString(message.toJson())).object();
+            if (!rootObj.contains(QStringLiteral("securityData"))) {
+                setGroupAllError(QBbgAbstractResponse::NoData, QStringLiteral("No results available"));
+                break;
+            }
+            const QJsonArray securityDataArr = rootObj.value(QStringLiteral("securityData")).toArray();
+            if (securityDataArr.isEmpty()) {
+                setGroupAllError(QBbgAbstractResponse::NoData, QStringLiteral("No results available"));
+                break;
+            }
+            for (auto securityData : securityDataArr) {
+                const QJsonObject securityDataObj = securityData.toObject();
+                const QString currentSecurity = securityDataObj.value(QStringLiteral("security")).toString();
+                if (securityDataObj.contains(QStringLiteral("securityError"))) {
+                    for (const auto &SingleReq : *CurrentGroup) {
+                        Q_ASSERT(dynamic_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(SingleReq)));
+                        const auto FoundRequ = static_cast<const QBbgAbstractSecurityRequest *>(m_Requests.request(SingleReq));
+                        if (FoundRequ->security().fullName().compare(currentSecurity, Qt::CaseInsensitive) == 0)
+                            SetError(SingleReq, QBbgAbstractResponse::SecurityError,
+                                     securityDataObj.value(QStringLiteral("securityError")).toObject().value(QStringLiteral("message")).toString());
                     }
-                } else {
-                    BloombergLP::blpapi::Element fieldDataArray =
-                            secDataArray.getValueAsElement(secIter).getElement(BloombergLP::blpapi::Name("fieldData")); // fieldData[]
-                    for (QList<qint64>::const_iterator SingleReq = CurrentGroup->constBegin(); SingleReq != CurrentGroup->constEnd(); SingleReq++) {
-                        Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(m_Requests.request(*SingleReq)));
-                        const QBbgAbstractFieldRequest *const FoundRequ =
-                                static_cast<const QBbgAbstractFieldRequest *>(m_Requests.request(*SingleReq));
-                        if (!fieldDataArray.hasElement(BloombergLP::blpapi::Name(FoundRequ->field().toLatin1().data()))) {
-                            bool foundExp = false;
-                            for (size_t fieldExcIter = 0; fieldExcIter < fieldExcepArray.numValues() && !foundExp; ++fieldExcIter) {
-                                QString CurrentField = QString::fromLocal8Bit(
-                                        fieldExcepArray.getValueAsElement(fieldExcIter).getElementAsString(BloombergLP::blpapi::Name("fieldId")), -1);
-                                if (FoundRequ->security().fullName() == CurrentSecurity && FoundRequ->field() == CurrentField) {
-                                    SetError(*SingleReq, QBbgAbstractResponse::FieldError,
-                                             QString::fromLocal8Bit(fieldExcepArray.getValueAsElement(fieldExcIter)
-                                                                            .getElement(BloombergLP::blpapi::Name("errorInfo"))
-                                                                            .getElementAsString(BloombergLP::blpapi::Name("message")),
-                                                                    -1));
-                                    foundExp = true;
-                                }
-                            }
-                            if (!foundExp)
-                                continue;
-                            // SetError(*SingleReq, QBbgAbstractResponse::NoData, "Field not found in response");
-                        } else {
-                            BloombergLP::blpapi::Element fieldDataValue =
-                                    fieldDataArray.getElement(BloombergLP::blpapi::Name(FoundRequ->field().toLatin1().data()));
-                            if (fieldDataValue.numValues() == 0) {
-                                SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("Table response with 0 rows"));
-                            } else if (fieldDataValue.getValueAsElement(0).numElements() == 0) {
-                                SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("Table response with 0 columns"));
-                            } else if (FoundRequ->security().fullName() == CurrentSecurity) {
-                                double tmpPos, tmpMkVal, tmpCst, tmpCstFx, tmpWei;
-                                QDate tmpCstDt;
-                                bool oneSent = false;
-                                for (size_t RowIter = 0; RowIter < fieldDataValue.numValues(); ++RowIter) {
-                                    if (!fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Security")))
-                                        continue;
-                                    if (QString::fromLocal8Bit(
-                                                fieldDataValue.getValueAsElement(RowIter).getElementAsString(BloombergLP::blpapi::Name("Security")),
-                                                -1)
-                                                .isEmpty())
-                                        continue;
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Position")))
-                                        tmpPos = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64(BloombergLP::blpapi::Name("Position"));
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Market Value")))
-                                        tmpMkVal = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64(
-                                                BloombergLP::blpapi::Name("Market Value"));
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost")))
-                                        tmpCst = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64(BloombergLP::blpapi::Name("Cost"));
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost Fx Rate")))
-                                        tmpCstFx = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64(
-                                                BloombergLP::blpapi::Name("Cost Fx Rate"));
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Weight")))
-                                        tmpWei = fieldDataValue.getValueAsElement(RowIter).getElementAsFloat64(BloombergLP::blpapi::Name("Weight"));
-                                    if (fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost Date")))
-                                        tmpCstDt = elementToVariant(fieldDataValue.getValueAsElement(RowIter).getElement(
-                                                                            BloombergLP::blpapi::Name("Cost Date")))
-                                                           .toDate();
-                                    PortfolioDataRecieved(
-                                            *SingleReq,
-                                            QString::fromLocal8Bit(fieldDataValue.getValueAsElement(RowIter).getElementAsString(
-                                                                           BloombergLP::blpapi::Name("Security")),
-                                                                   -1),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Position"))
-                                                    ? (&tmpPos)
-                                                    : static_cast<double *>(NULL),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Market Value"))
-                                                    ? (&tmpMkVal)
-                                                    : static_cast<double *>(NULL),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost"))
-                                                    ? (&tmpCst)
-                                                    : static_cast<double *>(NULL),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost Date"))
-                                                    ? (&tmpCstDt)
-                                                    : static_cast<QDate *>(NULL),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Cost Fx Rate"))
-                                                    ? (&tmpCstFx)
-                                                    : static_cast<double *>(NULL),
-                                            fieldDataValue.getValueAsElement(RowIter).hasElement(BloombergLP::blpapi::Name("Weight"))
-                                                    ? (&tmpWei)
-                                                    : static_cast<double *>(NULL));
-                                    oneSent = true;
-                                }
-                                if (oneSent) {
-                                    HeaderRecieved(*SingleReq, FoundRequ->field());
-                                    DataRecieved(*SingleReq);
-                                } else {
-                                    SetError(*SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("No security found"));
-                                }
-                            }
-                        }
+                    continue;
+                }
+                const QJsonObject fieldDataObj = securityDataObj.value(QStringLiteral("fieldData")).toObject();
+                const QJsonArray fieldExceptionsArr = securityDataObj.value(QStringLiteral("fieldExceptions")).toArray();
+                for (const auto &SingleReq : *CurrentGroup) {
+                    Q_ASSERT(dynamic_cast<const QBbgAbstractFieldRequest *>(m_Requests.request(SingleReq)));
+                    const auto FoundRequ = static_cast<const QBbgAbstractFieldRequest *>(m_Requests.request(SingleReq));
+                    if (FoundRequ->security().fullName().compare(currentSecurity, Qt::CaseInsensitive) != 0)
+                        continue;
+                    bool foundExp = false;
+                    for (auto i = fieldExceptionsArr.constBegin(), iEnd = fieldExceptionsArr.constEnd(); !foundExp && i != iEnd; ++i) {
+                        const QJsonObject fieldExceptionObj = i->toObject();
+                        if (fieldExceptionObj.value(QStringLiteral("fieldId")).toString().compare(FoundRequ->field(), Qt::CaseInsensitive) == 0)
+                            SetError(SingleReq, QBbgAbstractResponse::FieldError,
+                                     fieldExceptionObj.value(QStringLiteral("errorInfo")).toObject().value(QStringLiteral("message")).toString());
+                        foundExp = true;
+                    }
+                    if (foundExp)
+                        continue;
+                    const QJsonArray currentFieldArray = fieldDataObj.value(FoundRequ->field()).toArray();
+                    if (currentFieldArray.isEmpty())
+                        SetError(SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("No data in selected portfolio"));
+                    if (PortfolioDataRecieved(SingleReq,
+                                              QJsonObject({std::make_pair<QString, QJsonValue>(QStringLiteral("data"), currentFieldArray)}))) {
+                        HeaderRecieved(SingleReq, FoundRequ->field());
+                        DataRecieved(SingleReq);
+                    } else {
+                        SetError(SingleReq, QBbgAbstractResponse::NoData, QStringLiteral("No security found"));
                     }
                 }
             }
@@ -621,38 +559,16 @@ void QBbgRequestResponseWorker::TickDataRecieved(qint64 RequestID, const QDateTi
     Q_UNREACHABLE(); // Only IntraDayTick requests can receive Tick Data
 }
 
-void QBbgRequestResponseWorker::PortfolioDataRecieved(qint64 RequestID, const QString &Sec, const double *pos, const double *mkVal, const double *cst,
-                                                      const QDate *cstDt, const double *cstFx, const double *wei)
+bool QBbgRequestResponseWorker::PortfolioDataRecieved(qint64 RequestID, const QJsonObject &dataObj)
 {
-    QHash<qint64, QBbgAbstractResponse *>::iterator TempIter = m_Results.find(RequestID);
-    if (m_Requests.request(RequestID)->requestType() == QBbgAbstractRequest::RequestType::PortfolioData) {
-        if (TempIter == m_Results.end()) {
-            TempIter = m_Results.insert(RequestID, new QBbgPortfolioDataResponse());
-        }
-        QBbgPortfolioDataResponse *currRes = static_cast<QBbgPortfolioDataResponse *>(TempIter.value());
-        Q_ASSERT((pos && currRes->size() > 0) == currRes->hasPosition());
-        Q_ASSERT((mkVal && currRes->size() > 0) == currRes->hasMarketValue());
-        Q_ASSERT((cst && currRes->size() > 0) == currRes->hasCost());
-        Q_ASSERT((cstDt && currRes->size() > 0) == currRes->hasCostDate());
-        Q_ASSERT((cstFx && currRes->size() > 0) == currRes->hasCostFx());
-        Q_ASSERT((wei && currRes->size() > 0) == currRes->hasWeight());
-        currRes->addSecurity(Sec);
-        Q_ASSERT_X(currRes->security(currRes->size() - 1).isValid(), "QBbgRequestResponseWorker::PortfolioDataRecieved", "Invalid security recieved");
-        if (pos)
-            currRes->addPosition(*pos);
-        if (mkVal)
-            currRes->addMarketValue(*mkVal);
-        if (cst)
-            currRes->addCost(*cst);
-        if (cstDt)
-            currRes->addCostDate(*cstDt);
-        if (cstFx)
-            currRes->addCostFx(*cstFx);
-        if (wei)
-            currRes->addWeight(*wei);
-        return;
+    if (m_Requests.request(RequestID)->requestType() != QBbgAbstractRequest::RequestType::PortfolioData) {
+        Q_ASSERT_X(false, "BbgRequestResponseWorker::PortfolioDataRecieved", "Only PortfolioData can receive Portfolio Data");
+        return false;
     }
-    Q_UNREACHABLE(); // Only PortfolioData can receive Portfolio Data
+    QHash<qint64, QBbgAbstractResponse *>::iterator TempIter = m_Results.find(RequestID);
+    if (TempIter == m_Results.end())
+        TempIter = m_Results.insert(RequestID, new QBbgPortfolioDataResponse());
+    return TempIter.value()->loadFromJsonResponse(dataObj);
 }
 void QBbgRequestResponseWorker::SendRequ(QBbgAbstractRequest::ServiceType serv)
 {
